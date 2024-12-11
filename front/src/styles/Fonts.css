@@ -1,0 +1,78 @@
+/* Aeonik */
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-Regular.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-Bold.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-BoldItalic.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-Light.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-LightItalic.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("../assets/Fonts/Aeonik/Aeonik-RegularItalic.woff2") format("woff2"),
+    url("../assets/Fonts/Aeonik/Aeonik-RegularItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Grotzec";
+  src: url("../assets/Fonts/Grotzec/Grotzec-Bold.woff2") format("woff2"),
+    url("../assets/Fonts/Grotzec/Grotzec-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Grotzec";
+  src: url("../assets/Fonts/Grotzec/Grotzec-BoldItalic.woff2") format("woff2"),
+    url("../assets/Fonts/Grotzec/Grotzec-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Thunder";
+  src: url("../assets/Fonts/Thunder/Thunder-BoldItalic.woff2") format("woff2"),
+    url("../assets/Fonts/Thunder/Thunder-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}

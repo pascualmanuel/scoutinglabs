@@ -1,3 +1,98 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("Fonts.css");
+
+/* H1 - Desktop */
+.h1Title {
+  font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 51px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* H2 - Desktop (&MOB) */
+.h2Title {
+  font-family: "Grotzec", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 39px;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* MOB AND DESK */
+.buttonText {
+  font-family: "Aeonik", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+}
+
+/* SubHeading Special - Desktop&Mobile */
+.subH {
+  font-family: "Grotzec", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 27px;
+  text-transform: uppercase;
+}
+
+/* Body 1 - Desktop&Mobile */
+.body1 {
+  font-family: "Aeonik TRIAL";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Body 2 - Desktop&Mobile */
+.body2 {
+  font-family: "Aeonik", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+/* Body 3 - Desktop&Mobile */
+.body3 {
+  font-family: "Aeonik";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+}
+
+.loaderFont {
+  font-family: "Thunder";
+  font-style: italic;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 74px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Media queries para pantallas menores a 1000px */
+@media (min-width: 1000px) {
+  .h1Title {
+    font-size: 90px;
+    line-height: 82px;
+    letter-spacing: -0.03em;
+  }
+
+  .loaderFont {
+    font-size: 160px;
+    line-height: 147px;
+  }
+}
