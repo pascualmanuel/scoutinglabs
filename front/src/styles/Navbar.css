@@ -1,0 +1,22 @@
+.ellipse {
+  position: absolute;
+  width: 445px;
+  height: 167px;
+  left: -55vw;
+  top: calc(60% - 167px / 2 - 102.5px);
+  background: #0584f5;
+  filter: blur(127px);
+  transform: rotate(90deg);
+  z-index: -1;
+}
+
+.lang-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 78px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.1);
+}
