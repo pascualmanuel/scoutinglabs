@@ -3,10 +3,10 @@ import { Link } from "gatsby"; // Asumir que usas gatsby para la navegación
 import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import "../styles/Navbar.css";
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  // const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
 
   useEffect(() => {
@@ -24,10 +24,8 @@ const Navbar = () => {
     setLanguageOpen(false); // Cerrar el dropdown
   };
 
-  console.log(locale);
-
   return (
-    <nav className="bg-iBlue relative">
+    <nav className="bg-iBlue  relative">
       {/* Logo y Botón de Contactanos */}
       <div className="flex justify-between items-center h-[72px] mx-5">
         <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
@@ -49,13 +47,13 @@ const Navbar = () => {
           onClick={toggleMenu}
         >
           <div
-            className={`h-[2px] w-full bg-white transition-all duration-300  ${
-              menuOpen ? "transform rotate-45 translate-y-[8px] mt-0" : "mt-1 "
+            className={`h-[2px] w-full bg-white transition-transform duration-300  ${
+              menuOpen ? "transform rotate-45 translate-y-[8px] mt-0" : "mt-1"
             }`}
           />
 
           <div
-            className={`h-[2px] w-full bg-white transition-all duration-300 ${
+            className={`h-[2px] w-full bg-white transition-transform duration-300 ${
               menuOpen ? "transform -rotate-45 translate-y-[-8px]" : ""
             }`}
           />
@@ -63,11 +61,12 @@ const Navbar = () => {
       </div>
 
       <div
-        className={`absolute top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-all duration-300 ${
-          menuOpen ? "transform translate-x-0" : "transform -translate-x-full"
+        className={`absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{ willChange: "transform" }}
       >
-        <div className="flex items-center justify-between  mr-[78px]  h-[72px] ml-5">
+        <div className="flex items-center justify-between mr-[78px] h-[72px] ml-5">
           {/* Logo */}
           <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
 
@@ -102,7 +101,7 @@ const Navbar = () => {
               <div className="absolute top-full left-0 text-white lang-selector select-none rounded-b-lg">
                 {locale !== "ES" && (
                   <span
-                    className="cursor-pointer block ml-2 "
+                    className="cursor-pointer block ml-2"
                     onClick={() => changeLanguage("ES")}
                   >
                     ES 🇪🇸
@@ -122,7 +121,7 @@ const Navbar = () => {
         </div>
 
         {/* Links del menú */}
-        <div className="flex flex-col  mb-10 absolute bottom-0 z-100">
+        <div className="flex flex-col mb-10 absolute bottom-0 z-100">
           <Link
             to="/veocam"
             className="text-white py-3 px-5 h2Title"
@@ -172,7 +171,7 @@ const Navbar = () => {
             </Button>
           </div>
         </div>
-        <div className="ellipse"></div>
+        {/* <div className="ellipse"></div> */}
       </div>
     </nav>
   );
