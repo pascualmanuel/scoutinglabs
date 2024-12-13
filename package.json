@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "gatsby-plugin-react-svg": "^3.3.0",
+    "react-router-dom": "^7.0.2"
+  }
+}
