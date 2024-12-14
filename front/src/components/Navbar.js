@@ -27,23 +27,94 @@ const Navbar = () => {
   return (
     <nav className="bg-iBlue  relative">
       {/* Logo y Botón de Contactanos */}
-      <div className="flex justify-between items-center h-[72px] mx-5">
-        <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
-        <Button
-          link="/prueba"
-          text="Contactanos"
-          bg="#0584F5"
-          textColor="#fff"
-          width="sm:w-[125px] md:w-[400px]"
-          className={`transition-all duration-300 ${
-            menuOpen ? "absolute bottom-4" : ""
-          }`}
-        >
-          Contactanos
-        </Button>
+      <div className="flex justify-between items-center h-[72px] mx-auto max-w-[1624px] ">
+        <div className="lg:w-[350px] ml-[20px] mg:ml-[80px] xl:ml-[112px]">
+          <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
+        </div>
+        <div className="flex flex-row lg:w-[350px] justify-between">
+          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+            Veo Cam 3
+          </Link>
+          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+            ScoutingPlay
+          </Link>
+          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+            Becas
+          </Link>
+          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+            Suscripciones
+          </Link>
+          <Link className="text-grey1 body2 hidden md:block lg:hidden" to={"/"}>
+            Ayuda
+          </Link>
+        </div>
+        <div className="flex flex-row lg:w-[350px] justify-between items-center lg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+          <Link className="text-grey1 body2 hidden lg:block ml-12" to={"/"}>
+            Ayuda
+          </Link>
+          <div
+            className={`relative lang-selector  select-none rounded-lg hidden md:flex ${
+              languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
+            }`}
+          >
+            <span
+              className="text-white cursor-pointer flex flex-row items-center ml-2"
+              onClick={toggleLanguage}
+            >
+              {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
+              <svg
+                className={`ml-2 transition-all duration-300 ${
+                  languageOpen ? "rotate-180" : ""
+                }`}
+                width="10"
+                height="5"
+                viewBox="0 0 10 5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
+                  fill="#D9D9D9"
+                />
+              </svg>
+            </span>
+            {languageOpen && (
+              <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
+                {locale !== "ES" && (
+                  <span
+                    className="cursor-pointer block ml-2"
+                    onClick={() => changeLanguage("ES")}
+                  >
+                    ES 🇪🇸
+                  </span>
+                )}
+                {locale !== "EN" && (
+                  <span
+                    className="cursor-pointer block ml-2"
+                    onClick={() => changeLanguage("EN")}
+                  >
+                    EN 🇬🇧
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+          <Button
+            link="/prueba"
+            text="Contactanos"
+            bg="#0584F5"
+            textColor="#fff"
+            width="w-[129px] "
+            className={`transition-all duration-300 ${
+              menuOpen ? "absolute bottom-4" : ""
+            }`}
+          >
+            Contactanos
+          </Button>
+        </div>
         {/* Icono de hamburguesa */}
         <div
-          className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10"
+          className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mr-[20px] md:hidden"
           onClick={toggleMenu}
         >
           <div
@@ -72,7 +143,7 @@ const Navbar = () => {
 
           {/* Toggle de idioma */}
           <div
-            className={`relative lang-selector select-none rounded-lg ${
+            className={`relative lang-selector  select-none flex rounded-lg ${
               languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
             }`}
           >
@@ -98,7 +169,7 @@ const Navbar = () => {
               </svg>
             </span>
             {languageOpen && (
-              <div className="absolute top-full left-0 text-white lang-selector select-none rounded-b-lg">
+              <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
                 {locale !== "ES" && (
                   <span
                     className="cursor-pointer block ml-2"
