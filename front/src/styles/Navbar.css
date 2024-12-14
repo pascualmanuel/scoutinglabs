@@ -33,3 +33,10 @@
 
   background-color: black;
 }
+
+.bg-frame {
+  background-image: url("../assets/frame-bg.png");
+  background-position: top;
+  background-size: cover;
+  height: 100vh;
+}
