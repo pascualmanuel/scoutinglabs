@@ -2,13 +2,13 @@ import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/Layout"; // Si tienes un layout común
 import Seo from "../components/Seo.js"; // Si estás usando SEO dinámico
-
+import "../styles/Navbar.css";
 const HomePage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Style Guide" description="Guía de estilos" />
 
-      <div>
+      <div className="bg-frame">
         <h1 className="h1Title">H1 - Desktop</h1>
         <p className="body1">
           Esta es una muestra de cuerpo de texto con la fuente{" "}
