@@ -31,34 +31,37 @@ const Navbar = () => {
         <div className="lg:w-[350px] ml-[20px] mg:ml-[80px] xl:ml-[112px]">
           <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
         </div>
-        <div className="flex flex-row lg:w-[350px] justify-between">
-          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+        <div className="flex flex-row md:w-[420px] lg:w-[350px] justify-between md:mx-5">
+          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
             Veo Cam 3
           </Link>
-          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
             ScoutingPlay
           </Link>
-          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
             Becas
           </Link>
-          <Link className="text-grey1 body2 hidden md:block" to={"/"}>
+          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
             Suscripciones
           </Link>
-          <Link className="text-grey1 body2 hidden md:block lg:hidden" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden md:block  lg:mr-0 lg:hidden"
+            to={"/"}
+          >
             Ayuda
           </Link>
         </div>
-        <div className="flex flex-row lg:w-[350px] justify-between items-center lg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+        <div className="flex flex-row lg:w-[350px] justify-between items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
           <Link className="text-grey1 body2 hidden lg:block ml-12" to={"/"}>
             Ayuda
           </Link>
           <div
-            className={`relative lang-selector  select-none rounded-lg hidden md:flex ${
+            className={`relative lang-selector  select-none rounded-lg hidden md:flex mr-3 lg:mr-0 ${
               languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
             }`}
           >
             <span
-              className="text-white cursor-pointer flex flex-row items-center ml-2"
+              className="text-white cursor-pointer flex flex-row items-center  ml-2"
               onClick={toggleLanguage}
             >
               {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
