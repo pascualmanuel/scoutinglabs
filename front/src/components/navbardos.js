@@ -6,8 +6,8 @@ import { useLocation } from "@reach/router"; // Usamos useLocation para obtener 
 const Navbardos = () => {
   const location = useLocation();
 
-  // Usamos useRef para mantener la posición actual del dot entre renders
-  const dotPositionRef = useRef(0); // Guardar la posición actual
+  // Usamos useRef para mantener el estado de la posición del dot entre renders
+  const dotPositionRef = useRef(0); // Aquí se guarda la posición actual
   const [dotPosition, setDotPosition] = useState(dotPositionRef.current); // Estado que controla el render
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -35,16 +35,16 @@ const Navbardos = () => {
         break;
     }
 
-    // Solo actualizamos si la nueva posición es diferente
+    // Si la nueva posición es diferente, actualizamos la posición y mantenemos la referencia
     if (newPosition !== dotPositionRef.current) {
-      dotPositionRef.current = newPosition; // Guardamos la nueva posición en el ref
-      setDotPosition(newPosition); // Actualizamos el estado
+      dotPositionRef.current = newPosition;
+      setDotPosition(newPosition);
     }
 
     // Terminamos la transición después de 500ms
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-    }, 500); // El tiempo de transición (ajustable)
+    }, 500); // Tiempo de transición (ajustable)
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
