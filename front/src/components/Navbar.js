@@ -8,7 +8,11 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
+  const [activeIndex, setActiveIndex] = useState(null); // Track the active link
 
+  const handleLinkClick = (index) => {
+    setActiveIndex(index);
+  };
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || "ES";
     setLocale(savedLocale);
@@ -32,27 +36,42 @@ const Navbar = () => {
           <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
         </div>
         <div className="flex flex-row md:w-[420px] lg:w-[350px] justify-between md:mx-5">
-          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden md:block  lg:mr-0"
+            to={"/veo-cam"}
+          >
             Veo Cam 3
           </Link>
-          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden md:block  lg:mr-0"
+            to={"/scouting-play"}
+          >
             ScoutingPlay
           </Link>
-          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden md:block  lg:mr-0"
+            to={"/beca"}
+          >
             Becas
           </Link>
-          <Link className="text-grey1 body2 hidden md:block  lg:mr-0" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden md:block  lg:mr-0"
+            to={"/suscripciones"}
+          >
             Suscripciones
           </Link>
           <Link
             className="text-grey1 body2 hidden md:block  lg:mr-0 lg:hidden"
-            to={"/"}
+            to={"/ayuda"}
           >
             Ayuda
           </Link>
         </div>
         <div className="flex flex-row lg:w-[350px] justify-between items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
-          <Link className="text-grey1 body2 hidden lg:block ml-12" to={"/"}>
+          <Link
+            className="text-grey1 body2 hidden lg:block ml-12"
+            to={"/ayuda"}
+          >
             Ayuda
           </Link>
           <div
@@ -197,21 +216,21 @@ const Navbar = () => {
         {/* Links del menú */}
         <div className="flex flex-col mb-10 absolute bottom-0 z-100">
           <Link
-            to="/veocam"
+            to="/veo-cam"
             className="text-white py-3 px-5 h2Title"
             onClick={closeMenu}
           >
             VEO CAM 3
           </Link>
           <Link
-            to="/scoutingplay"
+            to="/scouting-play"
             className="text-white py-3 px-5 h2Title"
             onClick={closeMenu}
           >
             SCOUTINGPLAY
           </Link>
           <Link
-            to="/becas"
+            to="/beca"
             className="text-white py-3 px-5 h2Title"
             onClick={closeMenu}
           >
