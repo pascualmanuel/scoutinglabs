@@ -7,6 +7,7 @@ import Pablo from "../assets/pablo.png";
 import Pablo2 from "../assets/pablo2.jpg";
 import { Link } from "gatsby";
 import Navbar from "./Navbar";
+import Navbardos from "./navbardos";
 
 const Layout = ({ children }) => {
   return (

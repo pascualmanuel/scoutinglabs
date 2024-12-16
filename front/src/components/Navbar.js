@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "gatsby"; // Asumir que usas gatsby para la navegación
 import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import "../styles/Navbar.css";
+import { useLocation } from "@reach/router";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
-  const [activeIndex, setActiveIndex] = useState(null); // Track the active link
 
-  const handleLinkClick = (index) => {
-    setActiveIndex(index);
-  };
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || "ES";
     setLocale(savedLocale);
@@ -28,44 +25,156 @@ const Navbar = () => {
     setLanguageOpen(false); // Cerrar el dropdown
   };
 
+  const location = useLocation();
+
+  // Se establece el valor inicial desde localStorage o 0
+  const initialDotPosition = parseInt(
+    localStorage.getItem("dotPosition") || "0",
+    10
+  );
+
+  // Usamos useRef para persistir la posición entre renders
+  const dotPositionRef = useRef(initialDotPosition);
+  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    // Activamos la transición cuando la ruta cambia
+    setIsTransitioning(true);
+
+    let newPosition;
+    switch (location.pathname) {
+      case "/veo-cam/":
+        newPosition = 0;
+        break;
+      case "/scouting-play/":
+        newPosition = 90;
+        break;
+      case "/prueba/":
+        newPosition = 180;
+        break;
+      case "/suscripciones/":
+        newPosition = 270;
+        break;
+      case "/ayuda/":
+        newPosition = 540;
+        break;
+      default:
+        newPosition = dotPositionRef.current; // Mantener la última posición si no hay cambio de ruta
+        break;
+    }
+
+    // Guardamos la nueva posición en localStorage para persistir entre visitas
+    localStorage.setItem("dotPosition", newPosition);
+
+    // Actualizamos el ref y el estado de dotPosition
+    dotPositionRef.current = newPosition;
+    setDotPosition(newPosition);
+
+    // Terminamos la transición después de 500ms
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
+
+    // Limpiamos el timer cuando el efecto termine
+    return () => clearTimeout(timer);
+  }, [location.pathname]); // Solo se ejecuta cuando la ruta cambia
+
   return (
     <nav className="bg-iBlue  relative">
       {/* Logo y Botón de Contactanos */}
       <div className="flex justify-between items-center h-[72px] mx-auto max-w-[1624px] ">
-        <div className="lg:w-[350px] ml-[20px] mg:ml-[80px] xl:ml-[112px]">
-          <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
-        </div>
-        <div className="flex flex-row md:w-[420px] lg:w-[350px] justify-between md:mx-5">
-          <Link
-            className="text-grey1 body2 hidden md:block  lg:mr-0"
-            to={"/veo-cam"}
-          >
-            Veo Cam 3
-          </Link>
-          <Link
-            className="text-grey1 body2 hidden md:block  lg:mr-0"
-            to={"/scouting-play"}
-          >
-            ScoutingPlay
-          </Link>
-          <Link
-            className="text-grey1 body2 hidden md:block  lg:mr-0"
-            to={"/beca"}
-          >
-            Becas
-          </Link>
-          <Link
-            className="text-grey1 body2 hidden md:block  lg:mr-0"
-            to={"/suscripciones"}
-          >
-            Suscripciones
-          </Link>
-          <Link
-            className="text-grey1 body2 hidden md:block  lg:mr-0 lg:hidden"
-            to={"/ayuda"}
-          >
-            Ayuda
-          </Link>
+        <Link to={"/"}>
+          <div className="lg:w-[350px] ml-[20px] mg:ml-[80px] xl:ml-[112px]">
+            <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
+          </div>
+        </Link>
+        <div
+          className="flex flex-row  justify-between  section-dot relative ml-[-110px]"
+          style={{ width: "", lineHeight: "50px" }}
+        >
+          <div className="nav-dot">
+            <Link
+              to="/veo-cam"
+              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  top ${
+                dotPosition === 0 ? "active" : ""
+              }`}
+            >
+              Veo Cam 3
+            </Link>
+            <Link
+              to="/scouting-play"
+              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  about ${
+                dotPosition === 90 ? "active" : ""
+              }`}
+            >
+              ScoutingPlay
+            </Link>
+            <Link
+              to="/prueba"
+              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  work ${
+                dotPosition === 180 ? "active" : ""
+              }`}
+            >
+              Becas
+            </Link>
+            <Link
+              to="/suscripciones"
+              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  contact ${
+                dotPosition === 540 ? "active" : ""
+              }`}
+            >
+              Suscripciones
+            </Link>
+            {/* <Link
+              to="/ayuda"
+              className={`menuItem text-grey1 body2 hidden md:block  lg:hidden  lg:mr-0"  contact ${
+                dotPosition === 360 ? "active" : ""
+              }`}
+            >
+              <span className="">Ayuda</span>
+            </Link> */}
+            {/* Punto dinámico que se mueve suavemente */}
+            <div
+              className={`line ${isTransitioning ? "transitioning" : ""}`}
+              style={{ left: `${dotPosition}px` }}
+            >
+              •
+            </div>
+          </div>
+
+          {/* <div>
+            <Link
+              className="text-grey1 body2 hidden md:block  lg:mr-0"
+              to={"/veo-cam"}
+            >
+              Veo Cam 3
+            </Link>
+            <Link
+              className="text-grey1 body2 hidden md:block  lg:mr-0"
+              to={"/scouting-play"}
+            >
+              ScoutingPlay
+            </Link>
+            <Link
+              className="text-grey1 body2 hidden md:block  lg:mr-0"
+              to={"/beca"}
+            >
+              Becas
+            </Link>
+            <Link
+              className="text-grey1 body2 hidden md:block  lg:mr-0"
+              to={"/suscripciones"}
+            >
+              Suscripciones
+            </Link>
+            <Link
+              className="text-grey1 body2 hidden md:block  lg:mr-0 lg:hidden"
+              to={"/ayuda"}
+            >
+              Ayuda
+            </Link>
+          </div> */}
         </div>
         <div className="flex flex-row lg:w-[350px] justify-between items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
           <Link
