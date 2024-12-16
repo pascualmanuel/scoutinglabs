@@ -6,13 +6,14 @@ import { useLocation } from "@reach/router"; // Usamos useLocation para obtener 
 const Navbardos = () => {
   const location = useLocation();
 
-  // Usamos useRef para mantener el estado de la posición del dot entre renders
-  const dotPositionRef = useRef(0); // Aquí se guarda la posición actual
-  const [dotPosition, setDotPosition] = useState(dotPositionRef.current); // Estado que controla el render
+  // Usamos useRef para mantener la posición del dot de manera persistente
+  const dotPositionRef = useRef(0); // Guarda la última posición del dot
+  const [dotPosition, setDotPosition] = useState(dotPositionRef.current); // Estado para la posición visible
+
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Activamos la transición cuando cambia la ruta
+    // Activamos la transición cada vez que la ruta cambia
     setIsTransitioning(true);
 
     // Determinamos la nueva posición del dot según la ruta activa
@@ -35,20 +36,23 @@ const Navbardos = () => {
         break;
     }
 
-    // Si la nueva posición es diferente, actualizamos la posición y mantenemos la referencia
+    // Solo actualizamos si la nueva posición es diferente
     if (newPosition !== dotPositionRef.current) {
-      dotPositionRef.current = newPosition;
-      setDotPosition(newPosition);
+      dotPositionRef.current = newPosition; // Guardamos la nueva posición en el ref
+      setDotPosition(newPosition); // Actualizamos el estado
     }
 
     // Terminamos la transición después de 500ms
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-    }, 500); // Tiempo de transición (ajustable)
+    }, 500); // El tiempo de transición (ajustable)
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
   }, [location.pathname]); // Este efecto solo se ejecutará cuando la ruta cambie
+
+  // Debug: Para ver la posición de `dotPosition` en cada render
+  console.log(dotPosition);
 
   return (
     <>
