@@ -40,3 +40,26 @@
   background-size: cover;
   height: 100vh;
 }
+
+.line {
+  color: #f6f6f6;
+  text-align: center;
+  width: 90px;
+  position: absolute;
+  bottom: -15px;
+  transition: left 0.5s ease; /* Movemos el dot suavemente */
+}
+
+.line.transitioning {
+  transition: left 0.5s ease; /* Tiempo de transición */
+}
+.nav-dot a {
+  text-decoration: none;
+  height: 20px;
+  width: 90px;
+  display: inline-block;
+  text-align: center;
+}
+
+.menuItem.active {
+}
