@@ -1,22 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/Navbar.css";
-import { Link } from "gatsby"; // Usando Gatsby Link
-import { useLocation } from "@reach/router"; // Usamos useLocation para obtener la ubicación actual
+import { Link } from "gatsby";
+import { useLocation } from "@reach/router";
 
 const Navbardos = () => {
   const location = useLocation();
 
-  // Usamos useRef para mantener la posición del dot de manera persistente
-  const dotPositionRef = useRef(0); // Guarda la última posición del dot
-  const [dotPosition, setDotPosition] = useState(dotPositionRef.current); // Estado para la posición visible
+  // Se establece el valor inicial desde localStorage o 0
+  const initialDotPosition = parseInt(
+    localStorage.getItem("dotPosition") || "0",
+    10
+  );
 
+  // Usamos useRef para persistir la posición entre renders
+  const dotPositionRef = useRef(initialDotPosition);
+  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Activamos la transición cada vez que la ruta cambia
+    // Activamos la transición cuando la ruta cambia
     setIsTransitioning(true);
 
-    // Determinamos la nueva posición del dot según la ruta activa
     let newPosition;
     switch (location.pathname) {
       case "/veo-cam/":
@@ -36,65 +40,59 @@ const Navbardos = () => {
         break;
     }
 
-    // Solo actualizamos si la nueva posición es diferente
-    if (newPosition !== dotPositionRef.current) {
-      dotPositionRef.current = newPosition; // Guardamos la nueva posición en el ref
-      setDotPosition(newPosition); // Actualizamos el estado
-    }
+    // Guardamos la nueva posición en localStorage para persistir entre visitas
+    localStorage.setItem("dotPosition", newPosition);
+
+    // Actualizamos el ref y el estado de dotPosition
+    dotPositionRef.current = newPosition;
+    setDotPosition(newPosition);
 
     // Terminamos la transición después de 500ms
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-    }, 500); // El tiempo de transición (ajustable)
+    }, 500);
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
-  }, [location.pathname]); // Este efecto solo se ejecutará cuando la ruta cambie
-
-  // Debug: Para ver la posición de `dotPosition` en cada render
-  console.log(dotPosition);
+  }, [location.pathname]); // Solo se ejecuta cuando la ruta cambia
 
   return (
     <>
-      <div className="header-dot">
-        <div className="section-dot">
-          <div className="nav-dot">
-            <Link
-              to="/veo-cam"
-              className={`menuItem top ${dotPosition === 0 ? "active" : ""}`}
-            >
-              Veo Cam 3
-            </Link>
-            <Link
-              to="/scouting-play"
-              className={`menuItem about ${
-                dotPosition === 100 ? "active" : ""
-              }`}
-            >
-              ScoutingPlay
-            </Link>
-            <Link
-              to="/prueba"
-              className={`menuItem work ${dotPosition === 200 ? "active" : ""}`}
-            >
-              prueba
-            </Link>
-            <Link
-              to="/suscripciones"
-              className={`menuItem contact ${
-                dotPosition === 300 ? "active" : ""
-              }`}
-            >
-              Suscripciones
-            </Link>
+      <div className="section-dot relative">
+        <div className="nav-dot">
+          <Link
+            to="/veo-cam"
+            className={`menuItem top ${dotPosition === 0 ? "active" : ""}`}
+          >
+            Veo Cam 3
+          </Link>
+          <Link
+            to="/scouting-play"
+            className={`menuItem about ${dotPosition === 100 ? "active" : ""}`}
+          >
+            ScoutingPlay
+          </Link>
+          <Link
+            to="/prueba"
+            className={`menuItem work ${dotPosition === 200 ? "active" : ""}`}
+          >
+            prueba
+          </Link>
+          <Link
+            to="/suscripciones"
+            className={`menuItem contact ${
+              dotPosition === 300 ? "active" : ""
+            }`}
+          >
+            Suscripciones
+          </Link>
 
-            {/* Punto dinámico que se mueve suavemente */}
-            <div
-              className={`line ${isTransitioning ? "transitioning" : ""}`}
-              style={{ left: `${dotPosition}px` }}
-            >
-              •
-            </div>
+          {/* Punto dinámico que se mueve suavemente */}
+          <div
+            className={`line ${isTransitioning ? "transitioning" : ""}`}
+            style={{ left: `${dotPosition}px` }}
+          >
+            •
           </div>
         </div>
       </div>
