@@ -10,6 +10,41 @@ const Navbar = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
 
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    // Función para actualizar las medidas
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Event listener para el redimensionamiento
+    window.addEventListener("resize", handleResize);
+
+    // Limpiar el event listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // El array vacío asegura que el efecto se ejecute solo una vez al montar
+
+  let mLeft = 192;
+  // console.log(windowSize.width);
+
+  // Usar windowSize.width para las comparaciones
+  if (windowSize.width < 1024) {
+    mLeft = 0;
+  } else if (windowSize.width < 1300) {
+    mLeft = 80;
+  } else if (windowSize.width < 1400) {
+    mLeft = 192;
+  }
+
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || "ES";
     setLocale(savedLocale);
@@ -46,10 +81,28 @@ const Navbar = () => {
   const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const [helpPosition, setHelpPosition] = useState(555); // Valor inicial
+  useEffect(() => {
+    // Actualizar helpPosition según el tamaño de la ventana
+    let newHelpPosition = 555; // Valor por defecto
+
+    if (windowSize.width < 1024) {
+      newHelpPosition = 360;
+    } else if (windowSize.width < 1300) {
+      newHelpPosition = 442;
+    } else if (windowSize.width < 1400) {
+      newHelpPosition = 555;
+    }
+
+    // Establecer el nuevo valor de helpPosition
+    setHelpPosition(newHelpPosition);
+  }, [windowSize]); // Este efecto se ejecuta cada vez que cambia windowSize
+
   useEffect(() => {
     // Activamos la transición cuando la ruta cambia
     setIsTransitioning(true);
 
+    console.log(helpPosition);
     let newPosition;
     switch (location.pathname) {
       case "/veo-cam/":
@@ -65,9 +118,12 @@ const Navbar = () => {
         newPosition = 270;
         break;
       case "/ayuda/":
-        newPosition = 650;
+        newPosition = helpPosition;
         break;
       case "/":
+        newPosition = null;
+        break;
+      case "/contacto/":
         newPosition = null;
         break;
       default:
@@ -89,33 +145,59 @@ const Navbar = () => {
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
-  }, [location.pathname]); // Solo se ejecuta cuando la ruta cambia
+  }, [location.pathname, helpPosition]); // Solo se ejecuta cuando la ruta cambia
 
   return (
     <nav className="bg-iBlue  relative">
       {/* Logo y Botón de Contactanos */}
-      <div className="flex justify-between items-center h-[72px] mx-auto max-w-[1624px] ">
+      {/*     display: flex
+;
+    justify-content: space-between;
+    align-items: center; */}
+      <div className=" h-[72px] mx-auto max-w-[1624px] flex justify-between items-center ">
         <Link to={"/"}>
-          <div className="lg:w-[350px] ml-[20px] mg:ml-[80px] xl:ml-[112px]">
+          <div className="ml-[20px] mg:ml-[80px] xl:ml-[112px]">
             <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
           </div>
         </Link>
         <div
-          className="flex flex-row  justify-between  section-dot relative ml-[-110px]"
+          className="flex flex-row  justify-between  section-dot relative llg:ml-[-110px]"
           style={{ width: "", lineHeight: "50px" }}
         >
-          {/* <div className="nav-dot relative">
-            {menuItems.map((item) => (
+          <div className="nav-dot relative">
+            <div>
               <Link
-                key={item.path}
-                to={item.path}
-                className={`menuItem text-grey1 body2 hidden md:block lg:mr-0 ${
-                  dotPosition === item.position ? "active" : ""
-                } ${item.label === "Ayuda" ? "ml-[100px]" : ""}`} // Clase condicional para "Ayuda"
+                className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                to={"/veo-cam"}
               >
-                {item.label}
+                Veo Cam 3
               </Link>
-            ))}
+              <Link
+                className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                to={"/scouting-play"}
+              >
+                ScoutingPlay
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                to={"/prueba"}
+              >
+                Becas
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                to={"/suscripciones"}
+              >
+                Suscripciones
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden lg:block "
+                style={{ marginLeft: `${mLeft}px` }}
+                to={"/ayuda"}
+              >
+                Ayuda
+              </Link>
+            </div>
             {dotPosition !== null && (
               <div
                 className={`line ${isTransitioning ? "transitioning" : ""}`}
@@ -124,131 +206,105 @@ const Navbar = () => {
                 •
               </div>
             )}
-          </div> */}
-
-          <div className="nav-dot relative">
-            <div>
-              <Link
-                className="text-grey1 body2 hidden md:block  lg:mr-0"
-                to={"/veo-cam"}
-              >
-                Veo Cam 3
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden md:block  lg:mr-0"
-                to={"/scouting-play"}
-              >
-                ScoutingPlay
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden md:block  lg:mr-0"
-                to={"/prueba"}
-              >
-                Becas
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden md:block  lg:mr-0"
-                to={"/suscripciones"}
-              >
-                Suscripciones
-              </Link>
-            </div>
           </div>
-          {dotPosition !== null && (
+          <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
             <div
-              className={`line ${isTransitioning ? "transitioning" : ""}`}
-              style={{ left: `${dotPosition}px` }}
+              className={`relative lang-selector  select-none rounded-lg hidden llg:flex mr-3 lg:mr-4 ${
+                languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
+              }`}
             >
-              •
-            </div>
-          )}
-        </div>
-        <div className="flex flex-row lg:w-[350px] justify-end items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
-          <Link
-            className="text-grey1 body2 hidden lg:block ml-12"
-            to={"/ayuda"}
-          >
-            Ayuda
-          </Link>
-          <div
-            className={`relative lang-selector  select-none rounded-lg hidden md:flex mr-3 lg:mr-4 ${
-              languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
-            }`}
-          >
-            <span
-              className="text-white cursor-pointer flex flex-row items-center  ml-2"
-              onClick={toggleLanguage}
-            >
-              {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
-              <svg
-                className={`ml-2 transition-all duration-300 ${
-                  languageOpen ? "rotate-180" : ""
-                }`}
-                width="10"
-                height="5"
-                viewBox="0 0 10 5"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                className="text-white cursor-pointer flex flex-row items-center  ml-2"
+                onClick={toggleLanguage}
               >
-                <path
-                  d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
-                  fill="#D9D9D9"
-                />
-              </svg>
-            </span>
-            {languageOpen && (
-              <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
-                {locale !== "ES" && (
-                  <span
-                    className="cursor-pointer block ml-2"
-                    onClick={() => changeLanguage("ES")}
-                  >
-                    ES 🇪🇸
-                  </span>
-                )}
-                {locale !== "EN" && (
-                  <span
-                    className="cursor-pointer block ml-2"
-                    onClick={() => changeLanguage("EN")}
-                  >
-                    EN 🇬🇧
-                  </span>
-                )}
-              </div>
-            )}
+                {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
+                <svg
+                  className={`ml-2 transition-all duration-300 ${
+                    languageOpen ? "rotate-180" : ""
+                  }`}
+                  width="10"
+                  height="5"
+                  viewBox="0 0 10 5"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
+                    fill="#D9D9D9"
+                  />
+                </svg>
+              </span>
+              {languageOpen && (
+                <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
+                  {locale !== "ES" && (
+                    <span
+                      className="cursor-pointer block ml-2"
+                      onClick={() => changeLanguage("ES")}
+                    >
+                      ES 🇪🇸
+                    </span>
+                  )}
+                  {locale !== "EN" && (
+                    <span
+                      className="cursor-pointer block ml-2"
+                      onClick={() => changeLanguage("EN")}
+                    >
+                      EN 🇬🇧
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="hidden llg:block">
+              <Button
+                link="/contacto"
+                text="Contactanos"
+                bg="#0584F5"
+                textColor="#fff"
+                width="w-[129px] "
+                className={`transition-all duration-300  ${
+                  menuOpen ? "absolute bottom-4" : ""
+                }`}
+              >
+                Contactanos
+              </Button>
+            </div>
           </div>
+        </div>
+
+        {/* Icono de hamburguesa */}
+        <div className="flex items-center  llg:hidden">
           <Button
-            link="/prueba"
+            link="/contacto"
             text="Contactanos"
             bg="#0584F5"
             textColor="#fff"
             width="w-[129px] "
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-300 llg:hidden ${
               menuOpen ? "absolute bottom-4" : ""
             }`}
           >
             Contactanos
           </Button>
-        </div>
-        {/* Icono de hamburguesa */}
-        <div
-          className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mr-[20px] md:hidden"
-          onClick={toggleMenu}
-        >
-          <div
-            className={`h-[2px] w-full bg-white transition-transform duration-300  ${
-              menuOpen ? "transform rotate-45 translate-y-[8px] mt-0" : "mt-1"
-            }`}
-          />
 
           <div
-            className={`h-[2px] w-full bg-white transition-transform duration-300 ${
-              menuOpen ? "transform -rotate-45 translate-y-[-8px]" : ""
-            }`}
-          />
+            className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden"
+            onClick={toggleMenu}
+          >
+            <div
+              className={`h-[2px] w-full bg-white transition-transform duration-300  ${
+                menuOpen ? "transform rotate-45 translate-y-[8px] mt-0" : "mt-1"
+              }`}
+            />
+
+            <div
+              className={`h-[2px] w-full bg-white transition-transform duration-300 ${
+                menuOpen ? "transform -rotate-45 translate-y-[-8px]" : ""
+              }`}
+            />
+          </div>
         </div>
       </div>
-
       <div
         className={`absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
@@ -256,9 +312,9 @@ const Navbar = () => {
         style={{ willChange: "transform" }}
       >
         <div className="flex items-center justify-between mr-[78px] h-[72px] ml-5">
-          {/* Logo */}
-          <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
-
+          <Link to={"/"}>
+            <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
+          </Link>
           {/* Toggle de idioma */}
           <div
             className={`relative lang-selector  select-none flex rounded-lg ${
