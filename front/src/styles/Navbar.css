@@ -63,3 +63,12 @@
 
 .menuItem.active {
 }
+
+@media (max-width: 920px) {
+  .nav-dot a {
+    display: none;
+  }
+  .line {
+    display: none;
+  }
+}
