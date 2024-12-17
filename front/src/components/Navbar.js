@@ -25,6 +25,14 @@ const Navbar = () => {
     setLanguageOpen(false); // Cerrar el dropdown
   };
 
+  const menuItems = [
+    { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
+    { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
+    { path: "/prueba/", label: "Prueba", position: 200 },
+    { path: "/suscripciones/", label: "Suscripciones", position: 300 },
+    { path: "/ayuda/", label: "Ayuda", position: 300 },
+  ];
+
   const location = useLocation();
 
   // Se establece el valor inicial desde localStorage o 0
@@ -57,7 +65,10 @@ const Navbar = () => {
         newPosition = 270;
         break;
       case "/ayuda/":
-        newPosition = 540;
+        newPosition = 650;
+        break;
+      case "/":
+        newPosition = null;
         break;
       default:
         newPosition = dotPositionRef.current; // Mantener la última posición si no hay cambio de ruta
@@ -93,90 +104,66 @@ const Navbar = () => {
           className="flex flex-row  justify-between  section-dot relative ml-[-110px]"
           style={{ width: "", lineHeight: "50px" }}
         >
-          <div className="nav-dot">
-            <Link
-              to="/veo-cam"
-              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  top ${
-                dotPosition === 0 ? "active" : ""
-              }`}
-            >
-              Veo Cam 3
-            </Link>
-            <Link
-              to="/scouting-play"
-              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  about ${
-                dotPosition === 90 ? "active" : ""
-              }`}
-            >
-              ScoutingPlay
-            </Link>
-            <Link
-              to="/prueba"
-              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  work ${
-                dotPosition === 180 ? "active" : ""
-              }`}
-            >
-              Becas
-            </Link>
-            <Link
-              to="/suscripciones"
-              className={`menuItem text-grey1 body2 hidden md:block  lg:mr-0"  contact ${
-                dotPosition === 540 ? "active" : ""
-              }`}
-            >
-              Suscripciones
-            </Link>
-            {/* <Link
-              to="/ayuda"
-              className={`menuItem text-grey1 body2 hidden md:block  lg:hidden  lg:mr-0"  contact ${
-                dotPosition === 360 ? "active" : ""
-              }`}
-            >
-              <span className="">Ayuda</span>
-            </Link> */}
-            {/* Punto dinámico que se mueve suavemente */}
+          {/* <div className="nav-dot relative">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`menuItem text-grey1 body2 hidden md:block lg:mr-0 ${
+                  dotPosition === item.position ? "active" : ""
+                } ${item.label === "Ayuda" ? "ml-[100px]" : ""}`} // Clase condicional para "Ayuda"
+              >
+                {item.label}
+              </Link>
+            ))}
+            {dotPosition !== null && (
+              <div
+                className={`line ${isTransitioning ? "transitioning" : ""}`}
+                style={{ left: `${dotPosition}px` }}
+              >
+                •
+              </div>
+            )}
+          </div> */}
+
+          <div className="nav-dot relative">
+            <div>
+              <Link
+                className="text-grey1 body2 hidden md:block  lg:mr-0"
+                to={"/veo-cam"}
+              >
+                Veo Cam 3
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden md:block  lg:mr-0"
+                to={"/scouting-play"}
+              >
+                ScoutingPlay
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden md:block  lg:mr-0"
+                to={"/prueba"}
+              >
+                Becas
+              </Link>
+              <Link
+                className="text-grey1 body2 hidden md:block  lg:mr-0"
+                to={"/suscripciones"}
+              >
+                Suscripciones
+              </Link>
+            </div>
+          </div>
+          {dotPosition !== null && (
             <div
               className={`line ${isTransitioning ? "transitioning" : ""}`}
               style={{ left: `${dotPosition}px` }}
             >
               •
             </div>
-          </div>
-
-          {/* <div>
-            <Link
-              className="text-grey1 body2 hidden md:block  lg:mr-0"
-              to={"/veo-cam"}
-            >
-              Veo Cam 3
-            </Link>
-            <Link
-              className="text-grey1 body2 hidden md:block  lg:mr-0"
-              to={"/scouting-play"}
-            >
-              ScoutingPlay
-            </Link>
-            <Link
-              className="text-grey1 body2 hidden md:block  lg:mr-0"
-              to={"/beca"}
-            >
-              Becas
-            </Link>
-            <Link
-              className="text-grey1 body2 hidden md:block  lg:mr-0"
-              to={"/suscripciones"}
-            >
-              Suscripciones
-            </Link>
-            <Link
-              className="text-grey1 body2 hidden md:block  lg:mr-0 lg:hidden"
-              to={"/ayuda"}
-            >
-              Ayuda
-            </Link>
-          </div> */}
+          )}
         </div>
-        <div className="flex flex-row lg:w-[350px] justify-between items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+        <div className="flex flex-row lg:w-[350px] justify-end items-center md:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
           <Link
             className="text-grey1 body2 hidden lg:block ml-12"
             to={"/ayuda"}
@@ -184,7 +171,7 @@ const Navbar = () => {
             Ayuda
           </Link>
           <div
-            className={`relative lang-selector  select-none rounded-lg hidden md:flex mr-3 lg:mr-0 ${
+            className={`relative lang-selector  select-none rounded-lg hidden md:flex mr-3 lg:mr-4 ${
               languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
             }`}
           >
