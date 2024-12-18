@@ -88,7 +88,7 @@
 }
 
 /* Media queries para pantallas menores a 1000px */
-@media (min-width: 1000px) {
+@media (min-width: 920px) {
   .h1Title {
     font-size: 90px;
     line-height: 82px;

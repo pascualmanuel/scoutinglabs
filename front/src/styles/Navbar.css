@@ -76,23 +76,20 @@
 
 .first-card {
   position: absolute;
-  width: 214.58px;
-  height: 226px;
   background: #0584f5;
   border-radius: 8px;
   transform: rotate(7deg);
+  z-index: 10;
 }
 
 .second-card {
   position: absolute;
-  width: 214.58px;
-  height: 291px;
-  left: 28px;
-  top: 434.97px;
-
+  /* left: 28px; */
+  /* top: 434px; */
   background: #0024a6;
   border-radius: 8px;
   transform: rotate(-4deg);
+  z-index: 10;
 }
 @media (max-width: 920px) {
   .nav-dot a {
