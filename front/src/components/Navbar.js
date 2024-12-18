@@ -9,7 +9,6 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
-
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -67,21 +66,32 @@ const Navbar = () => {
     { path: "/suscripciones/", label: "Suscripciones", position: 300 },
     { path: "/ayuda/", label: "Ayuda", position: 300 },
   ];
-
   const location = useLocation();
 
   // Usamos useRef para persistir la posición entre renders
-  const dotPositionRef = useRef(initialDotPosition);
-  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const [helpPosition, setHelpPosition] = useState(555); // Valor inicial
-
-  // Se establece el valor inicial desde localStorage o 0
   const initialDotPosition = parseInt(
     localStorage.getItem("dotPosition") || "0",
     10
   );
+
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const dotPositionRef = useRef(initialDotPosition);
+  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
+  const [helpPosition, setHelpPosition] = useState(555); // Valor inicial
+
+  // Se establece el valor inicial desde localStorage o 0
+
+  // Se establece el valor inicial desde localStorage o 0 solo en el cliente
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage) {
+      const storedPosition = parseInt(
+        localStorage.getItem("dotPosition") || "0",
+        10
+      );
+      dotPositionRef.current = storedPosition; // Guardamos la posición en el ref
+      setDotPosition(storedPosition); // Establecemos el estado
+    }
+  }, []); // Este useEffect solo se ejecuta una vez cuando el componente se monta
 
   useEffect(() => {
     // Actualizar helpPosition según el tamaño de la ventana
@@ -100,10 +110,11 @@ const Navbar = () => {
   }, [windowSize]); // Este efecto se ejecuta cada vez que cambia windowSize
 
   useEffect(() => {
+    if (dotPosition === null) return; // Esperamos a que el estado de dotPosition se inicialice
+
     // Activamos la transición cuando la ruta cambia
     setIsTransitioning(true);
 
-    console.log(helpPosition);
     let newPosition;
     switch (location.pathname) {
       case "/veo-cam/":
@@ -133,7 +144,9 @@ const Navbar = () => {
     }
 
     // Guardamos la nueva posición en localStorage para persistir entre visitas
-    localStorage.setItem("dotPosition", newPosition);
+    if (typeof window !== "undefined" && localStorage) {
+      localStorage.setItem("dotPosition", newPosition);
+    }
 
     // Actualizamos el ref y el estado de dotPosition
     dotPositionRef.current = newPosition;
@@ -202,7 +215,10 @@ const Navbar = () => {
             {dotPosition !== null && (
               <div
                 className={`line ${isTransitioning ? "transitioning" : ""}`}
-                style={{ left: `${dotPosition}px` }}
+                style={{
+                  left: `${dotPosition}px`,
+                  transition: isTransitioning ? "left 0.5s ease" : "none", // Mantiene la transición de 0.5s
+                }}
               >
                 •
               </div>
