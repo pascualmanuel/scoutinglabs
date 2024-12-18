@@ -7,7 +7,7 @@ import Pablo from "../assets/pablo.png";
 import Pablo2 from "../assets/pablo2.jpg";
 import { Link } from "gatsby";
 import Navbar from "./Navbar";
-import Navbardos from "./navbardos";
+
 import PreFooter from "./PreFooter";
 import Social1 from "../assets/icons/fb-icon.svg";
 import Social2 from "../assets/icons/x-icon.svg";
