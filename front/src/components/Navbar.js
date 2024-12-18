@@ -4,43 +4,23 @@ import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import "../styles/Navbar.css";
 import { useLocation } from "@reach/router";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    // Función para actualizar las medidas
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    // Event listener para el redimensionamiento
-    window.addEventListener("resize", handleResize);
-
-    // Limpiar el event listener cuando el componente se desmonte
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []); // El array vacío asegura que el efecto se ejecute solo una vez al montar
+  const { width, height } = useWindowSize(); // Destructure window size from the hook
 
   let mLeft = 192;
   // console.log(windowSize.width);
 
-  // Usar windowSize.width para las comparaciones
-  if (windowSize.width < 1024) {
+  // Usar width para las comparaciones
+  if (width < 1024) {
     mLeft = 0;
-  } else if (windowSize.width < 1300) {
+  } else if (width < 1300) {
     mLeft = 80;
-  } else if (windowSize.width < 1400) {
+  } else if (width < 1400) {
     mLeft = 192;
   }
 
@@ -97,17 +77,17 @@ const Navbar = () => {
     // Actualizar helpPosition según el tamaño de la ventana
     let newHelpPosition = 555; // Valor por defecto
 
-    if (windowSize.width < 1024) {
+    if (width < 1024) {
       newHelpPosition = 360;
-    } else if (windowSize.width < 1300) {
+    } else if (width < 1300) {
       newHelpPosition = 442;
-    } else if (windowSize.width < 1400) {
+    } else if (width < 1400) {
       newHelpPosition = 555;
     }
 
     // Establecer el nuevo valor de helpPosition
     setHelpPosition(newHelpPosition);
-  }, [windowSize]); // Este efecto se ejecuta cada vez que cambia windowSize
+  }, [width]); // Este efecto se ejecuta cada vez que cambia windowSize
 
   useEffect(() => {
     if (dotPosition === null) return; // Esperamos a que el estado de dotPosition se inicialice
