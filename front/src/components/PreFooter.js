@@ -3,30 +3,30 @@ import "../styles/Navbar.css";
 const Prefooter = () => {
   return (
     <>
-      <div className="bg-iBlue prefooter-bg">
+      <div className="bg-iBlue prefooter-bg mt-[-1px]">
         <div className="relative max-w-[600px] mx-auto">
-          <div className="first-card right-[30px] pl-4">
-            <div className="flex flex-col h-[226px] justify-around">
-              <p className="uppercase grotzec text-base flex flex-col">
+          <div className="first-card w-[214px] h-[226px] sm:w-[219px] sm:h-[310px] lg:w-[] lg:h-[] right-[30px] pl-4">
+            <div className="flex flex-col h-[226px] sm:h-[310px] justify-around">
+              <p className="uppercase grotzec subH flex flex-col">
                 <span className="text-[40px] leading-[0px] pb-2">•</span>
                 CONTACTANOS
               </p>
-              <p className="body3 w-[180px]">
+              <p className="body3 w-[180px] ">
                 Estamos aca para resolver tus dudas. Envianos un mensaje y
                 hablemos.
               </p>
-              <p className="uppercase h1Title">¡hola!</p>
+              <p className="uppercase h2Title text-sm">¡hola!</p>
             </div>
           </div>
           <div className="flex items-center justify-center h-[670px]">
-            <h2 className="uppercase relative h1Title text-center w-[360px] lm:w-[635px] text-white">
+            <h2 className="uppercase relative h1Title sm:text-[90px] text-center w-[360px] sm:w-[735px] text-white sm:whitespace-nowrap  sm:!leading-[82px]">
               <span className="text-clearBlue"> la revolucion </span>{" "}
-              <br className="hidden lm:block" /> dEL deporte amateur
+              <br className="hidden sm:block" /> dEL deporte amateur
             </h2>
           </div>
-          <div className="second-card right-[] pl-4">
-            <div className="flex flex-col h-[291px] justify-around">
-              <p className="uppercase grotzec text-base flex flex-col">
+          <div className="second-card w-[214px] h-[291px] sm:w-[219px] sm:h-[300px]  left-[28px] top-[434px] sm:left-[5px] sm:top-[380px] pl-4">
+            <div className="flex flex-col h-[291px] sm:h-[300px] justify-around">
+              <p className="uppercase grotzec subH flex flex-col">
                 <span className="text-[40px] leading-[0px] pb-2">•</span>
                 SOBRE NOSOTROS
               </p>
@@ -34,7 +34,7 @@ const Prefooter = () => {
                 Creamos ScoutingLabs porque somos apasionados del deporte y de
                 impulsar al límite nuestro rendimiento.
               </p>
-              <p className="uppercase h1Title">NUESTRA HISTORIA</p>
+              <p className="uppercase h2Title">NUESTRA HISTORIA</p>
             </div>
           </div>
           <div></div>

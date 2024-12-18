@@ -9,7 +9,7 @@ const HomePage = ({ data }) => {
       <Seo title="Style Guide" description="Guía de estilos" />
 
       <div className="bg-frame">
-        <h1 className="h1Title">H1 - Desktop</h1>
+        {/* <h1 className="h1Title">H1 - Desktop</h1>
         <p className="body1">
           Esta es una muestra de cuerpo de texto con la fuente{" "}
           <strong>Aeonik TRIAL</strong> para la clase body1.
@@ -22,7 +22,7 @@ const HomePage = ({ data }) => {
         <button className="buttonText">Botón de texto</button>
         <p className="subH">Subheading Especial</p>
         <p className="body3">Texto en la clase body3 con fuente Aeonik.</p>
-        <div className="loaderFont">20%</div>
+        <div className="loaderFont">20%</div> */}
       </div>
     </Layout>
   );
