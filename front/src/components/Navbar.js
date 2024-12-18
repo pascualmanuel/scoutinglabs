@@ -4,7 +4,7 @@ import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import "../styles/Navbar.css";
 import { useLocation } from "@reach/router";
-import useWindowSize from "../hooks/useWindowSize";
+import useWindowSize from "../Hooks/useWindowSize";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
