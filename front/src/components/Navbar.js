@@ -4,44 +4,23 @@ import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import "../styles/Navbar.css";
 import { useLocation } from "@reach/router";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
-
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    // Función para actualizar las medidas
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    // Event listener para el redimensionamiento
-    window.addEventListener("resize", handleResize);
-
-    // Limpiar el event listener cuando el componente se desmonte
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []); // El array vacío asegura que el efecto se ejecute solo una vez al montar
-
-  let mLeft = 192;
-  // console.log(windowSize.width);
+  const { width, height } = useWindowSize(); // Destructure window size from the hook
 
   // Usar windowSize.width para las comparaciones
-  if (windowSize.width < 1024) {
+  let mLeft = 192;
+
+  // Use the window width for your conditionals
+  if (width < 1024) {
     mLeft = 0;
-  } else if (windowSize.width < 1300) {
+  } else if (width < 1300) {
     mLeft = 80;
-  } else if (windowSize.width < 1400) {
+  } else if (width < 1400) {
     mLeft = 192;
   }
 
@@ -70,40 +49,45 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  // Se establece el valor inicial desde localStorage o 0
-  const initialDotPosition = parseInt(
-    localStorage.getItem("dotPosition") || "0",
-    10
-  );
-
-  // Usamos useRef para persistir la posición entre renders
-  const dotPositionRef = useRef(initialDotPosition);
-  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
+  // Estado de la posición del punto
+  const [dotPosition, setDotPosition] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-
   const [helpPosition, setHelpPosition] = useState(555); // Valor inicial
+  const dotPositionRef = useRef(null);
+
+  useEffect(() => {
+    // Se establece el valor inicial desde localStorage solo en el cliente
+    if (typeof window !== "undefined" && window.localStorage) {
+      const initialDotPosition = parseInt(
+        localStorage.getItem("dotPosition") || "0",
+        10
+      );
+      dotPositionRef.current = initialDotPosition;
+      setDotPosition(initialDotPosition);
+    }
+  }, []); // Solo se ejecuta una vez al montar el componente
+
   useEffect(() => {
     // Actualizar helpPosition según el tamaño de la ventana
     let newHelpPosition = 555; // Valor por defecto
 
-    if (windowSize.width < 1024) {
+    if (width < 1024) {
       newHelpPosition = 360;
-    } else if (windowSize.width < 1300) {
+    } else if (width < 1300) {
       newHelpPosition = 442;
-    } else if (windowSize.width < 1400) {
+    } else if (width < 1400) {
       newHelpPosition = 555;
     }
 
-    // Establecer el nuevo valor de helpPosition
     setHelpPosition(newHelpPosition);
-  }, [windowSize]); // Este efecto se ejecuta cada vez que cambia windowSize
+  }, [width]); // Este efecto se ejecuta cuando cambia el tamaño de la ventana
 
   useEffect(() => {
     // Activamos la transición cuando la ruta cambia
     setIsTransitioning(true);
 
-    console.log(helpPosition);
     let newPosition;
+
     switch (location.pathname) {
       case "/veo-cam/":
         newPosition = 0;
@@ -121,8 +105,6 @@ const Navbar = () => {
         newPosition = helpPosition;
         break;
       case "/":
-        newPosition = null;
-        break;
       case "/contacto/":
         newPosition = null;
         break;
@@ -131,8 +113,10 @@ const Navbar = () => {
         break;
     }
 
-    // Guardamos la nueva posición en localStorage para persistir entre visitas
-    localStorage.setItem("dotPosition", newPosition);
+    if (typeof window !== "undefined" && window.localStorage) {
+      // Guardamos la nueva posición en localStorage solo en el cliente
+      localStorage.setItem("dotPosition", newPosition);
+    }
 
     // Actualizamos el ref y el estado de dotPosition
     dotPositionRef.current = newPosition;
@@ -145,7 +129,7 @@ const Navbar = () => {
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
-  }, [location.pathname, helpPosition]); // Solo se ejecuta cuando la ruta cambia
+  }, [location.pathname, helpPosition]); // Solo se ejecuta cuando cambia la ruta
 
   return (
     <nav className="bg-iBlue  relative">
