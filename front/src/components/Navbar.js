@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "gatsby"; // Asumir que usas gatsby para la navegación
 import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
-import "../styles/Navbar.css";
+import "../styles/Layout.css";
 import { useLocation } from "@reach/router";
 import useWindowSize from "../hooks/useWindowSize";
 
@@ -289,7 +289,7 @@ const Navbar = () => {
           </Button>
 
           <div
-            className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden"
+            className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden z-[1000]"
             onClick={toggleMenu}
           >
             <div
@@ -307,7 +307,7 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
+        className={`z-[999] absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ willChange: "transform" }}
