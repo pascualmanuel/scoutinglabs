@@ -61,9 +61,39 @@
   text-align: center;
 }
 
-.menuItem.active {
+.prefooter-bg {
+  width: 100%;
+  height: 790px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(5, 132, 245, 0.3) 0%,
+    /* Azul claro con menor opacidad */ rgba(5, 132, 245, 0) 100%
+      /* Transparente hacia afuera */
+  );
+  background-color: black; /* Fondo de respaldo en negro */
+  z-index: -1;
 }
 
+.first-card {
+  position: absolute;
+  width: 214.58px;
+  height: 226px;
+  background: #0584f5;
+  border-radius: 8px;
+  transform: rotate(7deg);
+}
+
+.second-card {
+  position: absolute;
+  width: 214.58px;
+  height: 291px;
+  left: 28px;
+  top: 434.97px;
+
+  background: #0024a6;
+  border-radius: 8px;
+  transform: rotate(-4deg);
+}
 @media (max-width: 920px) {
   .nav-dot a {
     display: none;

@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import url("Fonts.css");
 
+.grotzec {
+  font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
+}
+
 /* H1 - Desktop */
 .h1Title {
   font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
