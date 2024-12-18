@@ -41,13 +41,13 @@ const Layout = ({ children }) => {
             <div className="mx-5 ssm:flex ssm:justify-between border-b border-[#ffffff35] llg:w-[450px] llg:border-none">
               <div>
                 <p className="body3 uppercase text-grey1">SOLUCIONES</p>
-                <Link to={"/"} target="_blank">
+                <Link to={"/veo-cam"} target="_blank">
                   <p className="body2 text-grey4 py-3 ">Veo Cam 3</p>
                 </Link>
-                <Link to={"/"} target="_blank">
+                <Link to={"/becas"} target="_blank">
                   <p className="body2 text-grey4">Becas universitarias</p>
                 </Link>
-                <Link to={"/"} target="_blank">
+                <Link to={"/scouting-play"} target="_blank">
                   <p className="body2 text-grey4 py-3 ">Scouting Play</p>
                 </Link>
                 <Link to={"/"} target="_blank">
@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
                 <Link to={"/"} target="_blank">
                   <p className="body2 text-grey4">Nosotros</p>
                 </Link>
-                <Link to={"/"} target="_blank">
+                <Link to={"/contacto"} target="_blank">
                   <p className="body2 text-grey4 py-3 ">Contacto</p>
                 </Link>
                 <Link to={"/"} target="_blank">
