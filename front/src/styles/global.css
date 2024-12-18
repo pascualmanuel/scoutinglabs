@@ -7,6 +7,10 @@
   font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
 }
 
+.aeonik {
+  font-family: "Aeonik", sans-serif;
+}
+
 /* H1 - Desktop */
 .h1Title {
   font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
@@ -46,6 +50,16 @@
   font-weight: 700;
   font-size: 24px;
   line-height: 27px;
+  text-transform: uppercase;
+}
+
+.subH2 {
+  /* 2SubHeading Special */
+  font-family: "Grotzec", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 25px;
   text-transform: uppercase;
 }
 
