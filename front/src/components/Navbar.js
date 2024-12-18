@@ -42,17 +42,21 @@ const Navbar = () => {
   const menuItems = [
     { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
     { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
-    { path: "/prueba/", label: "Prueba", position: 200 },
+    { path: "/becas/", label: "Becas", position: 200 },
     { path: "/suscripciones/", label: "Suscripciones", position: 300 },
     { path: "/ayuda/", label: "Ayuda", position: 300 },
   ];
+
   const location = useLocation();
 
   // Usamos useRef para persistir la posición entre renders
-  const initialDotPosition = parseInt(
-    localStorage.getItem("dotPosition") || "0",
-    10
-  );
+  const [initialDotPosition, setInitialDotPosition] = useState(() => {
+    // Valor inicial seguro: intenta obtenerlo de localStorage si es cliente
+    if (typeof window !== "undefined" && localStorage) {
+      return parseInt(localStorage.getItem("dotPosition") || "0", 10);
+    }
+    return 0; // Valor por defecto para SSR
+  });
 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const dotPositionRef = useRef(initialDotPosition);
@@ -103,7 +107,7 @@ const Navbar = () => {
       case "/scouting-play/":
         newPosition = 90;
         break;
-      case "/prueba/":
+      case "/becas/":
         newPosition = 180;
         break;
       case "/suscripciones/":
@@ -174,7 +178,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                to={"/prueba"}
+                to={"/becas"}
               >
                 Becas
               </Link>
@@ -379,7 +383,7 @@ const Navbar = () => {
             SCOUTINGPLAY
           </Link>
           <Link
-            to="/beca"
+            to="/becas"
             className="text-white py-3 px-5 h2Title"
             onClick={closeMenu}
           >
@@ -402,7 +406,7 @@ const Navbar = () => {
 
           <div className="pt-11 flex justify-center w-screen ">
             <Button
-              link="/prueba"
+              link="/contacto"
               text="Contactanos"
               bg="#0584F5"
               textColor="#fff"
