@@ -15,7 +15,7 @@ import Pablo from "../../assets/pablo.png";
 const HomeHero = () => {
   return (
     <>
-      <section className="relative w-full  h-[100dvh] overflow-hidden ">
+      <section className="relative w-full  h-[100vh] overflow-hidden ">
         {/* Video de fondo */}
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"
@@ -103,16 +103,17 @@ const HomeHero = () => {
           </div>
         </div>
       </section>
-      <div className="h-[1200px] partner-bg flex flex-row items-center justify-between">
-        <div className="w-[440px] ml-[112px]">
-          <div className="lg:mb-[70px]">
-            <h2 className="grotzec lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-white uppercase">
+      <div className="llg:h-[1200px] partner-bg flex flex-col items-center llg:flex-row llg:justify-between px-4 md:px-0">
+        <div className=" max-w-[540px] llg:w-[460px]  lg:ml-[112px] llg:ml-6 relative llg:mr-[70px]">
+          <img src={Six} className="absolute right-12" />
+          <div className="llg:mb-[50px] z-50 relative">
+            <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
               pablo <br /> matera
             </h2>
             <h3 className="h2Title text-clearBlue">Strategic partner</h3>
           </div>
-          <div>
-            <p className="text-grey2 body0 mb-8">
+          <div className="my-10 llg:my-0">
+            <p className="text-grey2 body0 mb-8 !text-[18px] xxl:!text-[24px]">
               "Una de las principales ventajas de la cámara Veo es que no
               necesitas ser un genio para usarla; es muy intuitiva y fácil de
               usar. Desde padres hasta entrenadores tienen la capacidad de
@@ -128,15 +129,17 @@ const HomeHero = () => {
             />
           </div>
         </div>
-        <div className="h-[1440px] flex items-end">
-          <div>
+        <div className="llg:h-[1440px] flex items-end">
+          <div className=" llg:mb-[270px] xl:mb-[140px]">
             <div
-              className="w-[740px] h-[740px]"
-              style={{
-                backgroundImage: `url("${Pablo}")`,
-                backgroundSize: "cover",
-              }}
-            ></div>
+              className=" "
+              // style={{
+              //   backgroundImage: `url("${Pablo}")`,
+              //   backgroundSize: "cover",
+              // }}
+            >
+              <img src={Pablo} className="w-[540px] xl:w-[740px] rounded-xl" />
+            </div>
           </div>
         </div>
       </div>
