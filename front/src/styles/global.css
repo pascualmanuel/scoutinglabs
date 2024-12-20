@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import url("Fonts.css");
 
+body {
+  background-color: #03000d;
+  color: #f6f6f6;
+}
 .grotzec {
   font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
 }

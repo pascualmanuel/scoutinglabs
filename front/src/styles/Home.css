@@ -10,6 +10,21 @@
   background-color: black;
 }
 
+.veo-bg {
+  background: radial-gradient(
+      ellipse 252.2px 197px at 50% 40%,
+      rgba(5, 132, 245, 0.6) 1%,
+      rgba(5, 132, 245, 0) 130%
+    ),
+    linear-gradient(180deg, #03000d 0%, rgba(3, 0, 13, 0.7) 45.5%, #03000d 100%),
+    url("../assets/veo-bg.png");
+  height: 750px;
+  background-size: contain, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+  background-position: center center, center, center; /* Ubica cada capa */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  transform: scaleY(1); /* Invierte la imagen */
+}
+
 @media (max-width: 800px) {
   .partner-bg {
     /* background: radial-gradient(
@@ -26,5 +41,26 @@
       rgba(0, 0, 0, 1) 40%,
       rgba(0, 0, 0, 1) 100%
     );
+  }
+
+  .veo-bg {
+    background: radial-gradient(
+        ellipse 252.2px 197px at center,
+        rgba(5, 132, 245, 0.8) 1%,
+        rgba(5, 132, 245, 0) 130%
+      ),
+      linear-gradient(
+        180deg,
+        #03000d 0%,
+        rgba(3, 0, 13, 0.7) 45.5%,
+        #03000d 100%
+      ),
+      url("../assets/veo-bg.png");
+    height: 640px;
+    background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+    background-position: center center, center, center; /* Ubica cada capa */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    transform: scaleY(1); /* Invierte la imagen */
+    margin-bottom: 120px;
   }
 }
