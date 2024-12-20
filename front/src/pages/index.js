@@ -5,12 +5,14 @@ import Seo from "../components/Seo.js"; // Si estás usando SEO dinámico
 import "../styles/Layout.css";
 import "../styles/Home.css";
 import HomeHero from "../components/home/HomeHero.js";
+import HomeVeo from "../components/home/HomeVeo.jsx";
 
 const HomePage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Scouting Labs" description="Scouting Labs home" />
       <HomeHero />
+      <HomeVeo />
     </Layout>
   );
 };
