@@ -243,7 +243,7 @@ const Navbar = () => {
             </div>
             <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
               <div
-                className={`relative lang-selector  select-none rounded-lg hidden llg:flex mr-3 lg:mr-4 ${
+                className={`relative lang-selector  select-none rounded-lg hidden  llg:flex mr-3 lg:mr-4 ${
                   languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
                 }`}
               >
@@ -269,7 +269,7 @@ const Navbar = () => {
                   </svg>
                 </span>
                 {languageOpen && (
-                  <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
+                  <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg flex">
                     {locale !== "ES" && (
                       <span
                         className="cursor-pointer block ml-2"
@@ -379,7 +379,7 @@ const Navbar = () => {
                 </svg>
               </span>
               {languageOpen && (
-                <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
+                <div className="absolute  top-full left-0 text-white lang-selector  select-none rounded-b-lg">
                   {locale !== "ES" && (
                     <span
                       className="cursor-pointer block ml-2"

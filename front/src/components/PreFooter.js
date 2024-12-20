@@ -6,7 +6,7 @@ const Prefooter = () => {
       <div className="bg-iBlue prefooter-bg mt-[-1px]">
         <div className="relative max-w-[600px] mx-auto">
           <div className="first-card w-[214px] h-[226px] sm:w-[219px] sm:h-[310px]  right-[30px] lm:right-[-60px] lg:right-[-190px] lg:top-[80px] pl-4">
-            <div className="flex flex-col h-[226px] sm:h-[310px] justify-around">
+            <div className="flex flex-col h-[226px] sm:h-[310px] justify-around text-black">
               <p className="uppercase grotzec subH flex flex-col">
                 <span className="text-[40px] leading-[0px] pb-2">•</span>
                 CONTACTANOS
@@ -24,7 +24,7 @@ const Prefooter = () => {
               <br className="hidden sm:block" /> dEL deporte amateur
             </h2>
           </div>
-          <div className="second-card w-[214px] h-[291px] sm:w-[219px] sm:h-[300px]  left-[28px] top-[434px] sm:left-[5px] sm:top-[380px]  lg:top-[395px] lg:left-[-180px]  mg:top-[325px] mg:left-[-223px] pl-4">
+          <div className="second-card w-[214px] h-[291px] sm:w-[219px] sm:h-[300px]  left-[28px] top-[434px] sm:left-[5px] sm:top-[380px]  lg:top-[395px] lg:left-[-180px]  mg:top-[325px] mg:left-[-223px] pl-4 text-black">
             <div className="flex flex-col h-[291px] sm:h-[300px] justify-around">
               <p className="uppercase grotzec subH flex flex-col">
                 <span className="text-[40px] leading-[0px] pb-2">•</span>
