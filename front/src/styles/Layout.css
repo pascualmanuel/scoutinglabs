@@ -34,6 +34,17 @@
   background-color: black;
 }
 
+.navbar-visible {
+  visibility: visible;
+  transform: translateY(0);
+  transition: transform 0.6s ease-in-out, visibility 0s linear 0s;
+}
+
+.navbar-hidden {
+  transform: translateY(-100px);
+  transition: transform 0.6s ease-in-out, visibility 0s linear 0.6s;
+}
+
 .bg-frame {
   background-image: url("../assets/frame-bg.png");
   background-position: top;

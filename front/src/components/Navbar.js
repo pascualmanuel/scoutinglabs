@@ -145,77 +145,220 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, [location.pathname, helpPosition]); // Solo se ejecuta cuando la ruta cambia
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && lastScrollY < 90) {
+      // Keep the navbar visible when scrolling down near the top
+      setIsVisible(true);
+    } else if (currentScrollY > lastScrollY) {
+      // Hide the navbar when scrolling down beyond 90px
+      setIsVisible(false);
+    } else {
+      // Show the navbar when scrolling up
+      setIsVisible(true);
+    }
+
+    setLastScrollY(currentScrollY);
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Only add event listener if running in browser (Gatsby has SSR)
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [lastScrollY]);
+
+  console.log(lastScrollY);
+
   return (
-    <nav className="bg-iBlue  relative">
-      {/* Logo y Botón de Contactanos */}
-      {/*     display: flex
-;
-    justify-content: space-between;
-    align-items: center; */}
-      <div className=" h-[72px] mx-auto max-w-[1624px] flex justify-between items-center ">
-        <Link to={"/"}>
-          <div className="ml-[20px] mg:ml-[80px] xl:ml-[112px]">
-            <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
-          </div>
-        </Link>
-        <div
-          className="flex flex-row  justify-between  section-dot relative llg:ml-[-110px]"
-          style={{ width: "", lineHeight: "50px" }}
-        >
-          <div className="nav-dot relative">
-            <div>
-              <Link
-                className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                to={"/veo-cam"}
-              >
-                Veo Cam 3
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                to={"/scouting-play"}
-              >
-                ScoutingPlay
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                to={"/becas"}
-              >
-                Becas
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                to={"/suscripciones"}
-              >
-                Suscripciones
-              </Link>
-              <Link
-                className="text-grey1 body2 hidden lg:block "
-                style={{ marginLeft: `${mLeft}px` }}
-                to={"/ayuda"}
-              >
-                Ayuda
-              </Link>
+    <div
+      className={`navbar fixed z-[1000] w-full ${
+        isVisible ? "navbar-visible bg-iBlue  z-50" : "navbar-hidden"
+      }`}
+    >
+      <nav className="bg-iBlue  relative">
+        <div className=" h-[72px] mx-auto max-w-[1624px] flex justify-between items-center ">
+          <Link to={"/"}>
+            <div className="ml-[20px] mg:ml-[80px] xl:ml-[112px]">
+              <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
             </div>
-            {dotPosition !== null && (
-              <div
-                className={`line ${isTransitioning ? "transitioning" : ""}`}
-                style={{
-                  left: `${dotPosition}px`,
-                  transition: isTransitioning ? "left 0.5s ease" : "none", // Mantiene la transición de 0.5s
-                }}
-              >
-                •
+          </Link>
+          <div
+            className="flex flex-row  justify-between  section-dot relative llg:ml-[-110px]"
+            style={{ width: "", lineHeight: "50px" }}
+          >
+            <div className="nav-dot relative">
+              <div>
+                <Link
+                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                  to={"/veo-cam"}
+                >
+                  Veo Cam 3
+                </Link>
+                <Link
+                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                  to={"/scouting-play"}
+                >
+                  ScoutingPlay
+                </Link>
+                <Link
+                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                  to={"/becas"}
+                >
+                  Becas
+                </Link>
+                <Link
+                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
+                  to={"/suscripciones"}
+                >
+                  Suscripciones
+                </Link>
+                <Link
+                  className="text-grey1 body2 hidden lg:block "
+                  style={{ marginLeft: `${mLeft}px` }}
+                  to={"/ayuda"}
+                >
+                  Ayuda
+                </Link>
               </div>
-            )}
+              {dotPosition !== null && (
+                <div
+                  className={`line ${isTransitioning ? "transitioning" : ""}`}
+                  style={{
+                    left: `${dotPosition}px`,
+                    transition: isTransitioning ? "left 0.5s ease" : "none", // Mantiene la transición de 0.5s
+                  }}
+                >
+                  •
+                </div>
+              )}
+            </div>
+            <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+              <div
+                className={`relative lang-selector  select-none rounded-lg hidden llg:flex mr-3 lg:mr-4 ${
+                  languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
+                }`}
+              >
+                <span
+                  className="text-white cursor-pointer flex flex-row items-center  ml-2"
+                  onClick={toggleLanguage}
+                >
+                  {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
+                  <svg
+                    className={`ml-2 transition-all duration-300 ${
+                      languageOpen ? "rotate-180" : ""
+                    }`}
+                    width="10"
+                    height="5"
+                    viewBox="0 0 10 5"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
+                      fill="#D9D9D9"
+                    />
+                  </svg>
+                </span>
+                {languageOpen && (
+                  <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
+                    {locale !== "ES" && (
+                      <span
+                        className="cursor-pointer block ml-2"
+                        onClick={() => changeLanguage("ES")}
+                      >
+                        ES 🇪🇸
+                      </span>
+                    )}
+                    {locale !== "EN" && (
+                      <span
+                        className="cursor-pointer block ml-2"
+                        onClick={() => changeLanguage("EN")}
+                      >
+                        EN 🇬🇧
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="hidden llg:block">
+                <Button
+                  link="/contacto"
+                  text="Contactanos"
+                  bg="#0584F5"
+                  textColor="#fff"
+                  width="w-[129px] "
+                  className={`transition-all duration-300  ${
+                    menuOpen ? "absolute bottom-4" : ""
+                  }`}
+                >
+                  Contactanos
+                </Button>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+
+          {/* Icono de hamburguesa */}
+          <div className="flex items-center  llg:hidden">
+            <Button
+              link="/contacto"
+              text="Contactanos"
+              bg="#0584F5"
+              textColor="#fff"
+              width="w-[129px] "
+              className={`transition-all duration-300 llg:hidden ${
+                menuOpen ? "absolute bottom-4" : ""
+              }`}
+            >
+              Contactanos
+            </Button>
+
             <div
-              className={`relative lang-selector  select-none rounded-lg hidden llg:flex mr-3 lg:mr-4 ${
+              className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden z-[1000]"
+              onClick={toggleMenu}
+            >
+              <div
+                className={`h-[2px] w-full bg-white transition-transform duration-300  ${
+                  menuOpen
+                    ? "transform rotate-45 translate-y-[8px] mt-0"
+                    : "mt-1"
+                }`}
+              />
+
+              <div
+                className={`h-[2px] w-full bg-white transition-transform duration-300 ${
+                  menuOpen ? "transform -rotate-45 translate-y-[-8px]" : ""
+                }`}
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className={`z-[999] absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
+            menuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+          style={{ willChange: "transform" }}
+        >
+          <div className="flex items-center justify-between mr-[78px] h-[72px] ml-5">
+            <Link to={"/"}>
+              <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
+            </Link>
+            {/* Toggle de idioma */}
+            <div
+              className={`relative lang-selector  select-none flex rounded-lg ${
                 languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
               }`}
             >
               <span
-                className="text-white cursor-pointer flex flex-row items-center  ml-2"
+                className="text-white cursor-pointer flex flex-row items-center ml-2"
                 onClick={toggleLanguage}
               >
                 {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
@@ -256,170 +399,63 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <div className="hidden llg:block">
+          </div>
+
+          {/* Links del menú */}
+          <div className="flex flex-col mb-10 absolute bottom-0 z-100">
+            <Link
+              to="/veo-cam"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              VEO CAM 3
+            </Link>
+            <Link
+              to="/scouting-play"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              SCOUTINGPLAY
+            </Link>
+            <Link
+              to="/becas"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              BECAS
+            </Link>
+            <Link
+              to="/precios"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              PRECIOS
+            </Link>
+            <Link
+              to="/nosotros"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              NOSOTROS
+            </Link>
+
+            <div className="pt-11 flex justify-center w-screen ">
               <Button
                 link="/contacto"
                 text="Contactanos"
                 bg="#0584F5"
                 textColor="#fff"
-                width="w-[129px] "
-                className={`transition-all duration-300  ${
-                  menuOpen ? "absolute bottom-4" : ""
-                }`}
+                width="w-[90vw]"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 "
               >
                 Contactanos
               </Button>
             </div>
           </div>
+          {/* <div className="ellipse"></div> */}
         </div>
-
-        {/* Icono de hamburguesa */}
-        <div className="flex items-center  llg:hidden">
-          <Button
-            link="/contacto"
-            text="Contactanos"
-            bg="#0584F5"
-            textColor="#fff"
-            width="w-[129px] "
-            className={`transition-all duration-300 llg:hidden ${
-              menuOpen ? "absolute bottom-4" : ""
-            }`}
-          >
-            Contactanos
-          </Button>
-
-          <div
-            className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden z-[1000]"
-            onClick={toggleMenu}
-          >
-            <div
-              className={`h-[2px] w-full bg-white transition-transform duration-300  ${
-                menuOpen ? "transform rotate-45 translate-y-[8px] mt-0" : "mt-1"
-              }`}
-            />
-
-            <div
-              className={`h-[2px] w-full bg-white transition-transform duration-300 ${
-                menuOpen ? "transform -rotate-45 translate-y-[-8px]" : ""
-              }`}
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        className={`z-[999] absolute navbar-background top-0 left-0 w-screen h-[100dvh] bg-iBlue bg-opacity-100 transition-transform duration-300 ease-in-out transform ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{ willChange: "transform" }}
-      >
-        <div className="flex items-center justify-between mr-[78px] h-[72px] ml-5">
-          <Link to={"/"}>
-            <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
-          </Link>
-          {/* Toggle de idioma */}
-          <div
-            className={`relative lang-selector  select-none flex rounded-lg ${
-              languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
-            }`}
-          >
-            <span
-              className="text-white cursor-pointer flex flex-row items-center ml-2"
-              onClick={toggleLanguage}
-            >
-              {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
-              <svg
-                className={`ml-2 transition-all duration-300 ${
-                  languageOpen ? "rotate-180" : ""
-                }`}
-                width="10"
-                height="5"
-                viewBox="0 0 10 5"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
-                  fill="#D9D9D9"
-                />
-              </svg>
-            </span>
-            {languageOpen && (
-              <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg">
-                {locale !== "ES" && (
-                  <span
-                    className="cursor-pointer block ml-2"
-                    onClick={() => changeLanguage("ES")}
-                  >
-                    ES 🇪🇸
-                  </span>
-                )}
-                {locale !== "EN" && (
-                  <span
-                    className="cursor-pointer block ml-2"
-                    onClick={() => changeLanguage("EN")}
-                  >
-                    EN 🇬🇧
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Links del menú */}
-        <div className="flex flex-col mb-10 absolute bottom-0 z-100">
-          <Link
-            to="/veo-cam"
-            className="text-white py-3 px-5 h2Title"
-            onClick={closeMenu}
-          >
-            VEO CAM 3
-          </Link>
-          <Link
-            to="/scouting-play"
-            className="text-white py-3 px-5 h2Title"
-            onClick={closeMenu}
-          >
-            SCOUTINGPLAY
-          </Link>
-          <Link
-            to="/becas"
-            className="text-white py-3 px-5 h2Title"
-            onClick={closeMenu}
-          >
-            BECAS
-          </Link>
-          <Link
-            to="/precios"
-            className="text-white py-3 px-5 h2Title"
-            onClick={closeMenu}
-          >
-            PRECIOS
-          </Link>
-          <Link
-            to="/nosotros"
-            className="text-white py-3 px-5 h2Title"
-            onClick={closeMenu}
-          >
-            NOSOTROS
-          </Link>
-
-          <div className="pt-11 flex justify-center w-screen ">
-            <Button
-              link="/contacto"
-              text="Contactanos"
-              bg="#0584F5"
-              textColor="#fff"
-              width="w-[90vw]"
-              className="absolute bottom-10 left-1/2 transform -translate-x-1/2 "
-            >
-              Contactanos
-            </Button>
-          </div>
-        </div>
-        {/* <div className="ellipse"></div> */}
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
