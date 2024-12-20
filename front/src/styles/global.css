@@ -63,6 +63,15 @@
   text-transform: uppercase;
 }
 
+.body0 {
+  /* Body 0 - Mobile */
+  font-family: "Aeonik TRIAL";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+  /* or 167% */
+}
 /* Body 1 - Desktop&Mobile */
 .body1 {
   font-family: "Aeonik TRIAL";
@@ -112,5 +121,10 @@
   .loaderFont {
     font-size: 160px;
     line-height: 147px;
+  }
+  .body0 {
+    /* Body 0 - Mobile */
+    font-size: 24px;
+    line-height: 40px;
   }
 }

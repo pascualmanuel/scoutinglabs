@@ -1,0 +1,11 @@
+.partner-bg {
+  background: radial-gradient(
+    ellipse 150% 150% at right center,
+    /* Ajusta las proporciones del elipse */ rgba(5, 132, 245, 0.9) 8%,
+    /* Azul intenso en el centro */ rgba(0, 0, 0, 1) 30%,
+    /* Empieza la transición al negro */ rgba(0, 0, 0, 1) 40%,
+    /* Negro más presente */ rgba(0, 0, 0, 1) 100% /* Negro completo */
+  );
+
+  background-color: black;
+}
