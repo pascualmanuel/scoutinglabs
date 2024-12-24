@@ -55,7 +55,7 @@
         rgba(3, 0, 13, 0.7) 79.5%,
         #03000d 100%
       ),
-      url("../assets/veocam-bg3.webp");
+      url("../assets/veocam-bg.webp");
 
     height: 700px;
     background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
@@ -64,4 +64,135 @@
     transform: scaleY(1); /* Invierte la imagen */
     margin-bottom: 120px;
   }
+}
+
+/* @keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+.slider {
+
+  height: 150px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 960px;
+}
+.slider::before,
+.slider::after {
+
+  content: "";
+  height: 100px;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+.slider::before {
+  left: 0;
+  top: 0;
+}
+.slider .slide-track {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: calc(250px * 14);
+}
+.slider .slide {
+  height: 100px;
+  width: 250px;
+  padding-left: 20px;
+} */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll2 {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.slider {
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  height: 130px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 960px;
+}
+
+.slider::before,
+.slider::after {
+  background: linear-gradient(
+    to right,
+    rgb(0, 0, 0) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  content: "";
+  height: 130px;
+  position: absolute;
+  width: 200px;
+  z-index: 2;
+}
+
+.slider::before {
+  left: 0;
+  top: 0;
+}
+
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
+
+.slide-track {
+  animation: scroll 45s linear infinite;
+  display: flex;
+  width: calc(
+    2 * 1500px
+  ); /* Make it twice the slider width to enable looping */
+}
+
+.slide-track-2 {
+  animation: scroll2 45s linear infinite;
+  display: flex;
+  width: calc(
+    2 * 1500px
+  ); /* Make it twice the slider width to enable looping */
+}
+
+.slide {
+  background-color: #1b1b1b;
+  height: 90px;
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-sizing: border-box; */
+  border-radius: 7px;
+  margin-right: 20px;
+}
+
+.slide img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

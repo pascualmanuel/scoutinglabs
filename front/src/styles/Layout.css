@@ -11,7 +11,6 @@
 }
 
 .lang-selector {
-
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -77,11 +76,11 @@
   height: 790px;
   background: radial-gradient(
     ellipse at center,
-    rgba(5, 132, 245, 0.3) 0%,
-    /* Azul claro con menor opacidad */ rgba(5, 132, 245, 0) 100%
+    rgba(5, 132, 245, 0.5) 0%,
+    /* Azul claro con menor opacidad */ rgba(5, 132, 245, 0) 60%
       /* Transparente hacia afuera */
   );
-  background-color: black; /* Fondo de respaldo en negro */
+  background-color: #03000d;
   z-index: -1;
 }
 

@@ -4,6 +4,7 @@ import "../../styles/Home.css";
 import VeoLogo from "../../assets/icons/veo-logo.svg";
 import Button from "../Button";
 import VeoCamImg from "../../assets/home/veo-transparent.webp";
+import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
   return (
     <>
@@ -123,6 +124,18 @@ const HomeVeo = () => {
           <Button text={"Conoce Veo Cam 3"} width="w-[90vw] sm:w-[225px]" />
         </div>
       </div>
+      <div className="mx-5 mb-16">
+        <h3 className="h1Title uppercase text-left">
+          Confian en <br /> nosotros
+        </h3>
+        <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter">
+          <span className="text-skyBlue">
+            clubes, torneos <br /> y academias
+          </span>
+          &nbsp; de todo el mundo
+        </h3>
+      </div>
+      <TeamsCarousel />
     </>
   );
 };
