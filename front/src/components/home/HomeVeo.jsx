@@ -7,7 +7,7 @@ import VeoCamImg from "../../assets/home/veo-transparent.webp";
 const HomeVeo = () => {
   return (
     <>
-      <div className="mx-5 mb-[180px]">
+      <div className="mx-5 mb-[80px] md:mb-[180px]">
         <div className="h-280 relative mt-16 max-w-[1250px] mx-auto">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
@@ -93,7 +93,7 @@ const HomeVeo = () => {
         </div>
       </div>
       <div className="veo-bg ">
-        <div className="flex flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center justify-center text-center pt-[60px] md:pt-0">
           <div className="mb-4 lg:mb-8 max-w-[280px]">
             <span className=" bg-[#faf9f61a] body3 p-1 pr-2 pl-1 rounded-full border border-[#FAF9F64D] flex items-center aeonik">
               <span className="w-[25px] h-[25px] bg-[#0A3D14] rounded-full border border-grey3 inline-block relative mr-2">

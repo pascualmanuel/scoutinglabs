@@ -17,7 +17,7 @@
       rgba(5, 132, 245, 0) 130%
     ),
     linear-gradient(180deg, #03000d 0%, rgba(3, 0, 13, 0.7) 45.5%, #03000d 100%),
-    url("../assets/veo-bg.png");
+    url("../assets/veocam-bg.webp");
   height: 750px;
   background-size: contain, cover; /* Ajusta el tamaño del ellipse y de la imagen */
   background-position: center center, center, center; /* Ubica cada capa */
@@ -45,18 +45,19 @@
 
   .veo-bg {
     background: radial-gradient(
-        ellipse 252.2px 197px at center,
+        ellipse 252.2px 197px at center 251px,
         rgba(5, 132, 245, 0.8) 1%,
         rgba(5, 132, 245, 0) 130%
       ),
       linear-gradient(
         180deg,
-        #03000d 0%,
-        rgba(3, 0, 13, 0.7) 45.5%,
+        #03000d -179%,
+        rgba(3, 0, 13, 0.7) 79.5%,
         #03000d 100%
       ),
-      url("../assets/veo-bg.png");
-    height: 640px;
+      url("../assets/veocam-bg3.webp");
+
+    height: 700px;
     background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
     background-position: center center, center, center; /* Ubica cada capa */
     background-repeat: no-repeat; /* Evita repeticiones */
