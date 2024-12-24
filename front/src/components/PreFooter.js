@@ -3,7 +3,7 @@ import "../styles/Layout.css";
 const Prefooter = () => {
   return (
     <>
-      <div className="bg-iBlue prefooter-bg mt-[-1px]">
+      <div className="bg-iBlue prefooter-bg mt-[px]">
         <div className="relative max-w-[600px] mx-auto">
           <div className="first-card w-[214px] h-[226px] sm:w-[219px] sm:h-[310px]  right-[30px] lm:right-[-60px] lg:right-[-190px] lg:top-[80px] pl-4">
             <div className="flex flex-col h-[226px] sm:h-[310px] justify-around text-black">
