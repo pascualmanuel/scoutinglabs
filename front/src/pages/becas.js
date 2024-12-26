@@ -4,7 +4,7 @@ const Becas = () => {
   return (
     <>
       <Layout>
-        <div>Becas</div>
+        {/* <div>Becas</div> */}
       </Layout>
     </>
   );
