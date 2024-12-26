@@ -42,7 +42,7 @@ const Navbar = () => {
   const menuItems = [
     { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
     { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
-    { path: "/becas/", label: "Becas", position: 200 },
+    // { path: "/becas/", label: "Becas", position: 200 },
     { path: "/suscripciones/", label: "Suscripciones", position: 300 },
     { path: "/ayuda/", label: "Ayuda", position: 300 },
   ];
