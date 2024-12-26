@@ -72,7 +72,7 @@ const HomeVeo = () => {
                 href="#"
                 className="flex group items-center justify-between subH border-t border-[#434652] pt-7    "
               >
-                Becas deportivas en el exterior
+                {/* Becas deportivas en el exterior */}
                 <span className="">
                   <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
                     <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
