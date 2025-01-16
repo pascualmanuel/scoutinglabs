@@ -6,6 +6,7 @@ import "../styles/Layout.css";
 import "../styles/Home.css";
 import HomeHero from "../components/home/HomeHero.js";
 import HomeVeo from "../components/home/HomeVeo.jsx";
+import OurMission from "../components/home/OurMission.jsx";
 
 const HomePage = ({ data }) => {
   return (
@@ -13,6 +14,7 @@ const HomePage = ({ data }) => {
       <Seo title="Scouting Labs" description="Scouting Labs home" />
       <HomeHero />
       <HomeVeo />
+      <OurMission />
     </Layout>
   );
 };

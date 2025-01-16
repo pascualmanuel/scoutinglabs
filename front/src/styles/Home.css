@@ -196,3 +196,84 @@
   width: 100%;
   object-fit: cover;
 }
+
+.locations-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.location {
+  position: relative;
+  width: 280px;
+  height: fit-content;
+}
+
+.location-item {
+  cursor: pointer;
+  color: #a5a39f;
+  height: 60px;
+}
+
+.text-location {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 60px;
+  transition: 300ms;
+}
+
+.text-location.text-active {
+  font-weight: 400;
+}
+
+.location-item.active {
+  color: #212121 !important;
+}
+
+.text-location:hover {
+  color: #5e5e5e;
+}
+
+.text-location.text-active:hover {
+  color: #212121;
+}
+
+.location-content {
+  display: flex;
+  width: 90%;
+  position: relative;
+}
+.image-container {
+  position: relative;
+  overflow: hidden;
+  width: 55%;
+}
+
+.location-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.location-image.exiting {
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+  transition: transform 0.8s ease;
+}
+
+.location-image.next {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.location-text {
+  margin-top: 20px;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+}
