@@ -83,11 +83,11 @@ const HomeHero = () => {
                 </div>
               </span>
             </a>
-            <a
+            {/* <a
               href="#"
               className="flex group items-center gap-2 subH2 md:border-t md:border-[#434652] md:pt-4    "
             >
-              {/* BECAS PARA ESTUDIAR EN EL EXTERIOR{" "} */}
+              BECAS PARA ESTUDIAR EN EL EXTERIOR{" "}
               <span className="">
                 <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
                   <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
@@ -99,7 +99,7 @@ const HomeHero = () => {
                   </div>
                 </div>
               </span>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>
