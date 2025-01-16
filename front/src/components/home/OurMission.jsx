@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Pablo from "../../assets/pablo.png";
-import Pablo2 from "../../assets/veocam-bg.webp";
+import SPlay from "../../assets/ScoutingPlay.mp4";
+import VeoCam from "../../assets/VeoCam3.mp4";
+import SplayImg from "../../assets/play-img.png";
+import VeoImg from "../../assets/veo-img.png";
 
 function Locations() {
   const locations = {
     Belgrano: {
-      title:
-        "Nuestro primer local en Juramento y Vidal. Abrimos en agosto 2020 ofreciendo una nueva experiencia, que fue elegida rápidamente por la gente del barrio y alrededores. Nuestra propuesta fue ofrecer un café distinto al conocido hasta ese momento, resaltando la materia prima de alta calidad y una pastelería de excelencia.",
-      //   image: Belgrano,
-      media: Pablo,
+      title: "Veo Cam 3",
+      media: SPlay,
       subtitle: "Av. Juramento 2800",
       link: "https://maps.app.goo.gl/b7nNBRmyJovJCX9T9",
     },
     Palermo: {
-      text: "En agosto 2022 de la mano de Cande Molfese (Actriz y cantante), llegó nuestro segundo local con una propuesta y una ubicación única, en Palermo frente al Ecoparque. Gracias a la repercusión en el barrio y en los medios de comunicación, logramos posicionar la marca y consolidarnos. Con una nueva impronta, vegetariana pero siempre con el café como protagonista, logramos instalar nuevas opciones y prácticas basadas en el cuidado del medio ambiente y la conciencia sustentable (leches vegetales y agua filtrada sin costo adicional, descuentos en el take away para quienes traen su taza, más productos gluten free, eco mixers compostables, local pet friendly, entre otros).",
-      //   image: Palermo,
-      media: Pablo2,
-      locationText: "República de la India 2895",
+      title: "Scouting Play",
+      subtitle: "República de la India 2895",
+      media: VeoCam,
       link: "https://maps.app.goo.gl/R8XvW1ew8KDyXEZg9",
-    },
-    Recoleta: {
-      text: "Con tres años de experiencia y siendo una marca reconocida, llegó nuestro tercer local en julio 2023. Logramos plasmar todo lo aprendido para brindar una propuesta superadora para un barrio icónico de la Ciudad de Buenos Aires.",
-      //   image: Recoleta,
-      media: "",
-      locationText: "Av. Juncal 2303",
-      link: "https://maps.app.goo.gl/UC2mkh2YGrJgCwrC7",
-    },
-    Valencia: {
-      text: "SIN FRONTERAS. Luego de mucho esfuerzo cumplimos un sueño impensado, pasar de ser una pequeña cafetería de especialidad en Belgrano, a abrir nuestra primera sucursal en el exterior en 2024. En pleno auge y crecimiento del concepto “Specialty Coffee” en España llegamos para replicar nuestra esencia en el mercado internacional.",
-      //   image: Valencia,
-      media: "",
-      locationText: "Vicente Beltrán Grimal, 23",
-      link: "https://maps.app.goo.gl/UyFfNgSmSrNqNF5v8",
     },
   };
 
@@ -92,19 +77,7 @@ function Locations() {
 
   return (
     <>
-      Hola
-      {/* <img src={Valencia} className="hidden" />
-      <img src={Belgrano} className="hidden" />
-      <img src={Palermo} className="hidden" />
-      <img src={Recoleta} className="hidden" />
-      <img src={SpeCoffee} className="hidden" /> */}
-      <div id="donde-estamos"></div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="px-[30px]" id="">
+      <div className="px-[30px] py-[30px] " id="">
         <div className="max-w-[1290px] mx-auto mb-20">
           <h2 className="bH1 text-white">Dónde estamos</h2>
         </div>
@@ -143,14 +116,22 @@ function Locations() {
 
           <div className="location-content">
             <div className="image-container h-[350px] xl:h-[500px]">
-              <img
+              <video
                 src={locations[selectedLocation].media}
+                autoPlay="true"
+                mute="true"
+                loop="true"
+                playsInline="true"
                 alt={selectedLocation}
                 className={`location-image ${exiting ? "exiting" : ""}`} // Aplicar clase 'exiting' solo si estamos saliendo
               />
               {nextLocation && (
-                <img
+                <video
                   src={locations[nextLocation].media}
+                  autoPlay=""
+                  mute=""
+                  loop=""
+                  playsInline=""
                   alt={nextLocation}
                   className="location-image next" // Siempre está detrás
                 />
@@ -159,11 +140,11 @@ function Locations() {
 
             <div className="location-text">
               <p className="leading-6 text-lg	">
-                {locations[selectedLocation].text}
+                {locations[selectedLocation].title}
               </p>
               <div className="">
                 <p className="text-2xl leading-10 font-normal mb-2">
-                  {locations[selectedLocation].locationText}
+                  {locations[selectedLocation].subtitle}
                 </p>
                 <a
                   href={locations[selectedLocation].link}
