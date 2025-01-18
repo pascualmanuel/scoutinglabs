@@ -3,21 +3,30 @@ import SPlay from "../../assets/ScoutingPlay.mp4";
 import VeoCam from "../../assets/VeoCam3.mp4";
 import SplayImg from "../../assets/play-img.png";
 import VeoImg from "../../assets/veo-img.png";
-
+import Button from "../Button";
 function Locations() {
   const locations = {
     VeoCam3: {
       title: "Veo Cam 3",
       media: VeoCam,
-      subtitle: "Av. Juramento 2800",
-      link: "https://maps.app.goo.gl/b7nNBRmyJovJCX9T9",
+      subtitle:
+        "Graba tus partidos y entrenamientos y luego analiza las jugadas para mejorar tu rendimiento.",
+      link: "Link",
     },
     ScoutingPlay: {
       title: "Scouting Play",
-      subtitle: "República de la India 2895",
+      subtitle:
+        "Envianos tus mejores jugadas (o burradas) y forma parte de la comunidad más apasionada del deporte.",
       media: SPlay,
-      link: "https://maps.app.goo.gl/R8XvW1ew8KDyXEZg9",
+      link: "link",
     },
+    // ScoutinPuto: {
+    //   title: "Scouting Play2",
+    //   subtitle:
+    //     "Envianos tus mejores jugadas (o burradas) y forma parte de la comunidad más apasionada del deporte.",
+    //   media: VeoCam,
+    //   link: "link",
+    // },
   };
 
   const locationKeys = Object.keys(locations); // Obtener las claves para iterar
@@ -94,7 +103,7 @@ function Locations() {
       },
       {
         root: null,
-        threshold: 0.5,
+        threshold: 0.1,
       }
     );
 
@@ -108,6 +117,8 @@ function Locations() {
       }
     };
   }, []);
+
+  console.log(isVisible);
 
   useEffect(() => {
     // Controla la reproducción y pausa del video según la visibilidad
@@ -128,45 +139,83 @@ function Locations() {
     }
   }, [isVisible]);
 
+  // display: flex
+  // ;
+  //     flex-direction: column;
+  //     justify-content: space-between;
   return (
     <>
-      <div className="py-[30px] bg-white" ref={sectionRef} id="">
-        <div className="max-w-[] mx-auto mb-20">
-          <h2 className="bH1 text-white">Dónde estamos</h2>
-        </div>
-        <div className="locations-container max-w-[] mx-auto">
-          <div className="location">
-            <div
-              className=""
-              style={{
-                position: "absolute",
-                left: 0,
-                top: borderPosition,
-                height: "60px",
-                borderLeft: "solid #212121 4px",
-                opacity: 1,
-                transition: "top 500ms ease, opacity 500ms ease",
-              }}
-            />
-            {locationKeys.map((location) => (
-              <div
-                key={location}
-                className={`location-item ${
-                  activeText === location ? "active" : ""
-                }`}
-                onClick={() => handleLocationChange(location)}
-              >
-                <h2
-                  className={`pl-[30px] text-location ${
-                    activeText === location ? "text-active" : ""
-                  }`}
+      <div className=" bg-white pb-24 px-[100px]" id="">
+        <h2 className="py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-black uppercase mb-5 llg:mb-0">
+          juega y entrena
+          <br /> como profesional
+        </h2>
+        <div className="locations-container max-w-[] mx-auto" ref={sectionRef}>
+          <div className="flex flex-col justify-between">
+            <div>
+              <p className="text-black w-[460px] body0">
+                <span className=" text-[34px] grotzec text-skyBlue">[</span>
+                <span className="text-skyBlue grotzec font-bold">
+                  {" "}
+                  &nbsp; NUESTRA MISION &nbsp;
+                </span>
+                <span className="text-[34px] grotzec text-skyBlue ">
+                  ]
+                </span>{" "}
+                Impulsar deportistas y entrenadores a sentirse profesionales, y
+                generar una comunidad que revolucione el deporte amateur.
+              </p>
+              <div className="mt-[47px]">
+                <Button
+                  link="/contacto"
+                  text="Contactanos"
+                  bg="#0584F5"
+                  textColor="#fff"
+                  width="w-[175px] "
                 >
-                  {locations[location].title}
-                </h2>
+                  Conoce VeoCam3
+                </Button>
               </div>
-            ))}
+            </div>
+            <div className="location border-l-2 border-[#dcdcdc] max-w-[500px]">
+              <div
+                className=""
+                style={{
+                  position: "absolute",
+                  left: "-3px",
+                  top: borderPosition,
+                  height: "60px",
+                  borderLeft: "solid #0584F5 4px",
+                  opacity: 1,
+                  transition: "top 500ms ease, opacity 500ms ease",
+                }}
+              />
+              {locationKeys.map((location) => (
+                <div
+                  key={location}
+                  className={`location-item ${
+                    activeText === location ? "active" : ""
+                  }`}
+                  onClick={() => handleLocationChange(location)}
+                >
+                  <h2
+                    className={`pl-[30px] text-location subH !capitalize ${
+                      activeText === location ? "text-active" : ""
+                    }`}
+                  >
+                    {locations[location].title}
+                  </h2>
+                  <p
+                    className={`pl-[30px] body1 ${
+                      activeText === location ? "text-active" : "hidden"
+                    }`}
+                  >
+                    {locations[location].subtitle}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-
           <div className="location-content flex justify-end">
             <div className="image-container h-[350px] xl:h-[500px]">
               <video
