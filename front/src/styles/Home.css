@@ -204,38 +204,38 @@
 
 .location {
   position: relative;
-  width: 280px;
+  /* width: 280px; */
   height: fit-content;
 }
 
 .location-item {
   cursor: pointer;
   color: #a5a39f;
-  height: 60px;
+  /* height: 60px; */
 }
 
 .text-location {
+  font-family: "Aeonik";
   font-style: normal;
-  font-weight: 300;
-  font-size: 32px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 60px;
   transition: 300ms;
 }
 
 .text-location.text-active {
-  font-weight: 400;
 }
 
 .location-item.active {
-  color: #212121 !important;
+  color: #03000d !important;
 }
 
 .text-location:hover {
-  color: #5e5e5e;
+  color: #03000d;
 }
 
 .text-location.text-active:hover {
-  color: #212121;
+  /* color: red; */
 }
 
 .location-content {
