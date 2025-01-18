@@ -13,8 +13,8 @@ const HomePage = ({ data }) => {
     <Layout>
       <Seo title="Scouting Labs" description="Scouting Labs home" />
       <HomeHero />
-      <HomeVeo />
       <OurMission />
+      <HomeVeo />
     </Layout>
   );
 };
