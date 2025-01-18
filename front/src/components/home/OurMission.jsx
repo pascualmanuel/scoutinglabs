@@ -82,9 +82,55 @@ function Locations() {
       .catch((error) => console.error("Error al cargar las imágenes", error));
   }, []);
 
+  const sectionRef = useRef(null); // Referencia al contenedor observado
+  const videoRef = useRef(null); // Referencia al video principal
+  const nextVideoRef = useRef(null); // Referencia al video secundario (opcional)
+  const [isVisible, setIsVisible] = useState(false); // Estado para manejar la visibilidad
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Controla la reproducción y pausa del video según la visibilidad
+    if (videoRef.current) {
+      if (isVisible) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+
+    if (nextVideoRef.current) {
+      if (isVisible) {
+        nextVideoRef.current.play();
+      } else {
+        nextVideoRef.current.pause();
+      }
+    }
+  }, [isVisible]);
+
   return (
     <>
-      <div className="py-[30px] bg-white" id="">
+      <div className="py-[30px] bg-white" ref={sectionRef} id="">
         <div className="max-w-[] mx-auto mb-20">
           <h2 className="bH1 text-white">Dónde estamos</h2>
         </div>
@@ -125,6 +171,7 @@ function Locations() {
             <div className="image-container h-[350px] xl:h-[500px]">
               <video
                 src={locations[selectedLocation].media}
+                ref={videoRef} // Asocia la referencia al video principal
                 autoPlay
                 muted
                 loop={false} // Cambia a false para habilitar el evento onEnded
@@ -134,6 +181,7 @@ function Locations() {
               />
               {nextLocation && (
                 <video
+                  ref={nextVideoRef} // Asocia la referencia al video principal
                   src={locations[nextLocation].media}
                   autoPlay={false}
                   muted
