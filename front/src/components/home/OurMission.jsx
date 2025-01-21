@@ -145,15 +145,19 @@ function Locations() {
   //     justify-content: space-between;
   return (
     <>
-      <div className=" bg-white pb-24 px-[100px]" id="">
-        <h2 className="py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-black uppercase mb-5 llg:mb-0">
+      <div className=" bg-white pb-24  pl-[64px]  xl:pl-[112px]" id="">
+        <h2 className="py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-black uppercase mb-5 lg:mb-0">
           juega y entrena
           <br /> como profesional
         </h2>
-        <div className="locations-container max-w-[] mx-auto" ref={sectionRef}>
-          <div className="flex flex-col justify-between">
+
+        <div
+          className="locations-container flex flex-col  llg:flex-row llg:justify-between max-w-[] mx-auto"
+          ref={sectionRef}
+        >
+          <div className="flex flex-col justify-between mr-[30px] mg:mr-[80px]">
             <div>
-              <p className="text-black w-[460px] body0">
+              <p className="text-black w-[390px] mg:w-[460px] body0 ">
                 <span className=" text-[34px] grotzec text-skyBlue">[</span>
                 <span className="text-skyBlue grotzec font-bold">
                   {" "}
@@ -216,8 +220,11 @@ function Locations() {
               ))}
             </div>
           </div>
+          {/* width: 648px; */}
+          {/* height: 666px; */}
+
           <div className="location-content flex justify-end">
-            <div className="image-container h-[350px] xl:h-[500px]">
+            <div className="image-container w-[] xl:w-[648px] h-[500px]  xl:h-[666px] ">
               <video
                 src={locations[selectedLocation].media}
                 ref={videoRef} // Asocia la referencia al video principal
