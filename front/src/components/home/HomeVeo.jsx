@@ -9,7 +9,7 @@ const HomeVeo = () => {
   return (
     <>
       <div className="mx-5 mb-[80px] md:mb-[180px]">
-        <div className="h-280 relative mt-16 max-w-[1250px] mx-auto">
+        <div className="h-280 relative mt-16 max-w-[1288px] mx-auto">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
           </p>
@@ -67,12 +67,12 @@ const HomeVeo = () => {
                 la Veo Cam 3 y su plataforma.
               </p>
             </div>
-            <div className="llg:max-w-[400px]">
+            {/* <div className="llg:max-w-[400px]">
               <a
                 href="#"
                 className="flex group items-center justify-between subH border-t border-[#434652] pt-7    "
               >
-                {/* Becas deportivas en el exterior */}
+                Becas deportivas en el exterior
                 <span className="">
                   <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
                     <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
@@ -89,7 +89,7 @@ const HomeVeo = () => {
                 Te enviamos la cámara y te brindamos soporte exclusivo para usar
                 la Veo Cam 3 y su plataforma.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ const HomeVeo = () => {
           <Button text={"Conoce Veo Cam 3"} width="w-[90vw] sm:w-[225px]" />
         </div>
       </div>
-      <div className="mx-5 mb-16">
+      <div className="mx-5 mb-16 lg:mx-28">
         <h3 className="h1Title uppercase text-left">
           Confian en <br /> nosotros
         </h3>
