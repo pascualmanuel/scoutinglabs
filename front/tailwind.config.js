@@ -16,7 +16,7 @@ module.exports = {
       md: "768px",
       // => @media (min-width: 768px) { ... }
       lm: "840px",
-
+      // desde 920 a 840 todo a la izq y con un buen margen, desp le metemos centradiito
       llg: "920px",
 
       lg: "1024px",
