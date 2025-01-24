@@ -8,8 +8,8 @@ import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
   return (
     <>
-      <div className="mx-5 mb-[80px] md:mb-[180px]">
-        <div className="h-280 relative mt-16 max-w-[1288px] mx-auto">
+      <div className=" mb-[80px] md:mb-[180px] max-w-[1288px] mx-auto">
+        <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
           </p>
@@ -18,9 +18,9 @@ const HomeVeo = () => {
           </h2>
           <h2 className="h1Title text-right">a LA VICTORIA</h2>
         </div>
-        <div className="mt-28">
-          <div className="flex flex-col md:flex-row md:gap-6 justify-center">
-            <div className="llg:max-w-[400px]">
+        <div className="mt-28 ">
+          <div className="flex flex-col md:flex-row md:gap-6 justify-center ">
+            <div className="">
               <a
                 href="#"
                 className="group flex items-center justify-between subH border-t border-[#434652] pt-7"
@@ -43,7 +43,7 @@ const HomeVeo = () => {
                 la Veo Cam 3 y su plataforma.
               </p>
             </div>
-            <div className="llg:max-w-[400px]">
+            <div className="">
               <a
                 href="#"
                 className="flex group items-center justify-between subH border-t border-[#434652] pt-7"
@@ -67,7 +67,7 @@ const HomeVeo = () => {
                 la Veo Cam 3 y su plataforma.
               </p>
             </div>
-            {/* <div className="llg:max-w-[400px]">
+            {/* <div className="">
               <a
                 href="#"
                 className="flex group items-center justify-between subH border-t border-[#434652] pt-7    "
