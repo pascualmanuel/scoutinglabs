@@ -28,7 +28,7 @@ const HomeHero = () => {
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#03000D] to-transparent"></div>
 
-        <div className="relative z-10 flex flex-col justify-end  h-full p-6 sm:p-16 lg:px-28 pb-[130px] text-white ">
+        <div className="relative z-10 flex flex-col justify-end  h-full p-6 md:p-16 lg:px-28 pb-[130px] text-white ">
           <div className="mb-4 lg:mb-8 max-w-[280px]">
             <span className=" bg-[#faf9f61a] body3 p-1 pr-2 pl-1 rounded-full border border-[#FAF9F64D] flex items-center aeonik">
               <span className="w-[25px] h-[25px] bg-[#0A3D14] rounded-full border border-grey3 inline-block relative mr-2">
@@ -104,7 +104,7 @@ const HomeHero = () => {
         </div>
       </section>
       <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between ">
-        <div className=" max-w-[540px] llg:w-[460px] llg:ml-[64px]  xl:ml-[112px] relative llg:mr-[70px] ">
+        <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-[112px] relative llg:mr-[70px] ">
           <img src={Six} className="absolute right-12" />
           <div className="llg:mb-[50px] z-50 relative">
             <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
@@ -129,16 +129,16 @@ const HomeHero = () => {
             />
           </div>
         </div>
-        <div className="llg:h-[1440px] flex items-end">
-          <div className=" llg:mb-[270px] xl:mb-[140px]">
+        <div className="llg:h-[1440px] flex sm:justify-end llg:items-end sm:mt-[-110px] llg:mt-0">
+          <div className=" llg:mb-[270px] xl:mb-[140px] m-6 sm:m-0">
             <div
               className=" "
-              // style={{
-              //   backgroundImage: `url("${Pablo}")`,
-              //   backgroundSize: "cover",
-              // }}
+
             >
-              <img src={Pablo} className="w-[540px] xl:w-[740px] rounded-xl" />
+              <img
+                src={Pablo}
+                className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
+              />
             </div>
           </div>
         </div>
