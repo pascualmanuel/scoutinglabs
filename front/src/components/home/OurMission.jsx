@@ -228,7 +228,7 @@ function Locations() {
 
           <div className="location-content flex justify-end">
             <div
-              className="image-container w-[] lg:h-[500px]  xl:w-[648px]   xl:h-[666px] 
+              className="image-container w-[700px] h-[400px] md:w-[400px] lg:h-[500px]  xl:w-[648px]   xl:h-[666px] 
             rounded-md  md:rounded-r-none"
             >
               <video
