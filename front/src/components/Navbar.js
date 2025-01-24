@@ -213,7 +213,7 @@ const Navbar = () => {
                   className="text-grey1 body2 hidden llg:block  lg:mr-0"
                   to={"/becas"}
                 >
-                  Becas
+                  Nosotros
                 </Link>
                 <Link
                   className="text-grey1 body2 hidden llg:block  lg:mr-0"
@@ -417,13 +417,13 @@ const Navbar = () => {
             >
               SCOUTINGPLAY
             </Link>
-            <Link
+            {/* <Link
               to="/becas"
               className="text-white py-3 px-5 h2Title"
               onClick={closeMenu}
             >
               BECAS
-            </Link>
+            </Link> */}
             <Link
               to="/precios"
               className="text-white py-3 px-5 h2Title"
