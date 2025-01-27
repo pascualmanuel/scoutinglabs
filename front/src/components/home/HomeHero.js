@@ -103,8 +103,9 @@ const HomeHero = () => {
           </div>
         </div>
       </section>
-      <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between ">
-        <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-[112px] relative llg:mr-[70px] ">
+      <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between  max-w-screen-2xl m-auto">
+        {/* <div> */}
+        <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-[112px] relative llg:mr-[70px] 2xl:m-0">
           <img src={Six} className="absolute right-12" />
           <div className="llg:mb-[50px] z-50 relative">
             <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
@@ -131,10 +132,7 @@ const HomeHero = () => {
         </div>
         <div className="llg:h-[1440px] flex sm:justify-end llg:items-end sm:mt-[-110px] llg:mt-0">
           <div className=" llg:mb-[270px] xl:mb-[140px] m-6 sm:m-0">
-            <div
-              className=" "
-
-            >
+            <div className=" ">
               <img
                 src={Pablo}
                 className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
@@ -142,6 +140,7 @@ const HomeHero = () => {
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </>
   );
