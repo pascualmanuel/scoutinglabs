@@ -9,6 +9,7 @@ function Locations() {
     VeoCam3: {
       title: "Veo Cam 3",
       media: VeoCam,
+      placeholder: VeoImg,
       subtitle:
         "Graba tus partidos y entrenamientos y luego analiza las jugadas para mejorar tu rendimiento.",
       link: "Link",
@@ -18,6 +19,7 @@ function Locations() {
       subtitle:
         "Envianos tus mejores jugadas (o burradas) y forma parte de la comunidad más apasionada del deporte.",
       media: SPlay,
+      placeholder: SplayImg,
       link: "link",
     },
     // ScoutinPuto: {
@@ -118,8 +120,6 @@ function Locations() {
     };
   }, []);
 
-  console.log(isVisible);
-
   useEffect(() => {
     // Controla la reproducción y pausa del video según la visibilidad
     if (videoRef.current) {
@@ -143,6 +143,12 @@ function Locations() {
   // ;
   //     flex-direction: column;
   //     justify-content: space-between;
+  const [isPlaying, setIsPlaying] = useState(false); // Controla si el video ha comenzado a reproducirse
+
+  const handlePlay = () => {
+    setIsPlaying(true); // Oculta el placeholder cuando el video comienza
+  };
+
   return (
     <>
       <div
@@ -223,8 +229,6 @@ function Locations() {
               ))}
             </div>
           </div>
-          {/* width: 648px; */}
-          {/* height: 666px; */}
 
           <div className="location-content flex justify-end">
             <div
@@ -235,10 +239,12 @@ function Locations() {
                 src={locations[selectedLocation].media}
                 ref={videoRef} // Asocia la referencia al video principal
                 autoPlay
+                preload="auto"
                 muted
                 loop={false} // Cambia a false para habilitar el evento onEnded
                 playsInline
                 onEnded={handleVideoEnd} // Evento al terminar el video
+                onPlay={handlePlay} // Oculta el placeholder
                 className={`location-image ${exiting ? "exiting" : ""}`}
               />
               {nextLocation && (
