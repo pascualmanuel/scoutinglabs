@@ -152,112 +152,114 @@ function Locations() {
   return (
     <>
       <div
-        className=" bg-white pb-24 pl-6 pr-6  md:pr-0 lm:pl-16 xl:pl-[112px]"
+        className=" bg-white pb-24 pl-6 pr-6  md:pr-0 lm:pl-16 xl:pl-[112px] 2xl:pl-0"
         id=""
       >
-        <h2 className="py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-black uppercase mb-5 lg:mb-0">
-          juega y entrena
-          <br /> como profesional
-        </h2>
+        <div className="max-w-screen-2xl m-auto">
+          <h2 className="py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-black uppercase mb-5 lg:mb-0">
+            juega y entrena
+            <br /> como profesional
+          </h2>
 
-        <div
-          className="locations-container flex flex-col  md:flex-row llg:justify-between max-w-[] mx-auto"
-          ref={sectionRef}
-        >
-          <div className="flex flex-col justify-between mr-[30px] mg:mr-[80px]">
-            <div>
-              <p className="text-black w-[390px] mg:w-[460px] body0 ">
-                <span className=" text-[34px] grotzec text-skyBlue">[</span>
-                <span className="text-skyBlue grotzec font-bold">
-                  {" "}
-                  &nbsp; NUESTRA MISION &nbsp;
-                </span>
-                <span className="text-[34px] grotzec text-skyBlue ">
-                  ]
-                </span>{" "}
-                Impulsar deportistas y entrenadores a sentirse profesionales, y
-                generar una comunidad que revolucione el deporte amateur.
-              </p>
-              <div className="mt-[47px]">
-                <Button
-                  link="/contacto"
-                  text="Contactanos"
-                  bg="#0584F5"
-                  textColor="#fff"
-                  width="w-[175px] "
-                >
-                  Conoce VeoCam3
-                </Button>
+          <div
+            className="locations-container flex flex-col  md:flex-row llg:justify-between max-w-[] mx-auto"
+            ref={sectionRef}
+          >
+            <div className="flex flex-col justify-between sm:mr-[30px] mg:mr-[80px]">
+              <div>
+                <p className="text-black sm:w-[390px] mg:w-[460px] body0 ">
+                  <span className=" text-[34px] grotzec text-skyBlue">[</span>
+                  <span className="text-skyBlue grotzec font-bold">
+                    {" "}
+                    &nbsp; NUESTRA MISION &nbsp;
+                  </span>
+                  <span className="text-[34px] grotzec text-skyBlue ">
+                    ]
+                  </span>{" "}
+                  Impulsar deportistas y entrenadores a sentirse profesionales,
+                  y generar una comunidad que revolucione el deporte amateur.
+                </p>
+                <div className="mt-[47px]">
+                  <Button
+                    link="/contacto"
+                    text="Contactanos"
+                    bg="#0584F5"
+                    textColor="#fff"
+                    width="w-[175px] "
+                  >
+                    Conoce VeoCam3
+                  </Button>
+                </div>
+              </div>
+              <div className="location border-l-2 border-[#dcdcdc] max-w-[500px] mt-16 mb-16 md:mb-0 ">
+                <div
+                  className=""
+                  style={{
+                    position: "absolute",
+                    left: "-3px",
+                    top: borderPosition,
+                    height: "60px",
+                    borderLeft: "solid #0584F5 4px",
+                    opacity: 1,
+                    transition: "top 500ms ease, opacity 500ms ease",
+                  }}
+                />
+                {locationKeys.map((location) => (
+                  <div
+                    key={location}
+                    className={`location-item ${
+                      activeText === location ? "active" : ""
+                    }`}
+                    onClick={() => handleLocationChange(location)}
+                  >
+                    <h2
+                      className={`pl-[30px] text-location subH !capitalize ${
+                        activeText === location ? "text-active" : ""
+                      }`}
+                    >
+                      {locations[location].title}
+                    </h2>
+                    <p
+                      className={`pl-[30px] body1 ${
+                        activeText === location ? "text-active" : "hidden"
+                      }`}
+                    >
+                      {locations[location].subtitle}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="location border-l-2 border-[#dcdcdc] max-w-[500px] mt-16 mb-16 md:mb-0 ">
-              <div
-                className=""
-                style={{
-                  position: "absolute",
-                  left: "-3px",
-                  top: borderPosition,
-                  height: "60px",
-                  borderLeft: "solid #0584F5 4px",
-                  opacity: 1,
-                  transition: "top 500ms ease, opacity 500ms ease",
-                }}
-              />
-              {locationKeys.map((location) => (
-                <div
-                  key={location}
-                  className={`location-item ${
-                    activeText === location ? "active" : ""
-                  }`}
-                  onClick={() => handleLocationChange(location)}
-                >
-                  <h2
-                    className={`pl-[30px] text-location subH !capitalize ${
-                      activeText === location ? "text-active" : ""
-                    }`}
-                  >
-                    {locations[location].title}
-                  </h2>
-                  <p
-                    className={`pl-[30px] body1 ${
-                      activeText === location ? "text-active" : "hidden"
-                    }`}
-                  >
-                    {locations[location].subtitle}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="location-content flex justify-end">
-            <div
-              className="image-container w-[700px] h-[400px] md:w-[400px] lg:h-[500px]  xl:w-[648px]   xl:h-[666px] 
+            <div className="location-content flex justify-end">
+              <div
+                className="image-container w-[700px] h-[400px] md:w-[400px] lg:h-[500px]  xl:w-[648px]   xl:h-[666px] 
             rounded-md  md:rounded-r-none"
-            >
-              <video
-                src={locations[selectedLocation].media}
-                ref={videoRef} // Asocia la referencia al video principal
-                autoPlay
-                preload="auto"
-                muted
-                loop={false} // Cambia a false para habilitar el evento onEnded
-                playsInline
-                onEnded={handleVideoEnd} // Evento al terminar el video
-                onPlay={handlePlay} // Oculta el placeholder
-                className={`location-image ${exiting ? "exiting" : ""}`}
-              />
-              {nextLocation && (
+              >
                 <video
-                  ref={nextVideoRef} // Asocia la referencia al video principal
-                  src={locations[nextLocation].media}
-                  autoPlay={false}
+                  src={locations[selectedLocation].media}
+                  ref={videoRef} // Asocia la referencia al video principal
+                  autoPlay
+                  preload="auto"
                   muted
-                  loop
+                  loop={false} // Cambia a false para habilitar el evento onEnded
                   playsInline
-                  className="location-image next"
+                  onEnded={handleVideoEnd} // Evento al terminar el video
+                  onPlay={handlePlay} // Oculta el placeholder
+                  className={`location-image ${exiting ? "exiting" : ""}`}
                 />
-              )}
+                {nextLocation && (
+                  <video
+                    ref={nextVideoRef} // Asocia la referencia al video principal
+                    src={locations[nextLocation].media}
+                    autoPlay={false}
+                    muted
+                    loop
+                    playsInline
+                    className="location-image next"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
