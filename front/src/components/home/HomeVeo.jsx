@@ -8,7 +8,7 @@ import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
   return (
     <>
-      <div className=" mb-[80px] md:mb-[180px] max-w-[1288px] mx-auto">
+      <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-28 2xl:mx-auto">
         <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
@@ -19,7 +19,7 @@ const HomeVeo = () => {
           <h2 className="h1Title text-right">a LA VICTORIA</h2>
         </div>
         <div className="mt-28 ">
-          <div className="flex flex-col md:flex-row md:gap-6 justify-center ">
+          <div className="flex flex-col md:flex-row md:gap-6 justify-center justify-between">
             <div className="">
               <a
                 href="#"
@@ -135,7 +135,7 @@ const HomeVeo = () => {
           &nbsp; de todo el mundo
         </h3>
       </div>
-      <TeamsCarousel />
+      {/* <TeamsCarousel /> */}
     </>
   );
 };
