@@ -152,7 +152,7 @@ function Locations() {
   return (
     <>
       <div
-        className=" bg-white pb-24 pl-6 pr-6  md:pr-0 lm:pl-16 xl:pl-[112px] 2xl:pl-0"
+        className=" bg-white pb-24 pl-6 pr-6  md:pr-0 lm:pl-16 xl:pl-[112px] 2xl:pl"
         id=""
       >
         <div className="max-w-screen-2xl m-auto">
