@@ -22,9 +22,9 @@ const Layout = ({ children }) => (
     <main>{children}</main>
     <PreFooter />
     <footer className="bg-iBlue shadow-[0px_-6px_64px_rgba(0,_0,_0,_0.25)] mt-[-2px]">
-      <div className="max-w-[550px] mx-auto ms:max-w-[700px] llg:max-w-[840px] mg:max-w-[1450px] mg:mx-[140px] ">
-        <div className="llg:flex llg:flex-row llg:justify-between">
-          <div className="mx-5">
+      <div className=" mx-auto xl:mx-28 ">
+        <div className="llg:flex llg:flex-row llg:justify-between max-w-screen-2xl mx-auto">
+          <div className="mx-6 lm:mx-16 xl:mx-0 ">
             <div className="border-b border-[#ffffff35] py-6 llg:py-[0px] llg:border-none">
               <img src={WhiteLogo} />
             </div>
@@ -37,7 +37,7 @@ const Layout = ({ children }) => (
             </div>
           </div>
           {/* <div></div> */}
-          <div className="mx-5 ssm:flex ssm:justify-between border-b border-[#ffffff35] llg:w-[450px] llg:border-none">
+          <div className="mx-6 lm:mx-16 xl:mx-0 ssm:flex ssm:justify-between border-b border-[#ffffff35] llg:w-[450px] llg:border-none">
             <div>
               <p className="body3 uppercase text-grey1">SOLUCIONES</p>
               <Link to={"/veo-cam"} target="_blank">
