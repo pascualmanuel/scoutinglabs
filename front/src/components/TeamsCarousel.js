@@ -8,24 +8,26 @@ const TeamsCarousel = () => {
 
   return (
     <>
-      <div className="slider">
-        <div className="slide-track">
-          {loopingImages.map((image, index) => (
-            <div className="slide " key={index}>
-              {/* <img src={image} alt={`Slide ${index + 1}`} /> */}
-              <h1 className="h1Title">{image} </h1>
-            </div>
-          ))}
+      <div className=" !overflow-hidden">
+        <div className="slider">
+          <div className="slide-track">
+            {loopingImages.map((image, index) => (
+              <div className="slide " key={index}>
+                {/* <img src={image} alt={`Slide ${index + 1}`} /> */}
+                <h1 className="h1Title">{image} </h1>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="slider">
-        <div className="slide-track-2">
-          {loopingImages.map((image, index) => (
-            <div className="slide" key={index}>
-              {/* <img src={image} alt={`Slide ${index + 1}`} /> */}
-              <h1 className="h1Title">{image} </h1>
-            </div>
-          ))}
+        <div className="slider">
+          <div className="slide-track-2">
+            {loopingImages.map((image, index) => (
+              <div className="slide" key={index}>
+                {/* <img src={image} alt={`Slide ${index + 1}`} /> */}
+                <h1 className="h1Title">{image} </h1>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
