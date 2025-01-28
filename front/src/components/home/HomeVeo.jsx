@@ -8,7 +8,7 @@ import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
   return (
     <>
-      <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto">
+      <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28">
         <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
@@ -124,7 +124,7 @@ const HomeVeo = () => {
           <Button text={"Conoce Veo Cam 3"} width="w-[90vw] sm:w-[225px]" />
         </div>
       </div>
-      <div className="mx-5 mb-16 lg:mx-28">
+      <div className="mx-6 lm:mx-16 mb-16 lg:mx-28 max-w-screen-2xl 2xl:mx-auto 2xl:px-28">
         <h3 className="h1Title uppercase text-left">
           Confian en <br /> nosotros
         </h3>
@@ -135,7 +135,7 @@ const HomeVeo = () => {
           &nbsp; de todo el mundo
         </h3>
       </div>
-      {/* <TeamsCarousel /> */}
+      <TeamsCarousel />
     </>
   );
 };
