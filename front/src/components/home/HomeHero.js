@@ -105,7 +105,7 @@ const HomeHero = () => {
       </section>
       <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between  max-w-screen-2xl m-auto">
         {/* <div> */}
-        <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-[112px] relative llg:mr-[70px] 2xl:m">
+        <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-28 relative llg:mr-[70px] 2xl:m">
           <img src={Six} className="absolute right-12" />
           <div className="llg:mb-[50px] z-50 relative">
             <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">

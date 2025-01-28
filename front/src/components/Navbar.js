@@ -187,7 +187,7 @@ const Navbar = () => {
       <nav className="bg-iBlue  relative">
         <div className=" h-[72px] mx-auto max-w-screen-2xl flex justify-between items-center ">
           <Link to={"/"}>
-            <div className="ml-[20px] mg:ml-[80px] xl:ml-[112px]">
+            <div className="ml-[20px] mg:ml-[80px] xl:ml-28">
               <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
             </div>
           </Link>
@@ -241,7 +241,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-[112px]">
+            <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-28">
               <div
                 className={`relative lang-selector  select-none rounded-lg hidden  llg:flex mr-3 lg:mr-4 ${
                   languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
