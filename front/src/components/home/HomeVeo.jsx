@@ -8,7 +8,7 @@ import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
   return (
     <>
-      <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-28 2xl:mx-auto">
+      <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto">
         <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
             POR QUE ELEGIR SCOUTING LABS
