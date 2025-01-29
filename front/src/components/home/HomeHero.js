@@ -28,7 +28,7 @@ const HomeHero = () => {
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#03000D] to-transparent"></div>
 
-        <div className="relative z-10 flex flex-col justify-end  h-full p-6 md:p-22 lg:px-28 pb-[130px] text-white  max-w-screen-2xl mx-auto">
+        <div className="relative z-10 flex flex-col justify-end  h-full p-6 md:p-16 lg:px-28 pb-[130px] text-white  max-w-screen-2xl mx-auto">
           <div className="mb-4 lg:mb-8 max-w-[280px]">
             <span className=" bg-[#faf9f61a] body3 p-1 pr-2 pl-1 rounded-full border border-[#FAF9F64D] flex items-center aeonik">
               <span className="w-[25px] h-[25px] bg-[#0A3D14] rounded-full border border-grey3 inline-block relative mr-2">
