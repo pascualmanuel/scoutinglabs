@@ -6,6 +6,20 @@ import Button from "../Button";
 import VeoCamImg from "../../assets/home/veo-transparent.webp";
 import TeamsCarousel from "../TeamsCarousel";
 const HomeVeo = () => {
+  const data = [
+    {
+      title: "graba tus pARTIDOS con ia",
+      description:
+        "Te enviamos la cámara y te brindamos soporte exclusivo para usar la Veo Cam 3 y su plataforma.",
+      imgSrc: ArrowIcon, // Aquí puedes agregar la URL de la imagen
+    },
+    {
+      title: "Scouting play, nuestra comunidad",
+      description:
+        "Te enviamos la cámara y te brindamos soporte exclusivo para usar la Veo Cam 3 y su plataforma.",
+      imgSrc: ArrowIcon, // Aquí puedes agregar la URL de la imagen
+    },
+  ];
   return (
     <>
       <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
@@ -20,76 +34,28 @@ const HomeVeo = () => {
         </div>
         <div className="mt-28 ">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
-            <div className="">
-              <a
-                href="#"
-                className="group flex items-center justify-between subH border-t border-[#434652] pt-7"
-              >
-                graba tus pARTIDOS con ia
-                <span className="">
-                  <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                    <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                      <img src={ArrowIcon} className="" />
-                    </div>
+            {data.map((item, index) => (
+              <div key={index} className="box-sc">
+                <a
+                  href="#"
+                  className="group flex items-center justify-between subH border-t border-[#434652] pt-7"
+                >
+                  {item.title}
+                  <span className="">
+                    <div className="w-[44px] h-[44px] rounded-full flex justify-center items-center relative overflow-hidden">
+                      <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
+                        <img src={item.imgSrc} className="" />
+                      </div>
 
-                    <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                      <img src={ArrowIcon} className="" />
+                      <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px] bottom-[-35px] left-[-35px]">
+                        <img src={item.imgSrc} className="" />
+                      </div>
                     </div>
-                  </div>
-                </span>
-              </a>
-              <p className="body1 text-grey2 mb-8">
-                Te enviamos la cámara y te brindamos soporte exclusivo para usar
-                la Veo Cam 3 y su plataforma.
-              </p>
-            </div>
-            <div className="">
-              <a
-                href="#"
-                className="flex group items-center justify-between subH border-t border-[#434652] pt-7"
-              >
-                Scouting play, nuestra comunidad
-                {/* <img className="ml-4" src={ArrowIcon} /> */}
-                <span className="">
-                  <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                    <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                      <img src={ArrowIcon} className="" />
-                    </div>
-
-                    <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                      <img src={ArrowIcon} className="" />
-                    </div>
-                  </div>
-                </span>
-              </a>
-              <p className="body1 text-grey2 mb-8">
-                Te enviamos la cámara y te brindamos soporte exclusivo para usar
-                la Veo Cam 3 y su plataforma.
-              </p>
-            </div>
-            {/* <div className="">
-              <a
-                href="#"
-                className="flex group items-center justify-between subH border-t border-[#434652] pt-7    "
-              >
-                Becas deportivas en el exterior
-                <span className="">
-                  <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                    <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                      <img src={ArrowIcon} className="" />
-                    </div>
-
-                    <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                      <img src={ArrowIcon} className="" />
-                    </div>
-                  </div>
-                </span>
-              </a>
-              <p className="body1 text-grey2 mb-8">
-                Te enviamos la cámara y te brindamos soporte exclusivo para usar
-                la Veo Cam 3 y su plataforma.
-              </p>
-            </div> */}
+                  </span>
+                </a>
+                <p className="body1 text-grey2 mb-8">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
