@@ -40,21 +40,21 @@ const VeoCam = () => {
     {
       title: "Starter",
       desc: "Ideal para padres y jugadores amateur comprometidos a potenciar su nivel.",
-      price: "desde $20/mes",
+      price: "$20",
       cta: "Seleccionar Starter",
       starred: false,
     },
     {
       title: "Team",
       desc: "Diseñado para coaches, equipos de amigos, y ligas amateur.",
-      price: "desde $59/mes",
+      price: "$59",
       cta: "Seleccionar Team",
       starred: true,
     },
     {
       title: "Club",
       desc: "Enfocado en clubes de nivel profesional que buscan mejorar el rendimiento de su equipo.",
-      price: "desde $90/mes",
+      price: "$90",
       cta: "Seleccionar Club",
       starred: false,
     },
@@ -198,20 +198,30 @@ const VeoCam = () => {
           </p>
         </div>
         <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
-          <div className="flex flex-col md:flex-row md:gap-6 justify-between">
+          <div className="flex flex-col md:flex-row md:gap-6 justify-between max-w-[970px] m-auto">
             {suscriptions.map((item, index) => (
               <div
                 key={index}
-                className="box-sc  pt-5 w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px] border border-white  "
+                className="box-sc flex flex-col items-center w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px]  bg-white rounded-lg  "
               >
                 <a
                   href="#"
-                  className="group flex items-center justify-between subH  py-2"
+                  className="group flex items-center justify-between subH text-black "
                 >
                   {item?.title}
                 </a>
-                <p className="body1 text-grey2 mb-8">{item?.desc}</p>
-                <p>{item?.price}</p>
+                <p className="body2 text-grey4 text-center ">{item?.desc}</p>
+                <p className="aeonik font-bold text-3xl text-black">
+                  {item?.price}
+                </p>
+                <Button
+                  border={"solid 1px #434652"}
+                  textColor={"black"}
+                  bg={"transparent"}
+                  text={item?.cta}
+                  width={"w-[200px]"}
+                  height={""}
+                />
               </div>
             ))}
           </div>
