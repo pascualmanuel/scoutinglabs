@@ -202,7 +202,7 @@ const VeoCam = () => {
             {suscriptions.map((item, index) => (
               <div
                 key={index}
-                className="box-sc flex flex-col items-center w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px]  bg-white rounded-lg  "
+                className="box-sc flex flex-col items-center justify-evenly w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px]  bg-white rounded-lg  "
               >
                 <a
                   href="#"
@@ -224,6 +224,16 @@ const VeoCam = () => {
                 />
               </div>
             ))}
+          </div>
+          <div className="flex flex-col items-center mt-[100px]">
+            <p className="body1 text-white mb-3 opacity-50">
+              ¿Quieres saber mas sobre los planes?
+            </p>
+            <Button
+              text={"Comparar planes "}
+              width="w-[90vw] sm:w-[290px]"
+              height="h-[50px]"
+            />
           </div>
         </div>
       </Layout>
