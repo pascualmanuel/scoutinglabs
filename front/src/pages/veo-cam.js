@@ -36,6 +36,29 @@ const VeoCam = () => {
     },
   ];
 
+  const suscriptions = [
+    {
+      title: "Starter",
+      desc: "Ideal para padres y jugadores amateur comprometidos a potenciar su nivel.",
+      price: "desde $20/mes",
+      cta: "Seleccionar Starter",
+      starred: false,
+    },
+    {
+      title: "Team",
+      desc: "Diseñado para coaches, equipos de amigos, y ligas amateur.",
+      price: "desde $59/mes",
+      cta: "Seleccionar Team",
+      starred: true,
+    },
+    {
+      title: "Club",
+      desc: "Enfocado en clubes de nivel profesional que buscan mejorar el rendimiento de su equipo.",
+      price: "desde $90/mes",
+      cta: "Seleccionar Club",
+      starred: false,
+    },
+  ];
   return (
     <>
       <Layout>
@@ -173,6 +196,25 @@ const VeoCam = () => {
             Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
             activa.
           </p>
+        </div>
+        <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
+          <div className="flex flex-col md:flex-row md:gap-6 justify-between">
+            {suscriptions.map((item, index) => (
+              <div
+                key={index}
+                className="box-sc  pt-5 w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px] border border-white  "
+              >
+                <a
+                  href="#"
+                  className="group flex items-center justify-between subH  py-2"
+                >
+                  {item?.title}
+                </a>
+                <p className="body1 text-grey2 mb-8">{item?.desc}</p>
+                <p>{item?.price}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </Layout>
     </>
