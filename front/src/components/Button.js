@@ -10,6 +10,7 @@ const Button = ({
   children,
   width = "w-[133px]",
   height = "h-[42px]",
+  border = "none",
 }) => {
   const buttonStyle = {
     display: "flex",
@@ -20,7 +21,7 @@ const Button = ({
     backgroundColor: bg,
     borderRadius: "8px",
     color: textColor,
-    border: "none",
+    border: border,
     cursor: "pointer",
   };
 
