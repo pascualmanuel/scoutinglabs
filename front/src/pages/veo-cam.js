@@ -201,7 +201,7 @@ const VeoCam = () => {
         </div>
 
         <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px] ml-6 md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
-          <div className="overflow-x-auto md:overflow-hidden pr-6 ">
+          <div className="overflow-x-auto md:overflow-hidden md:pr-6 ">
             <div className="flex flex-row gap-4 llg:gap-6 justify-between md:max-w-[970px] m-auto w-fit md:w-[auto]">
               {suscriptions.map((item, index) => (
                 <div
