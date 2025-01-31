@@ -283,3 +283,15 @@
 .l-gradient-starred {
   background: linear-gradient(35.31deg, #0024a6 -37.15%, #5fcdff 98.6%);
 }
+.background-transition {
+  transition: background-image 500ms ease;
+}
+
+.description-container {
+  opacity: 0; /* Inicialmente oculto */
+  transition: opacity 0.5s ease-in-out; /* Transición de opacidad */
+}
+
+.description-container.visible {
+  opacity: 1; /* Se vuelve visible cuando tiene la clase 'visible' */
+}
