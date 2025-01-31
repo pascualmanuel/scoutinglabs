@@ -133,7 +133,7 @@
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
   height: 130px;
   margin: auto;
-  overflow: hidden!important;
+  overflow: hidden !important;
   position: relative;
   width: 960px;
 }
@@ -278,4 +278,8 @@
   flex-direction: column;
   justify-content: space-between;
   width: 40%;
+}
+
+.l-gradient-starred {
+  background: linear-gradient(35.31deg, #0024a6 -37.15%, #5fcdff 98.6%);
 }
