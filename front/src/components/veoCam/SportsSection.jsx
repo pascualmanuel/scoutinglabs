@@ -6,6 +6,7 @@ import HockeyBg from "../../assets/veocam/sports/Sport-3.webp";
 import VolleyBg from "../../assets/veocam/sports/Sport-4.webp";
 import HandballBg from "../../assets/veocam/sports/Sport-2.webp";
 import BasketBg from "../../assets/veocam/sports/Sport-1.webp";
+import "../../styles/Home.css";
 const sports = [
   {
     name: "Futbol",
@@ -49,34 +50,46 @@ const SportsSection = () => {
 
   return (
     <div
-      className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500"
+      // className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500"
+      className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500 background-transition"
       style={{
-        backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0) 46.13%, #000000 100%), url('${activeSport.image}'`,
+        backgroundImage: `url('${activeSport.image}'`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        // transition: "background 0.5s ease-in-out", // Transición suave
       }}
     >
-      <div className="flex flex-col sm:flex-row h-full">
-        {/* Lista de deportes */}
-        <div className="flex flex-col justify-center px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto ">
-          {sports?.map((sport) => (
-            <div
-              key={sport.name}
-              className={`h2Title my-[10px]  cursor-pointer transition-opacity duration-300 ${
-                activeSport.name === sport.name
-                  ? "text-[#FAF9F6] opacity-100"
-                  : "text-[#FAF9F6] opacity-50"
-              }`}
-              onMouseEnter={() => setActiveSport(sport)}
-              onClick={() => setActiveSport(sport)}
-            >
-              {sport?.name}
-            </div>
-          ))}
-        </div>
+      <div
+        className="h-[100%]"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0, 0, 0, 0) 46.13%, #000000 100%)",
+        }}
+      >
+        <div className="flex flex-col sm:flex-row h-full">
+          {/* Lista de deportes */}
+          <div className="flex flex-col justify-center px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto ">
+            {sports?.map((sport) => (
+              <div
+                key={sport.name}
+                className={`h2Title my-[10px]  cursor-pointer transition-opacity duration-300 ${
+                  activeSport.name === sport.name
+                    ? "text-[#FAF9F6] opacity-100"
+                    : "text-[#FAF9F6] opacity-50"
+                }`}
+                onMouseEnter={() => setActiveSport(sport)}
+                onClick={() => setActiveSport(sport)}
+              >
+                {sport?.name}
+              </div>
+            ))}
+          </div>
 
-        <div className="flex items-end justify-end w-full p-6 sm:p-12 text-white text-right">
-          <p className="max-w-md body0 !text-lg">{activeSport?.description}</p>
+          <div className="flex items-end justify-end w-full p-6 sm:p-12 text-white text-right ">
+            <p className="max-w-md body0 !text-lg ">
+              {activeSport?.description}
+            </p>
+          </div>
         </div>
       </div>
     </div>
