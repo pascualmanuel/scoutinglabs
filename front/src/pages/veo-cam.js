@@ -11,6 +11,7 @@ import VeoCamImg from "../assets/home/veo-transparent.webp";
 import VeoCamBg from "../assets/veocam/veo-cam-bg.webp";
 import TeamsCarousel from "../components/TeamsCarousel";
 import SportsSection from "../components/veoCam/SportsSection";
+import Accessories from "../components/veoCam/Accessories";
 const VeoCam = () => {
   const data = [
     {
@@ -198,92 +199,53 @@ const VeoCam = () => {
             activa.
           </p>
         </div>
-        <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
-          <div className="flex flex-col md:flex-row md:gap-6 justify-between max-w-[970px] m-auto">
-            {suscriptions.map((item, index) => (
-              <div
-                key={index}
-                className="box-sc3 flex flex-col items-center justify-evenly w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px]  bg-white rounded-lg  "
-              >
-                <a
-                  href="#"
-                  className="group flex items-center justify-between subH text-black "
-                >
-                  {item?.title}
-                </a>
-                <p className="body2 text-grey4 text-center ">{item?.desc}</p>
-                <p className="aeonik font-thin text-base text-black">
-                  desde&nbsp;
-                  <span className=" font-bold text-3xl ">
-                    {item?.price}
-                  </span>{" "}
-                  &nbsp;/mes
-                </p>
-                <Button
-                  border={"solid 1px #434652"}
-                  textColor={"black"}
-                  bg={"transparent"}
-                  text={item?.cta}
-                  width={"w-[200px]"}
-                  height={""}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col items-center mt-[100px]">
-            <p className="body1 text-white mb-3 opacity-50">
-              ¿Quieres saber mas sobre los planes?
-            </p>
-            <Button
-              text={"Comparar planes "}
-              width="w-[90vw] sm:w-[290px]"
-              height="h-[50px]"
-            />
-          </div>
-        </div>
 
-        <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
-          <div className="flex flex-col md:flex-row md:gap-6 justify-between max-w-[970px] m-auto">
-            {suscriptions.map((item, index) => (
-              <div
-                key={index}
-                className={`relative box-sc flex flex-col items-center justify-evenly w-[310px] h-[283px] md:w-[250px] md:h-[270px] lg:w-[310px] 
-          rounded-lg bg-white text-black transition-all duration-300 px-4
-          ${item.starred ? "l-gradient-starred text-white" : ""}`}
-              >
-                {/* 🏆 Banner superior "Más elegido" SOLO para el plan destacado */}
-                {item.starred && (
-                  <div className="absolute top-[-32px] z-[-1] left-0 w-full h-[38px] bg-white/10 rounded-t-lg flex items-center justify-center text-white text-xs aeonik">
-                    Más elegido
-                  </div>
-                )}
-
-                <a
-                  href="#"
-                  className={` group flex items-center justify-between ${
-                    item.starred ? "h2Title" : "subH"
-                  }`}
+        <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px] ml-6 md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
+          <div className="overflow-x-auto md:overflow-hidden pr-6 ">
+            <div className="flex flex-row gap-4 llg:gap-6 justify-between md:max-w-[970px] m-auto w-fit md:w-[auto]">
+              {suscriptions.map((item, index) => (
+                <div
+                  key={index}
+                  className={`relative box-sc flex flex-col items-center justify-evenly w-[310px] sm:w-[40vw] h-[283px]  md:w-[250px] md:h-[270px] lg:w-[310px] 
+          rounded-lg bg-white text-black transition-all duration-300  px-4
+              ${item.starred ? "l-gradient-starred text-white" : ""}
+              ${item.starred ? "order-1 md:order-2" : "order-2 md:order-2"} 
+        `}
                 >
-                  {item?.title}
-                </a>
-                <p className="body2  text-center">{item?.desc}</p>
-                <p className="aeonik font-thin text-base">
-                  desde&nbsp;
-                  <span className="font-bold text-3xl">{item?.price}</span>
-                  &nbsp;/mes
-                </p>
-                <Button
-                  border={
-                    item.starred ? "solid 1px white" : "solid 1px #434652"
-                  }
-                  textColor={item.starred ? "white" : "black"}
-                  bg={item.starred ? "transparent" : "white"}
-                  text={item?.cta}
-                  width={"w-[200px]"}
-                  height={""}
-                />
-              </div>
-            ))}
+                  {/* 🏆 Banner superior "Más elegido" SOLO para el plan destacado */}
+                  {item.starred && (
+                    <div className="absolute top-[-32px] z-[-1] left-0 w-full h-[38px] bg-white/10 rounded-t-lg flex items-center justify-center text-white text-xs aeonik">
+                      Más elegido
+                    </div>
+                  )}
+
+                  <a
+                    href="#"
+                    className={` group flex items-center justify-between ${
+                      item.starred ? "h2Title" : "subH"
+                    }`}
+                  >
+                    {item?.title}
+                  </a>
+                  <p className="body2  text-center">{item?.desc}</p>
+                  <p className="aeonik font-thin text-base">
+                    desde&nbsp;
+                    <span className="font-bold text-3xl">{item?.price}</span>
+                    &nbsp;/mes
+                  </p>
+                  <Button
+                    border={
+                      item.starred ? "solid 1px white" : "solid 1px #434652"
+                    }
+                    textColor={item.starred ? "white" : "black"}
+                    bg={item.starred ? "transparent" : "white"}
+                    text={item?.cta}
+                    width={"w-[200px]"}
+                    height={""}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col items-center mt-[100px]">
@@ -298,6 +260,7 @@ const VeoCam = () => {
           </div>
         </div>
         <SportsSection />
+        <Accessories />
       </Layout>
     </>
   );
