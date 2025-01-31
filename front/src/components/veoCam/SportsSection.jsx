@@ -51,7 +51,7 @@ const SportsSection = () => {
   return (
     <div
       // className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500"
-      className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500 background-transition"
+      className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500 background-transition m-auto rounded-md  md:rounded-none"
       style={{
         backgroundImage: `url('${activeSport.image}'`,
         backgroundSize: "cover",
@@ -72,7 +72,7 @@ const SportsSection = () => {
             {sports?.map((sport) => (
               <div
                 key={sport.name}
-                className={`h2Title my-[10px]  cursor-pointer transition-opacity duration-300 ${
+                className={`h2Title my-[10px]  cursor-pointer transition-opacity duration-300 text-center sm:text-start ${
                   activeSport.name === sport.name
                     ? "text-[#FAF9F6] opacity-100"
                     : "text-[#FAF9F6] opacity-50"
@@ -85,7 +85,7 @@ const SportsSection = () => {
             ))}
           </div>
 
-          <div className="flex items-end justify-end w-full p-6 sm:p-12 text-white text-right ">
+          <div className="flex items-end sm:justify-end w-full pl-6 pt-[90px] sm:p-12 text-white text-left sm:text-right ">
             <p className="max-w-md body0 !text-lg ">
               {activeSport?.description}
             </p>
