@@ -55,8 +55,8 @@
 
 @font-face {
   font-family: "Grotzec";
-  src: url("../assets/Fonts/Grotzec/Grotzec-Bold.woff2") format("woff2"),
-    url("../assets/Fonts/Grotzec/Grotzec-Bold.woff") format("woff");
+  src: url("../assets/Fonts/Grotzec/Grotzec-Bold2.woff2") format("woff2"),
+    url("../assets/Fonts/Grotzec/Grotzec-Bold2.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }

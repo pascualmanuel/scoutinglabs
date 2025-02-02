@@ -69,7 +69,7 @@ body {
 
 .body0 {
   /* Body 0 - Mobile */
-  font-family: "Aeonik";
+  font-family: "Aeonik", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -78,7 +78,7 @@ body {
 }
 /* Body 1 - Desktop&Mobile */
 .body1 {
-  font-family: "Aeonik";
+  font-family: "Aeonik", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -96,7 +96,7 @@ body {
 
 /* Body 3 - Desktop&Mobile */
 .body3 {
-  font-family: "Aeonik";
+  font-family: "Aeonik", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
