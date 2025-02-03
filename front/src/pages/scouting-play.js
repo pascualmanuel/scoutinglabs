@@ -5,7 +5,9 @@ const ScoutinPlay = () => {
     <>
       {" "}
       <Layout>
-        <div>ScoutinPlay</div>{" "}
+        <div>
+          <h2 className=" aeonik text-[200px]">Cañé más ésta</h2>
+        </div>
       </Layout>
     </>
   );
