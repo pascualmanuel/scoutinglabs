@@ -4,7 +4,7 @@ const Becas = () => {
   return (
     <>
       <Layout>
-        {/* <div>Becas</div> */}
+        <h2 className=" aeonik text-[15px]">Nosotros</h2>
       </Layout>
     </>
   );
