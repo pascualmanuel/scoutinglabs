@@ -107,7 +107,7 @@ const Navbar = () => {
       case "/scouting-play/":
         newPosition = 90;
         break;
-      case "/becas/":
+      case "/nosotros/":
         newPosition = 180;
         break;
       case "/suscripciones/":
@@ -211,7 +211,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                  to={"/becas"}
+                  to={"/nosotros"}
                 >
                   Nosotros
                 </Link>

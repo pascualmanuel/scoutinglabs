@@ -114,7 +114,7 @@ const HomeHero = () => {
             <h3 className="h2Title text-clearBlue">Strategic partner</h3>
           </div>
           <div className="my-10 llg:my-0">
-            <p className="text-grey2 body0 mb-8 !text-[18px] xxl:!text-[24px] !italic">
+            <p className="text-grey2 body0 mb-8 !text-[18px] xxl:!text-[24px]">
               "Una de las principales ventajas de la cámara Veo es que no
               necesitas ser un genio para usarla; es muy intuitiva y fácil de
               usar. Desde padres hasta entrenadores tienen la capacidad de
