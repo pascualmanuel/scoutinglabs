@@ -12,6 +12,7 @@ import VeoCamBg from "../assets/veocam/veo-cam-bg.webp";
 import TeamsCarousel from "../components/TeamsCarousel";
 import SportsSection from "../components/veoCam/SportsSection";
 import Accessories from "../components/veoCam/Accessories";
+import GridSection from "../components/veoCam/GridSection";
 const VeoCam = () => {
   const data = [
     {
@@ -142,7 +143,6 @@ const VeoCam = () => {
         <div className=" md:my-28 my-20">
           <TeamsCarousel />
         </div>
-
         <div
           className="h-screen max-h-[800px] min-h-[800px] sm:min-h-[500px] bg-top bg-contain ssm:bg-cover  sm:bg-right md:bg-center lg:bg-left"
           style={{
@@ -189,77 +189,7 @@ const VeoCam = () => {
             </div>
           </div>
         </div>
-        <div className="px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
-          <h3 className="h1Title">planes de suscripcion</h3>
-          <p className="mt-8 body1 opacity-50">
-            Todas las cámaras necesitan de una suscripción para su
-            funcionamiento, y cada suscripción aplica solamente para una cámara.
-            <br />
-            Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
-            activa.
-          </p>
-        </div>
 
-        <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px] ml-6 md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
-          <div className="overflow-x-auto md:overflow-hidden md:pr-6 ">
-            <div className="flex flex-row gap-4 llg:gap-6 justify-between md:max-w-[970px] m-auto w-fit md:w-[auto]">
-              {suscriptions.map((item, index) => (
-                <div
-                  key={index}
-                  className={`relative box-sc flex flex-col items-center justify-evenly w-[310px] sm:w-[40vw] h-[283px]  md:w-[250px] md:h-[270px] lg:w-[310px] 
-          rounded-lg bg-white text-black transition-all duration-300  px-4
-              ${item.starred ? "l-gradient-starred text-white" : ""}
-              ${item.starred ? "order-1 md:order-2" : "order-2 md:order-2"} 
-        `}
-                >
-                  {/* 🏆 Banner superior "Más elegido" SOLO para el plan destacado */}
-                  {item.starred && (
-                    <div className="absolute top-[-32px] z-[-1] left-0 w-full h-[38px] bg-white/10 rounded-t-lg flex items-center justify-center text-white text-xs aeonik">
-                      Más elegido
-                    </div>
-                  )}
-
-                  <a
-                    href="#"
-                    className={` group flex items-center justify-between ${
-                      item.starred ? "h2Title" : "subH"
-                    }`}
-                  >
-                    {item?.title}
-                  </a>
-                  <p className="body2  text-center">{item?.desc}</p>
-                  <p className="aeonik font-thin text-base">
-                    desde&nbsp;
-                    <span className="font-bold text-3xl">{item?.price}</span>
-                    &nbsp;/mes
-                  </p>
-                  <Button
-                    border={
-                      item.starred ? "solid 1px white" : "solid 1px #434652"
-                    }
-                    textColor={item.starred ? "white" : "black"}
-                    bg={item.starred ? "transparent" : "white"}
-                    text={item?.cta}
-                    width={"w-[200px]"}
-                    height={""}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center mt-[100px]">
-            <p className="body1 text-white mb-3 opacity-50">
-              ¿Quieres saber mas sobre los planes?
-            </p>
-            <Button
-              text={"Comparar planes "}
-              width="w-[90vw] sm:w-[290px]"
-              height="h-[50px]"
-            />
-          </div>
-        </div>
-        <SportsSection />
         <Accessories />
       </Layout>
     </>
