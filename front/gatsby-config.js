@@ -1,3 +1,8 @@
+// gatsby-config.js
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`, // Cargar el archivo .env basado en el entorno
+});
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
