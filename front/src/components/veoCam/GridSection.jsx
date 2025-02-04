@@ -55,7 +55,7 @@ const GridSection = () => {
                       autoPlay={true}
                       playsInline
                       muted
-                      loop
+                      loop={true}
                     />
                   </div>
                 </div>
@@ -81,7 +81,7 @@ const GridSection = () => {
                       marginRight: "7px",
                       marginLeft: "5px",
                       marginBottom: "27px",
-                      filter: "blur(1px)",
+                      // filter: "blur(1px)",
                     }}
                   />
 
@@ -218,7 +218,7 @@ const GridSection = () => {
                     marginRight: "7px",
                     marginLeft: "5px",
                     marginBottom: "27px",
-                    filter: "blur(1px)",
+                    // filter: "blur(1px)",
                   }}
                 />
 

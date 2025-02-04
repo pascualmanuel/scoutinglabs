@@ -66,7 +66,7 @@ const VeoCam = () => {
     <>
       <Layout>
         <div className="veo-bg ">
-          <div className="flex flex-col items-center justify-center text-center h-[90vh] ">
+          <div className="flex flex-col items-center justify-center text-center h-[90vh] max-h-[790px] ">
             <div className="mb-4 lg:mb-8 max-w-[280px]">
               <span className=" bg-[#faf9f61a] body3 p-1 pr-2 pl-1 rounded-full border border-[#FAF9F64D] flex items-center aeonik">
                 <span className="w-[25px] h-[25px] bg-[#0A3D14] rounded-full border border-grey3 inline-block relative mr-2">
@@ -203,22 +203,25 @@ const VeoCam = () => {
             activa.
           </p>
         </div>
-        <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px] ml-6 md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
-          <div className="overflow-x-auto md:overflow-hidden md:pr-6 ">
-            <div className="flex flex-row gap-4 llg:gap-6 justify-between md:max-w-[970px] m-auto w-fit md:w-[auto]">
+        <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px]  md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
+          <div className="overflow-x-auto md:overflow-visible relative ">
+            <div
+              className="mt-10  flex flex-row gap-4 llg:gap-6 justify-between 
+            md:max-w-[970px] m-auto w-fit md:w-[auto] px-6 md:px-0"
+            >
               {suscriptions.map((item, index) => (
                 <div
                   key={index}
                   className={`relative box-sc flex flex-col items-center justify-evenly w-[310px] sm:w-[40vw] h-[283px]  md:w-[250px] md:h-[270px] lg:w-[310px] 
-          rounded-lg bg-white text-black transition-all duration-300  px-4
+               rounded-lg bg-white text-black transition-all duration-300  px-4
               ${item.starred ? "l-gradient-starred text-white" : ""}
               ${item.starred ? "order-1 md:order-2" : "order-2 md:order-2"} 
         `}
                 >
                   {/* 🏆 Banner superior "Más elegido" SOLO para el plan destacado */}
                   {item.starred && (
-                    <div className="absolute top-[-32px] z-[-1] left-0 w-full h-[38px] bg-white/10 rounded-t-lg flex items-center justify-center text-white text-xs aeonik">
-                      Más elegido
+                    <div className=" absolute top-[-32px] z-[-1] left-0 w-full h-[38px] bg-white/10 rounded-t-lg flex items-center justify-center text-white text-xs aeonik">
+                      Más elegido!
                     </div>
                   )}
 
@@ -250,18 +253,18 @@ const VeoCam = () => {
               ))}
             </div>
           </div>
-
-          <div className="flex flex-col items-center mt-[100px]">
-            <p className="body1 text-white mb-3 opacity-50">
-              ¿Quieres saber mas sobre los planes?
-            </p>
-            <Button
-              text={"Comparar planes "}
-              width="w-[90vw] sm:w-[290px]"
-              height="h-[50px]"
-            />
-          </div>
         </div>
+        <div className="flex flex-col items-center my-[100px]">
+          <p className="body1 text-white mb-3 opacity-50">
+            ¿Quieres saber mas sobre los planes?
+          </p>
+          <Button
+            text={"Comparar planes "}
+            width="w-[90vw] sm:w-[290px]"
+            height="h-[50px]"
+          />
+        </div>
+
         <SportsSection />
         <Accessories />
       </Layout>

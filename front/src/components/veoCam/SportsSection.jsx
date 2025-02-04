@@ -59,16 +59,17 @@ const SportsSection = () => {
         // transition: "background 0.5s ease-in-out", // Transición suave
       }}
     >
+      {/* linear-gradient(rgba(0, 0, 0, 0) -40.87%, rgb(0, 0, 0) 100%) */}
       <div
-        className="h-[100%]"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(0, 0, 0, 0) 46.13%, #000000 100%)",
-        }}
+        className="h-[100%]  bg-[linear-gradient(180deg,rgba(0,0,0,0)_-40%,#000000_86%)]  sm:bg-[linear-gradient(180deg,rgba(0,0,0,0)_46.13%,#000000_100%)] "
+        // style={{
+        //   background:
+        //     "linear-gradient(180deg, rgba(0, 0, 0, 0) 46.13%, #000000 100%)",
+        // }}
       >
-        <div className="flex flex-col sm:flex-row h-full">
+        <div className="flex flex-col sm:flex-row h-full justify-between">
           {/* Lista de deportes */}
-          <div className="flex flex-col justify-center px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto ">
+          <div className="flex flex-col justify-center pt-11 sm:pt-0 px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto ">
             {sports?.map((sport) => (
               <div
                 key={sport.name}
@@ -85,8 +86,11 @@ const SportsSection = () => {
             ))}
           </div>
 
-          <div className="flex items-end sm:justify-end w-full pl-6 pt-[90px] sm:p-12 text-white text-left sm:text-right ">
-            <p className="max-w-md body0 !text-lg ">
+          <div
+            className="flex items-end sm:justify-end w-full pl-6
+           sm:pt-[90px] sm:pb-32 pb-10 lm:p-24 text-white"
+          >
+            <p className="max-w-md body0 !text-lg pr-5 w-[450px]">
               {activeSport?.description}
             </p>
           </div>
