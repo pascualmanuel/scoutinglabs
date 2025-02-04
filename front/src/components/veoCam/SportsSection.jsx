@@ -56,17 +56,9 @@ const SportsSection = () => {
         backgroundImage: `url('${activeSport.image}'`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        // transition: "background 0.5s ease-in-out", // Transición suave
       }}
     >
-      {/* linear-gradient(rgba(0, 0, 0, 0) -40.87%, rgb(0, 0, 0) 100%) */}
-      <div
-        className="h-[100%]  bg-[linear-gradient(180deg,rgba(0,0,0,0)_-40%,#000000_86%)]  sm:bg-[linear-gradient(180deg,rgba(0,0,0,0)_46.13%,#000000_100%)] "
-        // style={{
-        //   background:
-        //     "linear-gradient(180deg, rgba(0, 0, 0, 0) 46.13%, #000000 100%)",
-        // }}
-      >
+      <div className="h-[100%]  bg-[linear-gradient(180deg,rgba(0,0,0,0)_-40%,#000000_86%)]  sm:bg-[linear-gradient(180deg,rgba(0,0,0,0)_46.13%,#000000_100%)] ">
         <div className="flex flex-col sm:flex-row h-full justify-between">
           {/* Lista de deportes */}
           <div className="flex flex-col justify-center pt-11 sm:pt-0 px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto ">

@@ -25,6 +25,26 @@
   transform: scaleY(1); /* Invierte la imagen */
 }
 
+.sPlay-bg {
+  background: radial-gradient(
+      ellipse 252.2px 197px at 50% 40%,
+      rgba(5, 132, 245, 0.6) 1%,
+      rgba(5, 132, 245, 0) 130%
+    ),
+    linear-gradient(
+      180deg,
+      #03000d 0%,
+      rgba(3, 0, 13, 0.7) 50.21%,
+      #03000d 110.36%
+    ),
+    url("../assets/scoutingplay/splay-bg.webp");
+
+  background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+  background-position: center center, center, center; /* Ubica cada capa */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  transform: scaleY(1);
+}
+
 @media (max-width: 800px) {
   .partner-bg {
     /* background: radial-gradient(
