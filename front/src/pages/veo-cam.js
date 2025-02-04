@@ -66,7 +66,7 @@ const VeoCam = () => {
     <>
       <Layout>
         <div className="veo-bg ">
-          <div className="flex flex-col items-center justify-center text-center pt-[120px] ">
+          <div className="flex flex-col items-center justify-center text-center h-[90vh] ">
             <div className="mb-4 lg:mb-8 max-w-[280px]">
               <span className=" bg-[#faf9f61a] body3 p-1 pr-2 pl-1 rounded-full border border-[#FAF9F64D] flex items-center aeonik">
                 <span className="w-[25px] h-[25px] bg-[#0A3D14] rounded-full border border-grey3 inline-block relative mr-2">
@@ -190,7 +190,7 @@ const VeoCam = () => {
           </div>
         </div>
 
-        <div className="my-32">
+        <div className=" my-32 llg:my-0 mg:my-32 flex justify-center">
           <GridSection />
         </div>
         <div className="px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">

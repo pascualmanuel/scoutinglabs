@@ -141,3 +141,7 @@ body {
     text-transform: uppercase;
   }
 }
+
+.whtie-50-op {
+  background: rgba(255, 255, 255, 0.05);
+}
