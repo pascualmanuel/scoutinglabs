@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plan_addons",
+  "info": {
+    "singularName": "plan-addon",
+    "pluralName": "plan-addons",
+    "displayName": "plan-addons"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "addonName": {
+      "type": "string"
+    },
+    "addonPrice": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "subscription_plans": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::subscription-plan.subscription-plan",
+      "inversedBy": "plan_addons"
+    }
+  }
+}

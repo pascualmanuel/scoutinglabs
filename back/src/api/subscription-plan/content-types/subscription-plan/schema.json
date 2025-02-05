@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscription_plans",
+  "info": {
+    "singularName": "subscription-plan",
+    "pluralName": "subscription-plans",
+    "displayName": "subscription-plans",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "whatInclude": {
+      "type": "richtext"
+    },
+    "addons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "admin::user"
+    },
+    "mensualPrice": {
+      "type": "string"
+    },
+    "semestralPrice": {
+      "type": "string"
+    },
+    "annualPrice": {
+      "type": "string"
+    },
+    "featuredCard": {
+      "type": "boolean"
+    },
+    "plan_addons": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::plan-addon.plan-addon",
+      "mappedBy": "subscription_plans"
+    }
+  }
+}
