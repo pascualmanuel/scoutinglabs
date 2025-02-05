@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../Button";
 import WhatsAppIcon from "../../assets/icons/WhatsApp.svg";
+import WhatsAppDarkIcon from "../../assets/icons/wapp_black.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const PlanComparation = () => {
@@ -40,6 +41,26 @@ const PlanComparation = () => {
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
 
+  const calculatePlanTotal = (plan) => {
+    const basePrice = parseFloat(
+      selectedPlan === "mensual"
+        ? plan.mensualPrice
+        : selectedPlan === "semestral"
+        ? plan.semestralPrice
+        : plan.annualPrice
+    );
+
+    const addonsTotal =
+      plan.plan_addons?.reduce((acc, addon) => {
+        const addonKey = `${plan.id}-${addon.id}`;
+        return selectedAddons.includes(addonKey)
+          ? acc + parseFloat(addon.addonPrice.replace(/[^0-9.-]+/g, ""))
+          : acc;
+      }, 0) || 0;
+
+    return basePrice + addonsTotal;
+  };
+
   // Función para obtener datos de Strapi
   useEffect(() => {
     axios
@@ -57,16 +78,20 @@ const PlanComparation = () => {
     setSelectedPlan(e.target.value);
   };
 
-  const handleAddonClick = (addonId, addonPrice) => {
-    // Si el addon ya está seleccionado, no hacer nada
-    if (selectedAddons.includes(addonId)) {
-      return;
-    }
+  const handleAddonClick = (planId, addonId, addonPrice) => {
+    const uniqueAddonKey = `${planId}-${addonId}`;
 
-    const addonCost = parseFloat(addonPrice.replace(/[^0-9.-]+/g, "")); // Obtener el costo como número
-    setSelectedAddons((prevAddons) => [...prevAddons, addonId]); // Agregar el id del addon a la lista de seleccionados
-    setTotalPrice((prevTotal) => prevTotal + addonCost); // Sumar el precio del addon al total
+    setSelectedAddons((prev) =>
+      prev.includes(uniqueAddonKey)
+        ? prev.filter((key) => key !== uniqueAddonKey)
+        : [...prev, uniqueAddonKey]
+    );
   };
+
+  useEffect(() => {
+    console.log("Addons seleccionados:", selectedAddons);
+    console.log("Total actual:", totalPrice);
+  }, [selectedAddons, totalPrice]);
 
   console.log(totalPrice);
   return (
@@ -83,6 +108,22 @@ const PlanComparation = () => {
           Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
           activa.
         </p>
+      </div>
+
+      <div className="mt-5">
+        <label htmlFor="subscription-plan">
+          Selecciona el tipo de suscripción:
+        </label>
+        <select
+          id="subscription-plan"
+          value={selectedPlan}
+          onChange={handlePlanChange}
+          className="px-4 py-2 border rounded-lg"
+        >
+          <option value="mensual">Mensual</option>
+          <option value="semestral">Semestral</option>
+          <option value="anual">Anual</option>
+        </select>
       </div>
 
       <div className="mb-[80px] md:mb-[180px] md:max-w-[1536px] md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
@@ -104,29 +145,27 @@ const PlanComparation = () => {
                     Más popular
                   </div>
                 )}
-
-                <a
-                  href="#"
-                  className={`group flex items-center justify-between ${
-                    item.featuredCard ? "h2Title" : "subH"
-                  }`}
-                >
-                  {item?.title}
-                </a>
-                <p className="body2 text-center">{item?.desc}</p>
-                <p className="aeonik font-thin text-base">
-                  desde&nbsp;
-                  <span className="font-bold text-3xl">
-                    {selectedPlan === "mensual"
-                      ? item.mensualPrice
-                      : selectedPlan === "semestral"
-                      ? item.semestralPrice
-                      : item.annualPrice}
-                  </span>
-                  &nbsp;/mes
-                </p>
+                <div className="flex items-center flex-col justify-between">
+                  <p
+                    className={`group flex items-center justify-between ${
+                      item.featuredCard ? "h2Title" : "subH"
+                    }`}
+                  >
+                    {item?.title}
+                  </p>
+                  <p className="body2 text-center">{item?.desc}</p>
+                  <p className="aeonik font-thin text-base">
+                    desde USD&nbsp;
+                    <span className="font-bold text-[45px]">
+                      {calculatePlanTotal(item).toFixed()}
+                    </span>
+                    &nbsp;/mes
+                  </p>
+                </div>
                 <div className="w-full px-4">
-                  <span className="pb-2 text-sm"> Incluye:</span>
+                  <span className="pb-2 text-sm aeonik font-bold">
+                    Incluye:
+                  </span>
                   <p className="text-xs">{item?.whatInclude}</p>
                 </div>
                 <div className="">
@@ -134,11 +173,16 @@ const PlanComparation = () => {
                     <div
                       key={addon.id}
                       onClick={() =>
-                        handleAddonClick(addon.id, addon.addonPrice)
+                        handleAddonClick(item.id, addon.id, addon.addonPrice)
+                      } // item.id es el ID del plan padre
+                      className={`add-on text-xs w-[262px] h-[65px] flex flex-row justify-between  rounded-lg mb-2 cursor-pointer
+                      ${item.featuredCard ? "bg-[#ffffff1a]" : "bg-[#96979b1a]"}
+                      ${
+                        selectedAddons.includes(`${item.id}-${addon.id}`)
+                          ? "bg-gray-300"
+                          : ""
                       }
-                      className={`add-on text-xs w-[262px] h-[65px] flex flex-row justify-between bg-[#ffffff1a] rounded-lg mb-2 cursor-pointer
-        ${selectedAddons.includes(addon.id) ? "bg-gray-300" : ""}
-      `}
+                    `}
                     >
                       <div className="flex flex-col justify-around px-2">
                         <span className="title">{addon.addonName}</span>
@@ -161,7 +205,9 @@ const PlanComparation = () => {
                     <>
                       <div className="flex flex-row items-center px-2">
                         <img
-                          src={WhatsAppIcon}
+                          src={
+                            item.featuredCard ? WhatsAppIcon : WhatsAppDarkIcon
+                          }
                           alt="whattsapp"
                           className="w-6 h-6"
                         />
