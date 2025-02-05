@@ -125,12 +125,12 @@ const extrasList = [
 
 const PricingTable = () => {
   return (
-    <div className="container mx-auto px-4 py-8 text-black aeonik">
+    <div className="container mx-auto px-28 py-10 text-iBlue aeonik max-w-screen-2xl ">
       <div className="overflow-x-auto bg-[#ffff] ">
         <table className="w-full ">
           <thead>
             <tr className="">
-              <th className="p-4 text-left h-[230px]">
+              <th className="p-4 text-left h-[230px] w-[350px]">
                 <h2 className="text-2xl aeonik font-bold  mb-4">
                   Compara los planes
                 </h2>
@@ -151,9 +151,9 @@ const PricingTable = () => {
           <tbody>
             {Object.keys(plans[0].categories).map((category, rowIndex) => (
               <tr key={rowIndex} className="">
-                <td className="p-4 font-medium text-gray-700">{category}</td>
+                <td className="p-4 font-medium ">{category}</td>
                 {plans.map((plan, colIndex) => (
-                  <td key={colIndex} className="p-4 text-center">
+                  <td key={colIndex} className="p-4 text-sm  text-center">
                     {plan.categories[category]}
                   </td>
                 ))}
@@ -162,7 +162,7 @@ const PricingTable = () => {
 
             {featuresList.map((feature, rowIndex) => (
               <tr key={rowIndex} className="">
-                <td className="p-4 font-medium text-gray-700">{feature}</td>
+                <td className="p-4 font-medium ">{feature}</td>
                 {plans.map((plan, colIndex) => (
                   <td key={colIndex} className="p-4 text-center">
                     <img
@@ -176,9 +176,9 @@ const PricingTable = () => {
             ))}
             {extrasList.map((extra, rowIndex) => (
               <tr key={rowIndex} className=" ">
-                <td className="p-4 font-medium text-gray-700">{extra}</td>
+                <td className="p-4 font-medium ">{extra}</td>
                 {plans.map((plan, colIndex) => (
-                  <td key={colIndex} className="p-4 text-center text-gray-500">
+                  <td key={colIndex} className="p-4 text-center text-sm">
                     {plan.extras[rowIndex]}
                   </td>
                 ))}

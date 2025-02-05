@@ -322,7 +322,7 @@ const Navbar = () => {
             </Button>
 
             <div
-              className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer z-10 mx-[20px] llg:hidden z-[1000]"
+              className="flex flex-col justify-between items-center w-[24px] h-[18px] cursor-pointer  mx-[20px] llg:hidden z-[1000]"
               onClick={toggleMenu}
             >
               <div
