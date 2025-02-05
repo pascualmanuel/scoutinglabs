@@ -315,3 +315,11 @@
 .description-container.visible {
   opacity: 1; /* Se vuelve visible cuando tiene la clase 'visible' */
 }
+
+td {
+  border: solid 1px #eaeaea;
+}
+
+th {
+  border: solid 1px #eaeaea;
+}
