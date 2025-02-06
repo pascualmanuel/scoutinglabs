@@ -425,7 +425,7 @@ const Navbar = () => {
               BECAS
             </Link> */}
             <Link
-              to="/precios"
+              to="/suscripciones"
               className="text-white py-3 px-5 h2Title"
               onClick={closeMenu}
             >
