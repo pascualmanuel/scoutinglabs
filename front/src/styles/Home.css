@@ -57,13 +57,29 @@
       rgba(3, 0, 13, 0.7) 50.21%,
       #03000d 110.36%
     ),
-    url("../assets/suscripciones/suscripciones-bg.webp");
-
+    url("../assets/suscripciones/susc2.webp");
 
   background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
   background-position: center center, center, center; /* Ubica cada capa */
   background-repeat: no-repeat; /* Evita repeticiones */
   transform: scaleY(1);
+}
+
+@media (max-width: 500px) {
+  .susc-bg {
+    background: linear-gradient(
+        180deg,
+        #03000d 0%,
+        rgba(3, 0, 13, 0.7) 50.21%,
+        #03000d 110.36%
+      ),
+      url("../assets/suscripciones/susc2.webp");
+
+    background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+    background-position: 30%; /* Ubica cada capa */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    transform: scaleY(1);
+  }
 }
 
 @media (max-width: 800px) {
