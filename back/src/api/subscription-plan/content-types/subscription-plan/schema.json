@@ -15,9 +15,6 @@
     "title": {
       "type": "string"
     },
-    "desc": {
-      "type": "string"
-    },
     "whatInclude": {
       "type": "richtext"
     },
@@ -43,6 +40,9 @@
       "relation": "manyToMany",
       "target": "api::plan-addon.plan-addon",
       "mappedBy": "subscription_plans"
+    },
+    "desc": {
+      "type": "richtext"
     }
   }
 }

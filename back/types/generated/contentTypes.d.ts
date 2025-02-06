@@ -421,7 +421,7 @@ export interface ApiSubscriptionPlanSubscriptionPlan
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    desc: Schema.Attribute.String;
+    desc: Schema.Attribute.RichText;
     featuredCard: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
