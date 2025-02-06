@@ -50,7 +50,7 @@ const PlanComparation = () => {
   // Función para obtener datos de Strapi
   useEffect(() => {
     axios
-      .get("http://localhost:1337/api/subscription-plans?populate=*") // Ajusta la URL según tu configuración de Strapi
+      .get(`${process.env.REACT_APP_API_URL}/api/subscription-plans?populate=*`)
       .then((response) => {
         setSuscriptions(response.data.data);
       })
