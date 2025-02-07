@@ -64,6 +64,21 @@
   background-repeat: no-repeat; /* Evita repeticiones */
   transform: scaleY(1);
 }
+/* background: linear-gradient(180deg, #03000D 0%, rgba(3, 0, 13, 0.2) 110.36%); */
+.nosotros-bg {
+  background: radial-gradient(
+      ellipse 300.2px 240px at 85% 60%,
+      rgba(5, 132, 245, 0.4) 1%,
+      rgba(5, 132, 245, 0) 130%
+    ),
+    linear-gradient(1deg, #03000d 0%, rgba(3, 0, 13, 0.3) 110.36%),
+    url("../assets/nosotros/nosotros-bg.webp");
+
+  background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+  background-position: bottom; /* Ubica cada capa */
+  background-repeat: no-repeat; /* Evita repeticiones */
+  transform: scaleY(1);
+}
 
 @media (max-width: 500px) {
   .susc-bg {
@@ -74,6 +89,21 @@
         #03000d 110.36%
       ),
       url("../assets/suscripciones/susc2.webp");
+
+    background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+    background-position: 30%; /* Ubica cada capa */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    transform: scaleY(1);
+  }
+  .nosotros-bg {
+    background: radial-gradient(
+        ellipse 300.2px 240px at 85% 60%,
+        rgba(5, 132, 245, 0.15) 1%,
+        rgba(5, 132, 245, 0) 130%
+      ),
+      /* linear-gradient(1deg, #03000d 0%, rgba(3, 0, 13, 0.3) 110.36%), */
+        linear-gradient(1deg, #03000d 10.97%, rgba(3, 0, 13, 0.4) 110.31%),
+      url("../assets/nosotros/nosotros-bg.webp");
 
     background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
     background-position: 30%; /* Ubica cada capa */
