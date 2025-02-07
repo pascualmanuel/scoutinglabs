@@ -145,3 +145,68 @@ body {
 .whtie-50-op {
   background: rgba(255, 255, 255, 0.05);
 }
+
+select {
+  color: #c7cbd6 !important;
+}
+select:focus-visible {
+  outline: none !important;
+}
+input:focus,
+textarea:focus {
+  outline: none !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+  -webkit-box-shadow: 0 0 0 1000px #0f0d19 inset !important;
+  -webkit-text-fill-color: white !important;
+  caret-color: white !important; /* Color del cursor igual al texto */
+}
+
+.react-international-phone-input {
+  margin-left: 8px !important;
+  height: 50px !important;
+  background-color: #0f0d19 !important;
+}
+
+.react-international-phone-country-selector-button {
+  width: 77px !important;
+  height: 50px !important;
+  background-color: #0f0d19 !important;
+  border: solid 1px #434652 !important;
+}
+.react-international-phone-country-selector-dropdown__list-item-country-name {
+  font-family: "Aeonik", sans-serif !important;
+}
+
+.react-international-phone-input {
+  border: solid 1px #434652 !important;
+  color: #a2a2a2 !important;
+}
+
+.react-international-phone-input-container {
+  color: #a2a2a2 !important;
+}
+
+input {
+  color: #a2a2a2 !important;
+}
+.phone-input .country-selector__button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-international-phone-country-selector-dropdown {
+  width: min-content !important;
+}
+
+ul.react-international-phone-country-selector-dropdown:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  /* background-color: #0f0d19; */
+  /* color: white; */
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
