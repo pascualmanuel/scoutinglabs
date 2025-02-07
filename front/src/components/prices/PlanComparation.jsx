@@ -127,7 +127,7 @@ const PlanComparation = () => {
         </p>
       </div>
 
-      <div className="m-auto pt-12 max-w-[450px]">
+      <div className="m-auto pt-12 max-w-[340px] sm:max-w-[400px] md:max-w-[450px]">
         <div className="relative flex bg-iBlue rounded-[45px] p-1">
           <div
             className="absolute top-1 h-[calc(100%-8px)] bg-grey0 rounded-[40px] transition-all duration-300 ease-out shadow-sm"

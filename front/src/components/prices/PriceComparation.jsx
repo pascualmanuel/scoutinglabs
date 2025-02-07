@@ -125,23 +125,26 @@ const extrasList = [
 
 const PricingTable = () => {
   return (
-    <div className="container mx-auto px-28 py-10 text-iBlue aeonik max-w-screen-2xl ">
+    <div className="container mx-auto px-4 llg:px-10 xll:px-28 py-10 text-iBlue aeonik max-w-screen-2xl ">
       <div className="overflow-x-auto bg-[#ffff] ">
-        <table className="w-full ">
+        <table className=" sm:w-full ">
           <thead>
             <tr className="">
-              <th className="p-4 text-left h-[230px] w-[350px]">
+              <th className="p-4 text-left h-[230px] !w-[250px] lm:!w-[310px] llg:w-[350px]">
                 <h2 className="text-2xl aeonik font-bold  mb-4">
                   Compara los planes
                 </h2>
-                <p className=" body2 text-grey2 mb-6 w-[275px]">
+                <p className=" body2 text-grey2 mb-6 llg:w-[275px]">
                   Compara nuestros diferentes planes para encontrar cuál se
                   ajusta a tus necesidades
                 </p>
               </th>
               {plans.map((plan, index) => (
-                <th key={index} className="p-4 text-center font-bold text-2xl">
-                  <p className="mb-4">{plan.name}</p>
+                <th
+                  key={index}
+                  className="p-4 text-center font-bold text-2xl w-[175px] md:w-auto"
+                >
+                  <p className="mb-4 w-[110px] ms:w-auto">{plan.name}</p>
                   <span className="text-[40px] ">{plan.price}</span>
                   <span className="text-grey2 text-sm font-normal"> /mes</span>
                 </th>
