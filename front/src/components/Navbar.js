@@ -241,53 +241,57 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <div className="flex flex-row  justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-28">
+            <div className="flex flex-row cursor-pointer justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-28">
               <div
-                className={`relative lang-selector  select-none rounded-lg hidden  llg:flex mr-3 lg:mr-4 ${
-                  languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
+                className={`transition-[1000] ${
+                  languageOpen ? "mt-[-30px]" : "mt-0"
                 }`}
+                onClick={toggleLanguage}
               >
-                <span
-                  className="text-white cursor-pointer flex flex-row items-center  ml-2"
-                  onClick={toggleLanguage}
+                <div
+                  className={`relative lang-selector  select-none rounded-lg hidden  llg:flex mr-3 lg:mr-4 ${
+                    languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
+                  }`}
                 >
-                  {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
-                  <svg
-                    className={`ml-2 transition-all duration-300 ${
-                      languageOpen ? "rotate-180" : ""
-                    }`}
-                    width="10"
-                    height="5"
-                    viewBox="0 0 10 5"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
-                      fill="#D9D9D9"
-                    />
-                  </svg>
-                </span>
-                {languageOpen && (
-                  <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg flex">
-                    {locale !== "ES" && (
-                      <span
-                        className="cursor-pointer block ml-2"
-                        onClick={() => changeLanguage("ES")}
-                      >
-                        ES 🇪🇸
-                      </span>
-                    )}
-                    {locale !== "EN" && (
-                      <span
-                        className="cursor-pointer block ml-2"
-                        onClick={() => changeLanguage("EN")}
-                      >
-                        EN 🇬🇧
-                      </span>
-                    )}
-                  </div>
-                )}
+                  <span className="text-white cursor-pointer flex flex-row items-center  ml-2">
+                    {locale} {locale === "ES" ? "🇪🇸" : "🇬🇧"}
+                    <svg
+                      className={`ml-2 transition-all duration-300 absolute right-[10px] ${
+                        languageOpen ? "rotate-180 bottom-[0px]" : ""
+                      }`}
+                      width="10"
+                      height="5"
+                      viewBox="0 0 10 5"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 4.5L0.669873 1.38009e-07L9.33013 8.95112e-07L5 4.5Z"
+                        fill="#D9D9D9"
+                      />
+                    </svg>
+                  </span>
+                  {languageOpen && (
+                    <div className="absolute top-full left-0 text-white lang-selector  select-none rounded-b-lg flex">
+                      {locale !== "ES" && (
+                        <span
+                          className="cursor-pointer block ml-2"
+                          onClick={() => changeLanguage("ES")}
+                        >
+                          ES 🇪🇸
+                        </span>
+                      )}
+                      {locale !== "EN" && (
+                        <span
+                          className="cursor-pointer block ml-2"
+                          onClick={() => changeLanguage("EN")}
+                        >
+                          EN 🇬🇧
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="hidden llg:block">
                 <Button
