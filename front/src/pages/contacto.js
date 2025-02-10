@@ -8,7 +8,7 @@ const Contacto = () => {
     <>
       {" "}
       <Layout>
-        <div className="px-4 ssm:px-6 sm:px-16 lg:h-[750px] lg:flex lg:flex-row lg:items-center lg:justify-center mt-[-40px]">
+        <div className="px-4 ssm:px-6 sm:px-16 lg:h-[750px] lg:flex lg:flex-row lg:items-center lg:justify-center lg:mt-[-40px]">
           <div className="mb-10">
             <ContactCircles />
             <h2 className="h1Title mg:text-[110px] mg:leading-[102px] mg:tracking-[-0.03em] mb-8 lg:max-w-[550px]">

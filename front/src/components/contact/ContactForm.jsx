@@ -77,8 +77,8 @@ function ContactForm() {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Fila 1 - Name & Email */}
-          <div className="flex gap-4">
-            <div className="w-1/2">
+          <div className="ssm:flex gap-4">
+            <div className="ssm:w-1/2">
               <label className="block body1 text-grey1 mb-1">Name *</label>
               <input
                 type="text"
@@ -93,7 +93,7 @@ function ContactForm() {
               )}
             </div>
 
-            <div className="w-1/2">
+            <div className="ssm:w-1/2">
               <label className="block body1 text-grey1 mb-1">Email *</label>
               <input
                 type="email"
@@ -110,8 +110,8 @@ function ContactForm() {
           </div>
 
           {/* Fila 2 - Phone & Country */}
-          <div className="flex gap-4">
-            <div className="w-1/2">
+          <div className="ssm:flex gap-4">
+            <div className="ssm:w-1/2">
               <label className="block body1 text-grey1 mb-1">Phone *</label>
               <PhoneInput
                 defaultCountry="ar" // Código de país inicial (Argentina)
@@ -133,7 +133,7 @@ function ContactForm() {
                 <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
               )}
             </div>
-            <div className="w-1/2">
+            <div className="ssm:w-1/2">
               <label className="block body1 text-grey1 mb-1">
                 Country of residence *
               </label>
