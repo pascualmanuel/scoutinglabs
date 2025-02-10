@@ -8,9 +8,15 @@ import Video4 from "../../assets/veocam/grid/eventos.mp4";
 import Video5 from "../../assets/veocam/grid/VeoSetup.mp4";
 import VeoCamImg from "../../assets/home/veo-transparent2.webp";
 
-// import Lottie from "lottie-react"; // Import the correct Lottie component
+import loadable from "@loadable/component";
 
-import dotAnimation from "../../assets/veocam/dot-animation.json?raw";
+const Lottie = loadable(() => import("lottie-react"));
+
+// Resto de imports...
+let dotAnimation = null;
+if (typeof window !== "undefined") {
+  dotAnimation = require("../../assets/veocam/dot-animation.json?raw");
+}
 
 const GridSection = () => {
   const [ocultarPadre, setOcultarPadre] = useState(false);
@@ -72,18 +78,20 @@ const GridSection = () => {
                     src={VeoCamImg}
                     className="absolute top-4 right-0  w-auto translate-x-1/2 h-[230px]"
                   />
-                  {/* <Lottie
-                    animationData={dotAnimation} // Correct prop for Lottie
-                    loop={true} // Enable looping
-                    style={{
-                      height: "21px",
-                      width: "21px",
-                      marginRight: "7px",
-                      marginLeft: "5px",
-                      marginBottom: "27px",
-                      // filter: "blur(1px)",
-                    }}
-                  /> */}
+                  {typeof window !== "undefined" && Lottie && (
+                    <Lottie
+                      animationData={dotAnimation} // Correct prop for Lottie
+                      loop={true} // Enable looping
+                      style={{
+                        height: "21px",
+                        width: "21px",
+                        marginRight: "7px",
+                        marginLeft: "5px",
+                        marginBottom: "27px",
+                        // filter: "blur(1px)",
+                      }}
+                    />
+                  )}
 
                   <h2 className="h2Title w-[225px]">
                     CALIDAD <br /> DE VIDEO NITIDA
@@ -209,18 +217,20 @@ const GridSection = () => {
                   src={VeoCamImg}
                   className="absolute top-4 right-0  w-auto translate-x-1/2 h-[230px]"
                 />
-                {/* <Lottie
-                  animationData={dotAnimation} // Correct prop for Lottie
-                  loop={true} // Enable looping
-                  style={{
-                    height: "21px",
-                    width: "21px",
-                    marginRight: "7px",
-                    marginLeft: "5px",
-                    marginBottom: "27px",
-                    // filter: "blur(1px)",
-                  }}
-                /> */}
+                {typeof window !== "undefined" && Lottie && (
+                  <Lottie
+                    animationData={dotAnimation} // Correct prop for Lottie
+                    loop={true} // Enable looping
+                    style={{
+                      height: "21px",
+                      width: "21px",
+                      marginRight: "7px",
+                      marginLeft: "5px",
+                      marginBottom: "27px",
+                      // filter: "blur(1px)",
+                    }}
+                  />
+                )}
                 <h2 className="h2Title w-[225px]">
                   CALIDAD <br /> DE VIDEO NITIDA
                 </h2>
