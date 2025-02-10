@@ -1,10 +1,11 @@
 import React from "react";
 import Layout from "../components/Layout";
+import Faqs from "../components/Faqs/faqs.js"
 const Ayuda = () => {
   return (
     <>
       <Layout>
-        <div>Ayuda</div>
+        <Faqs />
       </Layout>
     </>
   );
