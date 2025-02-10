@@ -53,7 +53,7 @@ const ScoutinPlay = () => {
             >
               <div className="flex flex-row items-center px-2">
                 <img src={Tiktok} alt="Tiktok" className="w-6 h-6" />
-                <p className="buttonText ml-4">Tiktok</p>
+                <p className="buttonText hidden md:block ml-4">Tiktok</p>
               </div>
             </Button>
 
@@ -64,7 +64,7 @@ const ScoutinPlay = () => {
             >
               <div className="flex flex-row items-center px-2">
                 <img src={Instagram} alt="Instagram" className="w-6 h-6" />
-                <p className="buttonText ml-4">Instagram</p>
+                <p className="buttonText hidden md:block ml-4">Instagram</p>
               </div>
             </Button>
 
@@ -75,7 +75,7 @@ const ScoutinPlay = () => {
             >
               <div className="flex flex-row items-center px-2">
                 <img src={Youtube} alt="Youtube" className="w-6 h-6" />
-                <p className="buttonText ml-4">Youtube</p>
+                <p className="buttonText hidden md:block ml-4">Youtube</p>
               </div>
             </Button>
           </div>

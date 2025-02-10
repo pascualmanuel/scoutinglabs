@@ -161,8 +161,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-internal-autofill-selected {
   -webkit-box-shadow: 0 0 0 1000px #0f0d19 inset !important;
-  -webkit-text-fill-color: white !important;
-  caret-color: white !important; /* Color del cursor igual al texto */
+  -webkit-text-fill-color: #c7cbd6 !important;
+  caret-color: #c7cbd6 !important; /* Color del cursor igual al texto */
 }
 
 .react-international-phone-input {
@@ -210,8 +210,7 @@ input {
 ul.react-international-phone-country-selector-dropdown:focus-visible {
   outline: none !important;
   box-shadow: none !important;
-  /* background-color: #0f0d19; */
-  /* color: white; */
+
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
 }
