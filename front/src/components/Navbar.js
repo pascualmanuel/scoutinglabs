@@ -44,7 +44,7 @@ const Navbar = () => {
     { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
     // { path: "/becas/", label: "Becas", position: 200 },
     { path: "/suscripciones/", label: "Suscripciones", position: 300 },
-    { path: "/ayuda/", label: "Ayuda", position: 300 },
+    { path: "/ayuda/", label: "Ayuda!", position: 300 },
   ];
 
   const location = useLocation();
@@ -441,6 +441,13 @@ const Navbar = () => {
               onClick={closeMenu}
             >
               NOSOTROS
+            </Link>
+            <Link
+              to="/ayuda"
+              className="text-white py-3 px-5 h2Title"
+              onClick={closeMenu}
+            >
+              ayuda
             </Link>
 
             <div className="pt-11 flex justify-center w-screen ">
