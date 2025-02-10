@@ -188,6 +188,11 @@ input:-internal-autofill-selected {
 
 .react-international-phone-input-container {
   color: #a2a2a2 !important;
+  font-family: "Aeonik", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 input {
@@ -209,4 +214,17 @@ ul.react-international-phone-country-selector-dropdown:focus-visible {
   /* color: white; */
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+}
+
+.button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: "Aeonik", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  color: #c7cbd6 !important;
 }

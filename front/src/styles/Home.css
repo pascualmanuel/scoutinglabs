@@ -391,3 +391,126 @@ td {
 th {
   border: solid 1px #eaeaea;
 }
+
+/* FAQ.css */
+
+.faq-item {
+  border: 1px solid #434652;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 24px;
+  cursor: pointer;
+  padding-bottom: 40px;
+}
+
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-left {
+  display: flex;
+  align-items: center;
+}
+
+.faq-number {
+  width: 45px;
+  height: 45px;
+  color: #0057be;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  font-size: 14px;
+  border: #0057be solid 1px;
+}
+
+.faq-right {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  transition: transform 0.3s ease;
+}
+
+/* .faq-header:hover .faq-right {
+  transform: rotate(45deg);
+} */
+
+.faq-answer {
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 0.5s ease; /* Smooth open/close effect */
+}
+
+.faq-answer-content {
+}
+
+/* Contact.css */
+
+.contact-page {
+  margin: 0 auto;
+  padding: 56px 62px;
+  background: #ffffff;
+  box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  width: 100%;
+  height: 55px;
+  border: none;
+  border-bottom: 1px solid #8d9098;
+  margin-bottom: 20px;
+  border-radius: 0px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.form-field:focus {
+  border-bottom-color: #021e5f;
+}
+
+.message-field {
+  height: auto;
+  min-height: 55px;
+}
+
+.submit-button:hover {
+  background-color: #003f8a;
+}
+.custom-radio {
+  appearance: none;
+  width: 16px; /* Ajusta el tamaño del radio button */
+  height: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-radio:checked {
+  background-color: white;
+  border: none;
+}
+
+.custom-radio:checked::after {
+  content: "";
+  display: block;
+  width: 13px; /* Ajusta el tamaño del SVG */
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 14" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.90137C0 5.17746 0.684819 3.52416 1.90381 2.30517C3.12279 1.08619 4.77609 0.401367 6.5 0.401367C8.22391 0.401367 9.87721 1.08619 11.0962 2.30517C12.3152 3.52416 13 5.17746 13 6.90137C13 8.62527 12.3152 10.2786 11.0962 11.4976C9.87721 12.7165 8.22391 13.4014 6.5 13.4014C4.77609 13.4014 3.12279 12.7165 1.90381 11.4976C0.684819 10.2786 0 8.62527 0 6.90137H0ZM6.12907 9.68337L9.87133 5.0051L9.19533 4.4643L6.00427 8.45183L3.744 6.56857L3.18933 7.23417L6.12907 9.68423V9.68337Z" fill="%23161c2d"/></svg>');
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
