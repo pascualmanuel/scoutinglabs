@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import countries from "country-list";
-import "../styles/global.css";
+
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import Button from "./Button";
+import Button from "../Button";
 function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -69,7 +69,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="max-w-[630px] mx-auto p-6  rounded-lg">
+    <div className="max-w-[] mx-auto  rounded-lg">
       {submitted ? (
         <div className="p-4 bg-green-100 text-green-700 rounded-md body2">
           ✓ Mensaje enviado con éxito
