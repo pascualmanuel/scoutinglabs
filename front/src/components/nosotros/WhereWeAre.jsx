@@ -81,7 +81,6 @@ const WhereWeAre = () => {
                 src={`https://flagcdn.com/${item.countryCode}.svg`}
                 className="w-full h-full object-cover rounded-full"
                 alt="Ukraine"
-                cla
               />
             </div>
             <p className="body2 mt-3"> {item.country}</p>
