@@ -8,13 +8,49 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
   useEffect(() => {
     document.title = "Scouting Labs - Ayuda";
   }, []);
+
+  const getEmbedUrl = (url) => {
+    if (!url) return "";
+
+    // YouTube - formato largo: https://www.youtube.com/watch?v=VIDEO_ID
+    if (url.includes("youtube.com/watch?v=")) {
+      const videoId = new URL(url).searchParams.get("v");
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // YouTube - formato corto: https://youtu.be/VIDEO_ID
+    if (url.includes("youtu.be/")) {
+      const parts = url.split("/");
+      const videoId = parts[parts.length - 1];
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+
+    // Vimeo: https://vimeo.com/VIDEO_ID
+    if (url.includes("vimeo.com/")) {
+      const parts = url.split("/");
+      const videoId = parts[parts.length - 1];
+      return `https://player.vimeo.com/video/${videoId}`;
+    }
+
+    // Si el link no es de YouTube ni Vimeo, se devuelve tal cual
+    return url;
+  };
+
+  // console.log(answerRef.current.scrollHeight + 50);
+
   return (
     <>
-      <div className="faq-item select-none " onClick={() => setIsOpen(!isOpen)}>
-        <div className="faq-header mb-[-20px]  ">
+      {/* mb-[80px] md:mb-[180px]  mt-14 md:mt-[100px] */}
+      <div
+        className="faq-item select-none p-6 xll:pb-10 "
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="faq-header xll:!mb-[-20px]  ">
           <div className="faq-left">
             {/* <div className="faq-number subH">{number}</div> */}
-            <div className="faq-title subH w-[220px] sm:w-auto">{title}</div>
+            <div className="faq-title subH w-[260px] sm:w-auto lg:max-w-[400px] mg:max-w-[500px]">
+              {title}
+            </div>
           </div>
           <div className="faq-right">
             <div
@@ -43,10 +79,26 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
             maxHeight: isOpen ? `${answerRef.current.scrollHeight}px` : "0px",
           }}
         >
-          <div className="faq-answer-content  flex justify-between">
-            <p className="body2 text-grey2 w-[500px] mt-11">{answer}</p>
+          <div className="faq-answer-content flex flex-col  justify-between lg:flex-row">
+            <p className="body2 text-grey2 lg:max-w-[400px] mg:max-w-[420px] mt-11 mb-8">
+              {answer}
+            </p>
             <div>
-              <img className="mr-[100px] mt-" src={mediaSrc} />
+              {mediaSrc && mediaSrc.trim() !== "" && (
+                <div
+                  className=" w-[100%] h-[auto] max-w-[415px] ssm:h-[235px] m-auto 
+                lg:mr-[160px] xl:mr-10 xl:w-[415px] xl:h-[235px] "
+                >
+                  <iframe
+                    src={getEmbedUrl(mediaSrc)}
+                    frameBorder="0"
+                    allow=""
+                    allowFullScreen
+                    className="object-fit w-full h-full rounded-lg"
+                    title={`Video: ${title}`}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -66,7 +118,7 @@ const FAQPage = () => {
     const fetchFAQs = async () => {
       try {
         const response = await fetch(
-          "http://localhost:1337/api/faqs?populate=*"
+          `${process.env.REACT_APP_API_URL}/api/faqs?populate=*`
         ); // Reemplaza con tu URL real
         const json = await response.json();
         // Se asume que la respuesta tiene una propiedad "data" que contiene el array de FAQs
@@ -84,7 +136,8 @@ const FAQPage = () => {
   // Filtramos los FAQs según la categoría seleccionada
   const filteredFaqs = faqs.filter((faq) => faq.category === selectedOption);
 
-  console.log(selectedOption);
+  // console.log(selectedOption);
+  console.log(filteredFaqs);
   //
   return (
     <div className="faq-page max-w-[1360px] m-auto">
