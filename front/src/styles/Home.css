@@ -253,7 +253,7 @@
   animation: scroll 90s linear infinite;
   display: flex;
   width: calc(
-    4 * 1500px
+    3 * 1500px
   ); /* Make it twice the slider width to enable looping */
 }
 
