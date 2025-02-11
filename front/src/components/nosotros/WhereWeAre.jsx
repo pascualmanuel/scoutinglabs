@@ -64,8 +64,8 @@ const WhereWeAre = () => {
   return (
     <>
       <div>
-        <h3 className="pb-10 pt-40 h1Title text-center w-full">
-          estamos en <span className="text-skyBlue"> + 13 paises</span>
+        <h3 className="pb-10 pt-40 h1Title text-center m-auto w-[300px] ssm:w-full ">
+          estamos en <span className="text-clearBlue"> +13 paises</span>
         </h3>
 
         {/* <img src="https://flagcdn.com/ar.svg" width="30" alt="Ukraine" /> */}

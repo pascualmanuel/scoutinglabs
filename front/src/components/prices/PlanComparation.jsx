@@ -201,7 +201,7 @@ const PlanComparation = () => {
                     <ParseMarkdown text={item?.whatInclude} />
                   </p>
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 select-none">
                   {item.plan_addons?.map((addon) => (
                     <div
                       key={addon.id}
@@ -212,17 +212,40 @@ const PlanComparation = () => {
                       ${item.featuredCard ? "bg-[#ffffff1a]" : "bg-[#96979b1a]"}
                       ${
                         selectedAddons.includes(`${item.id}-${addon.id}`)
-                          ? "bg-gray-300"
+                          ? ""
                           : ""
                       }
                     `}
                     >
-                      <div className="flex flex-col justify-around px-2">
+                      <div className="flex flex-col justify-around px-2 select-none">
                         <span className="title">{addon.addonName}</span>
                       </div>
-                      <div className="flex flex-col justify-around px-2">
+                      <div className="flex flex-col justify-around px-2 select-none items-end">
                         <span>{addon.addonPrice}</span>
-                        <span> Radiocheck</span>
+                        <div
+                          className={`w-[17px] h-[17px] border-2  rounded-full flex items-center justify-center transition-all ${
+                            selectedAddons.includes(`${item.id}-${addon.id}`)
+                              ? item.featuredCard
+                                ? "border-white"
+                                : "border-skyBlue"
+                              : ""
+                          } 
+                               ${
+                                 item.featuredCard
+                                   ? "border-grey0"
+                                   : "border-grey1"
+                               }`}
+                        >
+                          <span
+                            className={`w-[9px] h-[9px] rounded-full transition-all ${
+                              selectedAddons.includes(`${item.id}-${addon.id}`)
+                                ? item.featuredCard
+                                  ? "bg-white"
+                                  : "bg-skyBlue"
+                                : ""
+                            }`}
+                          />
+                        </div>
                       </div>
                     </div>
                   ))}
