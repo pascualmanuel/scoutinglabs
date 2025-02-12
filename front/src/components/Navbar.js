@@ -12,17 +12,24 @@ const Navbar = () => {
   const [locale, setLocale] = useState("ES"); // Idioma por defecto
   const { width, height } = useWindowSize(); // Destructure window size from the hook
 
-  let mLeft = 192;
-  // console.log(windowSize.width);
+  const [mLeft, setMLeft] = useState(192);
 
-  // Usar width para las comparaciones
-  if (width < 1024) {
-    mLeft = 0;
-  } else if (width < 1300) {
-    mLeft = 80;
-  } else if (width < 1400) {
-    mLeft = 192;
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      let newMLeft = 192;
+
+      if (width < 1024) newMLeft = 0;
+      else if (width < 1300) newMLeft = 80;
+      else if (width < 1400) newMLeft = 192;
+
+      setMLeft(newMLeft);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || "ES";
@@ -39,13 +46,13 @@ const Navbar = () => {
     setLanguageOpen(false); // Cerrar el dropdown
   };
 
-  const menuItems = [
-    { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
-    { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
-    // { path: "/becas/", label: "Becas", position: 200 },
-    { path: "/suscripciones/", label: "Suscripciones", position: 300 },
-    { path: "/ayuda/", label: "Ayuda!", position: 300 },
-  ];
+  // const menuItems = [
+  //   { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
+  //   { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
+  //
+  //   { path: "/suscripciones/", label: "Suscripciones", position: 300 },
+  //   { path: "/ayuda/", label: "Ayuda!", position: 300 },
+  // ];
 
   const location = useLocation();
 

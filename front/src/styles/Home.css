@@ -19,7 +19,7 @@
     linear-gradient(180deg, #03000d 0%, rgba(3, 0, 13, 0.7) 45.5%, #03000d 100%),
     url("../assets/veocam-bg.webp");
   height: 750px;
-  background-size: contain, cover; /* Ajusta el tamaño del ellipse y de la imagen */
+  background-size: cover, cover; /* Ajusta el tamaño del ellipse y de la imagen */
   background-position: center center, center, center; /* Ubica cada capa */
   background-repeat: no-repeat; /* Evita repeticiones */
   transform: scaleY(1); /* Invierte la imagen */
@@ -437,4 +437,13 @@ th {
 }
 
 .faq-answer-content {
+}
+
+.transparent-bold {
+  font-weight: bold;
+  color: transparent;
+  -webkit-text-stroke: 1px #434652; /* For Safari/Chrome */
+  text-stroke: 1px #434652; /* Standard property */
+  font-size: 418px;
+  line-height: 285px;
 }
