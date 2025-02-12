@@ -1,19 +1,21 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface CategoruPrueba extends Struct.ComponentSchema {
-  collectionName: 'components_categoru_pruebas';
+export interface LinksLinkItem extends Struct.ComponentSchema {
+  collectionName: 'components_links_link_items';
   info: {
-    description: '';
-    displayName: 'prueba';
-    icon: 'alien';
+    displayName: 'LinkItem';
+    icon: 'link';
   };
-  attributes: {};
+  attributes: {
+    link: Schema.Attribute.String;
+    texto: Schema.Attribute.String;
+  };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'categoru.prueba': CategoruPrueba;
+      'links.link-item': LinksLinkItem;
     }
   }
 }

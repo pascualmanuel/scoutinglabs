@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_links_link_items",
+  "info": {
+    "displayName": "LinkItem",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "texto": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
