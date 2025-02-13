@@ -75,13 +75,13 @@ const PlanComparation = () => {
   };
 
   useEffect(() => {
-    console.log("Addons seleccionados:", selectedAddons);
-    console.log("Total actual:", totalPrice);
+    // console.log("Addons seleccionados:", selectedAddons);
+    // console.log("Total actual:", totalPrice);
   }, [selectedAddons, totalPrice]);
 
   const handleWhatsAppClick = (plan) => {
     // 1. Obtener addons seleccionados para ESTE plan específico
-    console.log(plan, "plan");
+    // console.log(plan, "plan");
     const addonsForPlan =
       plan.plan_addons?.filter((addon) =>
         selectedAddons.includes(`${plan.id}-${addon.id}`)
