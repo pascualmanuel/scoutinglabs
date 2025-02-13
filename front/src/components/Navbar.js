@@ -183,7 +183,7 @@ const Navbar = () => {
     }
   }, [lastScrollY]);
 
-  // console.log(lastScrollY);
+
 
   return (
     <div
