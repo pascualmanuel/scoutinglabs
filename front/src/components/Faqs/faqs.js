@@ -32,11 +32,8 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
       return `https://player.vimeo.com/video/${videoId}`;
     }
 
-    // Si el link no es de YouTube ni Vimeo, se devuelve tal cual
     return url;
   };
-
-  // console.log(answerRef.current.scrollHeight + 50);
 
   return (
     <>
@@ -133,12 +130,8 @@ const FAQPage = () => {
     fetchFAQs();
   }, []);
 
-  // Filtramos los FAQs según la categoría seleccionada
   const filteredFaqs = faqs.filter((faq) => faq.category === selectedOption);
 
-  // console.log(selectedOption);
-  console.log(filteredFaqs);
-  //
   return (
     <div className="faq-page max-w-[1360px] m-auto">
       <div className="flex justify-center my-24">
