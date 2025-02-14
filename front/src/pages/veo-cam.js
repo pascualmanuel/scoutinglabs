@@ -102,6 +102,7 @@ const VeoCam = () => {
                   text={"Recibir cotización"}
                   width="w-[90vw] sm:w-[225px]"
                   bg={"rgba(255, 255, 255, 0.1)"}
+                  link={"/suscripciones#cotizacion"}
                 />
               </div>
             </div>

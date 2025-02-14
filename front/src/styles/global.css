@@ -10,7 +10,9 @@ body {
 .grotzec {
   font-family: "Grotzec", sans-serif; /* Asegúrate de que el nombre coincida con el definido en @font-face */
 }
-
+html {
+  scroll-behavior: smooth;
+}
 .aeonik {
   font-family: "Aeonik", sans-serif;
 }
