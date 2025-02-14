@@ -12,7 +12,31 @@ import VeoLogo from "../../assets/icons/veo-logo.svg";
 import Six from "../../assets/icons/six.svg";
 import Button from "../Button.js";
 import Pablo from "../../assets/pablo.png";
+import Popup from "./Popup.js";
+import { useEffect, useState, useRef } from "react";
+
 const HomeHero = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    // Check if the popup has already been closed before
+    const hasPopupClosed = localStorage.getItem("popupClosed");
+
+    if (!hasPopupClosed) {
+      // Show the popup after 3 seconds
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 3000);
+
+      return () => clearTimeout(timer); // Cleanup timeout if component unmounts
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    localStorage.setItem("popupClosed", "true"); // Store in localStorage
+  };
+
   return (
     <>
       <section className="relative w-full  h-[100vh] overflow-hidden ">
@@ -83,26 +107,11 @@ const HomeHero = () => {
                 </div>
               </span>
             </a>
-            {/* <a
-              href="#"
-              className="flex group items-center gap-2 subH2 md:border-t md:border-[#434652] md:pt-4    "
-            >
-              BECAS PARA ESTUDIAR EN EL EXTERIOR{" "}
-              <span className="">
-                <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                  <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                    <img src={ArrowIcon} className="" />
-                  </div>
-
-                  <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                    <img src={ArrowIcon} className="" />
-                  </div>
-                </div>
-              </span>
-            </a> */}
           </div>
         </div>
+        {showPopup && <Popup onClose={handleClosePopup} />}
       </section>
+
       <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between  max-w-screen-2xl m-auto">
         {/* <div> */}
         <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-28 relative llg:mr-[70px] 2xl:m">
@@ -144,10 +153,6 @@ const HomeHero = () => {
         </div>
         {/* </div> */}
       </div>
-
-      {/* <div className="">
-        <h1 className="transparent-bold grotzec">6</h1>
-      </div> */}
     </>
   );
 };
