@@ -15,6 +15,8 @@ const PlanComparation = () => {
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
   const [planForWhatsApp, setPlanForWhatsApp] = useState(null);
   const [selectedPlanType, setSelectedPlanType] = useState("mensual");
+  const [addonsForWhatsApp, setAddonsForWhatsApp] = useState(null);
+
   const whatsappWindowRef = useRef(null); // Ref para la ventana de WhatsApp
 
   const buttonsRef = useRef([]);
@@ -116,11 +118,22 @@ const PlanComparation = () => {
   //   window.open(url, "_blank");
   // };
   const handleWhatsAppClick = (plan) => {
-    // Abre la ventana en blanco de forma síncrona
-    // whatsappWindowRef.current = window.open("", "_blank");
+    const addonsForPlan =
+      plan.plan_addons?.filter((addon) =>
+        selectedAddons.includes(`${plan.id}-${addon.id}`)
+      ) || [];
+
+    setAddonsForWhatsApp(addonsForPlan);
     setPlanForWhatsApp(plan);
     setShowWhatsAppPopup(true);
   };
+
+  const sortedSubscriptions = [...suscriptions].sort((a, b) => {
+    if (a.featuredCard) return -1; // Featured comes first
+    if (b.featuredCard) return 1;
+    return 0; // Keep other cards in original order
+  });
+
   return (
     <>
       <div className=" text-center text-iBlue px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
@@ -167,12 +180,16 @@ const PlanComparation = () => {
       <div className="pb-[80px] md:pb-[180px] md:max-w-[1536px]  mt-14 md:mt-[75px] m-auto">
         <div className="overflow-x-auto  relative">
           <div className="mt-10 flex flex-row  justify-evenly max-w-screen-2xl m-auto w-fit mg:w-[auto] px-6 mg:px-0 gap-4 mg:gap-0">
-            {suscriptions.map((item, index) => (
+            {sortedSubscriptions.map((item, index) => (
               <div
                 key={index}
                 className={`relative box-sc flex flex-col items-center  h-[600px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
-                ${item.featuredCard ? "" : ""} `}
+                 ${
+                   item.featuredCard
+                     ? "l-gradient-starred text-white order-0 md:order-2"
+                     : `order-${index + 2}`
+                 } `}
               >
                 {item.featuredCard && (
                   <div className="absolute top-[-25px] z-[1] w-[82%] h-[25px] bg-white rounded-t-lg flex items-center justify-center text-iBlue text-[10px] aeonik">
@@ -296,6 +313,7 @@ const PlanComparation = () => {
             {showWhatsAppPopup && planForWhatsApp && (
               <WhatsAppPopup
                 plan={planForWhatsApp}
+                addons={addonsForWhatsApp}
                 selectedPlanType={selectedPlanType}
                 onClose={() => setShowWhatsAppPopup(false)}
                 whatsappWindowRef={whatsappWindowRef} // Pasamos el ref al popup

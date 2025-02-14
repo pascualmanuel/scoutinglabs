@@ -66,7 +66,7 @@ const Suscripciones = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#ffff]">
+        <div className="bg-[#ffff]" id="cotizacion">
           <PlanComparation />
         </div>
         <div className="bg-white">
