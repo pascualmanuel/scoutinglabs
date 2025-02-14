@@ -5,15 +5,19 @@ import WhatsAppDarkIcon from "../../assets/icons/wapp_black.svg";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
+import WhatsAppPopup from "../contact/WhatsAppPopup";
 const PlanComparation = () => {
   const [suscriptions, setSuscriptions] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
-
   const [selectedPlan, setSelectedPlan] = useState("anual");
   const [thumbPosition, setThumbPosition] = useState({ width: 0, left: 0 });
-  const buttonsRef = useRef([]);
+  const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
+  const [planForWhatsApp, setPlanForWhatsApp] = useState(null);
+  const [selectedPlanType, setSelectedPlanType] = useState("mensual");
+  const whatsappWindowRef = useRef(null); // Ref para la ventana de WhatsApp
 
+  const buttonsRef = useRef([]);
   // Obtener posición del botón activo
   useEffect(() => {
     const index = ["mensual", "semestral", "anual"].indexOf(selectedPlan);
@@ -79,37 +83,43 @@ const PlanComparation = () => {
     // console.log("Total actual:", totalPrice);
   }, [selectedAddons, totalPrice]);
 
+  // const handleWhatsAppClick = (plan) => {
+  //   // 1. Obtener addons seleccionados para ESTE plan específico
+  //   // console.log(plan, "plan");
+  //   const addonsForPlan =
+  //     plan.plan_addons?.filter((addon) =>
+  //       selectedAddons.includes(`${plan.id}-${addon.id}`)
+  //     ) || [];
+
+  //   // 2. Mapear periodicidad a formato legible
+  //   const periodicidadMap = {
+  //     anual: "Anual",
+  //     semestral: "Semestral",
+  //     mensual: "Mensual",
+  //   };
+
+  //   // 3. Construir mensaje
+  //   const mensaje = `Hola, quiero suscribirme al plan *${plan?.title} (${
+  //     periodicidadMap[selectedPlan]
+  //   })* por USD *${calculatePlanTotal(plan).toFixed(
+  //     2
+  //   )}/mes*.\n\nAddons incluidos: ${
+  //     addonsForPlan.length > 0
+  //       ? addonsForPlan.map((a) => a.addonName + a.addonPrice).join(", ")
+  //       : "Ninguno"
+  //   }`;
+
+  //   // 4. Codificar y abrir enlace
+  //   const url = `https://wa.me/5491151632960?text=${encodeURIComponent(
+  //     mensaje
+  //   )}`;
+  //   window.open(url, "_blank");
+  // };
   const handleWhatsAppClick = (plan) => {
-    // 1. Obtener addons seleccionados para ESTE plan específico
-    // console.log(plan, "plan");
-    const addonsForPlan =
-      plan.plan_addons?.filter((addon) =>
-        selectedAddons.includes(`${plan.id}-${addon.id}`)
-      ) || [];
-
-    // 2. Mapear periodicidad a formato legible
-    const periodicidadMap = {
-      anual: "Anual",
-      semestral: "Semestral",
-      mensual: "Mensual",
-    };
-
-    // 3. Construir mensaje
-    const mensaje = `Hola, quiero suscribirme al plan *${plan?.title} (${
-      periodicidadMap[selectedPlan]
-    })* por USD *${calculatePlanTotal(plan).toFixed(
-      2
-    )}/mes*.\n\nAddons incluidos: ${
-      addonsForPlan.length > 0
-        ? addonsForPlan.map((a) => a.addonName + a.addonPrice).join(", ")
-        : "Ninguno"
-    }`;
-
-    // 4. Codificar y abrir enlace
-    const url = `https://wa.me/5491151632960?text=${encodeURIComponent(
-      mensaje
-    )}`;
-    window.open(url, "_blank");
+    // Abre la ventana en blanco de forma síncrona
+    // whatsappWindowRef.current = window.open("", "_blank");
+    setPlanForWhatsApp(plan);
+    setShowWhatsAppPopup(true);
   };
   return (
     <>
@@ -162,11 +172,7 @@ const PlanComparation = () => {
                 key={index}
                 className={`relative box-sc flex flex-col items-center  h-[600px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
-                ${
-                  item.featuredCard
-                    ? "order-1 md:order-2"
-                    : "order-2 md:order-2"
-                } `}
+                ${item.featuredCard ? "" : ""} `}
               >
                 {item.featuredCard && (
                   <div className="absolute top-[-25px] z-[1] w-[82%] h-[25px] bg-white rounded-t-lg flex items-center justify-center text-iBlue text-[10px] aeonik">
@@ -286,6 +292,15 @@ const PlanComparation = () => {
                 </div>
               </div>
             ))}
+
+            {showWhatsAppPopup && planForWhatsApp && (
+              <WhatsAppPopup
+                plan={planForWhatsApp}
+                selectedPlanType={selectedPlanType}
+                onClose={() => setShowWhatsAppPopup(false)}
+                whatsappWindowRef={whatsappWindowRef} // Pasamos el ref al popup
+              />
+            )}
           </div>
         </div>
       </div>
