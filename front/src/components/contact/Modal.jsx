@@ -6,7 +6,7 @@ const Modal = ({ children, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black opacity-50"
+        className="absolute inset-0 bg-black opacity-50 transition"
         onClick={onClose}
       ></div>
       {/* Contenido del Modal */}

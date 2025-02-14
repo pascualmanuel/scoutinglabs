@@ -5,13 +5,22 @@ import countries from "country-list";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
-function ContactForm({ showMessage = true, onSuccess }) {
+function ContactForm({
+  selectedPlanType,
+  addons,
+  selectedPlan,
+  showMessage = true,
+  onSuccess,
+}) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     country: "",
     message: "",
+    selectedPlan: selectedPlan,
+    addons: addons,
+    selectedPlanType: selectedPlanType,
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);

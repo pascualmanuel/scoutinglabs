@@ -8,7 +8,9 @@ const WhatsAppPopup = ({
   selectedPlanType,
   onClose,
   whatsappWindowRef,
+  addons,
 }) => {
+  console.log(addons, "selectedAddons");
   const handleFormSuccess = (formData) => {
     console.log("Formulario enviado:", formData);
 
@@ -48,12 +50,22 @@ const WhatsAppPopup = ({
     onClose();
   };
 
+  let selectedPlan = plan.title;
+
+  //   let selectedAddon =
+
   return (
     <Modal onClose={onClose}>
       <h2 className="subH mb-4">
         Completa el formulario y recibe tu cotizacion
       </h2>
-      <ContactForm onSuccess={handleFormSuccess} showMessage={false} />
+      <ContactForm
+        onSuccess={handleFormSuccess}
+        selectedPlanType={selectedPlanType}
+        selectedPlan={selectedPlan}
+        addons={addons}
+        showMessage={false}
+      />
     </Modal>
   );
 };
