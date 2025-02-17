@@ -107,7 +107,7 @@ html {
 }
 
 .loaderFont {
-  font-family: "Thunder";
+  font-family: "Thunder", sans-serif;
   font-style: italic;
   font-weight: 700;
   font-size: 80px;

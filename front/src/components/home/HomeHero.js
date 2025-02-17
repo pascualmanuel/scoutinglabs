@@ -56,9 +56,9 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
     const handleResize = () => {
       // Si el ancho de la ventana es menor o igual a 768px (dispositivo móvil)
       if (window.innerWidth <= 768) {
-        setHola(false); // Cambiar a `false` en dispositivos móviles
+        setHola(true); // Cambiar a `false` en dispositivos móviles
       } else {
-        setHola(true); // Cambiar a `true` en escritorio
+        setHola(false); // Cambiar a `true` en escritorio
       }
     };
 
