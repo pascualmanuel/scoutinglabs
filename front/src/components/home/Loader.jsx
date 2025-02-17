@@ -49,7 +49,7 @@ const Loader = ({ fadeOut }) => {
         zIndex: 9999,
       }}
     >
-      <h2 className="loaderFont">{`[${progress}%]`}</h2>
+      <h2 className="loaderFont mb-[155px] md:mb-0 ">{`[${progress}%]`}</h2>
     </div>
   );
 };
