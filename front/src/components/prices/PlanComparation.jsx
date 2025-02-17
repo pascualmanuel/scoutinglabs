@@ -128,11 +128,11 @@ const PlanComparation = () => {
     setShowWhatsAppPopup(true);
   };
 
-  const sortedSubscriptions = [...suscriptions].sort((a, b) => {
-    if (a.featuredCard) return -1; // Featured comes first
-    if (b.featuredCard) return 1;
-    return 0; // Keep other cards in original order
-  });
+  // const sortedSubscriptions = [...suscriptions].sort((a, b) => {
+  //   if (a.featuredCard) return -1; // Featured comes first
+  //   if (b.featuredCard) return 1;
+  //   return 0; // Keep other cards in original order
+  // });
 
   return (
     <>
@@ -180,15 +180,15 @@ const PlanComparation = () => {
       <div className="pb-[80px] md:pb-[180px] md:max-w-[1536px]  mt-14 md:mt-[75px] m-auto">
         <div className="overflow-x-auto  relative">
           <div className="mt-10 flex flex-row  justify-evenly max-w-screen-2xl m-auto w-fit mg:w-[auto] px-6 mg:px-0 gap-4 mg:gap-0">
-            {sortedSubscriptions.map((item, index) => (
+            {suscriptions.map((item, index) => (
               <div
                 key={index}
                 className={`relative box-sc flex flex-col items-center  h-[600px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
                  ${
                    item.featuredCard
-                     ? "l-gradient-starred text-white order-0 md:order-2"
-                     : `order-${index + 2}`
+                     ? "l-gradient-starred text-white order-1 md:order-2"
+                     : `order-4 md:order-${index + 2}`
                  } `}
               >
                 {item.featuredCard && (

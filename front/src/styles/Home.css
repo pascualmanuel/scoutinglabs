@@ -447,3 +447,15 @@ th {
   font-size: 418px;
   line-height: 285px;
 }
+
+/* Clase que controla la transición del fade */
+.loader {
+  opacity: 1;
+  transition: opacity 500ms ease-out;
+}
+
+.loader.fade-out {
+  opacity: 0; /* Hacer el loader invisible */
+}
+
+/* Asegura que no se pueda hacer scroll mientras el loader está visible */
