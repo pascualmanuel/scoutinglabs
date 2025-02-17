@@ -26,7 +26,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
       // Show the popup after 3 seconds
       const timer = setTimeout(() => {
         setShowPopup(true);
-      }, 3000);
+      }, 5700);
 
       return () => clearTimeout(timer); // Cleanup timeout if component unmounts
     }
@@ -50,6 +50,30 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
     }
   }, [playVideo]); // Solo se ejecuta cuando `playVideo` cambia a `true`
 
+  const [hola, setHola] = useState(true); // Valor por defecto para escritorio
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Si el ancho de la ventana es menor o igual a 768px (dispositivo móvil)
+      if (window.innerWidth <= 768) {
+        setHola(false); // Cambiar a `false` en dispositivos móviles
+      } else {
+        setHola(true); // Cambiar a `true` en escritorio
+      }
+    };
+
+    // Ejecutar la función de resize al cargar el componente
+    handleResize();
+
+    // Agregar un event listener para cambios en el tamaño de la ventana
+    window.addEventListener("resize", handleResize);
+
+    // Limpiar el event listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Este efecto solo se ejecuta una vez al cargar el componente
+
   return (
     <>
       <section className="relative w-full  h-[100vh] overflow-hidden ">
@@ -57,7 +81,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
         <video
           ref={videoRef} // Usamos la referencia aquí
           className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay={false}
+          autoPlay={hola}
           loop={true}
           muted={true}
           playsInline={true}

@@ -457,5 +457,3 @@ th {
 .loader.fade-out {
   opacity: 0; /* Hacer el loader invisible */
 }
-
-/* Asegura que no se pueda hacer scroll mientras el loader está visible */
