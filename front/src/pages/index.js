@@ -9,8 +9,10 @@ import HomeHero from "../components/home/HomeHero.js";
 import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
 import Loader from "../components/home/Loader.jsx";
+
 const HomePage = ({ data }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  console.log(videoLoaded);
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [videoError, setVideoError] = useState(false);
@@ -26,22 +28,28 @@ const HomePage = ({ data }) => {
   };
 
   useEffect(() => {
-    const loaderShown = localStorage.getItem("a");
+    const loaderShown = localStorage.getItem("loaderShown");
 
-    const timeout = setTimeout(() => {
-      setFadeOut(true); // Activamos el fadeout
-      setLoaderVisible(false); // Ocultamos el loader
-      localStorage.setItem("loaderShown", "true");
+    if (!loaderShown) {
+      setFadeOut(false);
+      setLoaderVisible(true); // Asegúrate de mostrar el loader al inicio
+    } else {
+      setFadeOut(true); // Ya se mostró, activar el fadeOut
+      setLoaderVisible(false); // Ocultar el loader inmediatamente
       setVideoPlaying(true); // Iniciamos el video
-    }, 3500); // Tiempo de 3.5 segundos para el loader
-
-    if (loaderShown) {
-      setFadeOut(true);
-      setLoaderVisible(false);
-      setVideoPlaying(true);
     }
 
-    return () => clearTimeout(timeout);
+    const timeout = setTimeout(() => {
+      setFadeOut(true); // Activamos el fadeOut
+      localStorage.setItem("loaderShown", "true"); // Guardamos que ya se mostró
+      setVideoPlaying(true); // Iniciamos el video
+
+      setTimeout(() => {
+        setLoaderVisible(false); // Ocultamos el loader después de que el fadeOut se complete
+      }, 1000); // Este tiempo debe coincidir con la duración del fadeOut (ajustar según el efecto)
+    }, 3500); // Tiempo de 3.5 segundos para el loader
+
+    return () => clearTimeout(timeout); // Limpiar el timeout al desmontar el componente
   }, []);
 
   useEffect(() => {
@@ -55,7 +63,7 @@ const HomePage = ({ data }) => {
   return (
     <>
       {loaderVisible && <Loader fadeOut={fadeOut} />}
-      {/* El Loader se mantiene visible hasta 3.5 segundos */}
+
       <Layout>
         <Seo title="Scouting Labs" description="Scouting Labs home" />
         <HomeHero
