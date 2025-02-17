@@ -15,7 +15,7 @@ import Pablo from "../../assets/pablo.png";
 import Popup from "./Popup.js";
 import { useEffect, useState, useRef } from "react";
 
-const HomeHero = () => {
+const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -37,18 +37,34 @@ const HomeHero = () => {
     localStorage.setItem("popupClosed", "true"); // Store in localStorage
   };
 
+  const videoRef = useRef(null); // Creamos una referencia para el video
+
+  const handleVideoLoad = () => {
+    onVideoLoad(); // Llamamos a la función pasada como prop
+  };
+
+  // Reproducir el video si `playVideo` es `true`
+  useEffect(() => {
+    if (videoRef.current && playVideo) {
+      videoRef.current.play();
+    }
+  }, [playVideo]); // Solo se ejecuta cuando `playVideo` cambia a `true`
+
   return (
     <>
       <section className="relative w-full  h-[100vh] overflow-hidden ">
         {/* Video de fondo */}
         <video
+          ref={videoRef} // Usamos la referencia aquí
           className="absolute top-0 left-0 w-full h-full object-cover"
-          autoPlay={true}
+          autoPlay={false}
           loop={true}
           muted={true}
           playsInline={true}
+          onLoadedData={handleVideoLoad} // O usa onCanPlay si prefieres
           src={HeroVideo}
-        ></video>
+          onError={onError} // Para manejar errores de carga
+        />
 
         <div className="absolute inset-0 bg-gradient-to-t from-[#03000D] to-transparent"></div>
 
