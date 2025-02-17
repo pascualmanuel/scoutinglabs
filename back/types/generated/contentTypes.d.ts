@@ -508,7 +508,10 @@ export interface ApiSubscriptionPlanSubscriptionPlan
     >;
     publishedAt: Schema.Attribute.DateTime;
     semestralPrice: Schema.Attribute.String;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 15;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
