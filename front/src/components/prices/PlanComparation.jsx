@@ -183,7 +183,7 @@ const PlanComparation = () => {
             {suscriptions.map((item, index) => (
               <div
                 key={index}
-                className={`relative box-sc flex flex-col items-center  h-[600px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
+                className={`relative  flex flex-col items-center  min-h-[650px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
                  ${
                    item.featuredCard
@@ -196,42 +196,43 @@ const PlanComparation = () => {
                     Más popular
                   </div>
                 )}
-                <div className="flex items-center flex-col justify-evenly h-[230px]">
-                  <p
-                    className={`group flex items-center justify-between ${
-                      item.featuredCard ? "h2Title" : "subH"
-                    }`}
-                  >
-                    {item?.title}
-                  </p>
-                  <p className="body2 text-center">
-                    <ParseMarkdown text={item?.desc} />
-                  </p>
+                <div>
+                  <div className="flex items-center flex-col justify-evenly h-[230px]">
+                    <p
+                      className={`group flex items-center justify-between ${
+                        item.featuredCard ? "h2Title" : "subH"
+                      }`}
+                    >
+                      {item?.title}
+                    </p>
+                    <p className="body2 text-center">
+                      <ParseMarkdown text={item?.desc} />
+                    </p>
 
-                  <p className="aeonik font-thin text-base">
-                    desde USD&nbsp;
-                    <span className="font-bold text-[45px]">
-                      {calculatePlanTotal(item).toFixed()}
+                    <p className="aeonik font-thin text-base">
+                      desde USD&nbsp;
+                      <span className="font-bold text-[45px]">
+                        {calculatePlanTotal(item).toFixed()}
+                      </span>
+                      &nbsp;/mes
+                    </p>
+                  </div>
+                  <div className="w-full px-4">
+                    <span className="pb-2 text-sm aeonik font-bold">
+                      Incluye:
                     </span>
-                    &nbsp;/mes
-                  </p>
-                </div>
-                <div className="w-full px-4">
-                  <span className="pb-2 text-sm aeonik font-bold">
-                    Incluye:
-                  </span>
-                  <p className="text-xs">
-                    <ParseMarkdown text={item?.whatInclude} />
-                  </p>
-                </div>
-                <div className="mt-5 select-none">
-                  {item.plan_addons?.map((addon) => (
-                    <div
-                      key={addon.id}
-                      onClick={() =>
-                        handleAddonClick(item.id, addon.id, addon.addonPrice)
-                      } // item.id es el ID del plan padre
-                      className={`add-on text-xs w-[262px] mg:w-[248px] xll:w-[262px]  h-[65px] flex flex-row justify-between  rounded-lg mb-2 cursor-pointer
+                    <p className="text-xs">
+                      <ParseMarkdown text={item?.whatInclude} />
+                    </p>
+                  </div>
+                  <div className="mt-5 select-none">
+                    {item.plan_addons?.map((addon) => (
+                      <div
+                        key={addon.id}
+                        onClick={() =>
+                          handleAddonClick(item.id, addon.id, addon.addonPrice)
+                        } // item.id es el ID del plan padre
+                        className={`add-on text-xs  xll:w-[100%]  h-[65px] flex flex-row justify-between  rounded-lg mb-2 cursor-pointer
                       ${item.featuredCard ? "bg-[#ffffff1a]" : "bg-[#96979b1a]"}
                       ${
                         selectedAddons.includes(`${item.id}-${addon.id}`)
@@ -239,42 +240,45 @@ const PlanComparation = () => {
                           : ""
                       }
                     `}
-                    >
-                      <div className="flex flex-col justify-around px-2 select-none">
-                        <span className="title">{addon.addonName}</span>
-                      </div>
-                      <div className="flex flex-col justify-around px-2 select-none items-end">
-                        <span>{addon.addonPrice}</span>
-                        <div
-                          className={`w-[17px] h-[17px] border-2  rounded-full flex items-center justify-center transition-all ${
-                            selectedAddons.includes(`${item.id}-${addon.id}`)
-                              ? item.featuredCard
-                                ? "border-white"
-                                : "border-skyBlue"
-                              : ""
-                          } 
+                      >
+                        <div className="flex flex-col justify-around px-2 select-none">
+                          <span className="title">{addon.addonName}</span>
+                        </div>
+                        <div className="flex flex-col justify-around px-2 select-none items-end">
+                          <span>{addon.addonPrice}</span>
+                          <div
+                            className={`w-[17px] h-[17px] border-2  rounded-full flex items-center justify-center transition-all ${
+                              selectedAddons.includes(`${item.id}-${addon.id}`)
+                                ? item.featuredCard
+                                  ? "border-white"
+                                  : "border-skyBlue"
+                                : ""
+                            } 
                                ${
                                  item.featuredCard
                                    ? "border-grey0"
                                    : "border-grey1"
                                }`}
-                        >
-                          <span
-                            className={`w-[9px] h-[9px] rounded-full transition-all ${
-                              selectedAddons.includes(`${item.id}-${addon.id}`)
-                                ? item.featuredCard
-                                  ? "bg-white"
-                                  : "bg-skyBlue"
-                                : ""
-                            }`}
-                          />
+                          >
+                            <span
+                              className={`w-[9px] h-[9px] rounded-full transition-all ${
+                                selectedAddons.includes(
+                                  `${item.id}-${addon.id}`
+                                )
+                                  ? item.featuredCard
+                                    ? "bg-white"
+                                    : "bg-skyBlue"
+                                  : ""
+                              }`}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
                 <div
-                  className="my-5"
+                  className="my-5  h-full flex items-end"
                   onClick={() => handleWhatsAppClick(item)} // <-- Agrega esta línea
                 >
                   <Button

@@ -107,8 +107,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           </div>
 
           <h1 className="h1Title mb-6 lg:mb-8 md:w-[550px] 2xl:w-[auto]">
-            Lleva <br className="md:hidden" /> tu pasion
-            <br className="md:hidden" /> al siguiente nivel
+            Lleva tu pasion al siguiente nivel
           </h1>
 
           <div className="flex flex-col md:flex-row md:gap-6 ">
