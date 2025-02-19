@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_slider_category_mission_sliders",
+  "info": {
+    "displayName": "Mission Slider"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,10 +1,8 @@
-/* Reducir tamaño del editor CodeMirror a la mitad en ancho y alto */
-.CodeMirror.cm-s-default.CodeMirror-wrap {
+/* .CodeMirror.cm-s-default.CodeMirror-wrap {
   height: 50% !important;
 }
 
 .CodeMirror.cm-s-default.CodeMirror-wrap {
-  /* transform: scale(0.5); */
   transform-origin: top left;
 }
 .hDbkDE {
@@ -16,4 +14,4 @@
 
 .kMvzJl {
   height: auto !important;
-}
+} */
