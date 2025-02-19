@@ -46,14 +46,20 @@ const sports = [
   },
 ];
 const SportsSection = () => {
-  const [activeSport, setActiveSport] = useState(sports[0]);
-
   useEffect(() => {
     sports.forEach((sport) => {
       const img = new Image();
       img.src = sport.image;
     });
   }, []);
+
+  const [activeSport, setActiveSport] = useState(sports[0]);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+  const handleHover = (sport) => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    setHoverTimeout(setTimeout(() => setActiveSport(sport), 300));
+  };
 
   return (
     <>
@@ -64,7 +70,7 @@ const SportsSection = () => {
       <img src={HandballBg} className="hidden" />
       <img src={BasketBg} className="hidden" />
       <div
-        className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-500 background-transition m-auto rounded-md  md:rounded-none"
+        className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-300 background-transition m-auto rounded-md  md:rounded-none"
         style={{
           backgroundImage: `url('${activeSport.image}'`,
           backgroundSize: "cover",
@@ -83,7 +89,7 @@ const SportsSection = () => {
                       ? "text-[#FAF9F6] opacity-100"
                       : "text-[#FAF9F6] opacity-50"
                   }`}
-                  onMouseEnter={() => setActiveSport(sport)}
+                  onMouseEnter={() => handleHover(sport)}
                   onClick={() => setActiveSport(sport)}
                 >
                   {sport?.name}
