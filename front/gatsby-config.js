@@ -11,11 +11,13 @@ module.exports = {
     title: `scoutingLabs`,
     siteUrl: `https://www.yourdomain.tld`,
   },
+
   plugins: [
     "gatsby-plugin-postcss", // Necesario si estás utilizando Tailwind CSS
     "gatsby-plugin-image", // Necesario para trabajar con imágenes en Gatsby
     "gatsby-plugin-sharp", // Necesario para procesar imágenes
     "gatsby-transformer-sharp", // Para transformar imágenes (por ejemplo, `.webp`)
+
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -23,6 +25,7 @@ module.exports = {
         path: `${__dirname}/src/assets/`, // Ruta donde están tus imágenes
       },
     },
+
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -30,5 +33,28 @@ module.exports = {
       },
     },
     "gatsby-plugin-mdx", // Si estás usando MDX para contenido adicional
+    {
+      resolve: "gatsby-source-strapi",
+      options: {
+        apiURL: "http://localhost:1337",
+        singleTypes: [
+          {
+            singularName: "home",
+            queryParams: {
+              populate: {
+                slider: {
+                  populate: {
+                    video: {
+                      populate: "*", // Poblar url y otros campos
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+        queryLimit: 1000,
+      },
+    },
   ],
 };
