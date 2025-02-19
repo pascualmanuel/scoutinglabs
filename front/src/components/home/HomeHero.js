@@ -14,8 +14,27 @@ import Button from "../Button.js";
 import Pablo from "../../assets/pablo.png";
 import Popup from "./Popup.js";
 import { useEffect, useState, useRef } from "react";
+import { useStaticQuery } from "gatsby";
 
 const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
+  const { strapiHome } = useStaticQuery(graphql`
+    query {
+      strapiHome {
+        hero_title
+        partner_subtitle
+        slider {
+          id
+          title
+          description
+          video {
+            url
+            name
+          }
+        }
+      }
+    }
+  `);
+
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
