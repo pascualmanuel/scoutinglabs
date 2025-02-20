@@ -42,6 +42,14 @@ module.exports = {
             singularName: "home",
             queryParams: {
               populate: {
+                hero_background: true,
+                partner_img: true,
+                logos: true,
+                heroLinks: "*",
+                partner_cta: "*",
+                mision_button: "*",
+                box_link: "*",
+                veo_button: "*",
                 slider: {
                   populate: {
                     video: {
