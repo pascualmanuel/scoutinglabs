@@ -5,7 +5,37 @@ import VeoLogo from "../../assets/icons/veo-logo.svg";
 import Button from "../Button";
 import VeoCamImg from "../../assets/home/veo-transparent.webp";
 import TeamsCarousel from "../TeamsCarousel";
+
+import { graphql } from "gatsby";
+import { useStaticQuery } from "gatsby";
 const HomeVeo = () => {
+  const { strapiHome } = useStaticQuery(graphql`
+    query {
+      strapiHome {
+        why_scouting_upTitle
+        first_title
+        second_title
+        box_link {
+          title
+          subtitle
+          link
+        }
+        veo_first_title
+        veo_second_title
+        veo_desc
+        veo_button {
+          text
+          link
+        }
+        confian_first_title
+        confian_second_title
+        partner_img {
+          url
+        }
+        
+      }
+    }
+  `);
   const data = [
     {
       title: "graba tus pARTIDOS con ia",
@@ -25,35 +55,35 @@ const HomeVeo = () => {
       <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
         <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
-            POR QUE ELEGIR SCOUTING LABS
+            {strapiHome?.why_scouting_upTitle}
           </p>
-          <h2 className="h1Title my-6">
-            APOYAMOS TU <br className="hidden llg:block" /> CAMINO{" "}
+          <h2 className="h1Title my-6 md:w-[580px]">
+            {strapiHome?.first_title}
           </h2>
-          <h2 className="h1Title text-right">a LA VICTORIA</h2>
+          <h2 className="h1Title text-right">{strapiHome?.second_title}</h2>
         </div>
         <div className="mt-28 ">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
-            {data.map((item, index) => (
+            {strapiHome.box_link.map((item, index) => (
               <div key={index} className="box-sc">
                 <a
-                  href="#"
+                  href={item.link}
                   className="group flex items-center justify-between subH border-t border-[#434652] pt-7"
                 >
                   {item.title}
                   <span className="">
                     <div className="w-[44px] h-[44px] rounded-full flex justify-center items-center relative overflow-hidden">
                       <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                        <img src={item.imgSrc} className="" />
+                        <img src={ArrowIcon} className="" />
                       </div>
 
                       <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px] bottom-[-35px] left-[-35px]">
-                        <img src={item.imgSrc} className="" />
+                        <img src={ArrowIcon} className="" />
                       </div>
                     </div>
                   </span>
                 </a>
-                <p className="body1 text-grey2 mb-8">{item.description}</p>
+                <p className="body1 text-grey2 mb-8">{item.subtitle}</p>
               </div>
             ))}
           </div>
@@ -73,33 +103,35 @@ const HomeVeo = () => {
               Distribuidor oficial de Veo Technologies
             </span>
           </div>
-          <h2 className="h1Title pt-[50px]">
-            Obten tu <br className="sm:hidden" />
-            veo cam3
+          <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto">
+            {strapiHome.veo_first_title}
           </h2>
           <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
-          <h2 className="h1Title">
-            exclusivo <br className="sm:hidden" />
-            latam - $ 1199
+          <h2 className="h1Title w-[300px] sm:w-auto">
+            {strapiHome.veo_second_title}
           </h2>
-          <p className="body2 px-5 text-grey2 py-9">
-            La cámara necesita de una suscripción para su funcionamiento.
-            Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
-            activa.
-          </p>
-          <Button text={"Conoce Veo Cam 3"} width="w-[90vw] sm:w-[225px]" />
+          <p className="body2 px-5 text-grey2 py-9">{strapiHome.veo_desc}</p>
+          <Button
+            text={strapiHome.veo_button.text}
+            link={strapiHome.veo_button.link}
+            width="w-[90vw] sm:w-[225px]"
+          />
         </div>
       </div>
       <div className="mx-6 lm:mx-16 mb-16 lg:mx-28 max-w-screen-2xl 2xl:mx-auto 2xl:px-28">
-        <h3 className="h1Title uppercase text-left">
-          Confian en <br /> nosotros
+        <h3 className="h1Title uppercase text-left sm:w-[490px]">
+          {/* Confian en <br /> nosotros */}
+          {strapiHome.confian_first_title}
         </h3>
-        <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter">
-          <span className="text-skyBlue">
-            clubes, torneos <br /> y academias
-          </span>
-          &nbsp; de todo el mundo
-        </h3>
+        <div className="flex justify-end w-full">
+          <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter ms:w-[685px] mg:w-[900px]">
+            <span className="text-skyBlue">
+              {/* clubes, torneos <br /> y academias */}
+              {strapiHome.confian_second_title}
+            </span>
+            {/* &nbsp; de todo el mundo */}
+          </h3>
+        </div>
       </div>
       <TeamsCarousel />
     </>
