@@ -23,12 +23,13 @@ export interface LinksBoxLink extends Struct.ComponentSchema {
 export interface LinksLinkItem extends Struct.ComponentSchema {
   collectionName: 'components_links_link_items';
   info: {
+    description: '';
     displayName: 'LinkItem';
     icon: 'link';
   };
   attributes: {
     link: Schema.Attribute.String;
-    texto: Schema.Attribute.String;
+    text: Schema.Attribute.String;
   };
 }
 

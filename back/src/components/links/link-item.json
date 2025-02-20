@@ -2,11 +2,12 @@
   "collectionName": "components_links_link_items",
   "info": {
     "displayName": "LinkItem",
-    "icon": "link"
+    "icon": "link",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "texto": {
+    "text": {
       "type": "string"
     },
     "link": {

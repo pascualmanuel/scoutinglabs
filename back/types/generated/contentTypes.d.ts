@@ -500,6 +500,14 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
+    partner_img: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     partner_number: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
