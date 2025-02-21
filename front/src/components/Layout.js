@@ -52,9 +52,6 @@ const Layout = ({ children }) => {
                 <Link to={"/veo-cam"} target="_blank">
                   <p className="body2 text-grey4 pt-3 ">Veo Cam 3</p>
                 </Link>
-                {/* <Link to={"/becas"} target="_blank">
-                <p className="body2 text-grey4">Becas universitarias</p>
-              </Link> */}
                 <Link to={"/scouting-play"} target="_blank">
                   <p className="body2 text-grey4 py-3 ">Scouting Play</p>
                 </Link>
@@ -62,8 +59,10 @@ const Layout = ({ children }) => {
                   <p className="body2 text-grey4">Precios</p>
                 </Link>
               </div>
-              <div className="mt-[30px] ssm:mt-0">
-                <p className="body3 uppercase text-grey1">COMPANY</p>
+              <div className="">
+                <p className="body3 uppercase text-grey1">SOLUCIONES</p>
+
+                <p className="body3 uppercase text-grey1"> </p>
                 <Link to={"/"} target="_blank">
                   <p className="body2 text-grey4 py-3 ">Precios</p>
                 </Link>

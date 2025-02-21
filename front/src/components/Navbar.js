@@ -46,13 +46,14 @@ const Navbar = () => {
     setLanguageOpen(false); // Cerrar el dropdown
   };
 
-  // const menuItems = [
-  //   { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
-  //   { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
-  //
-  //   { path: "/suscripciones/", label: "Suscripciones", position: 300 },
-  //   { path: "/ayuda/", label: "Ayuda!", position: 300 },
-  // ];
+  const menuItems = [
+    { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
+    { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
+    { path: "/nosotros/", label: "Nosotros", position: 300 },
+
+    { path: "/suscripciones/", label: "Suscripciones", position: 300 },
+    { path: "/ayuda", label: "Ayuda!", position: 300 },
+  ];
 
   const location = useLocation();
 
@@ -183,8 +184,6 @@ const Navbar = () => {
     }
   }, [lastScrollY]);
 
-
-
   return (
     <div
       className={`navbar fixed z-[1000] w-full ${
@@ -198,50 +197,30 @@ const Navbar = () => {
               <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
             </div>
           </Link>
-          <div
-            className="flex flex-row  justify-between  section-dot relative llg:ml-[-110px]"
-            style={{ width: "", lineHeight: "50px" }}
-          >
-            <div className="nav-dot relative">
+          <div className="flex flex-row justify-between section-dot relative llg:ml-[-110px]">
+            <div className="nav-dot relative flex items-center">
               <div>
-                <Link
-                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                  to={"/veo-cam"}
-                >
-                  Veo Cam 3
-                </Link>
-                <Link
-                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                  to={"/scouting-play"}
-                >
-                  ScoutingPlay
-                </Link>
-                <Link
-                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                  to={"/nosotros"}
-                >
-                  Nosotros
-                </Link>
-                <Link
-                  className="text-grey1 body2 hidden llg:block  lg:mr-0"
-                  to={"/suscripciones"}
-                >
-                  Suscripciones
-                </Link>
-                <Link
-                  className="text-grey1 body2 hidden lg:block "
-                  style={{ marginLeft: `${mLeft}px` }}
-                  to={"/ayuda"}
-                >
-                  Ayuda
-                </Link>
+                {menuItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.path}
+                    className="text-grey1 body2 hidden lg:block"
+                    style={
+                      item.path === "/ayuda" ? { marginLeft: `${mLeft}px` } : {}
+                    }
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
+              {/* Aquí iría el código para el dot indicator */}
               {dotPosition !== null && (
                 <div
                   className={`line ${isTransitioning ? "transitioning" : ""}`}
                   style={{
                     left: `${dotPosition}px`,
-                    transition: isTransitioning ? "left 0.5s ease" : "none", // Mantiene la transición de 0.5s
+                    top: `25px`,
+                    transition: isTransitioning ? "left 0.5s ease" : "none",
                   }}
                 >
                   •
