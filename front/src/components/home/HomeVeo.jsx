@@ -32,7 +32,6 @@ const HomeVeo = () => {
         partner_img {
           url
         }
-        
       }
     }
   `);
@@ -64,7 +63,7 @@ const HomeVeo = () => {
         </div>
         <div className="mt-28 ">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
-            {strapiHome.box_link.map((item, index) => (
+            {strapiHome?.box_link.map((item, index) => (
               <div key={index} className="box-sc">
                 <a
                   href={item.link}
@@ -104,16 +103,16 @@ const HomeVeo = () => {
             </span>
           </div>
           <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto">
-            {strapiHome.veo_first_title}
+            {strapiHome?.veo_first_title}
           </h2>
           <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
           <h2 className="h1Title w-[300px] sm:w-auto">
-            {strapiHome.veo_second_title}
+            {strapiHome?.veo_second_title}
           </h2>
-          <p className="body2 px-5 text-grey2 py-9">{strapiHome.veo_desc}</p>
+          <p className="body2 px-5 text-grey2 py-9">{strapiHome?.veo_desc}</p>
           <Button
-            text={strapiHome.veo_button.text}
-            link={strapiHome.veo_button.link}
+            text={strapiHome?.veo_button?.text}
+            link={strapiHome?.veo_button?.link}
             width="w-[90vw] sm:w-[225px]"
           />
         </div>
@@ -121,13 +120,13 @@ const HomeVeo = () => {
       <div className="mx-6 lm:mx-16 mb-16 lg:mx-28 max-w-screen-2xl 2xl:mx-auto 2xl:px-28">
         <h3 className="h1Title uppercase text-left sm:w-[490px]">
           {/* Confian en <br /> nosotros */}
-          {strapiHome.confian_first_title}
+          {strapiHome?.confian_first_title}
         </h3>
         <div className="flex justify-end w-full">
           <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter ms:w-[685px] mg:w-[900px]">
             <span className="text-skyBlue">
               {/* clubes, torneos <br /> y academias */}
-              {strapiHome.confian_second_title}
+              {strapiHome?.confian_second_title}
             </span>
             {/* &nbsp; de todo el mundo */}
           </h3>
