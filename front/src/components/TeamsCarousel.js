@@ -12,13 +12,10 @@ const TeamsCarousel = () => {
     }
   `);
 
-  console.log(strapiHome.logos);
-  // Split original array into two halves
   const midPoint = Math.ceil(strapiHome.logos.length / 2);
   const firstHalfOriginal = strapiHome.logos.slice(0, midPoint);
   const secondHalfOriginal = strapiHome.logos.slice(midPoint);
 
-  // Duplicate each half separately
   const loopingFirst = [...firstHalfOriginal, ...firstHalfOriginal];
   const loopingSecond = [...secondHalfOriginal, ...secondHalfOriginal];
 
