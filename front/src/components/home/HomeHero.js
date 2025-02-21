@@ -25,7 +25,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           id
           url
         }
-        partner_title
+        partiner_title
         partner_subtitle
         partner_number
         partner_desc
@@ -201,10 +201,10 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
               {strapiHome?.partner_desc}
             </p>
             <Button
-              text={strapiHome?.partner_cta.text}
+              text={strapiHome?.partner_cta?.text}
               width="w-[155px]"
               height="h-[48px]"
-              link={strapiHome?.partner_cta.link}
+              link={strapiHome?.partner_cta?.link}
             />
           </div>
         </div>
@@ -212,7 +212,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           <div className=" llg:mb-[270px] xl:mb-[140px] m-6 sm:m-0">
             <div className=" ">
               <img
-                src={`${process.env.REACT_APP_API_URL}/${strapiHome.partner_img.url}`}
+                src={`${process.env.REACT_APP_API_URL}/${strapiHome?.partner_img?.url}`}
                 className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
               />
             </div>
