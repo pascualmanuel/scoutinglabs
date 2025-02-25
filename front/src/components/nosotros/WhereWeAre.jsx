@@ -32,8 +32,8 @@ const WhereWeAre = () => {
       countryCode: "bo",
     },
     {
-      country: "Venezuela",
-      countryCode: "ve",
+      country: "Brazil",
+      countryCode: "br",
     },
     {
       country: "México",
