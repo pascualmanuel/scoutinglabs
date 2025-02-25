@@ -661,6 +661,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
 export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
   collectionName: 'navbars';
   info: {
+    description: '';
     displayName: 'Navbar';
     pluralName: 'navbars';
     singularName: 'navbar';
@@ -673,7 +674,13 @@ export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    links: Schema.Attribute.Component<'links.link-item', true>;
+    links: Schema.Attribute.Component<'links.link-item', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

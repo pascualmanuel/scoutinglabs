@@ -4,7 +4,8 @@
   "info": {
     "singularName": "navbar",
     "pluralName": "navbars",
-    "displayName": "Navbar"
+    "displayName": "Navbar",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,19 +13,21 @@
   "pluginOptions": {},
   "attributes": {
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "links": {
       "type": "component",
       "repeatable": true,
-      "component": "links.link-item"
+      "component": "links.link-item",
+      "max": 5
     },
     "button": {
       "type": "component",
