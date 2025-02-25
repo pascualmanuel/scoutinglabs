@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "gatsby"; // Importa Link de Gatsby
+import { Link } from "gatsby";
+import { useLanguage } from "../hooks/LanguageContext";
 
-// Button component
 const Button = ({
   text,
   link,
@@ -25,8 +25,14 @@ const Button = ({
     cursor: "pointer",
   };
 
+  const { locale } = useLanguage();
+  console.log(locale);
+
   return (
-    <Link to={link} className={``} style={{ textDecoration: "none" }}>
+    <Link
+      to={locale === "EN" ? `/en${link}` : link} // Agrega prefijo solo para EN
+      style={{ textDecoration: "none" }}
+    >
       <button className={`buttonText ${width} ${height}`} style={buttonStyle}>
         {children || text}
       </button>
