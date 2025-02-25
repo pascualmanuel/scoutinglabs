@@ -15,6 +15,7 @@ import Pablo from "../../assets/pablo.png";
 import Popup from "./Popup.js";
 import { useEffect, useState, useRef } from "react";
 import { useStaticQuery } from "gatsby";
+import { useLanguage } from "../../hooks/LanguageContext.js";
 
 const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
   const { strapiHome } = useStaticQuery(graphql`
@@ -25,7 +26,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           id
           url
         }
-        partiner_title
+        partner_title
         partner_subtitle
         partner_number
         partner_desc
@@ -46,6 +47,8 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
       }
     }
   `);
+
+  console.log(strapiHome);
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -186,7 +189,10 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
         {/* <div> */}
         <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-28 relative llg:mr-[70px] 2xl:m">
           {/* <img src={Six} className="absolute right-12" /> */}
-          <h1 className="transparent-bold grotzec absolute right-[32px]">6</h1>
+          <h1 className="transparent-bold grotzec absolute right-[32px]">
+            {" "}
+            {strapiHome?.partner_number}
+          </h1>
 
           <div className="llg:mb-[50px] z-50 relative">
             <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
