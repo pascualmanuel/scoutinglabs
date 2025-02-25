@@ -5,14 +5,19 @@ import Button from "./Button";
 import "../styles/Layout.css";
 import { useLocation } from "@reach/router";
 import useWindowSize from "../hooks/useWindowSize";
-
+import { useLanguage } from "../hooks/LanguageContext";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [locale, setLocale] = useState("ES"); // Idioma por defecto
-  const { width, height } = useWindowSize(); // Destructure window size from the hook
 
+  const { width, height } = useWindowSize(); // Destructure window size from the hook
   const [mLeft, setMLeft] = useState(192);
+
+  const { locale, changeLanguage } = useLanguage();
+
+  const handleLanguageChange = (newLocale) => {
+    changeLanguage(newLocale);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,20 +36,9 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const savedLocale = localStorage.getItem("locale") || "ES";
-    setLocale(savedLocale);
-  }, []);
-
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleLanguage = () => setLanguageOpen(!languageOpen);
   const closeMenu = () => setMenuOpen(false); // Cierra el menú al hacer clic en un enlace
-
-  const changeLanguage = (newLocale) => {
-    setLocale(newLocale);
-    localStorage.setItem("locale", newLocale); // Guardar el idioma seleccionado
-    setLanguageOpen(false); // Cerrar el dropdown
-  };
 
   const menuItems = [
     { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
@@ -262,7 +256,7 @@ const Navbar = () => {
                       {locale !== "ES" && (
                         <span
                           className="cursor-pointer block ml-2"
-                          onClick={() => changeLanguage("ES")}
+                          onClick={() => handleLanguageChange("ES")}
                         >
                           ES 🇪🇸
                         </span>
@@ -270,7 +264,7 @@ const Navbar = () => {
                       {locale !== "EN" && (
                         <span
                           className="cursor-pointer block ml-2"
-                          onClick={() => changeLanguage("EN")}
+                          onClick={() => handleLanguageChange("EN")}
                         >
                           EN 🇬🇧
                         </span>
@@ -373,7 +367,7 @@ const Navbar = () => {
                   {locale !== "ES" && (
                     <span
                       className="cursor-pointer block ml-2"
-                      onClick={() => changeLanguage("ES")}
+                      onClick={() => handleLanguageChange("ES")}
                     >
                       ES 🇪🇸
                     </span>
@@ -381,7 +375,7 @@ const Navbar = () => {
                   {locale !== "EN" && (
                     <span
                       className="cursor-pointer block ml-2"
-                      onClick={() => changeLanguage("EN")}
+                      onClick={() => handleLanguageChange("EN")}
                     >
                       EN 🇬🇧
                     </span>
