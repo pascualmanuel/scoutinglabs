@@ -32,6 +32,28 @@ module.exports = {
         icon: "src/images/icon.png", // Ajusta la ruta si es necesario
       },
     },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        languages: ["es", "en"], // Los idiomas soportados
+        defaultLanguage: "es", // Idioma por defecto
+        siteUrl: "http://localhost:8000/", // URL base de tu sitio
+        i18nextOptions: {
+          interpolation: {
+            escapeValue: false, // React ya escapa los valores
+          },
+          keySeparator: false,
+          nsSeparator: false,
+        },
+        pages: [
+          {
+            matchPath: "/ignored-page", // Página que no se debe traducir
+            languages: ["es"],
+          },
+        ],
+        redirect: false, // Desactivar redirección automática de idioma
+      },
+    },
     "gatsby-plugin-mdx", // Si estás usando MDX para contenido adicional
     {
       resolve: "gatsby-source-strapi",
@@ -39,14 +61,17 @@ module.exports = {
         apiURL: "http://localhost:1337",
         singleTypes: [
           {
+            singularName: "footer",
+          },
+          {
             singularName: "home",
             queryParams: {
               populate: {
                 hero_background: true,
                 partner_img: true,
+                partner_cta: "*",
                 logos: true,
                 heroLinks: "*",
-                partner_cta: "*",
                 mision_button: "*",
                 box_link: "*",
                 veo_button: "*",
@@ -54,6 +79,25 @@ module.exports = {
                   populate: {
                     video: {
                       populate: "*", // Poblar url y otros campos
+                    },
+                  },
+                },
+                localizations: {
+                  populate: {
+                    hero_background: true,
+                    partner_img: true,
+                    partner_cta: "*",
+                    logos: true,
+                    heroLinks: "*",
+                    mision_button: "*",
+                    box_link: "*",
+                    veo_button: "*",
+                    slider: {
+                      populate: {
+                        video: {
+                          populate: "*", // Poblar url y otros campos
+                        },
+                      },
                     },
                   },
                 },
