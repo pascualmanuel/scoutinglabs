@@ -6,6 +6,7 @@ import "../styles/Layout.css";
 import { useLocation } from "@reach/router";
 import useWindowSize from "../hooks/useWindowSize";
 import { useLanguage } from "../hooks/LanguageContext";
+import LangLink from "../hooks/LangLink";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -186,11 +187,11 @@ const Navbar = () => {
     >
       <nav className="bg-iBlue  relative">
         <div className=" h-[72px] mx-auto max-w-screen-2xl flex justify-between items-center ">
-          <Link to={"/"}>
+          <LangLink to={"/"}>
             <div className="ml-[20px] mg:ml-[80px] xl:ml-28">
               <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
             </div>
-          </Link>
+          </LangLink>
           <div className="flex flex-row justify-between section-dot relative llg:ml-[-110px]">
             <div className="nav-dot relative flex items-center">
               <div>
