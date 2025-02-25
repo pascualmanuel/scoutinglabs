@@ -7,10 +7,18 @@ import SplayImg from "../../assets/play-img.png";
 import VeoImg from "../../assets/veo-img.png";
 import Button from "../Button";
 import { useStaticQuery } from "gatsby";
+
+import { useLanguage } from "../../hooks/LanguageContext.js";
+import LangLink from "../../hooks/LangLink.jsx";
+
 function Locations() {
+  const { locale } = useLanguage();
+  const currentLocale = locale;
+
   const { strapiHome } = useStaticQuery(graphql`
     query {
       strapiHome {
+        locale
         mission_title
         mision_desc
         mision_button {
@@ -26,11 +34,34 @@ function Locations() {
             name
           }
         }
+        localizations {
+          locale
+          mission_title
+          mision_desc
+          mision_button {
+            text
+            link
+          }
+          slider {
+            id
+            title
+            description
+            video {
+              url
+              name
+            }
+          }
+        }
       }
     }
   `);
 
-  const locations = strapiHome.slider.reduce((acc, item) => {
+  const localizedData =
+    strapiHome?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
+    ) || strapiHome;
+
+  const locations = localizedData.slider.reduce((acc, item) => {
     acc[item.id] = {
       title: item.title,
       description: item.description,
@@ -134,6 +165,10 @@ function Locations() {
     setIsPlaying(true); // Oculta el placeholder cuando el video comienza
   };
 
+  let ourMission = "NUESTRA MISION";
+  if (locale === "EN") {
+    ourMission = "OUR MISSION";
+  }
   return (
     <>
       <div
@@ -141,8 +176,8 @@ function Locations() {
         id=""
       >
         <div className="max-w-screen-2xl m-auto">
-          <h2 className=" md:w-[440px] llg:w-[750px] py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-black uppercase mb-5 lg:mb-0">
-            {strapiHome?.mission_title}
+          <h2 className=" md:w-[440px] llg:w-[780px] py-[60px] lg:py-[100px] grotzec text-[64px] leading-[51px] tracking-[-2%] lg:text-[110px] lg:leading-[110px] lg:tracking-[-3%] text-black uppercase mb-5 lg:mb-0">
+            {localizedData?.mission_title}
           </h2>
 
           <div
@@ -155,17 +190,15 @@ function Locations() {
                   <span className=" text-[34px] grotzec text-skyBlue">[</span>
                   <span className="text-skyBlue grotzec font-bold">
                     {" "}
-                    &nbsp; NUESTRA MISION &nbsp;
+                    &nbsp; {ourMission} &nbsp;
                   </span>
-                  <span className="text-[34px] grotzec text-skyBlue ">
-                    ]
-                  </span>{" "}
-                  {strapiHome?.mision_desc}
+                  <span className="text-[34px] grotzec text-skyBlue ">]</span>{" "}
+                  {localizedData?.mision_desc}
                 </p>
                 <div className="mt-[47px]">
                   <Button
-                    text={strapiHome?.mision_button.text}
-                    link={strapiHome?.mision_button.link}
+                    text={localizedData?.mision_button.text}
+                    link={localizedData?.mision_button.link}
                     bg="#0584F5"
                     textColor="#fff"
                     width="w-[175px] "

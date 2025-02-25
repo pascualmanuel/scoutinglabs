@@ -8,10 +8,17 @@ import TeamsCarousel from "../TeamsCarousel";
 
 import { graphql } from "gatsby";
 import { useStaticQuery } from "gatsby";
+import { useLanguage } from "../../hooks/LanguageContext.js";
+import LangLink from "../../hooks/LangLink.jsx";
+
 const HomeVeo = () => {
+  const { locale } = useLanguage();
+  const currentLocale = locale;
+
   const { strapiHome } = useStaticQuery(graphql`
     query {
       strapiHome {
+        locale
         why_scouting_upTitle
         first_title
         second_title
@@ -32,38 +39,52 @@ const HomeVeo = () => {
         partner_img {
           url
         }
+        localizations {
+          locale
+          why_scouting_upTitle
+          first_title
+          second_title
+          box_link {
+            title
+            subtitle
+            link
+          }
+          veo_first_title
+          veo_second_title
+          veo_desc
+          veo_button {
+            text
+            link
+          }
+          confian_first_title
+          confian_second_title
+          partner_img {
+            url
+          }
+        }
       }
     }
   `);
-  const data = [
-    {
-      title: "graba tus pARTIDOS con ia",
-      description:
-        "Te enviamos la cámara y te brindamos soporte exclusivo para usar la Veo Cam 3 y su plataforma.",
-      imgSrc: ArrowIcon, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "Scouting play, nuestra comunidad",
-      description:
-        "Te enviamos la cámara y te brindamos soporte exclusivo para usar la Veo Cam 3 y su plataforma.",
-      imgSrc: ArrowIcon, // Aquí puedes agregar la URL de la imagen
-    },
-  ];
+
+  const localizedData =
+    strapiHome?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
+    ) || strapiHome;
   return (
     <>
       <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
         <div className="h-280 relative mt-16 ">
           <p className="subH text-grey4 text-right">
-            {strapiHome?.why_scouting_upTitle}
+            {localizedData?.why_scouting_upTitle}
           </p>
           <h2 className="h1Title my-6 md:w-[580px]">
-            {strapiHome?.first_title}
+            {localizedData?.first_title}
           </h2>
-          <h2 className="h1Title text-right">{strapiHome?.second_title}</h2>
+          <h2 className="h1Title text-right">{localizedData?.second_title}</h2>
         </div>
         <div className="mt-28 ">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
-            {strapiHome?.box_link.map((item, index) => (
+            {localizedData?.box_link.map((item, index) => (
               <div key={index} className="box-sc">
                 <a
                   href={item.link}
@@ -103,16 +124,18 @@ const HomeVeo = () => {
             </span>
           </div>
           <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto">
-            {strapiHome?.veo_first_title}
+            {localizedData?.veo_first_title}
           </h2>
           <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
           <h2 className="h1Title w-[300px] sm:w-auto">
-            {strapiHome?.veo_second_title}
+            {localizedData?.veo_second_title}
           </h2>
-          <p className="body2 px-5 text-grey2 py-9">{strapiHome?.veo_desc}</p>
+          <p className="body2 px-5 text-grey2 py-9">
+            {localizedData?.veo_desc}
+          </p>
           <Button
-            text={strapiHome?.veo_button?.text}
-            link={strapiHome?.veo_button?.link}
+            text={localizedData?.veo_button?.text}
+            link={localizedData?.veo_button?.link}
             width="w-[90vw] sm:w-[225px]"
           />
         </div>
@@ -120,13 +143,13 @@ const HomeVeo = () => {
       <div className="mx-6 lm:mx-16 mb-16 lg:mx-28 max-w-screen-2xl 2xl:mx-auto 2xl:px-28">
         <h3 className="h1Title uppercase text-left sm:w-[490px]">
           {/* Confian en <br /> nosotros */}
-          {strapiHome?.confian_first_title}
+          {localizedData?.confian_first_title}
         </h3>
         <div className="flex justify-end w-full">
           <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter ms:w-[685px] mg:w-[900px]">
             <span className="text-skyBlue">
               {/* clubes, torneos <br /> y academias */}
-              {strapiHome?.confian_second_title}
+              {localizedData?.confian_second_title}
             </span>
             {/* &nbsp; de todo el mundo */}
           </h3>
