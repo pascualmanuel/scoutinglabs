@@ -18,9 +18,12 @@ import { useStaticQuery } from "gatsby";
 import { useLanguage } from "../../hooks/LanguageContext.js";
 
 const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
+  const { locale } = useLanguage();
+  const currentLocale = locale;
   const { strapiHome } = useStaticQuery(graphql`
     query {
       strapiHome {
+        locale
         hero_title
         hero_background {
           id
@@ -44,11 +47,40 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
         partner_img {
           url
         }
+        localizations {
+          locale
+          hero_title
+          hero_background {
+            id
+            url
+          }
+          partner_title
+          partner_subtitle
+          partner_number
+          partner_desc
+          partner_cta {
+            link
+            text
+          }
+          heroLinks {
+            text
+            link
+          }
+          hero_background {
+            url
+          }
+          partner_img {
+            url
+          }
+        }
       }
     }
   `);
 
-  console.log(strapiHome);
+  const localizedData =
+    strapiHome?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
+    ) || strapiHome;
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -141,7 +173,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           </div>
 
           <h1 className="h1Title mb-6 lg:mb-8 md:w-[550px] 2xl:w-[auto]">
-            {strapiHome?.hero_title}
+            {localizedData?.hero_title}
           </h1>
 
           <div className="flex flex-col md:flex-row md:gap-6 ">
@@ -191,26 +223,26 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           {/* <img src={Six} className="absolute right-12" /> */}
           <h1 className="transparent-bold grotzec absolute right-[32px]">
             {" "}
-            {strapiHome?.partner_number}
+            {localizedData?.partner_number}
           </h1>
 
           <div className="llg:mb-[50px] z-50 relative">
             <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
-              {strapiHome?.partner_title}
+              {localizedData?.partner_title}
             </h2>
             <h3 className="h2Title text-clearBlue">
-              {strapiHome?.partner_subtitle}
+              {localizedData?.partner_subtitle}
             </h3>
           </div>
           <div className="my-10 llg:my-0">
             <p className="text-grey2 body0 mb-8 !text-[18px] xxl:!text-[24px]">
-              {strapiHome?.partner_desc}
+              {localizedData?.partner_desc}
             </p>
             <Button
-              text={strapiHome?.partner_cta?.text}
+              text={localizedData?.partner_cta?.text}
               width="w-[155px]"
               height="h-[48px]"
-              link={strapiHome?.partner_cta?.link}
+              link={localizedData?.partner_cta?.link}
             />
           </div>
         </div>
@@ -218,7 +250,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           <div className=" llg:mb-[270px] xl:mb-[140px] m-6 sm:m-0">
             <div className=" ">
               <img
-                src={`${process.env.REACT_APP_API_URL}/${strapiHome?.partner_img?.url}`}
+                src={`${process.env.REACT_APP_API_URL}/${localizedData?.partner_img?.url}`}
                 className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
               />
             </div>
