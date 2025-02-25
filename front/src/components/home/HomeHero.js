@@ -16,6 +16,7 @@ import Popup from "./Popup.js";
 import { useEffect, useState, useRef } from "react";
 import { useStaticQuery } from "gatsby";
 import { useLanguage } from "../../hooks/LanguageContext.js";
+import LangLink from "../../hooks/LangLink.jsx";
 
 const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
   const { locale } = useLanguage();
@@ -177,41 +178,26 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           </h1>
 
           <div className="flex flex-col md:flex-row md:gap-6 ">
-            <a
-              href="#"
-              className="group flex items-center gap-2 subH2 border-t border-[#434652] pt-4   w-[fit-content]"
-            >
-              CAMARA DEPORTIVA CON IA
-              <span className="">
-                <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                  <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                    <img src={ArrowIcon} className="" />
-                  </div>
+            {localizedData?.heroLinks?.map((link, index) => (
+              <LangLink
+                key={index}
+                to={link.link} // Usamos el enlace desde Strapi
+                className="group flex items-center gap-2 subH2 border-t border-[#434652] pt-4 w-[fit-content]"
+              >
+                {link.text}
+                <span className="">
+                  <div className="w-[44px] h-[44px] rounded-full flex justify-center items-center relative overflow-hidden">
+                    <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
+                      <img src={ArrowIcon} className="" />
+                    </div>
 
-                  <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                    <img src={ArrowIcon} className="" />
+                    <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px] bottom-[-35px] left-[-35px]">
+                      <img src={ArrowIcon} className="" />
+                    </div>
                   </div>
-                </div>
-              </span>
-            </a>
-            <a
-              href="#"
-              className="flex group items-center gap-2 subH2 md:border-t md:border-[#434652] md:pt-4    "
-            >
-              SCOUTINGPLAY, NUESTRA COMUNIDAD{" "}
-              {/* <img className="ml-4" src={ArrowIcon} /> */}
-              <span className="">
-                <div className="w-[44px] h-[44px] rounded-full	   flex justify-center items-center   relative overflow-hidden">
-                  <div className="flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-16 group-hover:-translate-y-16">
-                    <img src={ArrowIcon} className="" />
-                  </div>
-
-                  <div className="absolute flex items-center transition-transform duration-500 ease-in-out transform group-hover:translate-x-[51px] group-hover:translate-y-[-51px]  bottom-[-35px] left-[-35px]">
-                    <img src={ArrowIcon} className="" />
-                  </div>
-                </div>
-              </span>
-            </a>
+                </span>
+              </LangLink>
+            ))}
           </div>
         </div>
         {showPopup && <Popup onClose={handleClosePopup} />}
