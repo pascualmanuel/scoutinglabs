@@ -1,13 +1,18 @@
 {
-  "collectionName": "components_links_link_items",
+  "collectionName": "components_card_cards",
   "info": {
-    "displayName": "LinkItem",
-    "icon": "link",
+    "displayName": "card",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "text": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "second_title": {
       "type": "string"
     },
     "link": {

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_card_boxes",
+  "info": {
+    "displayName": "boxes"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

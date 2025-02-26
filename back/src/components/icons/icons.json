@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_icons_icons",
+  "info": {
+    "displayName": "Icons"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": false
+    },
+    "link": {
+      "type": "string",
+      "regex": "^(\\/(?!\\s).+|https?:\\/\\/.+)$"
+    }
+  }
+}

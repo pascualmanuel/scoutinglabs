@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_slider_category_sports_sliders",
+  "info": {
+    "displayName": "Sports Slider"
+  },
+  "options": {},
+  "attributes": {
+    "deporte": {
+      "type": "string"
+    },
+    "bg_image": {
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

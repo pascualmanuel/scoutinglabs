@@ -1,7 +1,8 @@
 {
   "collectionName": "components_links_box_links",
   "info": {
-    "displayName": "box_link"
+    "displayName": "box_link",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -12,7 +13,8 @@
       "type": "string"
     },
     "link": {
-      "type": "string"
+      "type": "string",
+      "regex": "^\\/(?!\\s).+$"
     }
   }
 }
