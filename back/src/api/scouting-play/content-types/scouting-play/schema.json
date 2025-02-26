@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "navbars",
+  "collectionName": "scouting_plays",
   "info": {
-    "singularName": "navbar",
-    "pluralName": "navbars",
-    "displayName": "Navbar",
+    "singularName": "scouting-play",
+    "pluralName": "scouting-plays",
+    "displayName": "Scouting Play",
     "description": ""
   },
   "options": {
@@ -21,10 +21,8 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
         "files",
-        "videos",
-        "audios"
+        "images"
       ],
       "pluginOptions": {
         "i18n": {
@@ -32,7 +30,15 @@
         }
       }
     },
-    "links": {
+    "title": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "buttons": {
       "type": "component",
       "repeatable": true,
       "component": "links.link-item",
@@ -43,10 +49,10 @@
         }
       }
     },
-    "button": {
+    "datos": {
       "type": "component",
-      "repeatable": false,
-      "component": "links.link-item",
+      "repeatable": true,
+      "component": "card.data-box",
       "pluginOptions": {
         "i18n": {
           "localized": true

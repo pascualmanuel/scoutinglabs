@@ -93,6 +93,35 @@
           "localized": true
         }
       }
+    },
+    "preFooter_title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "footerCards": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "card.card",
+      "max": 2
+    },
+    "social_network": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "icons.icons"
     }
   }
 }

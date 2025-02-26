@@ -20,7 +20,8 @@
     },
     "link": {
       "type": "string",
-      "required": false
+      "required": false,
+      "regex": "^\\/(?!\\s).+$"
     },
     "category": {
       "type": "enumeration",
