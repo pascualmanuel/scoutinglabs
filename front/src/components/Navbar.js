@@ -7,14 +7,22 @@ import { useLocation } from "@reach/router";
 import useWindowSize from "../hooks/useWindowSize";
 import { useLanguage } from "../hooks/LanguageContext";
 import LangLink from "../hooks/LangLink";
+import useLayoutData from "../hooks/useLayoutData";
+
 const Navbar = () => {
+  const { navbar } = useLayoutData();
+  const { locale, changeLanguage } = useLanguage();
+
+  const localizedData =
+    navbar?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || navbar;
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
 
   const { width, height } = useWindowSize(); // Destructure window size from the hook
   const [mLeft, setMLeft] = useState(192);
-
-  const { locale, changeLanguage } = useLanguage();
 
   const handleLanguageChange = (newLocale) => {
     changeLanguage(newLocale);
@@ -42,12 +50,11 @@ const Navbar = () => {
   const closeMenu = () => setMenuOpen(false); // Cierra el menú al hacer clic en un enlace
 
   const menuItems = [
-    { path: "/veo-cam/", label: "Veo Cam 3", position: 0 },
-    { path: "/scouting-play/", label: "ScoutingPlay", position: 120 },
-    { path: "/nosotros/", label: "Nosotros", position: 300 },
-
-    { path: "/suscripciones/", label: "Suscripciones", position: 300 },
-    { path: "/ayuda", label: "Ayuda!", position: 300 },
+    { path: "/veo-cam/", label: "Veo Cam 3" },
+    { path: "/scouting-play/", label: "ScoutingPlay" },
+    { path: "/nosotros/", label: "Nosotros" },
+    { path: "/suscripciones/", label: "Suscripciones" },
+    { path: "/ayuda", label: "Ayuda" },
   ];
 
   const location = useLocation();
@@ -122,6 +129,9 @@ const Navbar = () => {
       case "/":
         newPosition = null;
         break;
+      case "/en/":
+        newPosition = null;
+        break;
       case "/contacto/":
         newPosition = null;
         break;
@@ -189,23 +199,27 @@ const Navbar = () => {
         <div className=" h-[72px] mx-auto max-w-screen-2xl flex justify-between items-center ">
           <LangLink to={"/"}>
             <div className="ml-[20px] mg:ml-[80px] xl:ml-28">
-              <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
+              <img
+                src={`${process.env.REACT_APP_API_URL}/${localizedData.logo.url}`}
+                alt="Logo"
+                className="w-[120px]"
+              />
             </div>
           </LangLink>
           <div className="flex flex-row justify-between section-dot relative llg:ml-[-110px]">
             <div className="nav-dot relative flex items-center">
               <div>
-                {menuItems.map((item, index) => (
-                  <Link
+                {localizedData.links.map((item, index) => (
+                  <LangLink
                     key={index}
-                    to={item.path}
+                    to={item.link}
                     className="text-grey1 body2 hidden lg:block"
                     style={
-                      item.path === "/ayuda" ? { marginLeft: `${mLeft}px` } : {}
+                      item.link === "/ayuda" ? { marginLeft: `${mLeft}px` } : {}
                     }
                   >
-                    {item.label}
-                  </Link>
+                    {item.text}
+                  </LangLink>
                 ))}
               </div>
               {/* Aquí iría el código para el dot indicator */}
@@ -276,7 +290,7 @@ const Navbar = () => {
               </div>
               <div className="hidden llg:block">
                 <Button
-                  link="/contacto"
+                  link={localizedData.button.link}
                   text="Contactanos"
                   bg="#0584F5"
                   textColor="#fff"
@@ -285,7 +299,7 @@ const Navbar = () => {
                     menuOpen ? "absolute bottom-4" : ""
                   }`}
                 >
-                  Contactanos
+                  {localizedData?.button?.text}
                 </Button>
               </div>
             </div>

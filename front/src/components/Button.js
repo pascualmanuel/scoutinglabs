@@ -26,7 +26,6 @@ const Button = ({
   };
 
   const { locale } = useLanguage();
-  console.log(locale);
 
   return (
     <Link
