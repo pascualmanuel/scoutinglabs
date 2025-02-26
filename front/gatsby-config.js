@@ -62,6 +62,55 @@ module.exports = {
         singleTypes: [
           {
             singularName: "footer",
+            queryParams: {
+              populate: {
+                first_col_list: "*",
+                second_col_list: "*",
+                third_col_list: "*",
+                logo: true,
+                footerCards: "*",
+                social_network: {
+                  populate: {
+                    icon: {
+                      populate: "*",
+                    },
+                  },
+                },
+                localizations: {
+                  populate: {
+                    first_col_list: "*",
+                    second_col_list: "*",
+                    third_col_list: "*",
+                    logo: true,
+                    footerCards: "*",
+                    social_network: {
+                      populate: {
+                        icon: {
+                          populate: "*",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
+            singularName: "navbar",
+            queryParams: {
+              populate: {
+                links: "*",
+                button: "*",
+                logo: true,
+                localizations: {
+                  populate: {
+                    links: "*",
+                    button: "*",
+                    logo: true,
+                  },
+                },
+              },
+            },
           },
           {
             singularName: "home",
@@ -99,6 +148,66 @@ module.exports = {
                         },
                       },
                     },
+                  },
+                },
+              },
+            },
+          },
+          {
+            singularName: "veo-cam",
+            queryParams: {
+              populate: {
+                buttons: "*",
+                second_section_bg: true,
+                boxes: {
+                  populate: {
+                    populate: "*",
+                  },
+                },
+              },
+              second_section_buttons: "*",
+              slider: {
+                populate: {
+                  bg_image: {
+                    populate: "*",
+                  },
+                },
+              },
+              localizations: {
+                populate: {
+                  buttons: "*",
+                  second_section_bg: true,
+                  boxes: {
+                    populate: {
+                      icon: {
+                        populate: "*",
+                      },
+                    },
+                    second_section_buttons: "*",
+                    slider: {
+                      populate: {
+                        bg_image: {
+                          populate: "*",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
+            singularName: "scouting-play",
+            queryParams: {
+              populate: {
+                logo: true,
+                buttons: "*",
+                datos: "*",
+                localizations: {
+                  populate: {
+                    logo: true,
+                    buttons: "*",
+                    datos: "*",
                   },
                 },
               },
