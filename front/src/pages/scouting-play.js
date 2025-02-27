@@ -7,7 +7,20 @@ import Tiktok from "../assets/scoutingplay/icons/tiktok.svg";
 import Instagram from "../assets/scoutingplay/icons/instagram.svg";
 import Youtube from "../assets/scoutingplay/icons/yb.svg";
 import ScoutingPLayReels from "../components/ScoutingPlayReels";
+import usePagesData from "../hooks/usePagesData";
+import { useLanguage } from "../hooks/LanguageContext";
+import { ParseMarkdown } from "../hooks/ParseMarkdown";
 const ScoutinPlay = () => {
+  const { scoutingPlayPage } = usePagesData();
+  const { locale } = useLanguage();
+  console.log(scoutingPlayPage);
+  const localizedData =
+    scoutingPlayPage?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || scoutingPlayPage;
+
+
+
   const data = [
     {
       title: "+2 m",
@@ -33,7 +46,10 @@ const ScoutinPlay = () => {
         <div className="sPlay-bg h-[800px] flex flex-col justify-center">
           <div className="flex flex-col items-center">
             <img src={SPLogo} className="mb-8" />
-            <h2 className="h1Title text-clearBlue w-[270px] sm:w-[400px] mg:w-auto text-center mb-4 sm:mb-0">
+            <h2
+              className="h1Title text-clearBlue w-[270px] sm:w-[400px]
+             mg:w-auto text-center mb-4 sm:mb-0"
+            >
               UNA COMUNIDAD
             </h2>
             <h2 className="h1Title w-[270px] sm:w-[400px] mg:w-auto text-center">
@@ -81,7 +97,7 @@ const ScoutinPlay = () => {
           </div>
           <div className="mt-14 mx-4">
             <div className="flex flex-row md:gap-6 justify-between max-w-[780px] mg:max-w-[1000px] m-auto">
-              {data.map((item, index) => (
+              {localizedData?.datos.map((item, index) => (
                 <div
                   key={index}
                   className="box-sc w-[20%] flex flex-col items-center border-t border-grey2 pt-5"
@@ -90,7 +106,7 @@ const ScoutinPlay = () => {
                     {item?.title}
                   </p>
                   <p className="body1 text-grey2 mb-8 sm:!text-[18px] sm:mt-2">
-                    {item?.description}
+                    {item?.subtitle}
                   </p>
                 </div>
               ))}
