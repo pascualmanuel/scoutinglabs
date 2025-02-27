@@ -4,7 +4,7 @@ import { useLanguage } from "./LanguageContext"; // Usamos el contexto de idioma
 
 const LangLink = ({ to, children, ...props }) => {
   const { locale } = useLanguage(); // Obtener el idioma actual
-  console.log(locale, "fweda");
+
   // Lógica para gestionar la URL de acuerdo al idioma
   const updatedTo = locale === "ES" ? `${to}` : `/en${to}`;
 
