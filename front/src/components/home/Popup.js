@@ -17,7 +17,6 @@ const Popup = ({ onClose }) => {
   let errors = false;
   return (
     <div className=" absolute inset-0 z-50 ">
-      {/* Overlay */}
       <div
         className={`absolute inset-0 bg-black ${
           isVisible ? "opacity-50" : "opacity-0"
@@ -25,7 +24,6 @@ const Popup = ({ onClose }) => {
         onClick={onClose}
       ></div>
 
-      {/* Popup Content */}
       <div
         className={`absolute w-[90vw] max-w-[450px] left-1/2 top-1/2 -translate-x-1/2 translate-y-[-67%] h-[500px] sm:h-auto
             sm:w-[420px] sm:bottom-[100px] sm:right-[25px] sm:mg:right-[65px] sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 
