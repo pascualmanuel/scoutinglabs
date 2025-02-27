@@ -10,56 +10,17 @@ import { useStaticQuery } from "gatsby";
 
 import { useLanguage } from "../../hooks/LanguageContext.js";
 import LangLink from "../../hooks/LangLink.jsx";
-
+import useHomeData from "../../hooks/useHomeData.jsx";
 function Locations() {
   const { locale } = useLanguage();
   const currentLocale = locale;
 
-  const { strapiHome } = useStaticQuery(graphql`
-    query {
-      strapiHome {
-        locale
-        mission_title
-        mision_desc
-        mision_button {
-          text
-          link
-        }
-        slider {
-          id
-          title
-          description
-          video {
-            url
-            name
-          }
-        }
-        localizations {
-          locale
-          mission_title
-          mision_desc
-          mision_button {
-            text
-            link
-          }
-          slider {
-            id
-            title
-            description
-            video {
-              url
-              name
-            }
-          }
-        }
-      }
-    }
-  `);
+  const data = useHomeData();
 
   const localizedData =
-    strapiHome?.localizations?.find(
+    data?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
-    ) || strapiHome;
+    ) || data;
 
   const locations = localizedData.slider.reduce((acc, item) => {
     acc[item.id] = {
