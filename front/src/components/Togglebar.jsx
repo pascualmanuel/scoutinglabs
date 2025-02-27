@@ -16,7 +16,7 @@ const ToggleBar = ({
     width: 0,
     left: 0,
   });
-  console.log(externalValue);
+
   // Determinar si es controlado
   const isControlled = externalValue !== undefined;
   const currentValue = isControlled ? externalValue : internalValue;
