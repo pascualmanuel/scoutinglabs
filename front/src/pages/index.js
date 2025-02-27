@@ -12,7 +12,7 @@ import Loader from "../components/home/Loader.jsx";
 
 const HomePage = ({ data }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
-  console.log(videoLoaded);
+
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [videoError, setVideoError] = useState(false);
