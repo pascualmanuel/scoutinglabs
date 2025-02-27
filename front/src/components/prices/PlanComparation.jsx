@@ -6,7 +6,10 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
 import WhatsAppPopup from "../contact/WhatsAppPopup";
+import { useLocation } from "@reach/router";
 const PlanComparation = () => {
+  const location = useLocation(); // Obtiene la URL actual
+
   const [suscriptions, setSuscriptions] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
@@ -132,28 +135,41 @@ const PlanComparation = () => {
   //   if (a.featuredCard) return -1; // Featured comes first
   //   if (b.featuredCard) return 1;
   //   return 0; // Keep other cards in original order
-  // });
+  // });  const location = useLocation(); // Obtiene la URL actual
+
+  const veoCamUrl = "/veo-cam/";
+
+  const isVeoCam = window.location.pathname === veoCamUrl;
+
+  console.log(isVeoCam);
 
   return (
     <>
-      <div className=" text-center text-iBlue px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
-        <h2 className="h1Title pb-10 pt-16 lg:pt-20  ">
-          Planes de suscripción
-        </h2>
-        <p className=" opacity-50 ">
-          Todas las cámaras necesitan de una suscripción para su funcionamiento,
-          y cada suscripción aplica solamente para una cámara.
-        </p>
-        <p className="  opacity-50 ">
-          Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
-          activa.
-        </p>
-      </div>
-
+      {location.pathname !== veoCamUrl && (
+        <div className=" text-center text-iBlue px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
+          <h2 className="h1Title pb-10 pt-16 lg:pt-20  ">
+            Planes de suscripción
+          </h2>
+          <p className=" opacity-50 ">
+            Todas las cámaras necesitan de una suscripción para su
+            funcionamiento, y cada suscripción aplica solamente para una cámara.
+          </p>
+          <p className="  opacity-50 ">
+            Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
+            activa.
+          </p>
+        </div>
+      )}
       <div className="m-auto pt-12 max-w-[340px] sm:max-w-[400px] md:max-w-[450px]">
-        <div className="relative flex bg-iBlue rounded-[45px] p-1">
+        <div
+          className={`relative flex ${
+            isVeoCam ? "bg-grey0" : "bg-iBlue"
+          } rounded-[45px] p-1`}
+        >
           <div
-            className="absolute top-1 h-[calc(100%-8px)] bg-grey0 rounded-[40px] transition-all duration-300 ease-out shadow-sm"
+            className={`absolute top-1 h-[calc(100%-8px)] ${
+              isVeoCam ? "bg-iBlue" : "bg-grey0"
+            } rounded-[40px] transition-all duration-300 ease-out shadow-sm`}
             style={{
               width: `${thumbPosition.width}px`,
               left: `${thumbPosition.left}px`,
@@ -167,7 +183,11 @@ const PlanComparation = () => {
               onClick={() => setSelectedPlan(plan)}
               className={`relative flex-1 py-2 px-4 rounded-[40px] text-sm z-10 transition-colors duration-300 ${
                 selectedPlan === plan
-                  ? "text-black"
+                  ? isVeoCam
+                    ? "text-gray0" // Si es veoCam, usa text-gray0 en lugar de text-black
+                    : "text-black"
+                  : isVeoCam
+                  ? "text-black hover:text-gray-800" // Si es veoCam, invierte los colores de los botones no seleccionados
                   : "text-gray0 hover:text-gray-200"
               }`}
             >
