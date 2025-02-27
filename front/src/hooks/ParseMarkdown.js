@@ -3,21 +3,26 @@ import React from "react";
 export const ParseMarkdown = ({ text }) => {
   if (!text) return null;
 
-  // Detectamos si el texto tiene formato de bullets (líneas que empiezan con "- ")
-  const hasBullets = text.includes("- ");
+  // Dividimos el texto por saltos de línea reales (\n)
+  return text.split("\n").map((originalLine, lineIndex) => {
+    // Verificamos si la línea tiene un bullet (comienza con "- ")
+    const hasBulletInLine = originalLine.trim().startsWith("- ");
 
-  // Procesamos cada línea del texto
-  return text.split("\n").map((line, lineIndex) => {
-    // Convertimos bullets de "- " a "• "
-    let processedLine = hasBullets ? line.replace(/^- /, "• ") : line;
+    // Convertimos bullets de "- " a "• " solo en esta línea
+    let processedLine = hasBulletInLine
+      ? originalLine.replace(/^- /, "• ")
+      : originalLine;
 
-    // Dividimos la línea en segmentos con formato
+    // Dividimos los segmentos con formato
     const segments = processedLine.split(
-      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\))/g
+      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>)/g
     );
 
     return (
-      <span key={lineIndex} className={hasBullets ? "block" : ""}>
+      <div
+        key={lineIndex}
+        className={hasBulletInLine ? "block ml-4" : ""} // Margen para bullets
+      >
         {segments.map((segment, segmentIndex) => {
           // Negrita
           if (segment.startsWith("**") && segment.endsWith("**")) {
@@ -31,6 +36,14 @@ export const ParseMarkdown = ({ text }) => {
           if (segment.startsWith("<u>") && segment.endsWith("</u>")) {
             return <u key={segmentIndex}>{segment.slice(3, -4)}</u>;
           }
+          // Color Azul (sBlue)
+          if (segment.startsWith("<sBlue>") && segment.endsWith("<sBlue>")) {
+            return (
+              <span key={segmentIndex} className="text-clearBlue">
+                {segment.slice(7, -7)}
+              </span>
+            );
+          }
           // Enlaces
           if (
             segment.startsWith("[") &&
@@ -39,25 +52,21 @@ export const ParseMarkdown = ({ text }) => {
           ) {
             const [text, url] = segment.slice(1, -1).split("](");
             return (
-              <span>
-                &nbsp;
-                <a
-                  key={segmentIndex}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className=" !underline "
-                  style={{ textDecoration: "underline" }}
-                >
-                  {text}
-                </a>
-              </span>
+              <a
+                key={segmentIndex}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="!underline"
+              >
+                {text}
+              </a>
             );
           }
           // Texto normal
           return segment;
         })}
-      </span>
+      </div>
     );
   });
 };
