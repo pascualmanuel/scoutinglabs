@@ -17,71 +17,17 @@ import { useEffect, useState, useRef } from "react";
 import { useStaticQuery } from "gatsby";
 import { useLanguage } from "../../hooks/LanguageContext.js";
 import LangLink from "../../hooks/LangLink.jsx";
+import useHomeData from "../../hooks/useHomeData";
 
 const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
   const { locale } = useLanguage();
   const currentLocale = locale;
-  const { strapiHome } = useStaticQuery(graphql`
-    query {
-      strapiHome {
-        locale
-        hero_title
-        hero_background {
-          id
-          url
-        }
-        partner_title
-        partner_subtitle
-        partner_number
-        partner_desc
-        partner_cta {
-          link
-          text
-        }
-        heroLinks {
-          text
-          link
-        }
-        hero_background {
-          url
-        }
-        partner_img {
-          url
-        }
-        localizations {
-          locale
-          hero_title
-          hero_background {
-            id
-            url
-          }
-          partner_title
-          partner_subtitle
-          partner_number
-          partner_desc
-          partner_cta {
-            link
-            text
-          }
-          heroLinks {
-            text
-            link
-          }
-          hero_background {
-            url
-          }
-          partner_img {
-            url
-          }
-        }
-      }
-    }
-  `);
+  const data = useHomeData();
 
   const localizedData =
-    strapiHome?.localizations?.find(
+    data?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
-    ) || strapiHome;
+    ) || data;
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -213,7 +159,10 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           </h1>
 
           <div className="llg:mb-[50px] z-50 relative">
-            <h2 className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0">
+            <h2
+              className="grotzec text-[64px] leading-[51px] tracking-[-2%] llg:text-[110px] llg:leading-[110px] 
+            llg:tracking-[-3%] text-white uppercase mb-5 llg:mb-0"
+            >
               {localizedData?.partner_title}
             </h2>
             <h3 className="h2Title text-clearBlue">
