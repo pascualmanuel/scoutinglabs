@@ -10,66 +10,19 @@ import { graphql } from "gatsby";
 import { useStaticQuery } from "gatsby";
 import { useLanguage } from "../../hooks/LanguageContext.js";
 import LangLink from "../../hooks/LangLink.jsx";
+import useHomeData from "../../hooks/useHomeData.jsx";
 
 const HomeVeo = () => {
   const { locale } = useLanguage();
   const currentLocale = locale;
 
-  const { strapiHome } = useStaticQuery(graphql`
-    query {
-      strapiHome {
-        locale
-        why_scouting_upTitle
-        first_title
-        second_title
-        box_link {
-          title
-          subtitle
-          link
-        }
-        veo_first_title
-        veo_second_title
-        veo_desc
-        veo_button {
-          text
-          link
-        }
-        confian_first_title
-        confian_second_title
-        partner_img {
-          url
-        }
-        localizations {
-          locale
-          why_scouting_upTitle
-          first_title
-          second_title
-          box_link {
-            title
-            subtitle
-            link
-          }
-          veo_first_title
-          veo_second_title
-          veo_desc
-          veo_button {
-            text
-            link
-          }
-          confian_first_title
-          confian_second_title
-          partner_img {
-            url
-          }
-        }
-      }
-    }
-  `);
+  const data = useHomeData();
 
   const localizedData =
-    strapiHome?.localizations?.find(
+    data?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
-    ) || strapiHome;
+    ) || data;
+
   return (
     <>
       <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
