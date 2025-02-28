@@ -7,52 +7,30 @@ import VolleyBg from "../../assets/veocam/sports/Sport-4.webp";
 import HandballBg from "../../assets/veocam/sports/Sport-2.webp";
 import BasketBg from "../../assets/veocam/sports/Sport-1.webp";
 import "../../styles/Home.css";
-const sports = [
-  {
-    name: "Futbol",
-    image: FutbolBg,
-    description:
-      "Graba y analiza tus partidos y entrenamientos de fútbol. Revive los mejores goles, asistencias y jugadas clave con precisión.",
-  },
-  {
-    name: "Rugby",
-    image: RugbyBg,
-    description:
-      "Captura la intensidad de tu partido de rugby. Analiza las jugadas más impactantes, tries y momentos decisivos para seguir mejorando tu nivel.",
-  },
-  {
-    name: "Hockey",
-    image: HockeyBg,
-    description:
-      "Graba y estudia tus partidos y entrenamientos de hockey. Revisa las mejores jugadas, goles y analiza tus tácticas de juego.",
-  },
-  {
-    name: "Volley",
-    image: VolleyBg,
-    description:
-      "Captura la acción de tu partido de vóley. Analiza los mejores saques, bloqueos y puntos cruciales.",
-  },
-  {
-    name: "Handball",
-    image: HandballBg,
-    description:
-      "Graba tu partido de handball y revisa las jugadas más emocionantes, goles y defensas clave.",
-  },
-  {
-    name: "Basket",
-    image: BasketBg,
-    description:
-      "Revive tu partido de baloncesto. Revisa los mejores triples, asistencias y jugadas de alto impacto.",
-  },
-];
-const SportsSection = () => {
-  useEffect(() => {
-    sports.forEach((sport) => {
-      const img = new Image();
-      img.src = sport.image;
-    });
-  }, []);
 
+import usePagesData from "../../hooks/usePagesData";
+import { useLanguage } from "../../hooks/LanguageContext";
+import { ParseMarkdown } from "../../hooks/ParseMarkdown";
+
+const SportsSection = () => {
+  const { veoCamPage } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    veoCamPage?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || veoCamPage;
+
+  console.log(localizedData?.slider);
+
+  let sports = localizedData?.slider;
+
+  // useEffect(() => {
+  //   sports.forEach((sport) => {
+  //     const img = new Image();
+  //     img.src = sport.image;
+  //   });
+  // }, []);
+  console.log(sports);
   const [activeSport, setActiveSport] = useState(sports[0]);
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
@@ -61,6 +39,7 @@ const SportsSection = () => {
     setHoverTimeout(setTimeout(() => setActiveSport(sport), 300));
   };
 
+  console.log(activeSport);
   return (
     <>
       <img src={FutbolBg} className="hidden" />
@@ -72,7 +51,7 @@ const SportsSection = () => {
       <div
         className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-300 background-transition m-auto rounded-md  md:rounded-none"
         style={{
-          backgroundImage: `url('${activeSport.image}'`,
+          backgroundImage: `url('${process.env.REACT_APP_API_URL}${activeSport?.bg_image?.url}'`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -85,14 +64,14 @@ const SportsSection = () => {
                 <div
                   key={sport.name}
                   className={`h2Title my-[10px]  cursor-pointer transition-opacity duration-300 text-center sm:text-start ${
-                    activeSport.name === sport.name
+                    activeSport.deporte === sport?.deporte
                       ? "text-[#FAF9F6] opacity-100"
                       : "text-[#FAF9F6] opacity-50"
                   }`}
                   onMouseEnter={() => handleHover(sport)}
                   onClick={() => setActiveSport(sport)}
                 >
-                  {sport?.name}
+                  {sport?.deporte}
                 </div>
               ))}
             </div>
@@ -102,7 +81,7 @@ const SportsSection = () => {
            sm:pt-[90px] sm:pb-32 pb-10 lm:p-24 text-white"
             >
               <p className="max-w-md body0 !text-lg pr-5 w-[450px]">
-                {activeSport?.description}
+                <ParseMarkdown text={activeSport?.description} />
               </p>
             </div>
           </div>

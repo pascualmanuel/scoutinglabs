@@ -21,6 +21,10 @@ const usePagesData = () => {
             title
             description
           }
+          second_section_buttons {
+            link
+            text
+          }
           second_section_bg {
             url
           }
@@ -28,9 +32,44 @@ const usePagesData = () => {
           second_section_subtitle
 
           suscription_title
+
           suscription_description {
             data {
               suscription_description
+            }
+          }
+          slider {
+            bg_image {
+              url
+            }
+            deporte
+            description
+          }
+          localizations {
+            locale
+            title
+            subtitle
+
+            buttons {
+              link
+              text
+            }
+            second_section_buttons {
+              link
+              text
+            }
+            description
+            boxes {
+              title
+              description
+            }
+
+            slider {
+              bg_image {
+                url
+              }
+              deporte
+              description
             }
           }
         }

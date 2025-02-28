@@ -21,13 +21,12 @@ import { ParseMarkdown } from "../hooks/ParseMarkdown";
 const VeoCam = () => {
   const { veoCamPage } = usePagesData();
   const { locale } = useLanguage();
-  console.log(veoCamPage);
   const localizedData =
     veoCamPage?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || veoCamPage;
 
-  console.log(localizedData);
+  console.log(localizedData.boxes);
 
   const data = [
     {
@@ -77,6 +76,7 @@ const VeoCam = () => {
       starred: false,
     },
   ];
+  console.log(localizedData, locale);
   return (
     <>
       <Layout>
@@ -94,40 +94,36 @@ const VeoCam = () => {
                 Distribuidor oficial de Veo Technologies
               </span>
             </div>
-            <h2 className="h1Title pt-[50px]">
-              Obten tu <br className="sm:hidden" />
-              veo cam3
-            </h2>
+            <h2 className="h1Title pt-[50px]">{localizedData?.title}</h2>
             <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
-            <h2 className="h1Title">
-              {/* exclusivo <br className="sm:hidden" />
-              latam - $ 1199 */}
-              EXCLUSIVO LATAM <span className="line-through">USD1199 </span>
-              USD800
-            </h2>
+            <h2 className="h1Title">{localizedData?.subtitle}</h2>
+
             <div className="py-6 flex flex-col sm:flex-row">
-              <div className="mr-0 sm:mr-4 pb-[10px] sm:pb-0">
-                <Button
-                  text={"Conoce Veo Cam 3"}
-                  width="w-[90vw] sm:w-[225px]"
-                />
-              </div>
-              <div>
-                <Button
-                  text={"Recibir cotización"}
-                  width="w-[90vw] sm:w-[225px]"
-                  bg={"rgba(255, 255, 255, 0.1)"}
-                  link={"/suscripciones#cotizacion"}
-                />
-              </div>
+              {localizedData.buttons.map((btn, index) => (
+                <div
+                  key={index}
+                  className={`mr-0 ${
+                    index === 0 ? "sm:mr-4" : ""
+                  } pb-[10px] sm:pb-0`}
+                >
+                  <Button
+                    text={btn.text}
+                    width="w-[90vw] sm:w-[225px]"
+                    link={btn.link}
+                    bg={btn.bg ? btn.bg : undefined}
+                  />
+                </div>
+              ))}
             </div>
+
             <p className="body2 px-5 text-grey2 ">
-              Todas las cámaras necesitan de una suscripción para su
-              funcionamiento, y cada suscripción aplica solamente para una
-              cámara.
-              <br />
-              Renueva tu suscripción cada 1, 6 o 12 meses para mantener la
-              cámara activa.
+              <ParseMarkdown
+                text={
+                  locale === "EN"
+                    ? localizedData?.description
+                    : localizedData?.description?.data?.description
+                }
+              />
             </p>
           </div>
         </div>
@@ -137,7 +133,7 @@ const VeoCam = () => {
          */}
         <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
-            {data.map((item, index) => (
+            {localizedData?.boxes.map((item, index) => (
               <div
                 key={index}
                 className="box-sc border-t border-[#434652] pt-5"
@@ -162,7 +158,7 @@ const VeoCam = () => {
         <div
           className="h-screen max-h-[800px] min-h-[800px] sm:min-h-[500px] bg-top bg-contain ssm:bg-cover  sm:bg-right md:bg-center lg:bg-left"
           style={{
-            backgroundImage: `linear-gradient(00deg, #03000D 0%, rgba(3, 0, 13, 0) 110.36%), url(${VeoCamBg})`,
+            backgroundImage: `linear-gradient(00deg, #03000D 0%, rgba(3, 0, 13, 0) 110.36%), url(${process.env.REACT_APP_API_URL}${localizedData?.second_section_bg?.url})`,
           }}
         >
           <div className="relative z-10 flex flex-col justify-end  h-full p-6 md:p-16 lg:px-28 sm:pb-[130px] text-white  max-w-screen-2xl mx-auto">
@@ -180,28 +176,27 @@ const VeoCam = () => {
             </div>
 
             <h1 className="h1Title mb-6 lg:mb-8 md:w-[550px] 2xl:w-[auto]">
-              Impulsa tu juego con ia
+              {localizedData?.second_section_title}
             </h1>
             <p className="body0 sm:w-[490px]">
-              Graba, analiza, comparte y transmite tus partidos y entrenamientos
-              con Veo Cam 3.
+              {localizedData?.second_section_subtitle}
             </p>
             <div className="py-6 flex flex-col sm:flex-row">
-              <div className="mr-0 sm:mr-4 pb-[10px] sm:pb-0">
-                <Button
-                  text={"Contactanos"}
-                  width="w-[90vw] sm:w-[185px]"
-                  height="h-[48px]"
-                />
-              </div>
-              <div>
-                <Button
-                  text={"Recibir cotización"}
-                  width="w-[90vw] sm:w-[220px]"
-                  height="h-[48px]"
-                  bg={"rgba(255, 255, 255, 0.1)"}
-                />
-              </div>
+              {localizedData?.second_section_buttons?.map((btn, index) => (
+                <div
+                  key={index}
+                  className={`mr-0 ${
+                    index === 0 ? "sm:mr-4" : ""
+                  } pb-[10px] sm:pb-0`}
+                >
+                  <Button
+                    text={btn.text}
+                    width="w-[90vw] sm:w-[225px]"
+                    link={btn.link}
+                    bg={btn.bg ? btn.bg : undefined}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -210,13 +205,16 @@ const VeoCam = () => {
           <GridSection />
         </div>
         <div className="px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
-          <h3 className="h1Title">planes de suscripcion</h3>
+          <h3 className="h1Title">{localizedData?.suscription_title}</h3>
           <p className="mt-8 body1 opacity-50">
-            Todas las cámaras necesitan de una suscripción para su
-            funcionamiento, y cada suscripción aplica solamente para una cámara.
-            <br />
-            Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
-            activa.
+            <ParseMarkdown
+              text={
+                locale === "EN"
+                  ? localizedData?.suscription_description
+                  : localizedData?.suscription_description?.data
+                      ?.suscription_description
+              }
+            />
           </p>
         </div>
         <div className="mb-[80px] md:mb-[0] md:max-w-[1536px]  md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
