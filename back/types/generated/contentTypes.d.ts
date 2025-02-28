@@ -786,18 +786,12 @@ export interface ApiScoutingPlayScoutingPlay extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
-    buttons: Schema.Attribute.Component<'links.link-item', true> &
+    buttons: Schema.Attribute.Component<'links.button-icon', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }> &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-        },
-        number
-      >;
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -38,17 +38,6 @@
         }
       }
     },
-    "buttons": {
-      "type": "component",
-      "repeatable": true,
-      "component": "links.link-item",
-      "max": 5,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "datos": {
       "type": "component",
       "repeatable": true,
@@ -58,6 +47,17 @@
           "localized": true
         }
       }
+    },
+    "buttons": {
+      "displayName": "Button Icon",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "links.button-icon"
     }
   }
 }

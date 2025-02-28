@@ -69,6 +69,18 @@ export interface LinksBoxLink extends Struct.ComponentSchema {
   };
 }
 
+export interface LinksButtonIcon extends Struct.ComponentSchema {
+  collectionName: 'components_links_button_icons';
+  info: {
+    displayName: 'Button Icon';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
+    text: Schema.Attribute.String;
+  };
+}
+
 export interface LinksLinkItem extends Struct.ComponentSchema {
   collectionName: 'components_links_link_items';
   info: {
@@ -116,6 +128,7 @@ declare module '@strapi/strapi' {
       'icons.icons': IconsIcons;
       'images.logos': ImagesLogos;
       'links.box-link': LinksBoxLink;
+      'links.button-icon': LinksButtonIcon;
       'links.link-item': LinksLinkItem;
       'slider-category.mission-slider': SliderCategoryMissionSlider;
       'slider-category.sports-slider': SliderCategorySportsSlider;
