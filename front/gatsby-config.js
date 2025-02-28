@@ -164,26 +164,24 @@ module.exports = {
                     populate: "*",
                   },
                 },
-              },
-              second_section_buttons: "*",
-              slider: {
-                populate: {
-                  bg_image: {
-                    populate: "*",
+                second_section_buttons: "*",
+                slider: {
+                  populate: {
+                    bg_image: {
+                      populate: "*",
+                    },
                   },
                 },
-              },
-              localizations: {
-                populate: {
-                  buttons: "*",
-                  second_section_bg: true,
-                  boxes: {
-                    populate: {
-                      icon: {
+                localizations: {
+                  populate: {
+                    buttons: "*",
+                    second_section_bg: true,
+                    second_section_buttons: "*",
+                    boxes: {
+                      populate: {
                         populate: "*",
                       },
                     },
-                    second_section_buttons: "*",
                     slider: {
                       populate: {
                         bg_image: {
