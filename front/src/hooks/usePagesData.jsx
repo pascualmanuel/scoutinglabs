@@ -82,6 +82,9 @@ const usePagesData = () => {
           }
           title
           buttons {
+            icon {
+              url
+            }
             link
             text
           }
@@ -96,6 +99,9 @@ const usePagesData = () => {
             }
             title
             buttons {
+              icon {
+                url
+              }
               link
               text
             }

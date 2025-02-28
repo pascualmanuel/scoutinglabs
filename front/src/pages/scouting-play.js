@@ -19,27 +19,7 @@ const ScoutinPlay = () => {
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || scoutingPlayPage;
 
-
-
-  const data = [
-    {
-      title: "+2 m",
-      description: "Followers",
-    },
-    {
-      title: "+123 m",
-      description: "Views",
-    },
-    {
-      title: "+450 k",
-      description: "Likes",
-    },
-    {
-      title: "+123 k",
-      description: "Comments",
-    },
-  ];
-
+  console.log(localizedData);
   return (
     <>
       <Layout>
@@ -56,45 +36,38 @@ const ScoutinPlay = () => {
               LA MISMA PASION
             </h2>
           </div>
-          <div className=" flex flex-wrap justify-center gap-2 sm:gap-4 mt-10">
-            <Button
-              text={"Digitaliza tu torneo"}
-              width="w-[93vw] sm:w-[auto] lg:w-[196px]"
-              height="h-[50px]"
-            />
-            <Button
-              width="w-[30vw] sm:w-[auto]"
-              height="h-[50px]"
-              bg="#F6F6F633"
-            >
-              <div className="flex flex-row items-center px-2">
-                <img src={Tiktok} alt="Tiktok" className="w-6 h-6" />
-                <p className="buttonText hidden md:block ml-4">Tiktok</p>
-              </div>
-            </Button>
-
-            <Button
-              width="w-[30vw] sm:w-[auto]"
-              height="h-[50px]"
-              bg="#F6F6F633"
-            >
-              <div className="flex flex-row items-center px-2">
-                <img src={Instagram} alt="Instagram" className="w-6 h-6" />
-                <p className="buttonText hidden md:block ml-4">Instagram</p>
-              </div>
-            </Button>
-
-            <Button
-              width="w-[30vw] sm:w-[auto]"
-              height="h-[50px]"
-              bg="#F6F6F633"
-            >
-              <div className="flex flex-row items-center px-2">
-                <img src={Youtube} alt="Youtube" className="w-6 h-6" />
-                <p className="buttonText hidden md:block ml-4">Youtube</p>
-              </div>
-            </Button>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-10">
+            {localizedData?.buttons.map((button, index) => (
+              <Button
+                key={index}
+                text={button.text}
+                link={button.link}
+                width={
+                  index === 0
+                    ? "w-[93vw] sm:w-[auto] lg:w-[196px]"
+                    : "w-[30vw] sm:w-[auto]"
+                }
+                height="h-[50px]"
+                bg={index !== 0 ? "#F6F6F633" : undefined}
+              >
+                {/* Mostrar ícono solo si existe */}
+                {button.icon?.url && (
+                  <div className="flex flex-row items-center px-2">
+                    <img
+                      src={`${process.env.REACT_APP_API_URL}/${button?.icon?.url}`}
+                      alt={button.text}
+                      className="w-6 h-6"
+                    />
+                    {/* Texto solo en desktop */}
+                    <p className="buttonText hidden md:block ml-4">
+                      {button.text}
+                    </p>
+                  </div>
+                )}
+              </Button>
+            ))}
           </div>
+
           <div className="mt-14 mx-4">
             <div className="flex flex-row md:gap-6 justify-between max-w-[780px] mg:max-w-[1000px] m-auto">
               {localizedData?.datos.map((item, index) => (
