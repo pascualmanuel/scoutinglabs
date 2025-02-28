@@ -199,12 +199,24 @@ module.exports = {
             queryParams: {
               populate: {
                 logo: true,
-                buttons: "*",
+                buttons: {
+                  populate: {
+                    icon: {
+                      populate: "*",
+                    },
+                  },
+                },
                 datos: "*",
                 localizations: {
                   populate: {
                     logo: true,
-                    buttons: "*",
+                    buttons: {
+                      populate: {
+                        icon: {
+                          populate: "*",
+                        },
+                      },
+                    },
                     datos: "*",
                   },
                 },

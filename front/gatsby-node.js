@@ -1,18 +1,16 @@
 exports.onCreateNode = ({ node }) => {
-  // Función recursiva para reemplazar null por cadena vacía
   const replaceNulls = (value) => {
-    if (value === null) {
-      return "";
-    }
-    if (Array.isArray(value)) {
-      return value.map(replaceNulls);
-    }
-    if (value !== null && typeof value === "object") {
-      const newObj = {};
-      Object.keys(value).forEach((key) => {
-        newObj[key] = replaceNulls(value[key]);
-      });
-      return newObj;
+    if (value === null) return "";
+    if (Array.isArray(value)) return value.map(replaceNulls);
+    if (typeof value === "object") {
+      // Caso especial para botones (tanto en "buttons" como en "localizations.buttons")
+      if (value.link && value.text) {
+        // Identifica objetos que son botones
+        value.icon = value.icon ? replaceNulls(value.icon) : { url: "" }; // Fuerza el campo "icon"
+      }
+      return Object.fromEntries(
+        Object.entries(value).map(([key, val]) => [key, replaceNulls(val)])
+      );
     }
     return value;
   };
