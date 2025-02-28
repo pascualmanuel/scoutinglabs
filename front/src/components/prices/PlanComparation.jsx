@@ -141,8 +141,6 @@ const PlanComparation = () => {
 
   const isVeoCam = window.location.pathname === veoCamUrl;
 
-  console.log(isVeoCam);
-
   return (
     <>
       {location.pathname !== veoCamUrl && (

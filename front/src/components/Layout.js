@@ -33,8 +33,6 @@ const Layout = ({ children }) => {
   // Define la URL en la que quieres ocultar la sección
   const hideSectionUrl = "/contacto/";
 
-  console.log(localizedData.third_col_list);
-
   return (
     <>
       <header className="h-[70px]">
