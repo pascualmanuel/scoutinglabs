@@ -1,42 +1,108 @@
+// import React from "react";
+
+// export const ParseMarkdown = ({ text }) => {
+//   if (!text) return null;
+
+//   // Split by newline
+//   const lines = text.split("\n");
+
+//   return (
+//     <>
+//       {lines.map((originalLine, index) => (
+//         <React.Fragment key={index}>
+//           {processLine(originalLine)}
+//           <br />
+//         </React.Fragment>
+//       ))}
+//     </>
+//   );
+// };
+
+// const processLine = (line) => {
+//   // Check for bullets
+//   const hasBulletInLine = line.trim().startsWith("- ");
+//   let processedLine = hasBulletInLine ? line.replace(/^- /, "• ") : line;
+
+//   // Process markdown formatting segments
+//   const segments = processedLine.split(
+//     /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>)/g
+//   );
+
+//   return (
+//     <span className={hasBulletInLine ? "block ml-4" : ""}>
+//       {segments.map((segment, segmentIndex) => {
+//         if (segment.startsWith("**") && segment.endsWith("**")) {
+//           return <strong key={segmentIndex}>{segment.slice(2, -2)}</strong>;
+//         }
+//         if (segment.startsWith("_") && segment.endsWith("_")) {
+//           return <em key={segmentIndex}>{segment.slice(1, -1)}</em>;
+//         }
+//         if (segment.startsWith("<u>") && segment.endsWith("</u>")) {
+//           return <u key={segmentIndex}>{segment.slice(3, -4)}</u>;
+//         }
+//         if (segment.startsWith("<sBlue>") && segment.endsWith("<sBlue>")) {
+//           return (
+//             <span key={segmentIndex} className="text-clearBlue">
+//               {segment.slice(7, -7)}
+//             </span>
+//           );
+//         }
+//         if (
+//           segment.startsWith("[") &&
+//           segment.includes("](") &&
+//           segment.endsWith(")")
+//         ) {
+//           const [linkText, url] = segment.slice(1, -1).split("](");
+//           return (
+//             <a
+//               key={segmentIndex}
+//               href={url}
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="!underline"
+//             >
+//               {linkText}
+//             </a>
+//           );
+//         }
+//         return segment;
+//       })}
+//     </span>
+//   );
+// };
+
 import React from "react";
 
 export const ParseMarkdown = ({ text }) => {
   if (!text) return null;
 
-  // Dividimos el texto por saltos de línea reales (\n)
   return text.split("\n").map((originalLine, lineIndex) => {
-    // Verificamos si la línea tiene un bullet (comienza con "- ")
-    const hasBulletInLine = originalLine.trim().startsWith("- ");
+    // If the line is empty, return a <br> to render the break
+    if (originalLine.trim() === "") {
+      return <br key={`br-${lineIndex}`} />;
+    }
 
-    // Convertimos bullets de "- " a "• " solo en esta línea
+    const hasBulletInLine = originalLine.trim().startsWith("- ");
     let processedLine = hasBulletInLine
       ? originalLine.replace(/^- /, "• ")
       : originalLine;
 
-    // Dividimos los segmentos con formato
     const segments = processedLine.split(
       /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>)/g
     );
 
     return (
-      <div
-        key={lineIndex}
-        className={hasBulletInLine ? "block ml-4" : ""} // Margen para bullets
-      >
+      <div key={lineIndex} className={hasBulletInLine ? "block ml-4" : ""}>
         {segments.map((segment, segmentIndex) => {
-          // Negrita
           if (segment.startsWith("**") && segment.endsWith("**")) {
             return <strong key={segmentIndex}>{segment.slice(2, -2)}</strong>;
           }
-          // Cursiva
           if (segment.startsWith("_") && segment.endsWith("_")) {
             return <em key={segmentIndex}>{segment.slice(1, -1)}</em>;
           }
-          // Subrayado
           if (segment.startsWith("<u>") && segment.endsWith("</u>")) {
             return <u key={segmentIndex}>{segment.slice(3, -4)}</u>;
           }
-          // Color Azul (sBlue)
           if (segment.startsWith("<sBlue>") && segment.endsWith("<sBlue>")) {
             return (
               <span key={segmentIndex} className="text-clearBlue">
@@ -44,13 +110,12 @@ export const ParseMarkdown = ({ text }) => {
               </span>
             );
           }
-          // Enlaces
           if (
             segment.startsWith("[") &&
             segment.includes("](") &&
             segment.endsWith(")")
           ) {
-            const [text, url] = segment.slice(1, -1).split("](");
+            const [linkText, url] = segment.slice(1, -1).split("](");
             return (
               <a
                 key={segmentIndex}
@@ -59,11 +124,10 @@ export const ParseMarkdown = ({ text }) => {
                 rel="noopener noreferrer"
                 className="!underline"
               >
-                {text}
+                {linkText}
               </a>
             );
           }
-          // Texto normal
           return segment;
         })}
       </div>
