@@ -98,6 +98,38 @@ const plans = [
       "Diferentes",
     ],
   },
+  {
+    name: "Enterprise",
+    price: "$59",
+    categories: {
+      Equipos: "20 equipos por cámara",
+      Usuarios: "600 usuarios por cámara",
+      Almacenamiento: "12 meses",
+      "Horas de grabación": "Sin límite",
+      "Horas de soporte": "24 horas",
+    },
+    features: [
+      true,
+      true,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      false,
+    ],
+    extras: [
+      "Disponible como complemento",
+      "Disponible como complemento",
+      "Disponible como complemento",
+      "Diferentes",
+    ],
+  },
 ];
 
 const featuresList = [
