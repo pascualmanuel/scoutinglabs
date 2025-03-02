@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_addons_suscripciones",
+  "info": {
+    "displayName": "Suscripciones"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "mensual_price": {
+      "type": "string"
+    },
+    "semestral_price": {
+      "type": "string"
+    },
+    "annual_price": {
+      "type": "string"
+    }
+  }
+}

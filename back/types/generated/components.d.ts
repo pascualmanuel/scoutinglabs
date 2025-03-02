@@ -1,5 +1,19 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AddonsSuscripciones extends Struct.ComponentSchema {
+  collectionName: 'components_addons_suscripciones';
+  info: {
+    displayName: 'Suscripciones';
+  };
+  attributes: {
+    annual_price: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    mensual_price: Schema.Attribute.String;
+    semestral_price: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface CardBoxes extends Struct.ComponentSchema {
   collectionName: 'components_card_boxes';
   info: {
@@ -134,6 +148,7 @@ export interface SliderCategorySportsSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'addons.suscripciones': AddonsSuscripciones;
       'card.boxes': CardBoxes;
       'card.card': CardCard;
       'card.data-box': CardDataBox;
