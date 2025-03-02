@@ -59,6 +59,20 @@ module.exports = {
       resolve: "gatsby-source-strapi",
       options: {
         apiURL: "http://localhost:1337",
+        collectionTypes: [
+          {
+            singularName: "accessorie",
+            queryParams: {
+              populate: {
+                image: true,
+                localizations: {
+                  populate: ["image"],
+                },
+              },
+            },
+          },
+        ],
+
         singleTypes: [
           {
             singularName: "footer",

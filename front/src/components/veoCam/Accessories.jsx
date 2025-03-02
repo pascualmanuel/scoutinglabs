@@ -4,6 +4,9 @@ import Accessorie1 from "../../assets/veocam/accessories/Accessorie-1.png";
 import Accessorie2 from "../../assets/veocam/accessories/Accessorie-2.png";
 import Accessorie3 from "../../assets/veocam/accessories/Accessorie-3.png";
 
+import usePagesData from "../../hooks/usePagesData";
+import { useLanguage } from "../../hooks/LanguageContext";
+import { ParseMarkdown } from "../../hooks/ParseMarkdown";
 const Accessories = () => {
   const data = [
     {
@@ -29,6 +32,14 @@ const Accessories = () => {
       imgSrc: Accessorie1, // Aquí puedes agregar la URL de la imagen
     },
   ];
+  const { accessoriesData } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    accessoriesData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || accessoriesData;
+
+  console.log(localizedData);
 
   return (
     <>
@@ -39,9 +50,12 @@ const Accessories = () => {
           </h3>
           <div className="overflow-x-auto llg:overflow-hidden pr-6 llg:pr-0">
             <div className="flex flex-row gap-4 llg:gap-6 justify-between  m-auto w-fit llg:w-[auto]">
-              {data.map((item, index) => (
+              {localizedData?.map((item, index) => (
                 <div key={index} className="h-[290px] w-[310px] text-black">
-                  <img src={item.imgSrc} className="!w-[100%] max-h-[175px]" />
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/${item?.image?.url}`}
+                    className="!w-[100%] max-h-[175px]"
+                  />
                   <h3 className="subH my-4">{item?.title}</h3>
                   <p className="body2">{item?.description}</p>
                 </div>
