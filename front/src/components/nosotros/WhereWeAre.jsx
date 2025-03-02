@@ -1,4 +1,7 @@
 import React from "react";
+import usePagesData from "../../hooks/usePagesData";
+import { useLanguage } from "../../hooks/LanguageContext";
+import { ParseMarkdown } from "../../hooks/ParseMarkdown";
 
 const WhereWeAre = () => {
   const items = [
@@ -8,7 +11,6 @@ const WhereWeAre = () => {
     },
     {
       country: "uruguay",
-      position: "co founder",
       countryCode: "uy",
     },
     {
@@ -61,29 +63,34 @@ const WhereWeAre = () => {
     },
   ];
 
+  const { nosotrosData } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    nosotrosData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || nosotrosData;
+
   return (
     <>
       <div>
         <h3 className="pb-10 pt-40 h1Title text-center m-auto w-[300px] ssm:w-full ">
-          estamos en <span className="text-clearBlue"> +13 paises</span>
+          <ParseMarkdown text={localizedData?.paises_title} />
         </h3>
-
-        {/* <img src="https://flagcdn.com/ar.svg" width="30" alt="Ukraine" /> */}
       </div>
       <div className="flex flex-row flex-wrap gap-4 max-w-[630px] lm:max-w-[900px] m-auto justify-center px-4">
-        {items?.map((item) => (
+        {localizedData?.paises.map((item) => (
           <div
-            key={item.name}
+            key={item?.country_name}
             className="w-[95px] h-[85px] rounded-lg bg-[#eaeaea1a] p-4"
           >
             <div className="w-[25px] h-[25px]  rounded-full ">
               <img
-                src={`https://flagcdn.com/${item.countryCode}.svg`}
+                src={`https://flagcdn.com/${item.country_code}.svg`}
                 className="w-full h-full object-cover rounded-full"
                 alt="Ukraine"
               />
             </div>
-            <p className="body2 mt-3"> {item.country}</p>
+            <p className="body2 mt-3"> {item?.country_name}</p>
           </div>
         ))}
       </div>
