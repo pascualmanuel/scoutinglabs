@@ -13,13 +13,12 @@ import { ParseMarkdown } from "../hooks/ParseMarkdown";
 const ScoutinPlay = () => {
   const { scoutingPlayPage } = usePagesData();
   const { locale } = useLanguage();
-  console.log(scoutingPlayPage);
+
   const localizedData =
     scoutingPlayPage?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || scoutingPlayPage;
 
-  console.log(localizedData);
   return (
     <>
       <Layout>

@@ -20,8 +20,6 @@ const SportsSection = () => {
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || veoCamPage;
 
-  console.log(localizedData?.slider);
-
   let sports = localizedData?.slider;
 
   // useEffect(() => {
@@ -30,7 +28,7 @@ const SportsSection = () => {
   //     img.src = sport.image;
   //   });
   // }, []);
-  console.log(sports);
+
   const [activeSport, setActiveSport] = useState(sports[0]);
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
@@ -39,7 +37,6 @@ const SportsSection = () => {
     setHoverTimeout(setTimeout(() => setActiveSport(sport), 300));
   };
 
-  console.log(activeSport);
   return (
     <>
       <img src={FutbolBg} className="hidden" />

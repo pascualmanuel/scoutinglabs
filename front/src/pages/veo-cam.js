@@ -26,8 +26,6 @@ const VeoCam = () => {
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || veoCamPage;
 
-  console.log(localizedData.boxes);
-
   const data = [
     {
       title: "somos Distribuidores oficiales",
@@ -76,7 +74,7 @@ const VeoCam = () => {
       starred: false,
     },
   ];
-  console.log(localizedData, locale);
+
   return (
     <>
       <Layout>

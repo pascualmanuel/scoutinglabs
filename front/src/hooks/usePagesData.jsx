@@ -112,12 +112,31 @@ const usePagesData = () => {
           }
         }
       }
+      allStrapiAccessorie {
+        nodes {
+          locale
+          title
+          description
+          image {
+            url
+          }
+          localizations {
+            locale
+            title
+            description
+            image {
+              url
+            }
+          }
+        }
+      }
     }
   `);
 
   return {
     veoCamPage: data.allStrapiVeoCam.nodes[0],
     scoutingPlayPage: data.allStrapiScoutingPlay.nodes[0],
+    accessoriesData: data.allStrapiAccessorie.nodes,
   };
 };
 
