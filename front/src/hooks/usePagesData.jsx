@@ -112,6 +112,50 @@ const usePagesData = () => {
           }
         }
       }
+
+      allStrapiNosotros {
+        nodes {
+          locale
+          left_title
+          right_title
+          paragraph {
+            data {
+              paragraph
+            }
+          }
+          boxes {
+            title
+            description
+            media {
+              url
+            }
+          }
+          paises_title
+          paises {
+            country_name
+            country_code
+          }
+          localizations {
+            locale
+            left_title
+            right_title
+            paragraph
+            boxes {
+              title
+              description
+              media {
+                url
+              }
+            }
+            paises_title
+            paises {
+              country_name
+              country_code
+            }
+          }
+        }
+      }
+
       allStrapiAccessorie {
         nodes {
           locale
@@ -137,6 +181,7 @@ const usePagesData = () => {
     veoCamPage: data.allStrapiVeoCam.nodes[0],
     scoutingPlayPage: data.allStrapiScoutingPlay.nodes[0],
     accessoriesData: data.allStrapiAccessorie.nodes,
+    nosotrosData: data.allStrapiNosotros.nodes[0],
   };
 };
 
