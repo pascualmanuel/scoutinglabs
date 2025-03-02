@@ -237,6 +237,33 @@ module.exports = {
               },
             },
           },
+          {
+            singularName: "nosotros",
+            queryParams: {
+              populate: {
+                boxes: {
+                  populate: {
+                    media: {
+                      populate: "*",
+                    },
+                  },
+                },
+                paises: "*",
+                localizations: {
+                  populate: {
+                    paises: "*",
+                    boxes: {
+                      populate: {
+                        media: {
+                          populate: "*",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         ],
         queryLimit: 1000,
       },
