@@ -3,11 +3,12 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface CardBoxes extends Struct.ComponentSchema {
   collectionName: 'components_card_boxes';
   info: {
+    description: '';
     displayName: 'boxes';
   };
   attributes: {
     description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Media<'images' | 'files'>;
+    media: Schema.Attribute.Media<'images' | 'files'>;
     title: Schema.Attribute.String;
   };
 }
@@ -45,6 +46,17 @@ export interface IconsIcons extends Struct.ComponentSchema {
   attributes: {
     icon: Schema.Attribute.Media<'images' | 'files'>;
     link: Schema.Attribute.String;
+  };
+}
+
+export interface IconsPaises extends Struct.ComponentSchema {
+  collectionName: 'components_icons_paises';
+  info: {
+    displayName: 'paises';
+  };
+  attributes: {
+    country_code: Schema.Attribute.String;
+    country_name: Schema.Attribute.String;
   };
 }
 
@@ -126,6 +138,7 @@ declare module '@strapi/strapi' {
       'card.card': CardCard;
       'card.data-box': CardDataBox;
       'icons.icons': IconsIcons;
+      'icons.paises': IconsPaises;
       'images.logos': ImagesLogos;
       'links.box-link': LinksBoxLink;
       'links.button-icon': LinksButtonIcon;

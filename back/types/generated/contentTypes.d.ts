@@ -785,6 +785,74 @@ export interface ApiNavbarNavbar extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiNosotrosNosotros extends Struct.SingleTypeSchema {
+  collectionName: 'nosotross';
+  info: {
+    description: '';
+    displayName: 'Nosotros';
+    pluralName: 'nosotross';
+    singularName: 'nosotros';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    boxes: Schema.Attribute.Component<'card.boxes', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    left_title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::nosotros.nosotros'
+    >;
+    paises: Schema.Attribute.Component<'icons.paises', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    paises_title: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    paragraph: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    right_title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPlanAddonPlanAddon extends Struct.CollectionTypeSchema {
   collectionName: 'plan_addons';
   info: {
@@ -1558,6 +1626,7 @@ declare module '@strapi/strapi' {
       'api::footer.footer': ApiFooterFooter;
       'api::home.home': ApiHomeHome;
       'api::navbar.navbar': ApiNavbarNavbar;
+      'api::nosotros.nosotros': ApiNosotrosNosotros;
       'api::plan-addon.plan-addon': ApiPlanAddonPlanAddon;
       'api::scouting-play.scouting-play': ApiScoutingPlayScoutingPlay;
       'api::subscription-plan.subscription-plan': ApiSubscriptionPlanSubscriptionPlan;

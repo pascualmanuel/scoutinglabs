@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_icons_paises",
+  "info": {
+    "displayName": "paises"
+  },
+  "options": {},
+  "attributes": {
+    "country_name": {
+      "type": "string"
+    },
+    "country_code": {
+      "type": "string"
+    }
+  }
+}
