@@ -948,7 +948,7 @@ export interface ApiSubscriptionPlanSubscriptionPlan
   collectionName: 'subscription_plans';
   info: {
     description: '';
-    displayName: 'subscription-plans';
+    displayName: 'Subscription Plans';
     pluralName: 'subscription-plans';
     singularName: 'subscription-plan';
   };

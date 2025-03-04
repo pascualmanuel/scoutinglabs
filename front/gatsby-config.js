@@ -71,6 +71,17 @@ module.exports = {
               },
             },
           },
+          {
+            singularName: "subscription-plan",
+            queryParams: {
+              populate: {
+                addon: "*",
+                localizations: {
+                  populate: "*",
+                },
+              },
+            },
+          },
         ],
 
         singleTypes: [
