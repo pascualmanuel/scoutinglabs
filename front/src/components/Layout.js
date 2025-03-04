@@ -47,7 +47,7 @@ const Layout = ({ children }) => {
               <div className="border-b border-[#ffffff35] py-6 llg:py-[0px] llg:border-none">
                 <LangLink to={"/"}>
                   <img
-                    src={`${process.env.REACT_APP_API_URL}/${localizedData.logo.url}`}
+                    src={`${process.env.REACT_APP_API_URL}${localizedData.logo.url}`}
                   />
                 </LangLink>
               </div>
@@ -131,7 +131,7 @@ const Layout = ({ children }) => {
                   {localizedData?.social_network?.map((item, index) => (
                     <a href={item?.link} target="_blank">
                       <img
-                        src={`${process.env.REACT_APP_API_URL}/${item?.icon?.url}`}
+                        src={`${process.env.REACT_APP_API_URL}${item?.icon?.url}`}
                       />
                     </a>
                   ))}
@@ -173,7 +173,7 @@ const Layout = ({ children }) => {
                   {localizedData?.social_network?.map((item, index) => (
                     <a href={item.link} target="_blank">
                       <img
-                        src={`${process.env.REACT_APP_API_URL}/${item?.icon?.url}`}
+                        src={`${process.env.REACT_APP_API_URL}${item?.icon?.url}`}
                       />
                     </a>
                   ))}
