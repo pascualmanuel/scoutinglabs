@@ -53,7 +53,7 @@ const ScoutinPlay = () => {
                 {button.icon?.url && (
                   <div className="flex flex-row items-center px-2">
                     <img
-                      src={`${process.env.REACT_APP_API_URL}/${button?.icon?.url}`}
+                      src={`${process.env.REACT_APP_API_URL}${button?.icon?.url}`}
                       alt={button.text}
                       className="w-6 h-6"
                     />
