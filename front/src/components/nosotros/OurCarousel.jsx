@@ -23,7 +23,7 @@ const OurCarousel = () => {
           {localizedData.boxes?.map((item) => (
             <div key={item.name} className="w-[305px] h-[405px] mt-16">
               <img
-                src={`${process.env.REACT_APP_API_URL}/${item?.media?.url}`}
+                src={`${process.env.REACT_APP_API_URL}${item?.media?.url}`}
                 className="w-full h-[305px] rounded-lg object-cover"
               />
               <p className="subH2 text-grey4 mt-10 mb-1">{item.description}</p>
