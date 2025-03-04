@@ -11,6 +11,9 @@ import { useLocation } from "@reach/router";
 import usePagesData from "../../hooks/usePagesData";
 import { useLanguage } from "../../hooks/LanguageContext";
 
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+
 const PlanComparation = () => {
   const { subsData } = usePagesData();
   const { locale } = useLanguage();
@@ -23,18 +26,20 @@ const PlanComparation = () => {
 
   const location = useLocation(); // Obtiene la URL actual
 
-  const [subscription, setSubscription] = useState([]);
+  let subscription = localizedData;
+
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
   const [selectedPlan, setSelectedPlan] = useState("anual");
   const [thumbPosition, setThumbPosition] = useState({ width: 0, left: 0 });
   const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
   const [planForWhatsApp, setPlanForWhatsApp] = useState(null);
-  const [selectedPlanType, setSelectedPlanType] = useState("mensual");
+  // const [selectedPlanType, setSelectedPlanType] = useState("mensual");
   const [addonsForWhatsApp, setAddonsForWhatsApp] = useState(null);
   const whatsappWindowRef = useRef(null); // Ref para la ventana de WhatsApp
 
   const buttonsRef = useRef([]);
+
   // Obtener posición del botón activo
   useEffect(() => {
     const index = ["mensual", "semestral", "anual"].indexOf(selectedPlan);
@@ -58,29 +63,24 @@ const PlanComparation = () => {
     );
 
     const addonsTotal =
-      plan.plan_addons?.reduce((acc, addon) => {
+      plan.addon?.reduce((acc, addon) => {
         const addonKey = `${plan.id}-${addon.id}`;
-        return selectedAddons.includes(addonKey)
-          ? acc + parseFloat(addon.addonPrice.replace(/[^0-9.-]+/g, ""))
-          : acc;
+        if (selectedAddons.includes(addonKey)) {
+          // Seleccionamos el precio según el plan actual
+          const price =
+            selectedPlan === "anual"
+              ? addon.annual_price
+              : selectedPlan === "mensual"
+              ? addon.mensual_price
+              : addon.semestral_price;
+          return acc + parseFloat(price.replace(/[^0-9.-]+/g, ""));
+        }
+        return acc;
       }, 0) || 0;
 
     return basePrice + addonsTotal;
   };
 
-  // Función para obtener datos de Strapi
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/subscription-plans?populate=*`)
-      .then((response) => {
-        setSubscription(response.data.data);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error("Error fetching subscription plans:", error);
-      });
-  }, []);
-  // Función para manejar el cambio del tipo de suscripción (Mensual, Semestral, Anual)
   const handlePlanChange = (e) => {
     setSelectedPlan(e.target.value);
   };
@@ -100,50 +100,52 @@ const PlanComparation = () => {
     // console.log("Addons seleccionados:", selectedAddons);
     // console.log("Total actual:", totalPrice);
   }, [selectedAddons, totalPrice]);
+  const [selectedOrders, setSelectedOrders] = useState([]);
 
-  // const handleWhatsAppClick = (plan) => {
-  //   // 1. Obtener addons seleccionados para ESTE plan específico
-  //   // console.log(plan, "plan");
-  //   const addonsForPlan =
-  //     plan.plan_addons?.filter((addon) =>
-  //       selectedAddons.includes(`${plan.id}-${addon.id}`)
-  //     ) || [];
-
-  //   // 2. Mapear periodicidad a formato legible
-  //   const periodicidadMap = {
-  //     anual: "Anual",
-  //     semestral: "Semestral",
-  //     mensual: "Mensual",
-  //   };
-
-  //   // 3. Construir mensaje
-  //   const mensaje = `Hola, quiero suscribirme al plan *${plan?.title} (${
-  //     periodicidadMap[selectedPlan]
-  //   })* por USD *${calculatePlanTotal(plan).toFixed(
-  //     2
-  //   )}/mes*.\n\nAddons incluidos: ${
-  //     addonsForPlan.length > 0
-  //       ? addonsForPlan.map((a) => a.addonName + a.addonPrice).join(", ")
-  //       : "Ninguno"
-  //   }`;
-
-  //   // 4. Codificar y abrir enlace
-  //   const url = `https://wa.me/5491151632960?text=${encodeURIComponent(
-  //     mensaje
-  //   )}`;
-  //   window.open(url, "_blank");
-  // };
   const handleWhatsAppClick = (plan) => {
+    // Filtramos los addons seleccionados para este plan
     const addonsForPlan =
-      plan.plan_addons?.filter((addon) =>
+      plan.addon?.filter((addon) =>
         selectedAddons.includes(`${plan.id}-${addon.id}`)
       ) || [];
 
-    setAddonsForWhatsApp(addonsForPlan);
+    // Creamos un nuevo array con solo el título y el precio correspondiente
+    const simplifiedAddons = addonsForPlan.map((addon) => ({
+      title: addon.title,
+      price:
+        selectedPlan === "anual"
+          ? addon.annual_price
+          : selectedPlan === "mensual"
+          ? addon.mensual_price
+          : addon.semestral_price,
+    }));
+
+    // Calculamos el total usando la función ya definida
+    const total = calculatePlanTotal(plan);
+
+    // Armamos el objeto de selección
+    const selectedOrder = {
+      planId: plan.id,
+      planTitle: plan.title,
+      paymentMode: selectedPlan, // "anual", "mensual" o "semestral"
+      basePrice:
+        selectedPlan === "mensual"
+          ? plan.mensualPrice
+          : selectedPlan === "semestral"
+          ? plan.semestralPrice
+          : plan.annualPrice,
+      addons: simplifiedAddons, // Solo el título y el precio seleccionado
+      total,
+    };
+
+    // Guardamos en el array (se puede agregar o reemplazar según la lógica que necesites)
+    setSelectedOrders((prev) => [...prev, selectedOrder]);
+
+    // También seteamos lo que ya tenías para el popup de WhatsApp
+    setAddonsForWhatsApp(simplifiedAddons);
     setPlanForWhatsApp(plan);
     setShowWhatsAppPopup(true);
   };
-  console.log(subscription, "subscription");
 
   // const sortedSubscriptions = [...subscription].sort((a, b) => {
   //   if (a.featuredCard) return -1; // Featured comes first
@@ -238,7 +240,7 @@ const PlanComparation = () => {
                       {item?.title}
                     </p>
                     <p className="body2 text-center">
-                      <ParseMarkdown text={item?.desc} />
+                      <ParseMarkdown text={item?.desc?.data?.desc} />
                     </p>
 
                     <p className="aeonik font-thin text-base">
@@ -254,43 +256,70 @@ const PlanComparation = () => {
                       Incluye:
                     </span>
                     <p className="text-xs">
-                      <ParseMarkdown text={item?.whatInclude} />
+                      <ParseMarkdown
+                        text={item?.whatInclude?.data?.whatInclude}
+                      />
                     </p>
                   </div>
                   <div className="mt-5 select-none">
-                    {item.plan_addons?.map((addon) => (
+                    {item.addon?.map((addon) => (
                       <div
                         key={addon.id}
                         onClick={() =>
-                          handleAddonClick(item.id, addon.id, addon.addonPrice)
-                        } // item.id es el ID del plan padre
-                        className={`add-on text-xs  xll:w-[100%]  h-[65px] flex flex-row justify-between  rounded-lg mb-2 cursor-pointer
-                      ${item.featuredCard ? "bg-[#ffffff1a]" : "bg-[#96979b1a]"}
-                      ${
-                        selectedAddons.includes(`${item.id}-${addon.id}`)
-                          ? ""
-                          : ""
-                      }
-                    `}
+                          handleAddonClick(item.id, addon.id, addon)
+                        }
+                        className={`add-on text-xs xll:w-[100%] h-[65px] flex flex-row justify-between rounded-lg mb-2 cursor-pointer
+                                ${
+                                  item.featuredCard
+                                    ? "bg-[#ffffff1a]"
+                                    : "bg-[#96979b1a]"
+                                }
+                                ${
+                                  selectedAddons.includes(
+                                    `${item.id}-${addon.id}`
+                                  )
+                                    ? ""
+                                    : ""
+                                }`}
                       >
                         <div className="flex flex-col justify-around px-2 select-none">
-                          <span className="title">{addon.addonName}</span>
+                          <span className="title">{addon?.title}</span>
+                          <span
+                            className="underline cursor-pointer"
+                            data-tooltip-id={`tooltip-${addon?.id}`}
+                            data-tooltip-content={addon?.description}
+                          >
+                            Saber más
+                          </span>
+                          <Tooltip
+                            id={`tooltip-${addon?.id}`}
+                            place="top"
+                            effect="solid"
+                            className="max-w-xs bg-gray-800 text-white text-sm p-2 rounded- z-50"
+                          />
                         </div>
                         <div className="flex flex-col justify-around px-2 select-none items-end">
-                          <span>{addon.addonPrice}</span>
+                          <span>
+                            + USD{" "}
+                            {selectedPlan === "anual"
+                              ? addon.annual_price
+                              : selectedPlan === "mensual"
+                              ? addon.mensual_price
+                              : addon.semestral_price}
+                            /mes
+                          </span>
                           <div
-                            className={`w-[17px] h-[17px] border-2  rounded-full flex items-center justify-center transition-all ${
+                            className={`w-[17px] h-[17px] border-2 rounded-full flex items-center justify-center transition-all ${
                               selectedAddons.includes(`${item.id}-${addon.id}`)
                                 ? item.featuredCard
                                   ? "border-white"
                                   : "border-skyBlue"
                                 : ""
-                            } 
-                               ${
-                                 item.featuredCard
-                                   ? "border-grey0"
-                                   : "border-grey1"
-                               }`}
+                            } ${
+                              item.featuredCard
+                                ? "border-grey0"
+                                : "border-grey1"
+                            }`}
                           >
                             <span
                               className={`w-[9px] h-[9px] rounded-full transition-all ${
@@ -350,7 +379,7 @@ const PlanComparation = () => {
               <WhatsAppPopup
                 plan={planForWhatsApp}
                 addons={addonsForWhatsApp}
-                selectedPlanType={selectedPlanType}
+                selectedPlanType={selectedPlan}
                 onClose={() => setShowWhatsAppPopup(false)}
                 whatsappWindowRef={whatsappWindowRef} // Pasamos el ref al popup
               />

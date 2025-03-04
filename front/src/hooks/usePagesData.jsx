@@ -177,6 +177,7 @@ const usePagesData = () => {
       allStrapiSubscriptionPlan {
         nodes {
           locale
+          id
           title
           desc {
             data {
@@ -202,6 +203,7 @@ const usePagesData = () => {
           }
           localizations {
             locale
+            id
             title
             desc
             mensualPrice
