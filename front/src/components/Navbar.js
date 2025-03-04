@@ -110,34 +110,25 @@ const Navbar = () => {
     setIsTransitioning(true);
 
     let newPosition;
-    switch (location.pathname) {
-      case "/veo-cam/":
-        newPosition = 0;
-        break;
-      case "/scouting-play/":
-        newPosition = 90;
-        break;
-      case "/nosotros/":
-        newPosition = 180;
-        break;
-      case "/suscripciones/":
-        newPosition = 270;
-        break;
-      case "/ayuda/":
-        newPosition = helpPosition;
-        break;
-      case "/":
-        newPosition = null;
-        break;
-      case "/en/":
-        newPosition = null;
-        break;
-      case "/contacto/":
-        newPosition = null;
-        break;
-      default:
-        newPosition = dotPositionRef.current; // Mantener la última posición si no hay cambio de ruta
-        break;
+
+    if (location.pathname.includes("/veo-cam/")) {
+      newPosition = 0;
+    } else if (location.pathname.includes("/scouting-play/")) {
+      newPosition = 90;
+    } else if (location.pathname.includes("/nosotros/")) {
+      newPosition = 180;
+    } else if (location.pathname.includes("/suscripciones/")) {
+      newPosition = 270;
+    } else if (location.pathname.includes("/ayuda/")) {
+      newPosition = helpPosition;
+    } else if (
+      location.pathname === "/" ||
+      location.pathname === "/en/" ||
+      location.pathname === "/contacto/"
+    ) {
+      newPosition = null;
+    } else {
+      newPosition = dotPositionRef.current; // Mantener la última posición si no hay cambio de ruta
     }
 
     // Guardamos la nueva posición en localStorage para persistir entre visitas

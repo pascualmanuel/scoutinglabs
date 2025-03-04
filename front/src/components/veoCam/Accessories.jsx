@@ -39,8 +39,6 @@ const Accessories = () => {
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || accessoriesData;
 
-  console.log(localizedData);
-
   return (
     <>
       <div className="bg-grey0 py-28">

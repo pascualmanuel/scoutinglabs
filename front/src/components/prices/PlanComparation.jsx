@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import Button from "../Button";
 import WhatsAppIcon from "../../assets/icons/WhatsApp.svg";
 import WhatsAppDarkIcon from "../../assets/icons/wapp_black.svg";
@@ -7,10 +7,23 @@ import axios from "axios";
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
 import WhatsAppPopup from "../contact/WhatsAppPopup";
 import { useLocation } from "@reach/router";
+
+import usePagesData from "../../hooks/usePagesData";
+import { useLanguage } from "../../hooks/LanguageContext";
+
 const PlanComparation = () => {
+  const { subsData } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    subsData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || subsData;
+
+  console.log(localizedData);
+
   const location = useLocation(); // Obtiene la URL actual
 
-  const [suscriptions, setSuscriptions] = useState([]);
+  const [subscription, setSubscription] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
   const [selectedPlan, setSelectedPlan] = useState("anual");
@@ -19,7 +32,6 @@ const PlanComparation = () => {
   const [planForWhatsApp, setPlanForWhatsApp] = useState(null);
   const [selectedPlanType, setSelectedPlanType] = useState("mensual");
   const [addonsForWhatsApp, setAddonsForWhatsApp] = useState(null);
-
   const whatsappWindowRef = useRef(null); // Ref para la ventana de WhatsApp
 
   const buttonsRef = useRef([]);
@@ -61,13 +73,13 @@ const PlanComparation = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/subscription-plans?populate=*`)
       .then((response) => {
-        setSuscriptions(response.data.data);
+        setSubscription(response.data.data);
+        console.log(response);
       })
       .catch((error) => {
         console.error("Error fetching subscription plans:", error);
       });
   }, []);
-
   // Función para manejar el cambio del tipo de suscripción (Mensual, Semestral, Anual)
   const handlePlanChange = (e) => {
     setSelectedPlan(e.target.value);
@@ -75,6 +87,7 @@ const PlanComparation = () => {
 
   const handleAddonClick = (planId, addonId, addonPrice) => {
     const uniqueAddonKey = `${planId}-${addonId}`;
+    console.log(planId, "3");
 
     setSelectedAddons((prev) =>
       prev.includes(uniqueAddonKey)
@@ -130,8 +143,9 @@ const PlanComparation = () => {
     setPlanForWhatsApp(plan);
     setShowWhatsAppPopup(true);
   };
+  console.log(subscription, "subscription");
 
-  // const sortedSubscriptions = [...suscriptions].sort((a, b) => {
+  // const sortedSubscriptions = [...subscription].sort((a, b) => {
   //   if (a.featuredCard) return -1; // Featured comes first
   //   if (b.featuredCard) return 1;
   //   return 0; // Keep other cards in original order
@@ -198,14 +212,14 @@ const PlanComparation = () => {
       <div className="pb-[80px] md:pb-[180px] md:max-w-[1536px]  mt-14 md:mt-[75px] m-auto">
         <div className="overflow-x-auto  relative">
           <div className="mt-10 flex flex-row  justify-evenly max-w-screen-2xl m-auto w-fit mg:w-[auto] px-6 mg:px-0 gap-4 mg:gap-0">
-            {suscriptions.map((item, index) => (
+            {subscription.map((item, index) => (
               <div
                 key={index}
                 className={`relative  flex flex-col items-center  min-h-[650px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
                  ${
                    item.featuredCard
-                     ? "l-gradient-starred text-white order-1 md:order-2"
+                     ? "l-gradient-starred text-white order-1 md:order-4"
                      : `order-4 md:order-${index + 2}`
                  } `}
               >

@@ -174,6 +174,52 @@ const usePagesData = () => {
           }
         }
       }
+      allStrapiSubscriptionPlan {
+        nodes {
+          locale
+          title
+          desc {
+            data {
+              desc
+            }
+          }
+          mensualPrice
+          semestralPrice
+          annualPrice
+          featuredCard
+          whatInclude {
+            data {
+              whatInclude
+            }
+          }
+          addon {
+            id
+            title
+            description
+            mensual_price
+            semestral_price
+            annual_price
+          }
+          localizations {
+            locale
+            title
+            desc
+            mensualPrice
+            semestralPrice
+            annualPrice
+            featuredCard
+            whatInclude
+            addon {
+              id
+              title
+              description
+              mensual_price
+              semestral_price
+              annual_price
+            }
+          }
+        }
+      }
     }
   `);
 
@@ -182,6 +228,7 @@ const usePagesData = () => {
     scoutingPlayPage: data.allStrapiScoutingPlay.nodes[0],
     accessoriesData: data.allStrapiAccessorie.nodes,
     nosotrosData: data.allStrapiNosotros.nodes[0],
+    subsData: data.allStrapiSubscriptionPlan.nodes,
   };
 };
 
