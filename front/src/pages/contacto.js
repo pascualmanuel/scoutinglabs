@@ -3,7 +3,19 @@ import Layout from "../components/Layout";
 import ContactForm from "../components/contact/ContactForm.jsx";
 import TickContact from "../assets/icons/tick-contact.svg";
 import ContactCircles from "../components/contact/ContactCircles.js";
+
+import usePagesData from "../hooks/usePagesData";
+import { useLanguage } from "../hooks/LanguageContext";
+import { ParseMarkdown } from "../hooks/ParseMarkdown";
+
 const Contacto = () => {
+  const { contactData } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    contactData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || contactData;
+
   return (
     <>
       {" "}
@@ -12,12 +24,12 @@ const Contacto = () => {
           <div className="mb-10">
             <ContactCircles />
             <h2 className="h1Title mg:text-[110px] mg:leading-[102px] mg:tracking-[-0.03em] mb-8 lg:max-w-[550px]">
-              GET IN TOUCH WITH OUR SALES TEAM
+              {localizedData?.title}
             </h2>
             <div className="flex flex-row items-center">
               <img src={TickContact} />
               <p className="ml-2 body1 text-grey3">
-                Access to dedicated product specialists
+                {localizedData?.bullet_point_subtitle}
               </p>
             </div>
           </div>

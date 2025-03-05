@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
+import NosotrosCa from "../assets/nosotros/nosotros-bg.webp";
 import OurCarousel from "../components/nosotros/OurCarousel.jsx";
 import WhereWeAre from "../components/nosotros/WhereWeAre.jsx";
 import usePagesData from "../hooks/usePagesData";
@@ -13,7 +14,7 @@ const Nosotros = () => {
     nosotrosData?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || nosotrosData;
-
+  // style={{backgroundColor: `${nosotros}`}}
   return (
     <>
       <Layout>

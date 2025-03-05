@@ -5,7 +5,18 @@ import PlanComparation from "../components/prices/PlanComparation";
 import VeoCamImg from "../assets/home/veo-transparent3.webp";
 import VeoLogo from "../assets/icons/veo-logo.svg";
 import Button from "../components/Button";
+import usePagesData from "../hooks/usePagesData";
+import { useLanguage } from "../hooks/LanguageContext";
+import { ParseMarkdown } from "../hooks/ParseMarkdown";
+
 const Suscripciones = () => {
+  const { subscriptionPageData } = usePagesData();
+  const { locale } = useLanguage();
+  const localizedData =
+    subscriptionPageData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || subscriptionPageData;
+
   return (
     <>
       <Layout>
@@ -24,16 +35,17 @@ const Suscripciones = () => {
                   Distribuidor oficial de Veo Technologies
                 </span>
               </div>
+
               <h2 className="h1Title w-[300px] mg:w-[400px]">
-                PRECIOS
-                <span className="text-skyBlue"> EXCLUSIVOS PARA LATAM</span>
+                <ParseMarkdown text={localizedData?.subscription_title} />
               </h2>
+
               <div className="mt-6">
                 <Button
-                  text={"Contactanos"}
+                  text={localizedData.button.text}
                   width="w-[155px]"
                   height="h-[48px]"
-                  link={"/"}
+                  link={localizedData.button.link}
                 />
               </div>
             </div>
@@ -51,16 +63,11 @@ const Suscripciones = () => {
                   src={VeoCamImg}
                   className="absolute top-5 right-5 lg:right-20  w-auto h-[80px] ssm:h-[120px] md:h-[160px] xxl:h-[200px] xxl:right-[37px] xxl:top-[65px]"
                 />
-                <h2 className="grotzec  w-[225px] text-[]">
-                  <span className="line-through text-[45px]">USD1199</span>{" "}
-                  <br /> <span className="text-[64px] leading-8">USD800</span>
-                  <br />
-                  <span className="text-[45px] leading-10">UN SOLO PAGO</span>
+                <h2 className="grotzec text-[55px] leading-[1.1]  w-[300px] text-[]">
+                  <ParseMarkdown text={localizedData?.cta_title} />
                 </h2>
                 <p className="body1 !text-xs sm:!text-base text-grey1 pt-4 pb-8 max-w-[340px] lg:max-w-none">
-                  La cámara necesita de una suscripción para su funcionamiento.
-                  Renueva tu suscripción cada 1, 6 o 12 meses para mantener la
-                  cámara activa.
+                  <ParseMarkdown text={localizedData?.cta_description} />
                 </p>
               </div>
             </div>

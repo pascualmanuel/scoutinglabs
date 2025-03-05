@@ -156,7 +156,7 @@ const VeoCam = () => {
         <div
           className="h-screen max-h-[800px] min-h-[800px] sm:min-h-[500px] bg-top bg-contain ssm:bg-cover  sm:bg-right md:bg-center lg:bg-left"
           style={{
-            backgroundImage: `linear-gradient(00deg, #03000D 0%, rgba(3, 0, 13, 0) 110.36%), url(${process.env.REACT_APP_API_URL}${localizedData?.second_section_bg?.url})`,
+            backgroundImage: `linear-gradient(00deg, #03000D 0%, rgba(3, 0, 13, 0) 110.36%), url(${localizedData?.second_section_bg?.url})`,
           }}
         >
           <div className="relative z-10 flex flex-col justify-end  h-full p-6 md:p-16 lg:px-28 sm:pb-[130px] text-white  max-w-screen-2xl mx-auto">

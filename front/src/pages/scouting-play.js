@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import SPLogo from "../assets/scoutingplay/scouting-play-logo.svg";
-import Tiktok from "../assets/scoutingplay/icons/tiktok.svg";
-import Instagram from "../assets/scoutingplay/icons/instagram.svg";
-import Youtube from "../assets/scoutingplay/icons/yb.svg";
+
 import ScoutingPLayReels from "../components/ScoutingPlayReels";
 import usePagesData from "../hooks/usePagesData";
 import { useLanguage } from "../hooks/LanguageContext";
@@ -53,7 +51,7 @@ const ScoutinPlay = () => {
                 {button.icon?.url && (
                   <div className="flex flex-row items-center px-2">
                     <img
-                      src={`${process.env.REACT_APP_API_URL}${button?.icon?.url}`}
+                      src={`${button?.icon?.url}`}
                       alt={button.text}
                       className="w-6 h-6"
                     />
