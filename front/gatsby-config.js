@@ -275,6 +275,34 @@ module.exports = {
               },
             },
           },
+          {
+            singularName: "suscripciones",
+            queryParams: {
+              populate: {
+                button: "*",
+                cta_img: true,
+                localizations: {
+                  populate: {
+                    button: "*",
+                    cta_img: true,
+                  },
+                },
+              },
+            },
+          },
+          {
+            singularName: "contact",
+            queryParams: {
+              populate: {
+                imagenes_nosotros: true,
+                localizations: {
+                  populate: {
+                    imagenes_nosotros: true,
+                  },
+                },
+              },
+            },
+          },
         ],
         queryLimit: 1000,
       },
