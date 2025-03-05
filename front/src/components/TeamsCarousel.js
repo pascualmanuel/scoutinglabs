@@ -27,7 +27,7 @@ const TeamsCarousel = () => {
           <div className="slide-track">
             {loopingFirst.map((image, index) => (
               <div className="slide" key={`top-${index}`}>
-                <img src={`${process.env.REACT_APP_API_URL}${image.url}`} />
+                <img src={`${image.url}`} />
               </div>
             ))}
           </div>
@@ -38,7 +38,7 @@ const TeamsCarousel = () => {
           <div className="slide-track-2">
             {loopingSecond.map((image, index) => (
               <div className="slide" key={`bottom-${index}`}>
-                <img src={`${process.env.REACT_APP_API_URL}${image.url}`} />
+                <img src={`${image.url}`} />
               </div>
             ))}
           </div>

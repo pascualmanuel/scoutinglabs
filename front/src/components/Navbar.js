@@ -191,7 +191,7 @@ const Navbar = () => {
           <LangLink to={"/"}>
             <div className="ml-[20px] mg:ml-[80px] xl:ml-28">
               <img
-                src={`${process.env.REACT_APP_API_URL}${localizedData.logo.url}`}
+                src={`${localizedData.logo.url}`}
                 alt="Logo"
                 className="w-[120px]"
               />
