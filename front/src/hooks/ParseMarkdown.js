@@ -15,7 +15,7 @@ export const ParseMarkdown = ({ text }) => {
       : originalLine;
 
     const segments = processedLine.split(
-      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>)/g
+      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>|~.*?~)/g
     );
 
     return (
@@ -34,6 +34,16 @@ export const ParseMarkdown = ({ text }) => {
             return (
               <span key={segmentIndex} className="text-clearBlue">
                 {segment.slice(7, -7)}
+              </span>
+            );
+          }
+          if (segment.startsWith("~") && segment.endsWith("~")) {
+            return (
+              <span
+                key={segmentIndex}
+                style={{ textDecoration: "line-through" }}
+              >
+                {segment.slice(1, -1)}
               </span>
             );
           }

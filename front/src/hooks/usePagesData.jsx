@@ -222,6 +222,60 @@ const usePagesData = () => {
           }
         }
       }
+      allStrapiContact {
+        nodes {
+          locale
+          title
+          bullet_point_subtitle
+          imagenes_nosotros {
+            url
+          }
+          localizations {
+            locale
+            title
+            bullet_point_subtitle
+            imagenes_nosotros {
+              url
+            }
+          }
+        }
+      }
+      allStrapiSuscripciones {
+        nodes {
+          locale
+          subscription_title
+          button {
+            text
+            link
+          }
+          cta_img {
+            url
+          }
+          cta_title
+          cta_description
+          planes_title
+          planes_subtitle {
+            data {
+              planes_subtitle
+            }
+          }
+          localizations {
+            locale
+            subscription_title
+            button {
+              text
+              link
+            }
+            cta_img {
+              url
+            }
+            cta_title
+            cta_description
+            planes_title
+            planes_subtitle
+          }
+        }
+      }
     }
   `);
 
@@ -231,6 +285,8 @@ const usePagesData = () => {
     accessoriesData: data.allStrapiAccessorie.nodes,
     nosotrosData: data.allStrapiNosotros.nodes[0],
     subsData: data.allStrapiSubscriptionPlan.nodes,
+    contactData: data.allStrapiContact.nodes[0],
+    subscriptionPageData: data.allStrapiSuscripciones.nodes[0]
   };
 };
 
