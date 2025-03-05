@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "suscriptions_title": {
+    "subscription_title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -82,7 +82,7 @@
       },
       "type": "richtext"
     },
-    "suscription": {
+    "subscription": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::subscription-plan.subscription-plan"
