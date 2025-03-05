@@ -15,15 +15,16 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 const PlanComparation = () => {
-  const { subsData } = usePagesData();
+  const { subsData, subscriptionPageData } = usePagesData();
   const { locale } = useLanguage();
   const localizedData =
     subsData?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || subsData;
-
-  console.log(localizedData);
-
+  const dataSubPage =
+    subscriptionPageData?.localizations?.find(
+      (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
+    ) || subscriptionPageData;
   const location = useLocation(); // Obtiene la URL actual
 
   let subscription = localizedData;
@@ -162,15 +163,16 @@ const PlanComparation = () => {
       {location.pathname !== veoCamUrl && (
         <div className=" text-center text-iBlue px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
           <h2 className="h1Title pb-10 pt-16 lg:pt-20  ">
-            Planes de suscripción
+            {dataSubPage?.planes_title}
           </h2>
           <p className=" opacity-50 ">
-            Todas las cámaras necesitan de una suscripción para su
-            funcionamiento, y cada suscripción aplica solamente para una cámara.
-          </p>
-          <p className="  opacity-50 ">
-            Renueva tu suscripción cada 1, 6 o 12 meses para mantener la cámara
-            activa.
+            <ParseMarkdown
+              text={
+                locale === "EN"
+                  ? dataSubPage?.planes_subtitle
+                  : dataSubPage?.planes_subtitle?.data?.planes_subtitle
+              }
+            />
           </p>
         </div>
       )}
@@ -295,7 +297,7 @@ const PlanComparation = () => {
                             id={`tooltip-${addon?.id}`}
                             place="top"
                             effect="solid"
-                            className="max-w-xs bg-gray-800 text-white text-sm p-2 rounded- z-50"
+                            className="max-w-xs bg-gray-800 text-white  p-2 rounded- z-50  body1"
                           />
                         </div>
                         <div className="flex flex-col justify-around px-2 select-none items-end">

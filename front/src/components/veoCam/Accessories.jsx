@@ -1,37 +1,10 @@
 import React from "react";
 import Button from "../Button";
-import Accessorie1 from "../../assets/veocam/accessories/Accessorie-1.png";
-import Accessorie2 from "../../assets/veocam/accessories/Accessorie-2.png";
-import Accessorie3 from "../../assets/veocam/accessories/Accessorie-3.png";
-
 import usePagesData from "../../hooks/usePagesData";
 import { useLanguage } from "../../hooks/LanguageContext";
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
+
 const Accessories = () => {
-  const data = [
-    {
-      title: "Tripode  de  5,2 metros",
-      description:
-        "Te recomendaremos la suscripción que mejor se adapte a lo que necesitas.",
-      imgSrc: Accessorie1, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "Tripode  de  7,4 metros",
-      description: "Llevamos tu cámara y la configuramos donde quieras.",
-      imgSrc: Accessorie2, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "travel case",
-      description:
-        "Te enseñamos a sacarle el jugo a los datos y mejorar tu nivel con la Veo Cam 3.",
-      imgSrc: Accessorie3, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "travel bag",
-      description: "Estamos conectados para resolver tus inquietudes.",
-      imgSrc: Accessorie1, // Aquí puedes agregar la URL de la imagen
-    },
-  ];
   const { accessoriesData } = usePagesData();
   const { locale } = useLanguage();
   const localizedData =

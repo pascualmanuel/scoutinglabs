@@ -26,7 +26,7 @@ function Locations() {
     acc[item.id] = {
       title: item.title,
       description: item.description,
-      video: `${process.env.REACT_APP_API_URL}${item.video.url}`, // Concatenar URL base con la ruta del video
+      video: `${item.video.url}`, // Concatenar URL base con la ruta del video
     };
     return acc;
   }, {});

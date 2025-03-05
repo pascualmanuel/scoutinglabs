@@ -1,11 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import FutbolBg from "../../assets/veocam/sports/Sport-5.webp";
-import RugbyBg from "../../assets/veocam/sports/Sport-6.webp";
-import HockeyBg from "../../assets/veocam/sports/Sport-3.webp";
-import VolleyBg from "../../assets/veocam/sports/Sport-4.webp";
-import HandballBg from "../../assets/veocam/sports/Sport-2.webp";
-import BasketBg from "../../assets/veocam/sports/Sport-1.webp";
+
 import "../../styles/Home.css";
 
 import usePagesData from "../../hooks/usePagesData";
@@ -39,16 +34,16 @@ const SportsSection = () => {
 
   return (
     <>
-      <img src={FutbolBg} className="hidden" />
+      {/* <img src={FutbolBg} className="hidden" />
       <img src={RugbyBg} className="hidden" />
       <img src={HockeyBg} className="hidden" />
       <img src={VolleyBg} className="hidden" />
       <img src={HandballBg} className="hidden" />
-      <img src={BasketBg} className="hidden" />
+      <img src={BasketBg} className="hidden" /> */}
       <div
         className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-300 background-transition m-auto rounded-md  md:rounded-none"
         style={{
-          backgroundImage: `url('${process.env.REACT_APP_API_URL}${activeSport?.bg_image?.url}'`,
+          backgroundImage: `url('${activeSport?.bg_image?.url}'`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
