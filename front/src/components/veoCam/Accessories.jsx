@@ -51,7 +51,7 @@ const Accessories = () => {
               {localizedData?.map((item, index) => (
                 <div key={index} className="h-[290px] w-[310px] text-black">
                   <img
-                    src={`${process.env.REACT_APP_API_URL}${item?.image?.url}`}
+                    src={`${item?.image?.url}`}
                     className="!w-[100%] max-h-[175px]"
                   />
                   <h3 className="subH my-4">{item?.title}</h3>
