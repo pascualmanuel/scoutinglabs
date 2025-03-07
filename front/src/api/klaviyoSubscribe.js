@@ -3,7 +3,17 @@ import axios from "axios";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     // Validar email obligatorio
-    const { email, telefono, pais, nombre, mensaje, origen } = req.body;
+    const {
+      email,
+      telefono,
+      pais,
+      nombre,
+      mensaje,
+      origen,
+      selectedPlan,
+      addons,
+      selectedPlanType,
+    } = req.body;
     if (!email) {
       return res.status(400).json({
         success: false,
@@ -16,18 +26,22 @@ export default async function handler(req, res) {
         type: "profile",
         attributes: {
           email: email,
-          phone_number: telefono || "", // Teléfono en formato E.164
-
           properties: {
+            phone: telefono || "", // Teléfono en formato E.164
             country: pais || "", // Código ISO alpha-2
             nombre: nombre || "", // Nombre del usuario
             mensaje: mensaje || "", // Mensaje
+            consentimiento_marketing: true, // Consentimiento de marketing
             estado_lead: "nuevo",
             origen_lead: origen,
+            selectedPlan: selectedPlan || null,
+            addons: addons || null,
+            selectedPlanType: selectedPlanType || null,
           },
         },
       },
     };
+    console.log("Data que llegó:", data.properties);
 
     try {
       const response = await axios.post(
