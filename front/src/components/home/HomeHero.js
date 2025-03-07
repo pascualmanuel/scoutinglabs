@@ -29,27 +29,6 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
       (loc) => loc.locale.toLowerCase() === currentLocale.toLowerCase()
     ) || data;
 
-  const [showPopup, setShowPopup] = useState(false);
-
-  useEffect(() => {
-    // Check if the popup has already been closed before
-    const hasPopupClosed = localStorage.getItem("popupClosed");
-
-    if (!hasPopupClosed) {
-      // Show the popup after 3 seconds
-      const timer = setTimeout(() => {
-        setShowPopup(true);
-      }, 5700);
-
-      return () => clearTimeout(timer); // Cleanup timeout if component unmounts
-    }
-  }, []);
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
-    localStorage.setItem("popupClosed", "true"); // Store in localStorage
-  };
-
   const videoRef = useRef(null); // Creamos una referencia para el video
 
   const handleVideoLoad = () => {
@@ -146,7 +125,6 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
             ))}
           </div>
         </div>
-        {showPopup && <Popup onClose={handleClosePopup} />}
       </section>
 
       <div className="llg:h-[1200px] partner-bg flex flex-col llg:items-center llg:flex-row llg:justify-between  max-w-screen-2xl m-auto">

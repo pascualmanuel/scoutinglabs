@@ -9,7 +9,7 @@ import HomeHero from "../components/home/HomeHero.js";
 import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
 import Loader from "../components/home/Loader.jsx";
-
+import Popup from "../components/home/Popup.js";
 const HomePage = ({ data }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -18,6 +18,7 @@ const HomePage = ({ data }) => {
   const [videoError, setVideoError] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [fadeOut, setFadeOut] = useState(false); // Estado para el fade-out
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleVideoLoad = () => {
     setVideoLoaded(true);
@@ -25,6 +26,25 @@ const HomePage = ({ data }) => {
 
   const handleVideoError = () => {
     setVideoError(true);
+  };
+
+  useEffect(() => {
+    // Check if the popup has already been closed before
+    const hasPopupClosed = localStorage.getItem("popupClosed");
+
+    if (!hasPopupClosed) {
+      // Show the popup after 3 seconds
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 5700);
+
+      return () => clearTimeout(timer); // Cleanup timeout if component unmounts
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    localStorage.setItem("popupClosed", "true"); // Store in localStorage
   };
 
   useEffect(() => {
@@ -70,6 +90,8 @@ const HomePage = ({ data }) => {
           onVideoLoad={handleVideoLoad}
           playVideo={videoPlaying} // Pasamos el estado que controla si el video debe reproducirse
         />
+        {showPopup && <Popup onClose={handleClosePopup} />}
+
         <OurMission />
         <HomeVeo />
       </Layout>
