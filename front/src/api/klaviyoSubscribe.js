@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    // Validar email obligatorio
     const {
       email,
       telefono,
@@ -14,6 +13,7 @@ export default async function handler(req, res) {
       addons,
       selectedPlanType,
     } = req.body;
+
     if (!email) {
       return res.status(400).json({
         success: false,
@@ -21,32 +21,59 @@ export default async function handler(req, res) {
       });
     }
 
-    const data = {
+    // Mapear origen_lead a un evento
+    const eventMap = {
+      contacto: "Formulario de Contacto",
+      newsletter: "Suscripción a Newsletter",
+      cotizacion: "Solicitud de Cotización",
+    };
+
+    const eventName = eventMap[origen] || "Evento Desconocido";
+
+    const eventData = {
       data: {
-        type: "profile",
+        type: "event",
         attributes: {
-          email: email,
           properties: {
-            phone: telefono || "", // Teléfono en formato E.164
-            country: pais || "", // Código ISO alpha-2
-            nombre: nombre || "", // Nombre del usuario
-            mensaje: mensaje || "", // Mensaje
-            consentimiento_marketing: true, // Consentimiento de marketing
-            estado_lead: "nuevo",
-            origen_lead: origen,
-            selectedPlan: selectedPlan || null,
-            addons: addons || null,
-            selectedPlanType: selectedPlanType || null,
+            nombre: nombre || undefined, // Solo envía si tiene valor
+            mensaje: mensaje || undefined,
+            origen_lead: origen || undefined,
+            selectedPlan: selectedPlan || undefined,
+            addons: addons && addons.length > 0 ? addons : undefined,
+            selectedPlanType: selectedPlanType || undefined,
+          },
+          time: new Date().toISOString(), // Timestamp correcto
+          metric: {
+            data: {
+              type: "metric",
+              attributes: {
+                name: eventName, // Nombre del evento aquí
+              },
+            },
+          },
+          profile: {
+            data: {
+              type: "profile",
+              attributes: {
+                email: email,
+                phone_number: telefono || "",
+                // 🔥 Eliminamos `properties` aquí para que el perfil no sobrescriba datos anteriores
+              },
+            },
           },
         },
       },
     };
-    console.log("Data que llegó:", data.properties);
+
+    console.log(
+      "Datos enviados a Klaviyo:",
+      JSON.stringify(eventData, null, 2)
+    );
 
     try {
       const response = await axios.post(
-        "https://a.klaviyo.com/api/profiles/",
-        data,
+        "https://a.klaviyo.com/api/events",
+        eventData,
         {
           headers: {
             "Content-Type": "application/vnd.api+json",
@@ -57,17 +84,21 @@ export default async function handler(req, res) {
         }
       );
 
-      res.status(200).json({ success: true, data: response.data });
+      console.log("Evento enviado correctamente:", response.data);
+      return res.status(200).json({
+        success: true,
+        message: "Evento enviado con éxito a Klaviyo",
+        data: response.data,
+      });
     } catch (error) {
-      console.error("Error detallado:", error.response?.data || error.message);
-      res.status(error.response?.status || 500).json({
+      console.error(
+        "Error al enviar evento a Klaviyo:",
+        error.response?.data || error
+      );
+      return res.status(500).json({
         success: false,
-        error: "Error al enviar datos a Klaviyo",
-        details: error.response?.data || error.message,
+        error: error.response?.data?.errors?.[0]?.detail || "Error desconocido",
       });
     }
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Método ${req.method} no permitido`);
   }
 }

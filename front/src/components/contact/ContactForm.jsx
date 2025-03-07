@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import countries from "country-list";
-
+import TickWhite from "../../assets/icons/tick-white.svg";
+import RightArrow from "../../assets/icons/r-arrow.svg";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
+
 function ContactForm({ onSuccess }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -34,7 +36,9 @@ function ContactForm({ onSuccess }) {
           error = "Formato de email inválido";
         break;
       case "phone":
-        if (!/^\+?[0-9\s\-]{7,}$/.test(value)) error = "Teléfono inválido";
+        if (!/^\+\d{7,15}$/.test(value)) {
+          error = "Teléfono inválido. Usa formato E.164 (+5491123456789)";
+        }
         break;
       case "name":
         if (value.trim().length < 2) error = "Nombre completo requerido";
@@ -46,47 +50,64 @@ function ContactForm({ onSuccess }) {
     return error;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e, type) => {
+    e.preventDefault();
+    const newErrors = {};
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key]);
+      if (error) newErrors[key] = error;
+    });
 
-    const { email, phone, country, message, name, origen } = formData;
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Datos del formulario:", formData);
 
-    // Datos a enviar al backend
-    const dataToSend = {
-      email: email,
-      telefono: phone, // Asegúrate de que el teléfono esté en formato E.164
-      pais: country, // País en formato ISO alpha-2
-      nombre: name, // Nombre del usuario
-      mensaje: message, // Mensaje
-      origen: origen, // Mensaje
-    };
+      // Datos a enviar
+      const dataToSend = {
+        email: formData.email,
+        telefono: formData.phone,
+        pais: formData.country,
+        nombre: formData.name,
+        mensaje: formData.message,
+        origen: formData.origen,
+        selectedPlan: formData.selectedPlan,
+        addons: formData.addons,
+        selectedPlanType: formData.selectedPlanType,
+      };
 
-    try {
-      const response = await fetch("/api/klaviyoSubscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          revision: "2025-01-15",
-          Accept: "application/vnd.api+json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      try {
+        await fetch("/api/klaviyoSubscribe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            revision: "2025-01-15",
+            Accept: "application/vnd.api+json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
 
-      const result = await response.json();
+        if (type === "whatsapp") {
+          const whatsappMessage = `Hola, mi nombre es ${formData.name} y tengo la siguiente consulta: ${formData.message}`;
+          const whatsappUrl = `https://wa.me/5491151632960?text=${encodeURIComponent(
+            whatsappMessage
+          )}`;
+          window.open(whatsappUrl, "_blank");
+        }
 
-      if (result.success) {
-        console.log("Formulario enviado con éxito:", result.data);
-        // Aquí puedes mostrar un mensaje de éxito al usuario
-      } else {
-        console.error("Error en la respuesta del servidor:", result.error);
-        // Aquí puedes mostrar un mensaje de error al usuario
+        // Limpiar el formulario y mostrar mensaje de éxito
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          country: "",
+          message: "",
+          origen: "contacto",
+        });
+        setSubmitted(true);
+      } catch (error) {
+        console.error("Error al enviar el formulario:", error);
       }
-    } catch (error) {
-      console.error("Error al enviar el formulario:", error);
-      // Muestra el mensaje de error de Klaviyo
-      if (error.details) {
-        console.error("Detalles de Klaviyo:", error.details);
-      }
+    } else {
+      setErrors(newErrors);
     }
   };
 
@@ -98,32 +119,19 @@ function ContactForm({ onSuccess }) {
     });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const newErrors = {};
-  //   Object.keys(formData).forEach((key) => {
-  //     const error = validateField(key, formData[key]);
-  //     if (error) newErrors[key] = error;
-  //   });
+  const allFieldsFilled = Object.values(formData).every(
+    (value) => value.trim() !== ""
+  );
 
-  //   if (Object.keys(newErrors).length === 0) {
-  //     setSubmitted(true);
-  //     // Aquí iría la lógica de envío cuando esté lista
-  //   } else {
-  //     setErrors(newErrors);
-  //   }
+  const [showButtons, setShowButtons] = useState(false);
 
-  //   if (Object.keys(newErrors).length === 0) {
-  //     setSubmitted(true);
-  //     console.log("Datos del formulario:", formData);
-  //     // Llamamos al callback de éxito si se pasó por props
-  //     if (onSuccess) {
-  //       onSuccess(formData);
-  //     }
-  //   } else {
-  //     setErrors(newErrors);
-  //   }
-  // };
+  useEffect(() => {
+    if (allFieldsFilled) {
+      setShowButtons(true);
+    } else {
+      setShowButtons(false);
+    }
+  }, [allFieldsFilled]);
 
   return (
     <div className="max-w-[] mx-auto  rounded-lg">
@@ -219,12 +227,53 @@ function ContactForm({ onSuccess }) {
           )}
         </div>
 
-        <div>
+        {submitted ? (
+          <div className="w-fit bg-[#1d1a26] text-white p-4 rounded-md">
+            <p className="text-left body2 flex items-center flex-row">
+              <img src={TickWhite} className="mr-2" />
+              Enviaste el formulario
+            </p>
+          </div>
+        ) : allFieldsFilled ? (
+          <div
+            className={`flex  ssm:flex-row gap-4 transition-all duration-500 transform ${
+              showButtons ? "opacity-100 " : "opacity-5  pointer-events-none"
+            }`}
+          >
+            <button
+              onClick={(e) => handleSubmit(e, "email")}
+              className="w-1/2 p-4 h-[140px] flex flex-col justify-between items-start bg-[#161616] rounded-lg text-left"
+            >
+              <span className="body1">Email</span>
+              <span className="body3 text-grey3 ">
+                We reply as soon as possible
+              </span>
+              <div className="bg-white py-[6px] px-2 flex flex-row text-iBlue body3 rounded-md">
+                <span>Email Us</span>
+                <img src={RightArrow} className="ml-2" />
+              </div>
+            </button>
+            <button
+              onClick={(e) => handleSubmit(e, "whatsapp")}
+              className="w-1/2 p-4 h-[140px] flex flex-col justify-between items-start bg-[#161616] rounded-lg text-left"
+            >
+              <span className="body1">Whatsapp</span>
+              <span className="body3 text-grey3 ">
+                Available from: <br /> Mon – Fri 09:30 – 16:30
+              </span>
+              <div className="bg-white py-[6px] px-2 flex flex-row text-iBlue body3 rounded-md">
+                <span>Chat with Us</span>
+                <img src={RightArrow} className="ml-2" />
+              </div>
+            </button>
+          </div>
+        ) : (
           <Button
-            text={isLoading ? "Enviando..." : "Enviar"}
+            text="Enviar"
             width="w-[100%]"
+            onClick={(e) => handleSubmit(e)}
           />
-        </div>
+        )}
       </form>
     </div>
   );

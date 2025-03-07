@@ -18,6 +18,7 @@ function CotizacionForm({
     phone: "",
     country: "",
     message: "",
+    origen: "cotizacion",
     selectedPlan: selectedPlan,
     addons: addons,
     selectedPlanType: selectedPlanType,
