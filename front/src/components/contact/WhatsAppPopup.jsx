@@ -11,9 +11,15 @@ const WhatsAppPopup = ({
   whatsappWindowRef,
   addons,
 }) => {
-  console.log(addons, "selectedAddons");
   const handleFormSuccess = (formData) => {
-    console.log("Formulario enviado:", formData);
+    console.log("✅ onSuccess ejecutado - Datos recibidos:", formData);
+
+    if (!formData.phone) {
+      console.error(
+        "❌ Error: El número de teléfono está vacío o es inválido."
+      );
+      return;
+    }
 
     const periodicidadMap = {
       anual: "Anual",
@@ -21,7 +27,6 @@ const WhatsAppPopup = ({
       mensual: "Mensual",
     };
 
-    // Calcula el precio según el plan seleccionado (ajusta si es necesario)
     const planPrice =
       selectedPlanType === "mensual"
         ? parseFloat(plan.mensualPrice.replace(/[^0-9.-]+/g, ""))
@@ -39,15 +44,16 @@ const WhatsAppPopup = ({
       mensaje
     )}`;
 
-    // Actualizamos la ventana abierta si existe
-    if (whatsappWindowRef.current) {
+    console.log("🔗 URL de WhatsApp generada:", url);
+
+    // Verificar si la ventana ya está abierta
+    if (whatsappWindowRef?.current && !whatsappWindowRef.current.closed) {
       whatsappWindowRef.current.location = url;
     } else {
-      // Fallback: abre una nueva ventana
-      window.open(url, "_blank");
+      whatsappWindowRef.current = window.open(url, "_blank");
     }
 
-    // Cierra el modal
+    // Cerrar el modal
     onClose();
   };
 
