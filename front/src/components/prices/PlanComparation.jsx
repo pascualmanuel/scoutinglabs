@@ -142,17 +142,10 @@ const PlanComparation = () => {
     // Guardamos en el array (se puede agregar o reemplazar según la lógica que necesites)
     setSelectedOrders((prev) => [...prev, selectedOrder]);
 
-    // También seteamos lo que ya tenías para el popup de WhatsApp
     setAddonsForWhatsApp(simplifiedAddons);
     setPlanForWhatsApp(plan);
     setShowWhatsAppPopup(true);
   };
-
-  // const sortedSubscriptions = [...subscription].sort((a, b) => {
-  //   if (a.featuredCard) return -1; // Featured comes first
-  //   if (b.featuredCard) return 1;
-  //   return 0; // Keep other cards in original order
-  // });  const location = useLocation(); // Obtiene la URL actual
 
   const veoCamUrl = "/veo-cam/";
 
