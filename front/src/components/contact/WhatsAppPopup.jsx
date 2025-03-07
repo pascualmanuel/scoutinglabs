@@ -1,7 +1,8 @@
 // WhatsAppPopup.jsx
 import React from "react";
 import Modal from "./Modal";
-import ContactForm from "../contact/ContactForm";
+
+import CotizacionForm from "./CotizacionForm";
 
 const WhatsAppPopup = ({
   plan,
@@ -59,7 +60,7 @@ const WhatsAppPopup = ({
       <h2 className="subH mb-4">
         Completa el formulario y recibe tu cotizacion
       </h2>
-      <ContactForm
+      <CotizacionForm
         onSuccess={handleFormSuccess}
         selectedPlanType={selectedPlanType}
         selectedPlan={selectedPlan}
