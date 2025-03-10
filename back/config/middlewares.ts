@@ -15,7 +15,15 @@ export default [
       },
     },
   },
-  "strapi::cors",
+  {
+    name: "strapi::cors",
+    config: {
+      enabled: true,
+      origin: ["https://scoutinglabs.onrender.com"], // Reemplaza con el dominio de tu frontend
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      headers: ["Content-Type", "Authorization", "Origin", "Accept"],
+    },
+  },
   "strapi::poweredBy",
   "strapi::query",
   "strapi::body",
