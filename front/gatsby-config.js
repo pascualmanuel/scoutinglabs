@@ -37,7 +37,7 @@ module.exports = {
       options: {
         languages: ["es", "en"], // Los idiomas soportados
         defaultLanguage: "es", // Idioma por defecto
-        siteUrl: "http://localhost:8000/", // URL base de tu sitio
+        siteUrl: "https://scoutinglabs.onrender.com/", // URL base de tu sitio
         i18nextOptions: {
           interpolation: {
             escapeValue: false, // React ya escapa los valores
@@ -58,7 +58,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://localhost:1337",
+        apiURL: "http://attractive-darling-8051189523.strapiapp.com/",
         collectionTypes: [
           {
             singularName: "accessorie",
