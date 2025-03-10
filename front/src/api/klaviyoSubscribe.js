@@ -35,19 +35,22 @@ export default async function handler(req, res) {
         type: "event",
         attributes: {
           properties: {
-            nombre: nombre || undefined, // Solo envía si tiene valor
+            nombre: nombre || undefined, // Solo se envía si tiene valor
             mensaje: mensaje || undefined,
-            origen_lead: origen || undefined,
+            phone_number: telefono || undefined,
+            country: pais || undefined,
+            origen_lead: origen || undefined, // Se mantiene solo en el evento para segmentación
             selectedPlan: selectedPlan || undefined,
             addons: addons && addons.length > 0 ? addons : undefined,
             selectedPlanType: selectedPlanType || undefined,
+            consentimiento_marketing: true, // Consentimiento de marketing
           },
           time: new Date().toISOString(), // Timestamp correcto
           metric: {
             data: {
               type: "metric",
               attributes: {
-                name: eventName, // Nombre del evento aquí
+                name: eventName, // Nombre del evento
               },
             },
           },
@@ -56,8 +59,9 @@ export default async function handler(req, res) {
               type: "profile",
               attributes: {
                 email: email,
-                phone_number: telefono || "",
-                // 🔥 Eliminamos `properties` aquí para que el perfil no sobrescriba datos anteriores
+                phone_number: telefono || undefined,
+
+                // NOTA: No se incluyen otras propiedades en el perfil para evitar sobrescribir datos anteriores.
               },
             },
           },
