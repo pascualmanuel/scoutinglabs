@@ -83,7 +83,7 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
             <div>
               {mediaSrc && mediaSrc.trim() !== "" && (
                 <div
-                  className=" w-[100%] h-[auto] max-w-[415px] ssm:h-[235px] m-auto 
+                  className=" w-[100%] h-[auto] max-w-[415px] ssm:h-[235px] m-auto
                 lg:mr-[160px] xl:mr-10 xl:w-[415px] xl:h-[235px] "
                 >
                   <iframe
@@ -115,7 +115,7 @@ const FAQPage = () => {
     const fetchFAQs = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/faqs?populate=*`
+          `https://attractive-darling-8051189523.strapiapp.com/api/faqs?populate=*`
         ); // Reemplaza con tu URL real
         const json = await response.json();
         // Se asume que la respuesta tiene una propiedad "data" que contiene el array de FAQs

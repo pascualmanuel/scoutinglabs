@@ -3,7 +3,7 @@ import Button from "../Button";
 import WhatsAppIcon from "../../assets/icons/WhatsApp.svg";
 import WhatsAppDarkIcon from "../../assets/icons/wapp_black.svg";
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
 import WhatsAppPopup from "../contact/WhatsAppPopup";
 import { useLocation } from "@reach/router";
