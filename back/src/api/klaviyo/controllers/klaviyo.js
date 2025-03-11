@@ -19,6 +19,8 @@ module.exports = {
         return ctx.badRequest("El campo email es requerido");
       }
 
+      const klaviyoApiKey = strapi.config.get("klaviyo.apiKey"); // Ahora obtenemos la API Key desde la config
+
       // Mapear origen_lead a un evento
       const eventMap = {
         contacto: "Formulario de Contacto",
@@ -63,7 +65,9 @@ module.exports = {
           },
         },
       };
-      console.log(process.env.KLAVIYO_API_KEY, "keyyyyyyy");
+
+      console.log("Klaviyo API Key:", klaviyoApiKey);
+
       // Enviar datos a Klaviyo
       const response = await axios.post(
         "https://a.klaviyo.com/api/events",
@@ -71,7 +75,7 @@ module.exports = {
         {
           headers: {
             "Content-Type": "application/vnd.api+json",
-            Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_API_KEY}`,
+            Authorization: `Klaviyo-API-Key ${klaviyoApiKey}`,
             revision: "2025-01-15",
             Accept: "application/vnd.api+json",
           },
@@ -84,6 +88,10 @@ module.exports = {
         data: response.data,
       });
     } catch (error) {
+      console.error(
+        "Error en la petición a Klaviyo:",
+        error.response?.data || error.message
+      );
       return ctx.internalServerError(
         error.response?.data || "Error desconocido"
       );
