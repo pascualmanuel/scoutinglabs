@@ -18,4 +18,7 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  klaviyo: {
+    apiKey: env("KLAVIYO_API_KEY"),
+  },
 });
