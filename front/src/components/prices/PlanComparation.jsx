@@ -335,37 +335,28 @@ const PlanComparation = () => {
                 </div>
                 <div
                   className="my-5  h-full flex items-end"
-                  onClick={() => handleWhatsAppClick(item)} // <-- Agrega esta línea
+                  onClick={() => handleWhatsAppClick(item)}
                 >
-                  <Button
-                    border={
+                  <div
+                    className={`flex justify-center border items-center p-4 gap-[10px] w-[262px] mg:w-[248px] xll:w-[262px] rounded-lg ${
                       item.featuredCard
-                        ? "solid 1px white"
-                        : "solid 1px #434652"
-                    }
-                    textColor={item.featuredCard ? "white" : "black"}
-                    bg={item.featuredCard ? "transparent" : "white"}
-                    text={
-                      <>
-                        <div className="flex flex-row items-center px-2">
-                          <img
-                            src={
-                              item.featuredCard
-                                ? WhatsAppIcon
-                                : WhatsAppDarkIcon
-                            }
-                            alt="whattsapp"
-                            className="w-6 h-6"
-                          />
-                          <p className="buttonText ml-4 capitalize">
-                            Seleccionar {item?.title}
-                          </p>
-                        </div>
-                      </>
-                    }
-                    width={"w-[262px] mg:w-[248px] xll:w-[262px]"}
-                    height={""}
-                  />
+                        ? "bg-transparent text-white border border-white"
+                        : "bg-[#ffff] text-black border border-black"
+                    }`}
+                  >
+                    <div className="flex flex-row items-center px-2">
+                      <img
+                        src={
+                          item.featuredCard ? WhatsAppIcon : WhatsAppDarkIcon
+                        }
+                        alt="whattsapp"
+                        className="w-6 h-6"
+                      />
+                      <p className="buttonText ml-4 capitalize">
+                        Seleccionar {item?.title}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
