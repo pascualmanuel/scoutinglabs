@@ -63,7 +63,7 @@ module.exports = {
           },
         },
       };
-
+      console.log(process.env.KLAVIYO_API_KEY, "keyyyyyyy");
       // Enviar datos a Klaviyo
       const response = await axios.post(
         "https://a.klaviyo.com/api/events",
@@ -72,6 +72,8 @@ module.exports = {
           headers: {
             "Content-Type": "application/vnd.api+json",
             Authorization: `Klaviyo-API-Key ${process.env.KLAVIYO_API_KEY}`,
+            revision: "2025-01-15",
+            Accept: "application/vnd.api+json",
           },
         }
       );
