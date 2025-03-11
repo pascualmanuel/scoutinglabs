@@ -9,9 +9,11 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `scoutingLabs`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://scoutinglabs.onrender.com/`,
   },
-
+  flags: {
+    DEV_SSR: true,
+  },
   plugins: [
     "gatsby-plugin-postcss", // Necesario si estás utilizando Tailwind CSS
     "gatsby-plugin-image", // Necesario para trabajar con imágenes en Gatsby
