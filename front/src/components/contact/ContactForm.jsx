@@ -37,7 +37,7 @@ function ContactForm({ onSuccess }) {
         break;
       case "phone":
         if (!/^\+\d{7,15}$/.test(value)) {
-          error = "Teléfono inválido. Usa formato E.164 (+5491123456789)";
+          error = "Teléfono inválido.";
         }
         break;
       case "name":

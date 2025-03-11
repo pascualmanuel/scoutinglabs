@@ -11,6 +11,8 @@ const Button = ({
   width = "w-[133px]",
   height = "h-[42px]",
   border = "none",
+  onClick, // Permite manejar clics en botones sin enlace
+  type = "button", // Asegura compatibilidad con formularios
 }) => {
   const buttonStyle = {
     display: "flex",
@@ -26,16 +28,28 @@ const Button = ({
   };
 
   const { locale } = useLanguage();
+  const hasValidLink = link && typeof link === "string" && link.trim() !== "";
 
-  return (
+  const buttonElement = (
+    <button
+      className={`buttonText ${width} ${height}`}
+      style={buttonStyle}
+      onClick={onClick}
+      type={type}
+    >
+      {children || text}
+    </button>
+  );
+
+  return hasValidLink ? (
     <Link
-      to={locale === "EN" ? `/en${link}` : link} // Agrega prefijo solo para EN
+      to={locale === "EN" ? `/en${link}` : link}
       style={{ textDecoration: "none" }}
     >
-      <button className={`buttonText ${width} ${height}`} style={buttonStyle}>
-        {children || text}
-      </button>
+      {buttonElement}
     </Link>
+  ) : (
+    buttonElement
   );
 };
 
