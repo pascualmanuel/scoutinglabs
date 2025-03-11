@@ -25,8 +25,8 @@ const ReelsSection = () => {
   }, []);
 
   useEffect(() => {
-    console.log("User ID:", process.env.GATSBY_INSTA_API_ID);
-    console.log("Access Tokeaan:", process.env.DATABASE_CLIENT);
+    // console.log("User ID:", process.env.GATSBY_INSTA_API_ID);
+    // console.log("Access Tokeaan:", process.env.DATABASE_CLIENT);
   }, []);
 
   // Si hay error, mostramos un mensaje
