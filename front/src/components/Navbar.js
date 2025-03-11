@@ -124,7 +124,8 @@ const Navbar = () => {
     } else if (
       location.pathname === "/" ||
       location.pathname === "/en/" ||
-      location.pathname === "/contacto/"
+      location.pathname === "/contacto/" ||
+      location.pathname === "/en/contacto/"
     ) {
       newPosition = null;
     } else {

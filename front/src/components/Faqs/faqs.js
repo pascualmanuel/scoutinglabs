@@ -115,7 +115,7 @@ const FAQPage = () => {
     const fetchFAQs = async () => {
       try {
         const response = await fetch(
-          `https://attractive-darling-8051189523.strapiapp.com/api/faqs?populate=*`
+          `http://localhost:1337/api/faqs?populate=*`
         ); // Reemplaza con tu URL real
         const json = await response.json();
         // Se asume que la respuesta tiene una propiedad "data" que contiene el array de FAQs

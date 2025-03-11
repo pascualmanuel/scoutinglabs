@@ -30,18 +30,15 @@ const Popup = ({ onClose }) => {
     };
 
     try {
-      const response = await fetch(
-        "https://attractive-darling-8051189523.strapiapp.com/api/klaviyo-subscribe",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            revision: "2025-01-15",
-            Accept: "application/vnd.api+json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("/api/klaviyoSubscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          revision: "2025-01-15",
+          Accept: "application/vnd.api+json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
 
       const result = await response.json();
 

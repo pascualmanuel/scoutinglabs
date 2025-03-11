@@ -9,11 +9,11 @@ import Button from "../Button";
 
 function ContactForm({ onSuccess }) {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    country: "",
-    message: "",
+    name: "Manuel",
+    email: "manuel@test.test",
+    phone: "+54115143291",
+    country: "Argentina",
+    message: "Test de texto",
     origen: "contacto",
   });
   const [errors, setErrors] = useState({});
@@ -75,18 +75,15 @@ function ContactForm({ onSuccess }) {
       };
 
       try {
-        await fetch(
-          "https://attractive-darling-8051189523.strapiapp.com/api/klaviyo-subscribe",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              revision: "2025-01-15",
-              Accept: "application/vnd.api+json",
-            },
-            body: JSON.stringify(dataToSend),
-          }
-        );
+        await fetch("/api/klaviyoSubscribe", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            revision: "2025-01-15",
+            Accept: "application/vnd.api+json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
 
         if (type === "whatsapp") {
           const whatsappMessage = `Hola, mi nombre es ${formData.name} y tengo la siguiente consulta: ${formData.message}`;
