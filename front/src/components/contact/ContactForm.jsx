@@ -75,15 +75,18 @@ function ContactForm({ onSuccess }) {
       };
 
       try {
-        await fetch("/api/klaviyoSubscribe", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            revision: "2025-01-15",
-            Accept: "application/vnd.api+json",
-          },
-          body: JSON.stringify(dataToSend),
-        });
+        await fetch(
+          "https://attractive-darling-8051189523.strapiapp.com/api/klaviyo-subscribe",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              revision: "2025-01-15",
+              Accept: "application/vnd.api+json",
+            },
+            body: JSON.stringify(dataToSend),
+          }
+        );
 
         if (type === "whatsapp") {
           const whatsappMessage = `Hola, mi nombre es ${formData.name} y tengo la siguiente consulta: ${formData.message}`;
