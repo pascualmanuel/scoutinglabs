@@ -205,8 +205,9 @@ function CotizacionForm({
         </div>
         {/* Campo Message - Ancho completo */}
 
-        <div>
+        <div type="submit">
           <Button
+            link={null}
             text={
               <>
                 <div className="flex flex-row items-center px-2">

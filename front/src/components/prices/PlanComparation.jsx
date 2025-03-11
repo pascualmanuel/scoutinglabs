@@ -334,7 +334,7 @@ const PlanComparation = () => {
                   </div>
                 </div>
                 <div
-                  className="my-5  h-full flex items-end"
+                  className="my-5  h-full flex items-end cursor-pointer"
                   onClick={() => handleWhatsAppClick(item)}
                 >
                   <div
