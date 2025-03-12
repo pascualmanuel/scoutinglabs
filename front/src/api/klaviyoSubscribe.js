@@ -70,7 +70,7 @@ export default async function handler(req, res) {
     };
 
     console.log(
-      "Datos enviados a Klaviyo:",
+      "Datos a enviar a Klaviyo:",
       JSON.stringify(eventData, null, 2)
     );
 

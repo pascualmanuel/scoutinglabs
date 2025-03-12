@@ -75,7 +75,7 @@ function ContactForm({ onSuccess }) {
       };
 
       try {
-        await fetch("https://attractive-darling-8051189523.strapiapp.com/api/klaviyo-subscribe", {
+        await fetch("/api/klaviyoSubscribe", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
