@@ -9,12 +9,12 @@ import Button from "../Button";
 
 function ContactForm({ onSuccess }) {
   const [formData, setFormData] = useState({
-    name: "Manuel",
-    email: "manuel@test.test",
-    phone: "+54115143291",
-    country: "Argentina",
-    message: "Test de texto",
+    email: "",
+    phone_number: "",
+    first_name: "",
+    country: "",
     origen: "contacto",
+    message: "",
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -35,7 +35,7 @@ function ContactForm({ onSuccess }) {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
           error = "Formato de email inválido";
         break;
-      case "phone":
+      case "phone_number":
         if (!/^\+\d{7,15}$/.test(value)) {
           error = "Teléfono inválido.";
         }
@@ -52,62 +52,95 @@ function ContactForm({ onSuccess }) {
 
   const handleSubmit = async (e, type) => {
     e.preventDefault();
-    const newErrors = {};
-    Object.keys(formData).forEach((key) => {
-      const error = validateField(key, formData[key]);
-      if (error) newErrors[key] = error;
-    });
 
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Datos del formulario:", formData);
+    const eventData = {
+      data: {
+        type: "event",
+        attributes: {
+          properties: {
+            $source: "website",
+            origen: formData.origen,
+            selected_plan: formData.selectedPlan,
+            addons: formData.addons,
+            plan_type: formData.selectedPlanType,
+            message: formData.message,
+          },
+          metric: {
+            data: {
+              type: "metric",
+              attributes: {
+                name: "Form Submission", // Nombre de tu evento en Klaviyo
+                service: "lead-generation", // Ej: marketing, sales, etc.
+              },
+            },
+          },
+          profile: {
+            data: {
+              type: "profile",
+              attributes: {
+                email: formData.email,
+                phone_number: formData.phone_number,
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                location: {
+                  country: formData.country,
+                },
+                properties: {
+                  // Propiedades adicionales del perfil
+                  customer_type: "lead",
+                },
+              },
+            },
+          },
+          time: new Date().toISOString(),
+        },
+      },
+    };
 
-      // Datos a enviar
-      const dataToSend = {
-        email: formData.email,
-        telefono: formData.phone,
-        pais: formData.country,
-        nombre: formData.name,
-        mensaje: formData.message,
-        origen: formData.origen,
-        selectedPlan: formData.selectedPlan,
-        addons: formData.addons,
-        selectedPlanType: formData.selectedPlanType,
-      };
-
-      try {
-        await fetch("/api/klaviyoSubscribe", {
+    try {
+      const response = await fetch(
+        "https://a.klaviyo.com/client/events/?company_id=YzQZwN",
+        {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            revision: "2025-01-15",
+            "Content-Type": "application/vnd.api+json",
             Accept: "application/vnd.api+json",
+            Revision: "2025-01-15",
           },
-          body: JSON.stringify(dataToSend),
-        });
-
-        if (type === "whatsapp") {
-          const whatsappMessage = `Hola, mi nombre es ${formData.name} y tengo la siguiente consulta: ${formData.message}`;
-          const whatsappUrl = `https://wa.me/5491151632960?text=${encodeURIComponent(
-            whatsappMessage
-          )}`;
-          window.open(whatsappUrl, "_blank");
+          body: JSON.stringify(eventData),
         }
+      );
 
-        // Limpiar el formulario y mostrar mensaje de éxito
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          country: "",
-          message: "",
-          origen: "contacto",
-        });
-        setSubmitted(true);
-      } catch (error) {
-        console.error("Error al enviar el formulario:", error);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors?.[0]?.detail);
       }
-    } else {
-      setErrors(newErrors);
+
+      if (type === "whatsapp") {
+        const whatsappMessage = `Hola, mi nombre es ${formData.first_name} y tengo la siguiente consulta: ${formData.message}`;
+        const whatsappUrl = `https://wa.me/5491151632960?text=${encodeURIComponent(
+          whatsappMessage
+        )}`;
+        window.open(whatsappUrl, "_blank");
+      }
+
+      alert("¡Datos enviados con éxito!");
+      setFormData({
+        // Reset del formulario
+        email: "",
+        phone_number: "",
+        first_name: "",
+        last_name: "",
+        country: "",
+        origen: "contacto",
+        selectedPlan: "",
+        addons: [],
+        selectedPlanType: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+      alert(`Error: ${error.message}`);
     }
   };
 
@@ -141,8 +174,8 @@ function ContactForm({ onSuccess }) {
             <label className="block body1 text-grey1 mb-1">Name *</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               placeholder="Enter your full name..."
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
@@ -172,9 +205,9 @@ function ContactForm({ onSuccess }) {
             <label className="block body1 text-grey1 mb-1">Phone *</label>
             <PhoneInput
               defaultCountry="ar" // Código de país inicial (Argentina)
-              value={formData.phone}
-              onChange={(phone) => {
-                setFormData({ ...formData, phone });
+              value={formData.phone_number}
+              onChange={(phone_number) => {
+                setFormData({ ...formData, phone_number });
               }}
               inputClassName="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2"
               countrySelectorStyleProps={{
@@ -184,10 +217,12 @@ function ContactForm({ onSuccess }) {
                   className: "bg-[#ffffff0d] border border-[#434652]",
                 },
               }}
-              placeholder="Enter phone number..."
+              placeholder="Enter phone_number number..."
             />
-            {errors.phone && (
-              <p className="text-red-500  text-sm mt-1">{errors.phone}</p>
+            {errors.phone_number && (
+              <p className="text-red-500  text-sm mt-1">
+                {errors.phone_number}
+              </p>
             )}
           </div>
           <div className="ssm:w-1/2">
@@ -268,11 +303,7 @@ function ContactForm({ onSuccess }) {
             </button>
           </div>
         ) : (
-          <Button
-            text="Enviar"
-            width="w-[100%]"
-            onClick={(e) => handleSubmit(e)}
-          />
+          <Button text="Enviar" width="w-[100%]" />
         )}
       </form>
     </div>

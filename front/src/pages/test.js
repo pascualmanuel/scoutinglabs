@@ -1,34 +1,39 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const EventForm = () => {
   const [formData, setFormData] = useState({
     email: "",
-    phone_number: "+541151632960",
+    phone_number: "",
     first_name: "",
     last_name: "",
-    // ... otros campos
+    country: "",
+    origen: "contacto", // Valor por defecto
+    selectedPlan: "",
+    addons: [],
+    selectedPlanType: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Estructura para Klaviyo 2025-01-15
+    // Estructura validada para Klaviyo 2025-01-15
     const eventData = {
       data: {
         type: "event",
         attributes: {
           properties: {
-            $source: "website", // Campo obligatorio
-            ProductID: 1234,
-            ProductName: "Ejemplo",
+            $source: "website",
+            origen: formData.origen,
+            selected_plan: formData.selectedPlan,
+            addons: formData.addons,
+            plan_type: formData.selectedPlanType,
           },
           metric: {
             data: {
               type: "metric",
               attributes: {
-                name: "Viewed Product",
-                service: "your-service-name", // Nuevo campo requerido
+                name: "Form Submission", // Nombre de tu evento en Klaviyo
+                service: "lead-generation", // Ej: marketing, sales, etc.
               },
             },
           },
@@ -41,15 +46,16 @@ const EventForm = () => {
                 first_name: formData.first_name,
                 last_name: formData.last_name,
                 location: {
-                  city: "New York",
-                  country: "US",
+                  country: formData.country,
+                },
+                properties: {
+                  // Propiedades adicionales del perfil
+                  customer_type: "lead",
                 },
               },
             },
           },
           time: new Date().toISOString(),
-          value: 99.99,
-          value_currency: "USD",
         },
       },
     };
@@ -68,25 +74,142 @@ const EventForm = () => {
         }
       );
 
-      if (!response.ok) throw new Error(await response.text());
-      alert("Evento registrado!");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors?.[0]?.detail);
+      }
+
+      alert("¡Datos enviados con éxito!");
+      setFormData({
+        // Reset del formulario
+        email: "",
+        phone_number: "",
+        first_name: "",
+        last_name: "",
+        country: "",
+        origen: "contacto",
+        selectedPlan: "",
+        addons: [],
+        selectedPlanType: "",
+      });
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error al enviar datos");
+      console.error("Error en la solicitud:", error);
+      alert(`Error: ${error.message}`);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Campos del formulario */}
-      <input
-        type="email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        required
-      />
-      {/* ... otros campos */}
-      <button type="submit">Enviar</button>
+    <form onSubmit={handleSubmit} className="form-container">
+      <div className="form-group">
+        <label>Email*</label>
+        <input
+          type="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Teléfono</label>
+        <input
+          type="tel"
+          value={formData.phone_number}
+          onChange={(e) =>
+            setFormData({ ...formData, phone_number: e.target.value })
+          }
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Nombre</label>
+        <input
+          type="text"
+          value={formData.first_name}
+          onChange={(e) =>
+            setFormData({ ...formData, first_name: e.target.value })
+          }
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Apellido</label>
+        <input
+          type="text"
+          value={formData.last_name}
+          onChange={(e) =>
+            setFormData({ ...formData, last_name: e.target.value })
+          }
+        />
+      </div>
+
+      <div className="form-group">
+        <label>País</label>
+        <select
+          value={formData.country}
+          onChange={(e) =>
+            setFormData({ ...formData, country: e.target.value })
+          }
+        >
+          <option value="">Seleccionar</option>
+          <option value="AR">Argentina</option>
+          <option value="US">Estados Unidos</option>
+          {/* Agregar más opciones */}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Plan</label>
+        <select
+          value={formData.selectedPlan}
+          onChange={(e) =>
+            setFormData({ ...formData, selectedPlan: e.target.value })
+          }
+        >
+          <option value="">Seleccionar plan</option>
+          <option value="basic">Básico</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Tipo de Plan</label>
+        <select
+          value={formData.selectedPlanType}
+          onChange={(e) =>
+            setFormData({ ...formData, selectedPlanType: e.target.value })
+          }
+        >
+          <option value="">Seleccionar tipo</option>
+          <option value="mensual">Mensual</option>
+          <option value="anual">Anual</option>
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label>Addons</label>
+        <div className="checkbox-group">
+          {["SEO", "Hosting", "Soporte"].map((addon) => (
+            <label key={addon}>
+              <input
+                type="checkbox"
+                checked={formData.addons.includes(addon)}
+                onChange={(e) => {
+                  const newAddons = e.target.checked
+                    ? [...formData.addons, addon]
+                    : formData.addons.filter((item) => item !== addon);
+                  setFormData({ ...formData, addons: newAddons });
+                }}
+              />
+              {addon}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <button type="submit" className="submit-btn">
+        Enviar Datos
+      </button>
     </form>
   );
 };
