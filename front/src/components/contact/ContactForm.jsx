@@ -69,7 +69,7 @@ function ContactForm({ onSuccess }) {
             data: {
               type: "metric",
               attributes: {
-                name: "Form Submission", // Nombre de tu evento en Klaviyo
+                name: "Formulario de Contacto", // Nombre de tu evento en Klaviyo
                 service: "lead-generation", // Ej: marketing, sales, etc.
               },
             },

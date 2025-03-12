@@ -5,26 +5,21 @@ import WhatsAppIcon from "../../assets/icons/WhatsApp.svg";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
-function CotizacionForm({
-  selectedPlanType,
-  addons,
-  selectedPlan,
-  // showMessage = true,
-  onSuccess,
-}) {
+function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
-    phone: "",
+    phone_number: "",
+    first_name: "",
     country: "",
-    message: "",
     origen: "cotizacion",
     selectedPlan: selectedPlan,
     addons: addons,
     selectedPlanType: selectedPlanType,
   });
+  console.log(formData);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [countryList, setCountryList] = useState([]);
 
   // Cargar lista de países
@@ -41,8 +36,10 @@ function CotizacionForm({
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
           error = "Formato de email inválido";
         break;
-      case "phone":
-        if (!/^\+?[0-9\s\-]{7,}$/.test(value)) error = "Teléfono inválido";
+      case "phone_number":
+        if (!/^\+\d{7,15}$/.test(value)) {
+          error = "Teléfono inválido.";
+        }
         break;
       case "name":
         if (value.trim().length < 2) error = "Nombre completo requerido";
@@ -54,85 +51,121 @@ function CotizacionForm({
     return error;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const error = validateField(name, value);
-
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: error }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, type) => {
     e.preventDefault();
-    const newErrors = {};
 
-    Object.keys(formData).forEach((key) => {
-      const error = validateField(key, formData[key]);
-      if (error) newErrors[key] = error;
-    });
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setSubmitted(true);
-    console.log("Datos del formulario:", formData);
-
-    // Datos a enviar al backend
-    const dataToSend = {
-      email: formData.email,
-      telefono: formData.phone, // Asegúrate de que el teléfono esté en formato E.164
-      pais: formData.country, // País en formato ISO alpha-2
-      nombre: formData.name, // Nombre del usuario
-      origen: formData.origen, // Mensaje
-      selectedPlan: formData.selectedPlan,
-      addons: formData.addons,
-      selectedPlanType: formData.selectedPlanType,
+    const eventData = {
+      data: {
+        type: "event",
+        attributes: {
+          properties: {
+            $source: "website",
+            origen: formData.origen, // Mensaje
+            selectedPlan: formData.selectedPlan,
+            addons: formData.addons,
+            selectedPlanType: formData.selectedPlanType,
+          },
+          metric: {
+            data: {
+              type: "metric",
+              attributes: {
+                name: "Solicitud de Cotizacion ", // Nombre de tu evento en Klaviyo
+                service: "lead-generation", // Ej: marketing, sales, etc.
+              },
+            },
+          },
+          profile: {
+            data: {
+              type: "profile",
+              attributes: {
+                email: formData.email,
+                phone_number: formData.phone_number,
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                location: {
+                  country: formData.country,
+                },
+                properties: {
+                  // Propiedades adicionales del perfil
+                  customer_type: "lead",
+                },
+              },
+            },
+          },
+          time: new Date().toISOString(),
+        },
+      },
     };
 
-    console.log("📤 Data to send:", dataToSend);
-
     try {
-      const response = await fetch("/api/klaviyoSubscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          revision: "2025-01-15",
-          Accept: "application/vnd.api+json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        console.log("✅ Formulario enviado con éxito:", result.data);
-
-        // Llamamos al callback de éxito si existe
-        if (onSuccess) {
-          console.log("🎯 Llamando a onSuccess...");
-          onSuccess(formData);
+      const response = await fetch(
+        "https://a.klaviyo.com/client/events/?company_id=YzQZwN",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/vnd.api+json",
+            Accept: "application/vnd.api+json",
+            Revision: "2025-01-15",
+          },
+          body: JSON.stringify(eventData),
         }
-      } else {
-        console.error("❌ Error en la respuesta del servidor:", result.error);
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors?.[0]?.detail);
       }
-    } catch (error) {
-      console.error("❌ Error al enviar el formulario:", error);
+
+      if (response.ok) {
+        // Llamar al callback con los datos necesarios para WhatsApp
+        if (onSuccess) {
+          onSuccess({
+            name: formData.first_name, // Mapear first_name => name
+            email: formData.email,
+            phone: formData.phone_number, // Mapear phone_number => phone
+            plan: formData.selectedPlan,
+            planType: formData.selectedPlanType,
+          });
+        }
+
+        // Mantener tu reset original del formulario
+        setFormData({
+          email: "",
+          phone_number: "",
+          first_name: "",
+          last_name: "",
+          country: "",
+          origen: "cotizacion",
+          selectedPlan: "",
+          addons: [],
+          selectedPlanType: "",
+        });
+
+        alert("¡Datos enviados con éxito!"); // Mantener tu alerta
+      }
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
     <div className="max-w-[] mx-auto  rounded-lg">
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Fila 1 - Name & Email */}
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
             <label className="block body1 text-grey1 mb-1">Name *</label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               placeholder="Enter your full name..."
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
@@ -157,15 +190,14 @@ function CotizacionForm({
             )}
           </div>
         </div>
-        {/* Fila 2 - Phone & Country */}
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
             <label className="block body1 text-grey1 mb-1">Phone *</label>
             <PhoneInput
               defaultCountry="ar" // Código de país inicial (Argentina)
-              value={formData.phone}
-              onChange={(phone) => {
-                setFormData({ ...formData, phone });
+              value={formData.phone_number}
+              onChange={(phone_number) => {
+                setFormData({ ...formData, phone_number });
               }}
               inputClassName="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2"
               countrySelectorStyleProps={{
@@ -175,10 +207,12 @@ function CotizacionForm({
                   className: "bg-[#ffffff0d] border border-[#434652]",
                 },
               }}
-              placeholder="Enter phone number..."
+              placeholder="Enter phone_number number..."
             />
-            {errors.phone && (
-              <p className="text-red-500  text-sm mt-1">{errors.phone}</p>
+            {errors.phone_number && (
+              <p className="text-red-500  text-sm mt-1">
+                {errors.phone_number}
+              </p>
             )}
           </div>
           <div className="ssm:w-1/2">
@@ -205,9 +239,9 @@ function CotizacionForm({
         </div>
         {/* Campo Message - Ancho completo */}
 
-        <div type="submit">
+        <button type="submit">
           <Button
-            link={null}
+            // link={null}
             text={
               <>
                 <div className="flex flex-row items-center px-2">
@@ -220,7 +254,7 @@ function CotizacionForm({
             }
             width="w-[100%]"
           />
-        </div>
+        </button>
       </form>
     </div>
   );
