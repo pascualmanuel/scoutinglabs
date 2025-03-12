@@ -58,7 +58,6 @@ const WhatsAppPopup = ({
   };
 
   let selectedPlan = plan.title;
-
   //   let selectedAddon =
 
   return (

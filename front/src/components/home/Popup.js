@@ -4,8 +4,10 @@ import { useState } from "react";
 const Popup = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [error, setError] = useState(null); // Estado para manejar errores
-  const [success, setSuccess] = useState(false); // Estado para manejar éxito
+
   const [email, setEmail] = useState(""); // Estado para el email
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     // Hacer visible el popup después de 500ms
@@ -16,44 +18,80 @@ const Popup = ({ onClose }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
 
-    // Validar email
+    // Validación de email
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       setError("Por favor, ingresa un email válido.");
       return;
     }
 
-    // Datos a enviar al backend
-    const dataToSend = {
-      email: email,
-      origen: "newsletter", // Origen del lead
+    // Estructura para Klaviyo 2025
+    const eventData = {
+      data: {
+        type: "event",
+        attributes: {
+          properties: {
+            $source: "website",
+            origen: "newsletter", // Identificador único
+          },
+          metric: {
+            data: {
+              type: "metric",
+              attributes: {
+                name: "Suscripción Newsletter", // Debe existir en Klaviyo
+                service: "marketing", // Área de servicio
+              },
+            },
+          },
+          profile: {
+            data: {
+              type: "profile",
+              attributes: {
+                email: email, // Único campo requerido
+              },
+            },
+          },
+          time: new Date().toISOString(),
+        },
+      },
     };
 
     try {
-      const response = await fetch("/api/klaviyoSubscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          revision: "2025-01-15",
-          Accept: "application/vnd.api+json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://a.klaviyo.com/client/events/?company_id=YzQZwN", // Reemplaza con tu ID
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/vnd.api+json",
+            Accept: "application/vnd.api+json",
+            Revision: "2025-01-15",
+          },
+          body: JSON.stringify(eventData),
+        }
+      );
 
-      const result = await response.json();
-
-      if (result.success) {
-        setSuccess(true); // Mostrar mensaje de éxito
-        setError(null);
-        setTimeout(() => {
-          onClose(); // Cerrar el popup después de 2 segundos
-        }, 2000);
-      } else {
-        setError(result.error || "Error al suscribirse. Inténtalo de nuevo.");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.errors?.[0]?.detail || "Error en el servidor"
+        );
       }
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setIsSuccess(true);
+      setEmail("");
+
+      // Resetear después de 2 segundos
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 2000);
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
-      setError("Error al conectar con el servidor.");
+      setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -102,9 +140,31 @@ const Popup = ({ onClose }) => {
               />
               <button
                 type="submit"
-                className="bg-iBlue h-[50px] w-[120px] flex items-center justify-center body2 rounded-r-md"
+                className={`bg-iBlue h-[50px] w-[120px] flex items-center justify-center body2 rounded-r-md transition-all ${
+                  isSubmitting || isSuccess
+                    ? "opacity-90 cursor-not-allowed"
+                    : ""
+                }`}
+                disabled={isSubmitting || isSuccess}
               >
-                <span>Enviar</span>
+                {isSubmitting ? (
+                  <span className="flex items-center">
+                    <svg
+                      className="animate-spin h-5 w-5 mr-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"
+                      />
+                    </svg>
+                    Enviando
+                  </span>
+                ) : isSuccess ? (
+                  "¡Gracias!"
+                ) : (
+                  "Enviar"
+                )}
               </button>
             </form>
           </div>
