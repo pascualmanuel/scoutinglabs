@@ -28,6 +28,7 @@ export default async function handler(req, res) {
       cotizacion: "Solicitud de Cotización",
     };
 
+    console.log(process.env.GATSBY_KLAVIYO_API_KEY);
     const eventName = eventMap[origen] || "Evento Desconocido";
 
     const eventData = {
@@ -99,6 +100,15 @@ export default async function handler(req, res) {
         "Error al enviar evento a Klaviyo:",
         error.response?.data || error
       );
+
+      // Verificamos si error.response existe y tiene un cuerpo
+      if (!error.response?.data) {
+        return res.status(500).json({
+          success: false,
+          error: "Respuesta vacía de Klaviyo o error desconocido",
+        });
+      }
+
       return res.status(500).json({
         success: false,
         error: error.response?.data?.errors?.[0]?.detail || "Error desconocido",
