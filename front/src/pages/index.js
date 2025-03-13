@@ -10,7 +10,12 @@ import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
 import Loader from "../components/home/Loader.jsx";
 import Popup from "../components/home/Popup.js";
-import ImageTest from "../assets/veocam-bg.webp";
+import PreLoadVeoCam from "../assets/veocam-bg.webp";
+import PreLoadSL from "../assets/scoutingplay/splay-bg.webp";
+import PreLoadNosotros from "../assets/nosotros/nosotros-bg.webp";
+import PreLoadSuscripciones from "../assets/suscripciones/susc2.webp";
+//
+
 const HomePage = ({ data }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -83,7 +88,10 @@ const HomePage = ({ data }) => {
 
   return (
     <>
-      <img src={ImageTest} className="hidden" />
+      <img src={PreLoadVeoCam} className="hidden" />
+      <img src={PreLoadSL} className="hidden" />
+      <img src={PreLoadNosotros} className="hidden" />
+      <img src={PreLoadSuscripciones} className="hidden" />
       {loaderVisible && <Loader fadeOut={fadeOut} />}
       <Layout>
         <Seo title="Scouting Labs" description="Scouting Labs home" />
