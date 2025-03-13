@@ -86,8 +86,8 @@ const Popup = ({ onClose }) => {
 
       // Resetear después de 2 segundos
       setTimeout(() => {
-        setIsSuccess(false);
-      }, 2000);
+        setIsVisible(false);
+      }, 2500);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -105,7 +105,7 @@ const Popup = ({ onClose }) => {
       ></div>
 
       <div
-        className={`fixed w-[90vw] max-w-[450px] left-1/2 top-1/2 -translate-x-1/2 translate-y-[-67%] h-[500px] sm:h-auto
+        className={`fixed w-[90vw] max-w-[450px] left-1/2 top-1/2 -translate-x-1/2 translate-y-[-67%] h-[240px] sm:h-auto
             sm:w-[420px] sm:bottom-[50px] sm:right-[25px] sm:mg:right-[65px] sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 
             rounded-lg shadow-lg transition-all duration-500 
         ${
@@ -120,9 +120,22 @@ const Popup = ({ onClose }) => {
         >
           &times;
         </button>
-        <div className="flex flex-col  absolute top-6 left-2 m-4 h-[80%] justify-between mt-[50px] sm:mt-4 sm:h-auto">
-          <h2 className="text-white opacity-100 uppercase mb-10  h2Title !text-[42px] ">
-            Suscribe and get special discounts!
+        <div className="flex flex-col  absolute top-6 left-2 m-4 h-[75%] justify-between sm:mt-4 sm:h-auto w-[90%] sm:w-auto">
+          <h2 className="relative text-white uppercase h-[120px] h2Title !text-[42px] sm:w-[370px]">
+            <span
+              className={`absolute inset-0 transition-opacity duration-300 ${
+                isSuccess ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Gracias!
+            </span>
+            <span
+              className={`absolute inset-0 transition-opacity duration-300 ${
+                isSuccess ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              Suscribe and get special discounts!
+            </span>
           </h2>
           <div className="">
             <form
@@ -138,7 +151,31 @@ const Popup = ({ onClose }) => {
                 className="w-full pl-2 h-[50px] bg-[white] border border-[#434652] rounded-md body2 !text-iBlue rounded-r-[0px]"
                 required
               />
+
               <button
+                type="submit"
+                className="bg-iBlue h-[50px] w-[120px] flex items-center justify-center body2 rounded-r-md"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center">
+                    <svg
+                      className="animate-spin h-5 w-5 mr-2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"
+                      />
+                    </svg>
+                  </span>
+                ) : isSuccess ? (
+                  "Enviado"
+                ) : (
+                  "Enviar"
+                )}
+              </button>
+
+              {/* <button
                 type="submit"
                 className={`bg-iBlue h-[50px] w-[120px] flex items-center justify-center body2 rounded-r-md transition-all ${
                   isSubmitting || isSuccess
@@ -165,7 +202,7 @@ const Popup = ({ onClose }) => {
                 ) : (
                   "Enviar"
                 )}
-              </button>
+              </button> */}
             </form>
           </div>
         </div>
