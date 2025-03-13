@@ -163,7 +163,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           <div className=" llg:mb-[270px] xl:mb-[140px] m-6 sm:m-0">
             <div className=" ">
               <img
-                src={`${localizedData?.partner_img?.url}`}
+                src={localizedData?.partner_img?.url}
                 className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
               />
             </div>

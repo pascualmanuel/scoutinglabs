@@ -84,9 +84,9 @@ const Popup = ({ onClose }) => {
       setIsSuccess(true);
       setEmail("");
 
-      // Resetear después de 2 segundos
       setTimeout(() => {
         setIsVisible(false);
+        onClose();
       }, 2500);
     } catch (error) {
       setError(error.message);

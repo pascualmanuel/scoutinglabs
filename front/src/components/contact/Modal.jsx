@@ -3,7 +3,7 @@ import React from "react";
 
 const Modal = ({ children, onClose }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-black opacity-50 transition"

@@ -239,9 +239,9 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
         </div>
         {/* Campo Message - Ancho completo */}
 
-        <button type="submit">
+        <button type="submit" className="w-full">
           <Button
-            // link={null}
+            link={null}
             text={
               <>
                 <div className="flex flex-row items-center px-2">

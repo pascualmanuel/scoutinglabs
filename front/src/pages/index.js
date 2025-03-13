@@ -10,6 +10,7 @@ import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
 import Loader from "../components/home/Loader.jsx";
 import Popup from "../components/home/Popup.js";
+import ImageTest from "../assets/veocam-bg.webp";
 const HomePage = ({ data }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -82,8 +83,8 @@ const HomePage = ({ data }) => {
 
   return (
     <>
+      <img src={ImageTest} className="hidden" />
       {loaderVisible && <Loader fadeOut={fadeOut} />}
-
       <Layout>
         <Seo title="Scouting Labs" description="Scouting Labs home" />
         <HomeHero

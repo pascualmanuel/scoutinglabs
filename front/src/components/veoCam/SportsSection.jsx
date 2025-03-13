@@ -17,13 +17,6 @@ const SportsSection = () => {
 
   let sports = localizedData?.slider;
 
-  // useEffect(() => {
-  //   sports.forEach((sport) => {
-  //     const img = new Image();
-  //     img.src = sport.image;
-  //   });
-  // }, []);
-
   const [activeSport, setActiveSport] = useState(sports[0]);
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
@@ -34,12 +27,9 @@ const SportsSection = () => {
 
   return (
     <>
-      {/* <img src={FutbolBg} className="hidden" />
-      <img src={RugbyBg} className="hidden" />
-      <img src={HockeyBg} className="hidden" />
-      <img src={VolleyBg} className="hidden" />
-      <img src={HandballBg} className="hidden" />
-      <img src={BasketBg} className="hidden" /> */}
+      {sports?.map((sportImg) => (
+        <img src={sportImg.bg_image.url} className="hidden" />
+      ))}
       <div
         className="w-[90vw] h-[620px] sm:w-[100vw] sm:h-[705px] transition-all duration-300 background-transition m-auto rounded-md  md:rounded-none"
         style={{
