@@ -49,6 +49,13 @@ const usePagesData = () => {
             locale
             title
             subtitle
+            second_section_bg {
+              url
+            }
+            second_section_title
+            second_section_subtitle
+            suscription_title
+            suscription_description
 
             buttons {
               link
@@ -286,7 +293,7 @@ const usePagesData = () => {
     nosotrosData: data.allStrapiNosotros.nodes[0],
     subsData: data.allStrapiSubscriptionPlan.nodes,
     contactData: data.allStrapiContact.nodes[0],
-    subscriptionPageData: data.allStrapiSuscripciones.nodes[0]
+    subscriptionPageData: data.allStrapiSuscripciones.nodes[0],
   };
 };
 

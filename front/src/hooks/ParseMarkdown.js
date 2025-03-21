@@ -15,7 +15,7 @@ export const ParseMarkdown = ({ text }) => {
       : originalLine;
 
     const segments = processedLine.split(
-      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>|~.*?~)/g
+      /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>|<blue>.*?<blue>|-.*?-)/g
     );
 
     return (
@@ -37,7 +37,14 @@ export const ParseMarkdown = ({ text }) => {
               </span>
             );
           }
-          if (segment.startsWith("~") && segment.endsWith("~")) {
+          if (segment.startsWith("<blue>") && segment.endsWith("<blue>")) {
+            return (
+              <span key={segmentIndex} className="text-skyBlue">
+                {segment.slice(6, -6)}
+              </span>
+            );
+          }
+          if (segment.startsWith("-") && segment.endsWith("-")) {
             return (
               <span
                 key={segmentIndex}
