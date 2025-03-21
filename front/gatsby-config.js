@@ -188,7 +188,9 @@ module.exports = {
                 second_section_bg: true,
                 boxes: {
                   populate: {
-                    populate: "*",
+                    media: {
+                      populate: "*",
+                    },
                   },
                 },
                 second_section_buttons: "*",
@@ -206,7 +208,9 @@ module.exports = {
                     second_section_buttons: "*",
                     boxes: {
                       populate: {
-                        populate: "*",
+                        media: {
+                          populate: "*",
+                        },
                       },
                     },
                     slider: {
@@ -303,6 +307,12 @@ module.exports = {
                   },
                 },
               },
+            },
+          },
+          {
+            singularName: "faq",
+            queryParams: {
+              populate: "*",
             },
           },
         ],

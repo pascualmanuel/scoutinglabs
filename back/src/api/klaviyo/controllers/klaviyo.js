@@ -66,8 +66,6 @@ module.exports = {
         },
       };
 
-      console.log("Klaviyo API Key:", klaviyoApiKey);
-
       // Enviar datos a Klaviyo
       const response = await axios.post(
         "https://a.klaviyo.com/api/events",
