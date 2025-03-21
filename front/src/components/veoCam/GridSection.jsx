@@ -10,6 +10,7 @@ import VeoCamImg from "../../assets/home/veo-transparent2.webp";
 
 import loadable from "@loadable/component";
 
+import { useLanguage } from "../../hooks/LanguageContext";
 const Lottie = loadable(() => import("lottie-react"));
 
 // Resto de imports...
@@ -19,6 +20,7 @@ if (typeof window !== "undefined") {
 }
 
 const GridSection = () => {
+  const { locale } = useLanguage();
   const [ocultarPadre, setOcultarPadre] = useState(false);
 
   useEffect(() => {
@@ -50,8 +52,9 @@ const GridSection = () => {
                   <div className="pt-10 pl-7 pr-16">
                     <h2 className="h2Title pb-4">SET UP SIMPLE</h2>
                     <p className="body1">
-                      Coloca la cámara y filma tu partido sin la necesidad de un
-                      camarógrafo.
+                      {locale === "ES"
+                        ? "Coloca la cámara y filma tu partido sin la necesidad de un camarógrafo."
+                        : "Place the camera and film your game without the need for a cameraman."}
                     </p>
                   </div>
                   <div className="w-[85%] h-[260px] ">
@@ -93,13 +96,15 @@ const GridSection = () => {
                     />
                   )}
 
-                  <h2 className="h2Title w-[225px]">
-                    CALIDAD <br /> DE VIDEO NITIDA
+                  <h2 className="h2Title w-[225px] uppercase">
+                    {locale === "ES"
+                      ? "  CALIDAD DE VIDEO NITIDA"
+                      : "Sharp video quality"}
                   </h2>
                   <p className="body1 pt-4 pb-8 max-w-[350px]">
-                    Las lentes de nueva generación y la introducción del HDR
-                    garantizan una calidad de vídeo nítida y colores vibrantes
-                    en todas las grabaciones.
+                    {locale === "ES"
+                      ? "Las lentes de nueva generación y la introducción del HDR garantizan una calidad de vídeo nítida y colores vibrantes en todas las grabaciones."
+                      : "New generation lenses and the introduction of HDR ensure sharp video quality and vibrant colors on all recordings."}
                   </p>
                 </div>
               </div>
@@ -107,11 +112,11 @@ const GridSection = () => {
               <div className="w-1/3 rounded-[20px] border border-grey4 whtie-50-op ">
                 <div className="flex flex-col justify-between pl-7 pt-10 h-full">
                   <div>
-                    <h2 className="h2Title pb-4">FOLLOW CAM</h2>
+                    <h2 className="h2Title pb-4">FOLLOW-CAM</h2>
                     <p className="body1">
-                      La cámara con IA sigue automáticamente las acciones del
-                      partido, y ofrece una experiencia similar a ver un partido
-                      en la TV.
+                      {locale === "ES"
+                        ? "La cámara con IA sigue automáticamente las acciones del partido, y ofrece una experiencia similar a ver un partido en la TV."
+                        : "AI-powered follow-cam technology automatically follows the action of the game and provides you with a broadcast-like experience."}
                     </p>
                   </div>
                   <div className="w-[85%] h-[260px]  ml-auto">
@@ -135,8 +140,9 @@ const GridSection = () => {
                     className="h-full w-full object-cover mt-8 rounded-[10px] "
                   />
                   <h2 className="h2Title max-w-[170px] pt-11">
-                    {" "}
-                    Preparada para todo clima{" "}
+                    {locale === "ES"
+                      ? "Preparada para todo clima"
+                      : "Ready for all conditions"}
                   </h2>
                 </div>
               </div>
@@ -144,11 +150,14 @@ const GridSection = () => {
                 <div className="flex flex-row-reverse justify-between h-full">
                   <div className="pt-10 px-4 w-[360px]">
                     <h2 className="h2Title pb-4">
-                      DETECTA eventos automaticamente
+                      {locale === "ES"
+                        ? "DETECTA eventos automaticamente"
+                        : "Automatically detected events"}
                     </h2>
                     <p className="body1">
-                      La IA detecta y etiqueta los eventos clave del partido,
-                      como goles, remates, tiros de esquina o penaltis.
+                      {locale === "ES"
+                        ? "La IA detecta y etiqueta los eventos clave del partido, como goles, remates, tiros de esquina o penales."
+                        : "Our AI automatically detects the most important match events, as goals, corners, shots on goal, free kicks, goal kicks."}
                     </p>
                   </div>
                   <div className="w-[85%] h-[100%] flex items-end">
@@ -165,7 +174,9 @@ const GridSection = () => {
               </div>
               <div className="w-[25%] rounded-[20px] border border-grey4 whtie-50-op ">
                 <div className="w-[220px] h-[100%] m-auto flex flex-col justify-between">
-                  <h2 className="h2Title  pt-11">8H de batería</h2>
+                  <h2 className="h2Title  pt-11">
+                    {locale === "ES" ? "8H de Batería" : "8H of battery"}
+                  </h2>
                   <img
                     src={Battery}
                     className="h-full w-full object-cover  max-h-[196px] rounded-[10px] mb-8 "
@@ -189,8 +200,9 @@ const GridSection = () => {
                 <div className="pt-10 pl-4 ssm:pl-7 pr-16">
                   <h2 className="h2Title pb-4">SET UP SIMPLE</h2>
                   <p className="body1 ">
-                    Coloca la cámara y filma tu partido sin la necesidad de un
-                    camarógrafo.
+                    {locale === "ES"
+                      ? "Coloca la cámara y filma tu partido sin la necesidad de un camarógrafo."
+                      : "Place the camera and film your game without the need for a cameraman."}
                   </p>
                 </div>
                 <div className="w-[92%] h-[260px] ">
@@ -232,12 +244,14 @@ const GridSection = () => {
                   />
                 )}
                 <h2 className="h2Title w-[225px]">
-                  CALIDAD <br /> DE VIDEO NITIDA
+                  {locale === "ES"
+                    ? "  CALIDAD DE VIDEO NITIDA"
+                    : "Sharp video quality"}
                 </h2>
                 <p className="body1 pt-4 pb-8 pr-6 ssm:max-w-[350px]">
-                  Las lentes de nueva generación y la introducción del HDR
-                  garantizan una calidad de vídeo nítida y colores vibrantes en
-                  todas las grabaciones.
+                  {locale === "ES"
+                    ? "Las lentes de nueva generación y la introducción del HDR garantizan una calidad de vídeo nítida y colores vibrantes en todas las grabaciones."
+                    : "New generation lenses and the introduction of HDR ensure sharp video quality and vibrant colors on all recordings."}
                 </p>
               </div>
             </div>
@@ -245,11 +259,11 @@ const GridSection = () => {
             <div className="w-[100%] ms:w-[56%] md:w-[65%] h-[470px] ms:h-[470px] md:h-[440px] rounded-[20px] border border-grey4 whtie-50-op ">
               <div className="flex flex-col justify-between pl-4 ssm:pl-7 pt-10 h-full">
                 <div>
-                  <h2 className="h2Title pb-4">FOLLOW CAM</h2>
+                  <h2 className="h2Title pb-4">FOLLOW-CAM</h2>
                   <p className="body1 pr-6">
-                    La cámara con IA sigue automáticamente las acciones del
-                    partido, y ofrece una experiencia similar a ver un partido
-                    en la TV.
+                    {locale === "ES"
+                      ? "La cámara con IA sigue automáticamente las acciones del partido, y ofrece una experiencia similar a ver un partido en la TV."
+                      : "AI-powered follow-cam technology automatically follows the action of the game and provides you with a broadcast-like experience."}
                   </p>
                 </div>
                 <div className="w-[92%] h-[260px]  ml-auto">
@@ -271,12 +285,19 @@ const GridSection = () => {
                   src={Clima}
                   className=" w-full object-cover mt-8 h-[230px] ms:h-full rounded-[10px] "
                 />
-                <h2 className="h2Title pt-11"> Preparada para todo clima </h2>
+                <h2 className="h2Title pt-11">
+                  {" "}
+                  {locale === "ES"
+                    ? "Preparada para todo clima"
+                    : "Ready for all conditions"}{" "}
+                </h2>
               </div>
             </div>
             <div className="w-[100%] ms:w-[39%] md:w-[32%] h-[340px] ms:h-[470px] md:h-[440px] rounded-[20px] border border-grey4 whtie-50-op ">
               <div className="w-[90%] ms:w-[220px] h-[100%] m-auto flex flex-col justify-between">
-                <h2 className="h2Title  pt-11">8H de batería</h2>
+                <h2 className="h2Title  pt-11">
+                  {locale === "ES" ? "8H de Batería" : "8H of battery"}
+                </h2>
                 <img
                   src={Battery}
                   className="h-full w-full object-cover  max-h-[196px] rounded-[10px] mb-8 "
@@ -287,11 +308,14 @@ const GridSection = () => {
               <div className="flex flex-col justify-between h-full">
                 <div className="pt-10 px-4 ssm:px-7 ms:w-[360px]">
                   <h2 className="h2Title pb-4">
-                    DETECTA eventos automaticamente
+                    {locale === "ES"
+                      ? "DETECTA eventos automaticamente"
+                      : "Automatically detected events"}{" "}
                   </h2>
                   <p className="body1">
-                    La IA detecta y etiqueta los eventos clave del partido, como
-                    goles, remates, tiros de esquina o penaltis.
+                    {locale === "ES"
+                      ? "La IA detecta y etiqueta los eventos clave del partido, como goles, remates, tiros de esquina o penales."
+                      : "Our AI automatically detects the most important match events, as goals, corners, shots on goal, free kicks, goal kicks."}
                   </p>
                 </div>
                 <div className="w-[92%] h-[100%] flex justify-start ms:justify-end items-end">

@@ -5,53 +5,48 @@ import Cross from "../../assets/icons/cross.svg";
 const plans = [
   {
     name: "Starter",
-    price: "$20",
+    price: "$32",
     categories: {
       Equipos: "1 equipo por cámara",
-      Usuarios: "30 usuarios por cámara",
-      Almacenamiento: "12 meses",
-      "Horas de grabación": "40 horas por cámara",
+      Usuarios: "15 usuarios por cámara",
+      Almacenamiento: "6 meses",
+      "Horas de grabación": "10 hs mensuales",
     },
     features: [
       true,
       true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
       false,
-      true,
       false,
-      true,
-      true,
       false,
-      true,
-      true,
-      true,
-      true,
       false,
     ],
-    extras: [
-      "Disponible como complemento",
-      "Disponible como complemento",
-      "Disponible como complemento",
-      "Puede",
-    ],
+    extras: [false, false, false, ""],
   },
   {
     name: "Team",
-    price: "$39",
+    price: "$62",
     categories: {
-      Equipos: "5 equipos por cámara",
-      Usuarios: "150 usuarios por cámara",
+      Equipos: "1 equipos por cámara",
+      Usuarios: "30 usuarios por cámara",
       Almacenamiento: "12 meses",
-      "Horas de grabación": "Sin límite",
+      "Horas de grabación": "40 hs mensuales",
       "Horas de soporte": "10 horas",
     },
     features: [
-      false,
-      true,
-      false,
-      false,
       true,
       true,
-      false,
+      true,
+      true,
+      true,
+      true,
+      true,
       true,
       true,
       true,
@@ -63,44 +58,44 @@ const plans = [
       "Disponible como complemento",
       "Disponible como complemento",
       "Disponible como complemento",
-      "haber",
+      "acá iría otro extra",
     ],
   },
   {
     name: "Club",
-    price: "$59",
+    price: "$75",
     categories: {
-      Equipos: "20 equipos por cámara",
-      Usuarios: "600 usuarios por cámara",
+      Equipos: "5 equipos por cámara",
+      Usuarios: "150 usuarios por cámara",
       Almacenamiento: "12 meses",
-      "Horas de grabación": "Sin límite",
+      "Horas de grabación": "200 hs mensuales",
       "Horas de soporte": "24 horas",
     },
     features: [
       true,
       true,
-      false,
-      true,
-      false,
-      true,
-      true,
-      false,
       true,
       true,
       true,
       true,
-      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
     ],
     extras: [
       "Disponible como complemento",
       "Disponible como complemento",
       "Disponible como complemento",
-      "Diferentes",
+      "acá iría otro extra",
     ],
   },
   {
     name: "Enterprise",
-    price: "$59",
+    price: "$134",
     categories: {
       Equipos: "20 equipos por cámara",
       Usuarios: "600 usuarios por cámara",
@@ -111,23 +106,23 @@ const plans = [
     features: [
       true,
       true,
-      false,
-      true,
-      false,
-      true,
-      true,
-      false,
       true,
       true,
       true,
       true,
-      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
     ],
     extras: [
       "Disponible como complemento",
       "Disponible como complemento",
       "Disponible como complemento",
-      "Diferentes",
+      "acá iría otro extra",
     ],
   },
 ];
@@ -152,7 +147,7 @@ const extrasList = [
   "Veo Live",
   "Veo Analytics",
   "Destacados del Jugador",
-  "Tripode (5,2 m o 7,4m)",
+  // "Tripode (5,2 m o 7,4m)",
 ];
 
 const PricingTable = () => {
@@ -212,11 +207,23 @@ const PricingTable = () => {
             {extrasList.map((extra, rowIndex) => (
               <tr key={rowIndex} className=" ">
                 <td className="p-4 font-medium ">{extra}</td>
-                {plans.map((plan, colIndex) => (
-                  <td key={colIndex} className="p-4 text-center text-sm">
-                    {plan.extras[rowIndex]}
-                  </td>
-                ))}
+                {plans.map((plan, colIndex) => {
+                  const value = plan.extras[rowIndex];
+
+                  return (
+                    <td key={colIndex} className="p-4 text-center text-sm">
+                      {typeof value === "boolean" ? (
+                        <img
+                          src={value ? Tick : Cross}
+                          className="m-auto"
+                          width={20}
+                        />
+                      ) : (
+                        value
+                      )}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

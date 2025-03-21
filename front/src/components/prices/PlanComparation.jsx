@@ -149,11 +149,20 @@ const PlanComparation = () => {
 
   const veoCamUrl = "/veo-cam/";
 
-  const isVeoCam = window.location.pathname === veoCamUrl;
+  const veoCamUrlEn = "/en/veo-cam/";
+
+  const isVeoCam =
+    window.location.pathname === veoCamUrl ||
+    window.location.pathname === veoCamUrlEn;
+
+  const planTranslations = {
+    ES: { mensual: "Mensual", semestral: "Semestral", anual: "Anual" },
+    EN: { mensual: "Monthly", semestral: "6 Months", anual: "Annual" },
+  };
 
   return (
     <>
-      {location.pathname !== veoCamUrl && (
+      {!isVeoCam && (
         <div className=" text-center text-iBlue px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
           <h2 className="h1Title pb-10 pt-16 lg:pt-20  ">
             {dataSubPage?.planes_title}
@@ -200,7 +209,10 @@ const PlanComparation = () => {
                   : "text-gray0 hover:text-gray-200"
               }`}
             >
-              {plan.charAt(0).toUpperCase() + plan.slice(1)}
+              <span className="hidden">
+                {plan.charAt(0).toUpperCase() + plan.slice(1)}
+              </span>
+              {planTranslations[locale]?.[plan]}
             </button>
           ))}
         </div>
@@ -216,7 +228,7 @@ const PlanComparation = () => {
                 ${item.featuredCard ? "l-gradient-starred text-white" : ""}
                  ${
                    item.featuredCard
-                     ? "l-gradient-starred text-white order-1 md:order-4"
+                     ? "l-gradient-starred text-white order-1 md:order-2"
                      : `order-4 md:order-${index + 2}`
                  } `}
               >

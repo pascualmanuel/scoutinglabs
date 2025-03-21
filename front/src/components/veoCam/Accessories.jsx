@@ -17,7 +17,7 @@ const Accessories = () => {
       <div className="bg-grey0 py-28">
         <div className="md:max-w-[1536px] ml-6 llg:mx-6 lg:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
           <h3 className="h1Title uppercase mb-[70px] text-black">
-            Accessories
+            {locale === "ES" ? "Accesorios" : "Accessories"}
           </h3>
           <div className="overflow-x-auto llg:overflow-hidden pr-6 llg:pr-0">
             <div className="flex flex-row gap-4 llg:gap-6 justify-between  m-auto w-fit llg:w-[auto]">
@@ -35,23 +35,27 @@ const Accessories = () => {
           </div>
         </div>
         <div className="flex flex-col items-center mt-[100px]">
-          <p className="body1 text-iBlue">Quieres saber mas?</p>
+          <p className="body1 text-iBlue">
+            {locale === "ES" ? "¿Quieres saber más?" : "Want to learn more?"}
+          </p>
           <div className="py-6 flex flex-col sm:flex-row">
             <div className="mr-0 sm:mr-4 pb-[10px] sm:pb-0">
               <Button
-                text={"Contactanos"}
+                text={locale === "ES" ? "Contactanos" : "Contact us"}
                 width="w-[90vw] sm:w-[185px]"
                 height="h-[48px]"
+                link={"/contacto"}
               />
             </div>
             <div>
               <Button
-                text={"Recibir cotización"}
+                text={locale === "ES" ? "Recibir cotización" : "Get a quote"}
                 width="w-[90vw] sm:w-[220px]"
                 height="h-[48px]"
                 bg={"rgba(255, 255, 255, 0.1)"}
                 textColor="#03000D"
                 border="solid 1px #03000D "
+                link={"/subscripciones"}
               />
             </div>
           </div>
