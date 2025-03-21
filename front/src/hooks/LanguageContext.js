@@ -24,10 +24,12 @@ export const LanguageProvider = ({ children }) => {
   }, []);
 
   const changeLanguage = (newLocale) => {
+    const currentPath = window.location.pathname.replace(/^\/en/, "");
+    console.log(currentPath);
     localStorage.setItem("locale", newLocale);
     setLocale(newLocale);
     // Actualizar la URL
-    navigate(newLocale === "EN" ? "/en" : "/");
+    navigate(newLocale === "EN" ? `/en${currentPath}` : `${currentPath}`);
   };
 
   return (

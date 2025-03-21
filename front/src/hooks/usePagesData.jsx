@@ -20,6 +20,9 @@ const usePagesData = () => {
           boxes {
             title
             description
+            media {
+              url
+            }
           }
           second_section_buttons {
             link
@@ -69,6 +72,9 @@ const usePagesData = () => {
             boxes {
               title
               description
+              media {
+                url
+              }
             }
 
             slider {
@@ -283,6 +289,27 @@ const usePagesData = () => {
           }
         }
       }
+
+      allStrapiFaq {
+        nodes {
+          locale
+          title
+          category
+          description {
+            data {
+              description
+            }
+          }
+          link
+          localizations {
+            locale
+            category
+            title
+            description
+            link
+          }
+        }
+      }
     }
   `);
 
@@ -294,6 +321,7 @@ const usePagesData = () => {
     subsData: data.allStrapiSubscriptionPlan.nodes,
     contactData: data.allStrapiContact.nodes[0],
     subscriptionPageData: data.allStrapiSuscripciones.nodes[0],
+    faqData: data.allStrapiFaq.nodes,
   };
 };
 
