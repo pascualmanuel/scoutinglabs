@@ -25,7 +25,9 @@ const VeoCam = () => {
     veoCamPage?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || veoCamPage;
+
   console.log(localizedData);
+
   return (
     <>
       <Layout>
@@ -84,26 +86,20 @@ const VeoCam = () => {
             </p>
           </div>
         </div>
-        {/* 
-        a
-        a
-         */}
+
         <div className="mb-[80px] md:mb-[180px] max-w-[1536px] mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px]">
           <div className="flex flex-col md:flex-row md:gap-6 justify-between">
             {localizedData?.boxes.map((item, index) => (
               <div
                 key={index}
-                className="box-sc border-t border-[#434652] pt-5"
+                className="box-sc border-t border-[#434652] pt-5 md:w-1/4"
               >
                 <div className="w-[44px] h-[44px] rounded-full flex justify-center items-center relative overflow-hidden">
-                  <img src={item?.imgSrc} className="" width={24} />
+                  <img src={item?.media.url} className="" width={24} />
                 </div>
-                <a
-                  href="#"
-                  className="group flex items-center justify-between subH  py-2"
-                >
+                <div className="group flex items-center justify-between subH  py-2">
                   {item?.title}
-                </a>
+                </div>
                 <p className="body1 text-grey2 mb-8">{item?.description}</p>
               </div>
             ))}

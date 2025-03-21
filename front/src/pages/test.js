@@ -79,7 +79,6 @@ const EventForm = () => {
         throw new Error(errorData.errors?.[0]?.detail);
       }
 
-      alert("¡Datos enviados con éxito!");
       setFormData({
         // Reset del formulario
         email: "",

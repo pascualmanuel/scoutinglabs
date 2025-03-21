@@ -12,6 +12,7 @@ import { ParseMarkdown } from "../hooks/ParseMarkdown";
 const Suscripciones = () => {
   const { subscriptionPageData } = usePagesData();
   const { locale } = useLanguage();
+
   const localizedData =
     subscriptionPageData?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
