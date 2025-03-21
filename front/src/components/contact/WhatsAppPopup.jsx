@@ -4,6 +4,7 @@ import Modal from "./Modal";
 
 import CotizacionForm from "./CotizacionForm";
 
+import { useLanguage } from "../../hooks/LanguageContext";
 const WhatsAppPopup = ({
   plan,
   selectedPlanType,
@@ -11,9 +12,8 @@ const WhatsAppPopup = ({
   whatsappWindowRef,
   addons,
 }) => {
+  const { locale } = useLanguage();
   const handleFormSuccess = (formData) => {
-    console.log("✅ onSuccess ejecutado - Datos recibidos:", formData);
-
     if (!formData.phone) {
       console.error(
         "❌ Error: El número de teléfono está vacío o es inválido."
@@ -63,7 +63,9 @@ const WhatsAppPopup = ({
   return (
     <Modal onClose={onClose}>
       <h2 className="subH mb-4">
-        Completa el formulario y recibe tu cotizacion
+        {locale === "ES"
+          ? "Completa el formulario y recibe tu cotizacion"
+          : "Fill out the form and receive your quote."}
       </h2>
       <CotizacionForm
         onSuccess={handleFormSuccess}

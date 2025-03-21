@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import VeocamBg from "../../assets/veocam-bg.webp";
 import { useState } from "react";
+
+import { useLanguage } from "../../hooks/LanguageContext";
 const Popup = ({ onClose }) => {
+  const { locale } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [error, setError] = useState(null); // Estado para manejar errores
 
@@ -95,6 +98,8 @@ const Popup = ({ onClose }) => {
     }
   };
 
+  console.log(locale);
+
   return (
     <div className=" fixed inset-0 z-50 ">
       <div
@@ -127,14 +132,16 @@ const Popup = ({ onClose }) => {
                 isSuccess ? "opacity-100" : "opacity-0"
               }`}
             >
-              Gracias!
+              {locale === "ES" ? "¡Gracias!" : "Thanks!"}
             </span>
             <span
               className={`absolute inset-0 transition-opacity duration-300 ${
                 isSuccess ? "opacity-0" : "opacity-100"
               }`}
             >
-              Suscribe and get special discounts!
+              {locale === "ES"
+                ? "Suscríbete y consigue descuentos especiales!"
+                : "Suscribe and get special discounts!"}
             </span>
           </h2>
           <div className="">

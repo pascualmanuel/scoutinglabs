@@ -73,7 +73,9 @@ const HomeVeo = () => {
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[17px] h-[17px]"
                 />
               </span>
-              Distribuidor oficial de Veo Technologies
+              {locale === "ES"
+                ? "Distribuidor oficial de Veo Technologies"
+                : "Official distributor of Veo Technologies"}
             </span>
           </div>
           <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto">
