@@ -17,17 +17,28 @@ import "react-tooltip/dist/react-tooltip.css";
 const PlanComparation = () => {
   const { subsData, subscriptionPageData } = usePagesData();
   const { locale } = useLanguage();
+  const location = useLocation(); // Obtiene la URL actual
+
   const localizedData =
     subsData?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || subsData;
+
   const dataSubPage =
     subscriptionPageData?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || subscriptionPageData;
-  const location = useLocation(); // Obtiene la URL actual
 
-  let subscription = localizedData;
+  const enEs = subsData.map((faq) => {
+    // Buscar la traducción en el array `localizations`, asegurando que la comparación sea case-sensitive
+    const translated = faq.localizations?.find(
+      (loc) => loc.locale.toUpperCase() === locale
+    );
+
+    return translated ?? faq; // Si hay traducción, usarla; si no, mantener el original
+  });
+
+  let subscription = enEs;
 
   const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el total a 0
   const [selectedAddons, setSelectedAddons] = useState([]); // Lista de addons seleccionados
@@ -88,7 +99,6 @@ const PlanComparation = () => {
 
   const handleAddonClick = (planId, addonId, addonPrice) => {
     const uniqueAddonKey = `${planId}-${addonId}`;
-    console.log(planId, "3");
 
     setSelectedAddons((prev) =>
       prev.includes(uniqueAddonKey)
@@ -97,10 +107,7 @@ const PlanComparation = () => {
     );
   };
 
-  useEffect(() => {
-    // console.log("Addons seleccionados:", selectedAddons);
-    // console.log("Total actual:", totalPrice);
-  }, [selectedAddons, totalPrice]);
+  useEffect(() => {}, [selectedAddons, totalPrice]);
   const [selectedOrders, setSelectedOrders] = useState([]);
 
   const handleWhatsAppClick = (plan) => {
@@ -247,7 +254,11 @@ const PlanComparation = () => {
                       {item?.title}
                     </p>
                     <p className="body2 text-center">
-                      <ParseMarkdown text={item?.desc?.data?.desc} />
+                      <ParseMarkdown
+                        text={
+                          locale === "EN" ? item?.desc : item?.desc.data.desc
+                        }
+                      />
                     </p>
 
                     <p className="aeonik font-thin text-base">
@@ -264,7 +275,11 @@ const PlanComparation = () => {
                     </span>
                     <p className="text-xs">
                       <ParseMarkdown
-                        text={item?.whatInclude?.data?.whatInclude}
+                        text={
+                          locale === "EN"
+                            ? item?.whatInclude
+                            : item?.whatInclude?.data?.whatInclude
+                        }
                       />
                     </p>
                   </div>
@@ -307,7 +322,7 @@ const PlanComparation = () => {
                         </div>
                         <div className="flex flex-col justify-around px-2 select-none items-end">
                           <span>
-                            + USD{" "}
+                            + USD
                             {selectedPlan === "anual"
                               ? addon.annual_price
                               : selectedPlan === "mensual"
