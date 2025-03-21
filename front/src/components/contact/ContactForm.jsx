@@ -6,8 +6,9 @@ import RightArrow from "../../assets/icons/r-arrow.svg";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
-
+import { useLanguage } from "../../hooks/LanguageContext";
 function ContactForm({ onSuccess }) {
+  const { locale } = useLanguage();
   const [formData, setFormData] = useState({
     email: "",
     phone_number: "",
@@ -171,13 +172,17 @@ function ContactForm({ onSuccess }) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
-            <label className="block body1 text-grey1 mb-1">Name *</label>
+            <label className="block body1 text-grey1 mb-1">
+              {locale === "ES" ? "Nombre" : "Name *"}
+            </label>
             <input
               type="text"
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              placeholder="Enter your full name..."
+              placeholder={
+                locale === "ES" ? "Nombre" : "Enter your full name... *"
+              }
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
             {errors.name && (
@@ -192,7 +197,7 @@ function ContactForm({ onSuccess }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email..."
+              placeholder={locale === "ES" ? "Email" : "Enter your email *"}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
             {errors.email && (
@@ -202,7 +207,9 @@ function ContactForm({ onSuccess }) {
         </div>
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
-            <label className="block body1 text-grey1 mb-1">Phone *</label>
+            <label className="block body1 text-grey1 mb-1">
+              {locale === "ES" ? "Télefono" : "Phone *"}
+            </label>
             <PhoneInput
               defaultCountry="ar" // Código de país inicial (Argentina)
               value={formData.phone_number}
@@ -227,7 +234,7 @@ function ContactForm({ onSuccess }) {
           </div>
           <div className="ssm:w-1/2">
             <label className="block body1 text-grey1 mb-1">
-              Country of residence *
+              {locale === "ES" ? "País" : "Country of residence *"}
             </label>
             <select
               name="country"
@@ -235,7 +242,9 @@ function ContactForm({ onSuccess }) {
               onChange={handleChange}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             >
-              <option value="">Selecciona tu país...</option>
+              <option value="">
+                {locale === "ES" ? "País" : "Country of residence *"}
+              </option>
               {countryList.map((c) => (
                 <option key={c.code} value={c.name}>
                   {c.name}
@@ -249,12 +258,19 @@ function ContactForm({ onSuccess }) {
         </div>
 
         <div>
-          <label className="block body1 text-grey1 mb-1">Message *</label>
+          <label className="block body1 text-grey1 mb-1">
+            {" "}
+            {locale === "ES" ? "Mensaje *" : "Message *"}
+          </label>
           <textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Type your message here..."
+            placeholder={
+              locale === "ES"
+                ? "Escribí tu mensaje"
+                : "Type your message here..."
+            }
             className="w-full pl-2 pt-4 bg-[#ffffff0d] border border-[#434652] rounded-md body2 h-32 "
           />
           {errors.message && (
@@ -266,7 +282,10 @@ function ContactForm({ onSuccess }) {
           <div className="w-fit bg-[#1d1a26] text-white p-4 rounded-md">
             <p className="text-left body2 flex items-center flex-row">
               <img src={TickWhite} className="mr-2" />
-              Enviaste el formulario
+
+              {locale === "ES"
+                ? "Enviaste el formulario"
+                : "You submitted the form"}
             </p>
           </div>
         ) : allFieldsFilled ? (
@@ -281,7 +300,9 @@ function ContactForm({ onSuccess }) {
             >
               <span className="body1">Email</span>
               <span className="body3 text-grey3 ">
-                We reply as soon as possible
+                {locale === "ES"
+                  ? "Te respondemos lo antes posible"
+                  : "We reply as soon as possible"}
               </span>
               <div className="bg-white py-[6px] px-2 flex flex-row text-iBlue body3 rounded-md">
                 <span>Email Us</span>
@@ -294,7 +315,11 @@ function ContactForm({ onSuccess }) {
             >
               <span className="body1">Whatsapp</span>
               <span className="body3 text-grey3 ">
-                Available from: <br /> Mon – Fri 09:30 – 16:30
+                {locale === "ES" ? "Atención disponible:" : "Available from:"}
+                <br />{" "}
+                {locale === "ES"
+                  ? "Lun – Vie 09:30 – 18:00"
+                  : "Mon – Fri 09:30 – 18:00"}
               </span>
               <div className="bg-white py-[6px] px-2 flex flex-row text-iBlue body3 rounded-md">
                 <span>Chat with Us</span>
@@ -303,7 +328,7 @@ function ContactForm({ onSuccess }) {
             </button>
           </div>
         ) : (
-          <Button text="Enviar" width="w-[100%]" />
+          <Button text={locale === "ES" ? "Enviar" : "Send"} width="w-[100%]" />
         )}
       </form>
     </div>

@@ -5,7 +5,9 @@ import WhatsAppIcon from "../../assets/icons/WhatsApp.svg";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
+import { useLanguage } from "../../hooks/LanguageContext";
 function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
+  const { locale } = useLanguage();
   const [formData, setFormData] = useState({
     email: "",
     phone_number: "",
@@ -161,13 +163,18 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
-            <label className="block body1 text-grey1 mb-1">Name *</label>
+            <label className="block body1 text-grey1 mb-1">
+              {" "}
+              {locale === "ES" ? "Nombre" : "Name *"}
+            </label>
             <input
               type="text"
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              placeholder="Enter your full name..."
+              placeholder={
+                locale === "ES" ? "Nombre" : "Enter your full name... *"
+              }
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
             {errors.name && (
@@ -182,7 +189,7 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email..."
+              placeholder={locale === "ES" ? "Email" : "Enter your email *"}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
             {errors.email && (
@@ -192,7 +199,10 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
         </div>
         <div className="ssm:flex gap-4">
           <div className="ssm:w-1/2">
-            <label className="block body1 text-grey1 mb-1">Phone *</label>
+            <label className="block body1 text-grey1 mb-1">
+              {" "}
+              {locale === "ES" ? "Télefono" : "Phone *"}
+            </label>
             <PhoneInput
               defaultCountry="ar" // Código de país inicial (Argentina)
               value={formData.phone_number}
@@ -217,7 +227,7 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
           </div>
           <div className="ssm:w-1/2">
             <label className="block body1 text-grey1 mb-1">
-              Country of residence *
+              {locale === "ES" ? "País" : "Country of residence *"}
             </label>
             <select
               name="country"
@@ -225,7 +235,9 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
               onChange={handleChange}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             >
-              <option value="">Selecciona tu país...</option>
+              <option value="">
+                {locale === "ES" ? "País" : "Country of residence *"}
+              </option>
               {countryList.map((c) => (
                 <option key={c.code} value={c.name}>
                   {c.name}
@@ -247,7 +259,7 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
                 <div className="flex flex-row items-center px-2">
                   <img src={WhatsAppIcon} alt="whattsapp" className="w-6 h-6" />
                   <p className="buttonText ml-4 capitalize">
-                    Recibir cotización
+                    {locale === "ES" ? "Recibir cotización" : "Get a quote *"}
                   </p>
                 </div>
               </>

@@ -15,7 +15,7 @@ const ReelsSection = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data.data); // Traer todos los posts sin filtrarlos
+        setPosts(data.data.slice(0, 16)); // Limitar a 12 posteos
         setLoading(false);
       })
       .catch((error) => {
@@ -31,12 +31,12 @@ const ReelsSection = () => {
 
   // Si hay error, mostramos un mensaje
   if (error) {
-    return <div>Error al cargar los reels: {error.message}</div>;
+    return null;
   }
 
   // Si está cargando, mostramos un mensaje de loading
   if (loading) {
-    return <div>Cargando reels...</div>;
+    return <div></div>;
   }
 
   return (
