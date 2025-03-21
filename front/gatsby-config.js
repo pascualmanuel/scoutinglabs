@@ -60,7 +60,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://attractive-darling-8051189523.strapiapp.com/",
+        apiURL: "http://localhost:1337",
         collectionTypes: [
           {
             singularName: "accessorie",
