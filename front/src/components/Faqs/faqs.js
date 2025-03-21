@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 // import "./FAQ.css"; // Add your styles here
 import ToggleBar from "../Togglebar";
+import { ParseMarkdown } from "../../hooks/ParseMarkdown";
+import usePagesData from "../../hooks/usePagesData";
+import { useLanguage } from "../../hooks/LanguageContext";
 const FAQItem = ({ number, title, answer, mediaSrc }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -77,14 +80,12 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
           }}
         >
           <div className="faq-answer-content flex flex-col  justify-between lg:flex-row">
-            <p className="body2 text-grey2 lg:max-w-[400px] mg:max-w-[420px] mt-11 mb-8">
-              {answer}
-            </p>
+            <p className="body1 text-grey2  mt-11 mb-8">{answer}</p>
             <div>
               {mediaSrc && mediaSrc.trim() !== "" && (
                 <div
-                  className=" w-[100%] h-[auto] max-w-[415px] ssm:h-[235px] m-auto
-                lg:mr-[160px] xl:mr-10 xl:w-[415px] xl:h-[235px] "
+                  className=" h-[auto] max-w-[415px] ssm:h-[235px] m-auto
+                   lg:ml-[60px]  xl:ml-[110px] lg:mr-10 w-[415px] xl:h-[235px] "
                 >
                   <iframe
                     src={getEmbedUrl(mediaSrc)}
@@ -105,32 +106,24 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
 };
 
 const FAQPage = () => {
-  const [faqs, setFaqs] = useState([]);
+  const { faqData } = usePagesData();
+  const { locale } = useLanguage();
+  // const locale = "en"; // Define el idioma deseado (puedes cambiarlo dinámicamente)
+
+  const localizedFaqs = faqData.map((faq) => {
+    // Buscar la traducción en el array `localizations`, asegurando que la comparación sea case-sensitive
+    const translated = faq.localizations?.find(
+      (loc) => loc.locale.toUpperCase() === locale
+    );
+
+    return translated ?? faq; // Si hay traducción, usarla; si no, mantener el original
+  });
 
   const [selectedOption, setSelectedOption] = useState("VeoCam3");
 
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchFAQs = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:1337/api/faqs?populate=*`
-        ); // Reemplaza con tu URL real
-        const json = await response.json();
-        // Se asume que la respuesta tiene una propiedad "data" que contiene el array de FAQs
-        setFaqs(json.data);
-      } catch (error) {
-        console.error("Error al obtener los FAQs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFAQs();
-  }, []);
-
-  const filteredFaqs = faqs.filter((faq) => faq.category === selectedOption);
+  const filteredFaqs = localizedFaqs.filter(
+    (faq) => faq.category === selectedOption
+  );
 
   return (
     <div className="faq-page max-w-[1360px] m-auto">
@@ -150,18 +143,22 @@ const FAQPage = () => {
         />
       </div>
 
-      {loading ? (
-        <p>Cargando FAQs...</p>
-      ) : (
-        filteredFaqs.map((faq) => (
-          <FAQItem
-            key={faq.id}
-            title={faq.title}
-            answer={faq.description}
-            mediaSrc={faq.link} // Aquí usamos el campo "link" para mostrar la imagen o el medio
-          />
-        ))
-      )}
+      {filteredFaqs.map((faq) => (
+        <FAQItem
+          key={faq?.id}
+          title={faq?.title}
+          answer={
+            <ParseMarkdown
+              text={
+                locale === "EN"
+                  ? faq?.description
+                  : faq?.description.data.description
+              }
+            />
+          }
+          mediaSrc={faq?.link}
+        />
+      ))}
     </div>
   );
 };

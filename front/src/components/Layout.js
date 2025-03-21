@@ -122,7 +122,7 @@ const Layout = ({ children }) => {
           <div className="llg:flex llg:items-center llg:justify-between llg:mt-24 border-t border-[#ffffff35]">
             <div className="llg:flex">
               <p className="text-[#64626A] text-xs font-thin mt-4 flex justify-center  aenoik llg:mt-0	">
-                © 2024 SCOUTING LABS
+                © 2025 SCOUTING LABS
               </p>
               <div className="flex flex-row justify-center my-10 llg:hidden">
                 <div className="w-[220px] flex flex-row justify-between ">
@@ -151,7 +151,7 @@ const Layout = ({ children }) => {
               </div>
               <div className="flex flex-row justify-center ">
                 <div className="w-[250px] flex flex-row justify-between text-[#64626A] text-xs font-thin aenoik llg:ml-8">
-                  <LangLink to={"/"}>
+                  {/* <LangLink to={"/"}>
                     <p>Privacidad</p>
                   </LangLink>
                   <LangLink to={"/"}>
@@ -159,7 +159,7 @@ const Layout = ({ children }) => {
                   </LangLink>
                   <LangLink to={"/"}>
                     <p>Cookies</p>
-                  </LangLink>
+                  </LangLink> */}
                 </div>
               </div>
             </div>
@@ -177,6 +177,15 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </footer>
+      <div className=" w-screen flex justify-center llg:mt-[-52px] mb-8 llg:mb-0">
+        <a
+          href="https://www.labba.studio/"
+          className="text-[#64626A] text-xs font-thin aenoik "
+          target="_blank"
+        >
+          Hecho por Labba Studio
+        </a>
+      </div>
     </>
   );
 };

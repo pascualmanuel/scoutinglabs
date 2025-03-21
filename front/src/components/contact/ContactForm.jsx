@@ -125,7 +125,6 @@ function ContactForm({ onSuccess }) {
         window.open(whatsappUrl, "_blank");
       }
 
-      alert("¡Datos enviados con éxito!");
       setFormData({
         // Reset del formulario
         email: "",

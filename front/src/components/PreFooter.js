@@ -7,7 +7,7 @@ import { useLanguage } from "../hooks/LanguageContext";
 import { ParseMarkdown } from "../hooks/ParseMarkdown";
 const Prefooter = () => {
   const { footer } = useLayoutData();
-  const { locale, changeLanguage } = useLanguage();
+  const { locale } = useLanguage();
 
   const localizedData =
     footer?.localizations?.find(

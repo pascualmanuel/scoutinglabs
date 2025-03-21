@@ -18,7 +18,7 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
     addons: addons,
     selectedPlanType: selectedPlanType,
   });
-  console.log(formData);
+
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -142,8 +142,6 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
           addons: [],
           selectedPlanType: "",
         });
-
-        alert("¡Datos enviados con éxito!"); // Mantener tu alerta
       }
     } finally {
       setIsLoading(false);

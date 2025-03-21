@@ -28,7 +28,6 @@ export default async function handler(req, res) {
       cotizacion: "Solicitud de Cotización",
     };
 
-    console.log(process.env.GATSBY_KLAVIYO_API_KEY);
     const eventName = eventMap[origen] || "Evento Desconocido";
 
     const eventData = {
@@ -70,11 +69,6 @@ export default async function handler(req, res) {
       },
     };
 
-    console.log(
-      "Datos a enviar a Klaviyo:",
-      JSON.stringify(eventData, null, 2)
-    );
-
     try {
       const response = await axios.post(
         "https://a.klaviyo.com/api/events",
@@ -89,7 +83,6 @@ export default async function handler(req, res) {
         }
       );
 
-      console.log("Evento enviado correctamente:", response.data);
       return res.status(200).json({
         success: true,
         message: "Evento enviado con éxito a Klaviyo",

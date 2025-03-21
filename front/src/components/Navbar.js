@@ -25,6 +25,8 @@ const Navbar = () => {
   const [mLeft, setMLeft] = useState(192);
 
   const handleLanguageChange = (newLocale) => {
+    console.log("Cambiando idioma a:", newLocale);
+
     changeLanguage(newLocale);
   };
 

@@ -20,11 +20,10 @@ const WhatsAppPopup = ({
       );
       return;
     }
-
     const periodicidadMap = {
-      anual: "Anual",
-      semestral: "Semestral",
-      mensual: "Mensual",
+      anual: locale === "EN" ? "Annual" : "Anual",
+      semestral: locale === "EN" ? "Semi-annual" : "Semestral",
+      mensual: locale === "EN" ? "Monthly" : "Mensual",
     };
 
     const planPrice =
@@ -34,17 +33,24 @@ const WhatsAppPopup = ({
         ? parseFloat(plan.semestralPrice.replace(/[^0-9.-]+/g, ""))
         : parseFloat(plan.annualPrice.replace(/[^0-9.-]+/g, ""));
 
-    const mensaje = `Hola, quiero suscribirme al plan *${plan?.title} (${
-      periodicidadMap[selectedPlanType]
-    })* por USD *${planPrice.toFixed(2)}/mes*.\n\nContacto:\n- Nombre: ${
-      formData.name
-    }\n- Email: ${formData.email}\n- Teléfono: ${formData.phone}`;
+    const mensaje =
+      locale === "EN"
+        ? `Hello, I want to subscribe to the *${plan?.title} (${
+            periodicidadMap[selectedPlanType]
+          })* plan for USD *${planPrice.toFixed(
+            2
+          )}/month*.\n\nContact:\n- Name: ${formData.name}\n- Email: ${
+            formData.email
+          }\n- Phone: ${formData.phone}`
+        : `Hola, quiero suscribirme al plan *${plan?.title} (${
+            periodicidadMap[selectedPlanType]
+          })* por USD *${planPrice.toFixed(2)}/mes*.\n\nContacto:\n- Nombre: ${
+            formData.name
+          }\n- Email: ${formData.email}\n- Teléfono: ${formData.phone}`;
 
     const url = `https://wa.me/5491151632960?text=${encodeURIComponent(
       mensaje
     )}`;
-
-    console.log("🔗 URL de WhatsApp generada:", url);
 
     // Verificar si la ventana ya está abierta
     if (whatsappWindowRef?.current && !whatsappWindowRef.current.closed) {

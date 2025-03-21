@@ -98,8 +98,6 @@ const Popup = ({ onClose }) => {
     }
   };
 
-  console.log(locale);
-
   return (
     <div className=" fixed inset-0 z-50 ">
       <div
