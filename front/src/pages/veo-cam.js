@@ -25,56 +25,7 @@ const VeoCam = () => {
     veoCamPage?.localizations?.find(
       (loc) => loc.locale.toLowerCase() === locale.toLowerCase()
     ) || veoCamPage;
-
-  const data = [
-    {
-      title: "somos Distribuidores oficiales",
-      description:
-        "Te recomendaremos la suscripción que mejor se adapte a lo que necesitas.",
-      imgSrc: VeoGreen, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "ENTREGA INMEDIATA",
-      description: "Llevamos tu cámara y la configuramos donde quieras. ",
-      imgSrc: Box, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "CAPACITACION personalizada",
-      description:
-        "Te enseñamos a sacarle el jugo a los datos y mejorar tu nivel con la Veo Cam 3.",
-      imgSrc: Person, // Aquí puedes agregar la URL de la imagen
-    },
-    {
-      title: "soporte exclusivo",
-      description: "Estamos conectados para resolver tus inquietudes.",
-      imgSrc: Crown, // Aquí puedes agregar la URL de la imagen
-    },
-  ];
-
-  const suscriptions = [
-    {
-      title: "Starter",
-      desc: "Ideal para padres y jugadores amateur comprometidos a potenciar su nivel.",
-      price: "$20",
-      cta: "Seleccionar Starter",
-      starred: false,
-    },
-    {
-      title: "Team",
-      desc: "Diseñado para coaches, equipos de amigos, y ligas amateur.",
-      price: "$59",
-      cta: "Seleccionar Team",
-      starred: true,
-    },
-    {
-      title: "Club",
-      desc: "Enfocado en clubes de nivel profesional que buscan mejorar el rendimiento de su equipo.",
-      price: "$90",
-      cta: "Seleccionar Club",
-      starred: false,
-    },
-  ];
-
+  console.log(localizedData);
   return (
     <>
       <Layout>
@@ -89,12 +40,20 @@ const VeoCam = () => {
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[17px] h-[17px]"
                   />
                 </span>
-                Distribuidor oficial de Veo Technologies
+                {locale === "ES"
+                  ? "Distribuidor oficial de Veo Technologies"
+                  : "Official distributor of Veo Technologies"}
               </span>
             </div>
-            <h2 className="h1Title pt-[50px]">{localizedData?.title}</h2>
+            <h2 className="h1Title pt-[50px]">
+              <ParseMarkdown text={localizedData?.title} />
+
+              {/* <ParseMarkdown text={localizedData?.title} /> */}
+            </h2>
             <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
-            <h2 className="h1Title">{localizedData?.subtitle}</h2>
+            <h2 className="h1Title">
+              <ParseMarkdown text={localizedData?.subtitle} />
+            </h2>
 
             <div className="py-6 flex flex-col sm:flex-row">
               {localizedData.buttons.map((btn, index) => (
@@ -169,7 +128,9 @@ const VeoCam = () => {
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[17px] h-[17px]"
                   />
                 </span>
-                Distribuidor oficial de Veo Technologies
+                {locale === "ES"
+                  ? "Distribuidor oficial de Veo Technologies"
+                  : "Official distributor of Veo Technologies"}
               </span>
             </div>
 
@@ -198,7 +159,6 @@ const VeoCam = () => {
             </div>
           </div>
         </div>
-
         <div className=" my-32 llg:my-0 mg:my-32 flex justify-center">
           <GridSection />
         </div>
@@ -218,7 +178,6 @@ const VeoCam = () => {
         {/* <div className="mb-[80px] md:mb-[0] md:max-w-[1536px]  md:mx-6 lm:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] "> */}
         <PlanComparation />
         {/* </div> */}
-
         <SportsSection />
         <Accessories />
       </Layout>
