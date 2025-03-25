@@ -60,7 +60,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://localhost:1337",
+        apiURL: "https://great-hope-45f9424224.strapiapp.com/",
         collectionTypes: [
           {
             singularName: "accessorie",
