@@ -43,30 +43,30 @@ module.exports = {
         start_url: `/`,
         background_color: `#03000d`,
         display: `standalone`,
-        icon: `public/favicon/favicon.svg`,
+        icon: `src/assets/favicon/favicon.svg`,
         icons: [
           {
-            src: `public/favicon/apple-touch-icon.png`,
+            src: `src/assets/favicon/apple-touch-icon.png`,
             sizes: `180x180`,
             type: `image/png`,
           },
           {
-            src: `public/favicon/favicon-96x96.png`,
+            src: `src/assets/favicon/favicon-96x96.png`,
             sizes: `96x96`,
             type: `image/png`,
           },
           {
-            src: `public/favicon/favicon.ico`,
+            src: `src/assets/favicon/favicon.ico`,
             sizes: `16x16`,
             type: `image/x-icon`,
           },
           {
-            src: `public/favicon/web-app-manifest-192x192.png`,
+            src: `src/assets/favicon/web-app-manifest-192x192.png`,
             sizes: `192x192`,
             type: `image/png`,
           },
           {
-            src: `public/favicon/web-app-manifest-512x512.png`,
+            src: `src/assets/favicon/web-app-manifest-512x512.png`,
             sizes: `512x512`,
             type: `image/png`,
           },
