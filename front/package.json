@@ -31,6 +31,7 @@
     "gatsby-source-filesystem": "^5.14.0",
     "gatsby-source-strapi": "^5.0.2",
     "gatsby-transformer-sharp": "^5.14.0",
+    "google-libphonenumber": "^3.2.40",
     "libphonenumber-js": "^1.11.19",
     "lottie-react": "^2.4.1",
     "postcss": "^8.4.49",
