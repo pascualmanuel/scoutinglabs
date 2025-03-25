@@ -94,7 +94,10 @@ const HomePage = ({ data }) => {
       <img src={PreLoadSuscripciones} className="hidden" />
       {loaderVisible && <Loader fadeOut={fadeOut} />}
       <Layout>
-        <Seo title="Scouting Labs" description="Scouting Labs home" />
+        <Seo
+          title="Scouting Labs"
+          description="Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo."
+        />
         <HomeHero
           onVideoLoad={handleVideoLoad}
           playVideo={videoPlaying} // Pasamos el estado que controla si el video debe reproducirse
