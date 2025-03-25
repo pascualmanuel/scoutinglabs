@@ -1,13 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import countries from "country-list";
+import { PhoneNumberUtil } from "google-libphonenumber";
+
 import TickWhite from "../../assets/icons/tick-white.svg";
 import RightArrow from "../../assets/icons/r-arrow.svg";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
 import { useLanguage } from "../../hooks/LanguageContext";
-function ContactForm({ onSuccess }) {
+function ContactForm() {
   const { locale } = useLanguage();
   const [formData, setFormData] = useState({
     email: "",
@@ -37,15 +39,22 @@ function ContactForm({ onSuccess }) {
           error = "Formato de email inválido";
         break;
       case "phone_number":
-        if (!/^\+\d{7,15}$/.test(value)) {
-          error = "Teléfono inválido.";
+        if (!/^\+\d{5,15}$/.test(value)) {
+          error =
+            "Teléfono inválido. Usa formato internacional: +[código país][número] Ejemplo: +59812345678";
         }
         break;
-      case "name":
+
+      case "first_name":
         if (value.trim().length < 2) error = "Nombre completo requerido";
         break;
       case "country":
         if (!value) error = "Selecciona tu país";
+        break;
+      case "message":
+        if (value.trim().length < 0) error = "Mensaje demasiado corto";
+        break;
+      default:
         break;
     }
     return error;
@@ -53,6 +62,17 @@ function ContactForm({ onSuccess }) {
 
   const handleSubmit = async (e, type) => {
     e.preventDefault();
+
+    // Validación de todos los campos antes de enviar el formulario
+    let formErrors = {};
+    for (let field in formData) {
+      const error = validateField(field, formData[field]);
+      if (error) formErrors[field] = error;
+    }
+    setErrors(formErrors);
+
+    // Si hay errores, no enviamos el formulario
+    if (Object.keys(formErrors).length > 0) return;
 
     const eventData = {
       data: {
@@ -117,6 +137,7 @@ function ContactForm({ onSuccess }) {
         throw new Error(errorData.errors?.[0]?.detail);
       }
 
+      // Enviar mensaje de WhatsApp si se seleccionó esa opción
       if (type === "whatsapp") {
         const whatsappMessage = `Hola, mi nombre es ${formData.first_name} y tengo la siguiente consulta: ${formData.message}`;
         const whatsappUrl = `https://wa.me/5491151632960?text=${encodeURIComponent(
@@ -126,18 +147,14 @@ function ContactForm({ onSuccess }) {
       }
 
       setFormData({
-        // Reset del formulario
         email: "",
         phone_number: "",
         first_name: "",
-        last_name: "",
         country: "",
         origen: "contacto",
-        selectedPlan: "",
-        addons: [],
-        selectedPlanType: "",
         message: "",
       });
+      setSubmitted(true);
     } catch (error) {
       console.error("Error en la solicitud:", error);
       alert(`Error: ${error.message}`);
@@ -149,6 +166,13 @@ function ContactForm({ onSuccess }) {
     setFormData({
       ...formData,
       [name]: value,
+    });
+
+    // Validar campo individual al cambiar
+    const error = validateField(name, value);
+    setErrors({
+      ...errors,
+      [name]: error,
     });
   };
 
@@ -223,12 +247,10 @@ function ContactForm({ onSuccess }) {
                   className: "bg-[#ffffff0d] border border-[#434652]",
                 },
               }}
-              placeholder="Enter phone_number number..."
+              placeholder="Enter phone number number..."
             />
             {errors.phone_number && (
-              <p className="text-red-500  text-sm mt-1">
-                {errors.phone_number}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.phone_number}</p>
             )}
           </div>
           <div className="ssm:w-1/2">

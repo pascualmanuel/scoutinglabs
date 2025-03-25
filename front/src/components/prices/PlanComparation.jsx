@@ -167,6 +167,13 @@ const PlanComparation = () => {
     EN: { mensual: "Monthly", semestral: "6 Months", anual: "Annual" },
   };
 
+  const orderedSubscriptions = subscription.sort(
+    (b, a) => Number(b.annualPrice) - Number(a.annualPrice)
+  );
+
+  console.log(subscription, "subscriptions");
+  console.log(orderedSubscriptions, "orderedSubscriptions");
+
   return (
     <>
       {!isVeoCam && (
@@ -228,15 +235,17 @@ const PlanComparation = () => {
       <div className="pb-[80px] md:pb-[180px] md:max-w-[1536px]  mt-14 md:mt-[75px] m-auto">
         <div className="overflow-x-auto  relative">
           <div className="mt-10 flex flex-row  justify-evenly max-w-screen-2xl m-auto w-fit mg:w-[auto] px-6 mg:px-0 gap-4 mg:gap-0">
-            {subscription.map((item, index) => (
+            {orderedSubscriptions.map((item, index) => (
               <div
                 key={index}
                 className={`relative  flex flex-col items-center  min-h-[650px] w-[300px] mg:w-[275px] xl:w-[290px]  xll:w-[310px] rounded-lg bg-white text-black transition-all duration-300 px-4
-                ${item.featuredCard ? "l-gradient-starred text-white" : ""}
+                ${
+                  item.featuredCard
+                    ? "l-gradient-starred text-white"
+                    : "order-4 md:order-[inherit]"
+                }
                  ${
-                   item.featuredCard
-                     ? "l-gradient-starred text-white order-1 md:order-2"
-                     : `order-4 md:order-${index + 2}`
+                   item.featuredCard ? "l-gradient-starred text-white " : ` `
                  } `}
               >
                 {item.featuredCard && (
