@@ -9,7 +9,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `scoutingLabs`,
-    siteUrl: `https://scoutinglabs.onrender.com/`,
+    siteUrl: `https://scoutinglabs.com/`,
     description: `Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo.`,
   },
   flags: {
@@ -78,7 +78,7 @@ module.exports = {
       options: {
         languages: ["es", "en"], // Los idiomas soportados
         defaultLanguage: "es", // Idioma por defecto
-        siteUrl: "https://scoutinglabs.onrender.com/", // URL base de tu sitio
+        siteUrl: "https://scoutinglabs.com/", // URL base de tu sitio
         i18nextOptions: {
           interpolation: {
             escapeValue: false, // React ya escapa los valores

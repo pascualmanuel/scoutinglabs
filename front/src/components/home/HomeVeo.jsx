@@ -11,7 +11,7 @@ import { useStaticQuery } from "gatsby";
 import { useLanguage } from "../../hooks/LanguageContext.js";
 import LangLink from "../../hooks/LangLink.jsx";
 import useHomeData from "../../hooks/useHomeData.jsx";
-
+import { ParseMarkdown } from "../../hooks/ParseMarkdown.js";
 const HomeVeo = () => {
   const { locale } = useLanguage();
   const currentLocale = locale;
@@ -83,7 +83,7 @@ const HomeVeo = () => {
           </h2>
           <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
           <h2 className="h1Title w-[300px] sm:w-auto">
-            {localizedData?.veo_second_title}
+            <ParseMarkdown text={localizedData?.veo_second_title} />
           </h2>
           <p className="body2 px-5 text-grey2 py-9">
             {localizedData?.veo_desc}
