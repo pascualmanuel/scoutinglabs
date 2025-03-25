@@ -8,13 +8,27 @@ export default [
         useDefaults: true,
         directives: {
           "connect-src": ["'self'", "https:"],
-          "img-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
-          "media-src": ["'self'", "data:", "blob:", "res.cloudinary.com"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "market-assets.strapi.io", // Imágenes de plugins
+            "dl.airtable.com", // Si usas Airtable
+            "*.strapi.io", // Dominio de Strapi Cloud
+          ],
+          "media-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "market-assets.strapi.io",
+            "*.strapi.io",
+          ],
           upgradeInsecureRequests: null,
         },
       },
     },
   },
+
   {
     name: "strapi::cors",
     config: {
