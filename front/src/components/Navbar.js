@@ -33,7 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      let newMLeft = 192;
+      let newMLeft = 252;
 
       if (width < 1024) newMLeft = 0;
       else if (width < 1300) newMLeft = 80;
@@ -91,14 +91,14 @@ const Navbar = () => {
 
   useEffect(() => {
     // Actualizar helpPosition según el tamaño de la ventana
-    let newHelpPosition = 555; // Valor por defecto
+    let newHelpPosition = 614; // Valor por defecto
 
     if (width < 1024) {
       newHelpPosition = 360;
     } else if (width < 1300) {
       newHelpPosition = 442;
     } else if (width < 1400) {
-      newHelpPosition = 555;
+      newHelpPosition = 614;
     }
 
     // Establecer el nuevo valor de helpPosition
@@ -231,7 +231,8 @@ const Navbar = () => {
               )}
             </div>
             <div className="flex flex-row cursor-pointer justify-end items-center llg:mr-[20px] mg:mr-[80px] xl:mr-28">
-              <div
+              {/* <div className="w-[100px]"></div> */}
+              {/* <div
                 className={`transition-[1000] ${
                   languageOpen ? "mt-[-30px]" : "mt-0"
                 }`}
@@ -281,7 +282,7 @@ const Navbar = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
               <div className="hidden llg:block">
                 <Button
                   link={localizedData.button.link}

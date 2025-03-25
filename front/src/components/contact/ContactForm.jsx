@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import countries from "country-list";
-import { PhoneNumberUtil } from "google-libphonenumber";
+import { PhoneNumberUtil, PhoneNumberFormat } from "google-libphonenumber";
 
 import TickWhite from "../../assets/icons/tick-white.svg";
 import RightArrow from "../../assets/icons/r-arrow.svg";
@@ -10,6 +10,8 @@ import "react-international-phone/style.css";
 import Button from "../Button";
 import { useLanguage } from "../../hooks/LanguageContext";
 function ContactForm() {
+  const phoneUtil = PhoneNumberUtil.getInstance();
+
   const { locale } = useLanguage();
   const [formData, setFormData] = useState({
     email: "",
@@ -39,9 +41,16 @@ function ContactForm() {
           error = "Formato de email inválido";
         break;
       case "phone_number":
-        if (!/^\+\d{5,15}$/.test(value)) {
+        try {
+          const parsedNumber = phoneUtil.parseAndKeepRawInput(value);
+          if (!phoneUtil.isValidNumber(parsedNumber)) {
+            error = locale === "ES" ? "Teléfono inválido. " : "Invalid phone.";
+          }
+        } catch (error) {
           error =
-            "Teléfono inválido. Usa formato internacional: +[código país][número] Ejemplo: +59812345678";
+            locale === "ES"
+              ? "Formato de teléfono incorrecto"
+              : "Invalid phone format";
         }
         break;
 
@@ -74,6 +83,15 @@ function ContactForm() {
     // Si hay errores, no enviamos el formulario
     if (Object.keys(formErrors).length > 0) return;
 
+    const normalizedPhone = (() => {
+      try {
+        const parsed = phoneUtil.parse(formData.phone_number);
+        return phoneUtil.format(parsed, PhoneNumberFormat.E164);
+      } catch (error) {
+        return formData.phone_number.replace(/[^\d+]/g, "");
+      }
+    })();
+
     const eventData = {
       data: {
         type: "event",
@@ -100,7 +118,7 @@ function ContactForm() {
               type: "profile",
               attributes: {
                 email: formData.email,
-                phone_number: formData.phone_number,
+                phone_number: normalizedPhone,
                 first_name: formData.first_name,
                 last_name: formData.last_name,
                 location: {
@@ -157,7 +175,7 @@ function ContactForm() {
       setSubmitted(true);
     } catch (error) {
       console.error("Error en la solicitud:", error);
-      alert(`Error: ${error.message}`);
+      // alert(`Error: ${error.message}`);
     }
   };
 
@@ -234,10 +252,13 @@ function ContactForm() {
               {locale === "ES" ? "Télefono" : "Phone *"}
             </label>
             <PhoneInput
-              defaultCountry="ar" // Código de país inicial (Argentina)
+              defaultCountry="ar"
               value={formData.phone_number}
               onChange={(phone_number) => {
                 setFormData({ ...formData, phone_number });
+                // Validación inmediata
+                const error = validateField("phone_number", phone_number);
+                setErrors({ ...errors, phone_number: error });
               }}
               inputClassName="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2"
               countrySelectorStyleProps={{
