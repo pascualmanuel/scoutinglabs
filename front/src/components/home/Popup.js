@@ -108,7 +108,7 @@ const Popup = ({ onClose }) => {
       ></div>
 
       <div
-        className={`fixed w-[90vw] max-w-[450px] left-1/2 top-1/2 -translate-x-1/2 translate-y-[-67%] h-[240px] sm:h-auto
+        className={`fixed w-[90vw] max-w-[450px] left-1/2 top-1/2 -translate-x-1/2 translate-y-[-67%] h-[300px] sm:h-auto
             sm:w-[420px] sm:bottom-[50px] sm:right-[25px] sm:mg:right-[65px] sm:left-auto sm:top-auto sm:translate-x-0 sm:translate-y-0 
             rounded-lg shadow-lg transition-all duration-500 
         ${
@@ -116,14 +116,14 @@ const Popup = ({ onClose }) => {
         } animate-fadeIn`}
       >
         {/* Close Button */}
-        <img src={VeocamBg} className="object-cover h-[100%]" />
+        <img src={VeocamBg} className="object-cover h-[50vh] sm:h-auto" />
         <button
           onClick={onClose}
           className="absolute top-1 sm:top-2 right-4 sm:right-6 text-white hover:text-white text-[36px] sm:text-xl"
         >
           &times;
         </button>
-        <div className="flex flex-col  absolute top-6 left-2 m-4 h-[75%] justify-between sm:mt-4 sm:h-auto w-[90%] sm:w-auto">
+        <div className="flex flex-col  absolute top-16 sm:top-6 left-2 m-4 h-[35vh] justify-between sm:mt-4 sm:h-auto w-[90%] sm:w-auto">
           <h2 className="relative text-white uppercase h-[120px] h2Title !text-[42px] sm:w-[370px]">
             <span
               className={`absolute inset-0 transition-opacity duration-300 ${
