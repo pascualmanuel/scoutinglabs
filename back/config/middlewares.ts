@@ -12,9 +12,10 @@ export default [
             "'self'",
             "data:",
             "blob:",
-            "market-assets.strapi.io", // Imágenes de plugins
-            "dl.airtable.com", // Si usas Airtable
-            "*.strapi.io", // Dominio de Strapi Cloud
+            "market-assets.strapi.io",
+            "*.strapi.io",
+            "*.strapiapp.com", // Nuevo dominio de Strapi Cloud
+            "media.strapiapp.com", // Dominio específico de medios
           ],
           "media-src": [
             "'self'",
@@ -22,6 +23,8 @@ export default [
             "blob:",
             "market-assets.strapi.io",
             "*.strapi.io",
+            "*.strapiapp.com",
+            "media.strapiapp.com",
           ],
           upgradeInsecureRequests: null,
         },
@@ -34,7 +37,8 @@ export default [
     config: {
       origin: [
         "https://scoutinglabs.onrender.com",
-        "https://your-strapi-cloud-url.strapi.io", // Reemplaza con tu URL
+        "https://scoutinglabs.com",
+        "https://great-hope-45f9424224.strapiapp.com",
       ],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
