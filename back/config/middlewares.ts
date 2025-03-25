@@ -32,10 +32,13 @@ export default [
   {
     name: "strapi::cors",
     config: {
-      origin: ["https://scoutinglabs.onrender.com"],
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // ¡Agrega OPTIONS!
+      origin: [
+        "https://scoutinglabs.onrender.com",
+        "https://your-strapi-cloud-url.strapi.io", // Reemplaza con tu URL
+      ],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
-      keepHeaderOnError: true, // Crucial para errores CORS
+      keepHeaderOnError: true,
     },
   },
   "strapi::poweredBy",
