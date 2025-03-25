@@ -346,7 +346,7 @@ const Navbar = () => {
               <img src={WhiteLogo} alt="Logo" className="w-[120px]" />
             </Link>
             {/* Toggle de idioma */}
-            <div
+            {/* <div
               className={`relative lang-selector  select-none flex rounded-lg ${
                 languageOpen ? "rounded-t-lg rounded-b-none" : "closed"
               }`}
@@ -392,7 +392,7 @@ const Navbar = () => {
                   )}
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
 
           {/* Links del menú */}
