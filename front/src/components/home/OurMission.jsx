@@ -150,7 +150,6 @@ function Locations() {
                 <p className="text-black sm:w-[390px] mg:w-[460px] body0 ">
                   <span className=" text-[34px] grotzec text-skyBlue">[</span>
                   <span className="text-skyBlue grotzec font-bold">
-                    {" "}
                     &nbsp; {ourMission} &nbsp;
                   </span>
                   <span className="text-[34px] grotzec text-skyBlue ">]</span>{" "}

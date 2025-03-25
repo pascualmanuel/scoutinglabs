@@ -35,33 +35,35 @@ const ScoutinPlay = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-10">
             {localizedData?.buttons.map((button, index) => (
-              <Button
-                key={index}
-                text={button.text}
-                link={button.link}
-                width={
-                  index === 0
-                    ? "w-[93vw] sm:w-[auto] lg:w-[196px]"
-                    : "w-[30vw] sm:w-[auto]"
-                }
-                height="h-[50px]"
-                bg={index !== 0 ? "#F6F6F633" : undefined}
-              >
-                {/* Mostrar ícono solo si existe */}
-                {button.icon?.url && (
-                  <div className="flex flex-row items-center px-2">
-                    <img
-                      src={`${button?.icon?.url}`}
-                      alt={button.text}
-                      className="w-6 h-6"
-                    />
-                    {/* Texto solo en desktop */}
-                    <p className="buttonText hidden md:block ml-4">
-                      {button.text}
-                    </p>
-                  </div>
-                )}
-              </Button>
+              <a href={button?.link} target="_blank">
+                <Button
+                  key={index}
+                  text={button.text}
+                  // link={button.link}
+                  width={
+                    index === 0
+                      ? "w-[93vw] sm:w-[auto] lg:w-[196px]"
+                      : "w-[30vw] sm:w-[auto]"
+                  }
+                  height="h-[50px]"
+                  bg={index !== 0 ? "#F6F6F633" : undefined}
+                >
+                  {/* Mostrar ícono solo si existe */}
+                  {button.icon?.url && (
+                    <div className="flex flex-row items-center px-2">
+                      <img
+                        src={`${button?.icon?.url}`}
+                        alt={button.text}
+                        className="w-6 h-6"
+                      />
+                      {/* Texto solo en desktop */}
+                      <p className="buttonText hidden md:block ml-4">
+                        {button.text}
+                      </p>
+                    </div>
+                  )}
+                </Button>
+              </a>
             ))}
           </div>
 
