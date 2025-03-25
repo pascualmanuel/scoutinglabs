@@ -10,6 +10,7 @@ module.exports = {
   siteMetadata: {
     title: `scoutingLabs`,
     siteUrl: `https://scoutinglabs.onrender.com/`,
+    description: `Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo.`,
   },
   flags: {
     DEV_SSR: true,
@@ -28,10 +29,48 @@ module.exports = {
       },
     },
 
+    // {
+    //   resolve: "gatsby-plugin-manifest",
+    //   options: {
+    //     icon: "src/images/icon.png", // Ajusta la ruta si es necesario
+    //   },
+    // },
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        icon: "src/images/icon.png", // Ajusta la ruta si es necesario
+        name: `Scouting Labs`,
+        short_name: `ScoutingLabs`,
+        start_url: `/`,
+        background_color: `#03000d`,
+        display: `standalone`,
+        icon: `public/favicon/favicon.svg`,
+        icons: [
+          {
+            src: `public/favicon/apple-touch-icon.png`,
+            sizes: `180x180`,
+            type: `image/png`,
+          },
+          {
+            src: `public/favicon/favicon-96x96.png`,
+            sizes: `96x96`,
+            type: `image/png`,
+          },
+          {
+            src: `public/favicon/favicon.ico`,
+            sizes: `16x16`,
+            type: `image/x-icon`,
+          },
+          {
+            src: `public/favicon/web-app-manifest-192x192.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `public/favicon/web-app-manifest-512x512.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
       },
     },
     {
