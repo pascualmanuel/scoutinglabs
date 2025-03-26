@@ -22,11 +22,9 @@ const Navbar = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
 
   const { width, height } = useWindowSize(); // Destructure window size from the hook
-  const [mLeft, setMLeft] = useState(192);
+  const [mLeft, setMLeft] = useState(252);
 
   const handleLanguageChange = (newLocale) => {
-    console.log("Cambiando idioma a:", newLocale);
-
     changeLanguage(newLocale);
   };
 
@@ -50,14 +48,6 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleLanguage = () => setLanguageOpen(!languageOpen);
   const closeMenu = () => setMenuOpen(false); // Cierra el menú al hacer clic en un enlace
-
-  const menuItems = [
-    { path: "/veo-cam/", label: "Veo Cam 3" },
-    { path: "/scouting-play/", label: "ScoutingPlay" },
-    { path: "/nosotros/", label: "Nosotros" },
-    { path: "/suscripciones/", label: "Suscripciones" },
-    { path: "/ayuda", label: "Ayuda" },
-  ];
 
   const location = useLocation();
 

@@ -9,6 +9,8 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
 import { useLanguage } from "../../hooks/LanguageContext";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+
 function ContactForm() {
   const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -236,8 +238,13 @@ function ContactForm() {
             <input
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              onBlur={() => {
+                const error = validateField("email", formData.email);
+                setErrors({ ...errors, email: error });
+              }}
               placeholder={locale === "ES" ? "Email" : "Enter your email *"}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
@@ -256,8 +263,12 @@ function ContactForm() {
               value={formData.phone_number}
               onChange={(phone_number) => {
                 setFormData({ ...formData, phone_number });
-                // Validación inmediata
-                const error = validateField("phone_number", phone_number);
+              }}
+              onBlur={() => {
+                const error = validateField(
+                  "phone_number",
+                  formData.phone_number
+                );
                 setErrors({ ...errors, phone_number: error });
               }}
               inputClassName="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2"

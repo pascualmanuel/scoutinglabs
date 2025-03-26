@@ -6,6 +6,8 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import Button from "../Button";
 import { useLanguage } from "../../hooks/LanguageContext";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+
 function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
   const { locale } = useLanguage();
   const [formData, setFormData] = useState({
@@ -25,6 +27,14 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
   const [countryList, setCountryList] = useState([]);
 
   // Cargar lista de países
+  const [touchedFields, setTouchedFields] = useState({}); // Estado para rastrear interacción
+
+  // const validatePhoneNumber = (value) => {
+  //   if (!value) return ""; // No mostrar error si el campo está vacío
+  //   const phone = parsePhoneNumberFromString(value);
+  //   return phone && phone.isValid() ? "" : "Número de celular inválido";
+  // };
+
   useEffect(() => {
     setCountryList(
       countries.getData().sort((a, b) => a.name.localeCompare(b.name))
@@ -33,28 +43,47 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
 
   const validateField = (name, value) => {
     let error = "";
+
     switch (name) {
       case "email":
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
           error = "Formato de email inválido";
         break;
-      case "phone_number":
-        if (!/^\+\d{7,15}$/.test(value)) {
-          error = "Teléfono inválido.";
-        }
-        break;
-      case "name":
+
+      case "first_name":
         if (value.trim().length < 2) error = "Nombre completo requerido";
         break;
+
+      case "phone_number":
+        if (!value) break; // No mostrar error si el campo está vacío
+        const phone = parsePhoneNumberFromString(value);
+        if (!phone || !phone.isValid()) {
+          error = locale === "ES" ? "Teléfono inválido. " : "Invalid phone.";
+        }
+        break;
+
       case "country":
         if (!value) error = "Selecciona tu país";
         break;
+      default:
+        break;
     }
+
     return error;
   };
-
   const handleSubmit = async (e, type) => {
     e.preventDefault();
+
+    // Validación de todos los campos antes de enviar el formulario
+    let formErrors = {};
+    for (let field in formData) {
+      const error = validateField(field, formData[field]);
+      if (error) formErrors[field] = error;
+    }
+    setErrors(formErrors);
+
+    // Si hay errores, no enviamos el formulario
+    if (Object.keys(formErrors).length > 0) return;
 
     const eventData = {
       data: {
@@ -154,6 +183,13 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
       ...formData,
       [name]: value,
     });
+
+    // Validar campo individual al cambiar
+    const error = validateField(name, value);
+    setErrors({
+      ...errors,
+      [name]: error,
+    });
   };
 
   return (
@@ -169,14 +205,20 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
               type="text"
               name="first_name"
               value={formData.first_name}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, first_name: e.target.value })
+              }
+              onBlur={() => {
+                const error = validateField("first_name", formData.first_name);
+                setErrors({ ...errors, first_name: error });
+              }}
               placeholder={
                 locale === "ES" ? "Nombre" : "Enter your full name... *"
               }
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
-            {errors.name && (
-              <p className="text-red-500  text-sm mt-1">{errors.name}</p>
+            {errors.first_name && (
+              <p className="text-red-500  text-sm mt-1">{errors.first_name}</p>
             )}
           </div>
 
@@ -186,7 +228,13 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
               type="email"
               name="email"
               value={formData.email}
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              onBlur={() => {
+                const error = validateField("email", formData.email);
+                setErrors({ ...errors, email: error });
+              }}
               placeholder={locale === "ES" ? "Email" : "Enter your email *"}
               className="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2 "
             />
@@ -202,10 +250,20 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
               {locale === "ES" ? "Télefono" : "Phone *"}
             </label>
             <PhoneInput
-              defaultCountry="ar" // Código de país inicial (Argentina)
+              defaultCountry="ar"
               value={formData.phone_number}
+              onFocus={() =>
+                setTouchedFields({ ...touchedFields, phone_number: true })
+              } // Marca el campo como tocado
               onChange={(phone_number) => {
                 setFormData({ ...formData, phone_number });
+              }}
+              onBlur={() => {
+                const error = validateField(
+                  "phone_number",
+                  formData.phone_number
+                );
+                setErrors({ ...errors, phone_number: error });
               }}
               inputClassName="w-full pl-2 h-[50px] bg-[#ffffff0d] border border-[#434652] rounded-md body2"
               countrySelectorStyleProps={{
@@ -215,12 +273,10 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
                   className: "bg-[#ffffff0d] border border-[#434652]",
                 },
               }}
-              placeholder="Enter phone_number number..."
+              placeholder="Enter phone number..."
             />
-            {errors.phone_number && (
-              <p className="text-red-500  text-sm mt-1">
-                {errors.phone_number}
-              </p>
+            {touchedFields.phone_number && errors.phone_number && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone_number}</p>
             )}
           </div>
           <div className="ssm:w-1/2">
@@ -247,7 +303,6 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
             )}
           </div>
         </div>
-        {/* Campo Message - Ancho completo */}
 
         <button type="submit" className="w-full">
           <Button

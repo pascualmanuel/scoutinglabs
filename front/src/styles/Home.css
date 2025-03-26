@@ -426,17 +426,10 @@ th {
   transition: transform 0.3s ease;
 }
 
-/* .faq-header:hover .faq-right {
-  transform: rotate(45deg);
-} */
-
 .faq-answer {
   overflow: hidden;
   max-height: 0px;
   transition: max-height 0.5s ease; /* Smooth open/close effect */
-}
-
-.faq-answer-content {
 }
 
 .transparent-bold {
@@ -475,4 +468,19 @@ th {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+@media (max-width: 500px) {
+  .slider::before,
+  .slider::after {
+    background: linear-gradient(
+      to right,
+      rgb(0, 0, 0) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    content: "";
+    height: 130px;
+    position: absolute;
+    width: 90px;
+    z-index: 2;
+  }
 }

@@ -78,11 +78,11 @@ const HomeVeo = () => {
                 : "Official distributor of Veo Technologies"}
             </span>
           </div>
-          <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto">
+          <h2 className="h1Title pt-[50px] w-[270px] sm:w-auto ">
             {localizedData?.veo_first_title}
           </h2>
           <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
-          <h2 className="h1Title w-[300px] sm:w-auto">
+          <h2 className="h1Title  sm:w-auto">
             <ParseMarkdown text={localizedData?.veo_second_title} />
           </h2>
           <p className="body2 px-5 text-grey2 py-9">
