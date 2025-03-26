@@ -20,6 +20,13 @@ module.exports = {
     "gatsby-plugin-image", // Necesario para trabajar con imágenes en Gatsby
     "gatsby-plugin-sharp", // Necesario para procesar imágenes
     "gatsby-transformer-sharp", // Para transformar imágenes (por ejemplo, `.webp`)
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-TQC2WTP5", // Reemplaza con tu ID
+        includeInDevelopment: false, // Cambia a true si quieres en modo dev
+      },
+    },
 
     {
       resolve: "gatsby-source-filesystem",
