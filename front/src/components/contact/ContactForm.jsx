@@ -158,7 +158,7 @@ function ContactForm() {
       // Enviar mensaje de WhatsApp si se seleccionó esa opción
       if (type === "whatsapp") {
         const whatsappMessage = `Hola, mi nombre es ${formData.first_name} y tengo la siguiente consulta: ${formData.message}`;
-        const whatsappUrl = `https://wa.me/5491151632960?text=${encodeURIComponent(
+        const whatsappUrl = `https://wa.me/541131002952?text=${encodeURIComponent(
           whatsappMessage
         )}`;
         window.open(whatsappUrl, "_blank");

@@ -48,7 +48,7 @@ const WhatsAppPopup = ({
             formData.name
           }\n- Email: ${formData.email}\n- Teléfono: ${formData.phone}`;
 
-    const url = `https://wa.me/5491151632960?text=${encodeURIComponent(
+    const url = `https://wa.me/541131002952?text=${encodeURIComponent(
       mensaje
     )}`;
 
