@@ -82,6 +82,12 @@ const Popup = ({ onClose }) => {
         );
       }
 
+      // Aquí es donde agregas el evento "form_submit" a window.dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "form_submit", // Este es el evento que GTM capturará
+      });
+
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setIsSuccess(true);

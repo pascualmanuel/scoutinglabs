@@ -157,6 +157,11 @@ function ContactForm() {
         throw new Error(errorData.errors?.[0]?.detail);
       }
 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "form_submit", // Este es el evento que GTM capturará
+      });
+
       // Enviar mensaje de WhatsApp si se seleccionó esa opción
       if (type === "whatsapp") {
         const whatsappMessage = `Hola, mi nombre es ${formData.first_name} y tengo la siguiente consulta: ${formData.message}`;

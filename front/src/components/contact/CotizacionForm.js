@@ -159,6 +159,12 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
           });
         }
 
+        // Aquí es donde agregas el evento "form_submit" a window.dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "form_submit", // Este es el evento que GTM capturará
+        });
+
         // Mantener tu reset original del formulario
         setFormData({
           email: "",
