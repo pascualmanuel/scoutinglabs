@@ -1,0 +1,14 @@
+{
+  "app.components.HomePage.welcome": "¡Bienvenido a Mi Panel! 🚀",
+  "global.welcome": "¡Bienvenido a Mi Panel! 🚀",
+  "content-manager.components.LeftMenu.home": "Inicio",
+  "app.components.LeftMenu.navbrand.title": "Holaa!!",
+  "Auth.form.welcome.title": "Hola!",
+  "Auth.form.email.label": "Correo electrónico",
+  "Auth.form.password.label": "Contraseña",
+  "Auth.form.button.login": "Iniciar sesión",
+  "app.components.Header.logo": "Mi Panel",
+  "global.confirm": "Confirmar",
+  "global.cancel": "Cancelar",
+  "global.save": "Guardar"
+}
