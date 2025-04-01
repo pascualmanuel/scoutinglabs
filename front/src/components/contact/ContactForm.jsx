@@ -126,6 +126,7 @@ function ContactForm() {
                 location: {
                   country: formData.country,
                 },
+                email_consent: "explicit",
                 properties: {
                   // Propiedades adicionales del perfil
                   customer_type: "lead",
