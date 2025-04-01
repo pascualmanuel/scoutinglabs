@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     const eventMap = {
       contacto: "Formulario de Contacto",
       newsletter: "Suscripción a Newsletter",
-      cotizacion: "Solicitud de Cotización",
+      cotizacion: "Solicitud de Cotizacion",
     };
 
     const eventName = eventMap[origen] || "Evento Desconocido";
