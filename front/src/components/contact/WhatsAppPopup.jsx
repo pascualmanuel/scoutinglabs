@@ -48,9 +48,7 @@ const WhatsAppPopup = ({
             formData.name
           }\n- Email: ${formData.email}\n- Teléfono: ${formData.phone}`;
 
-    const url = `https://wa.me/541131002952?text=${encodeURIComponent(
-      mensaje
-    )}`;
+    const url = `https://wa.me/59894958171?text=${encodeURIComponent(mensaje)}`;
 
     // Verificar si la ventana ya está abierta
     if (whatsappWindowRef?.current && !whatsappWindowRef.current.closed) {
