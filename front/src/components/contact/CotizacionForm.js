@@ -116,7 +116,7 @@ function CotizacionForm({ selectedPlanType, addons, selectedPlan, onSuccess }) {
                 location: {
                   country: formData.country,
                 },
-                email_consent: "explicit",
+
                 properties: {
                   // Propiedades adicionales del perfil
                   customer_type: "lead",
