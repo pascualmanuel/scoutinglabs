@@ -55,7 +55,7 @@ const Accessories = () => {
                 bg={"rgba(255, 255, 255, 0.1)"}
                 textColor="#03000D"
                 border="solid 1px #03000D "
-                link={"/subscripciones"}
+                link={"/suscripciones"}
               />
             </div>
           </div>
