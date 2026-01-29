@@ -109,9 +109,8 @@ const Layout = ({ children }) => {
                 {localizedData?.third_col_list?.map((item, index) => (
                   <p
                     key={index}
-                    className={`body2 text-grey4 pb-2 ${
-                      index % 3 === 0 ? "" : ""
-                    }`}
+                    className={`body2 text-grey4 pb-2 ${index % 3 === 0 ? "" : ""
+                      }`}
                   >
                     {item.text}
                   </p>
@@ -122,7 +121,7 @@ const Layout = ({ children }) => {
           <div className="llg:flex llg:items-center llg:justify-between llg:mt-24 border-t border-[#ffffff35]">
             <div className="llg:flex">
               <p className="text-[#64626A] text-xs font-thin mt-4 flex justify-center  aenoik llg:mt-0	">
-                © 2025 SCOUTING LABS
+                © {new Date().getFullYear()} SCOUTING LABS
               </p>
               <div className="flex flex-row justify-center my-10 llg:hidden">
                 <div className="w-[220px] flex flex-row justify-between ">
