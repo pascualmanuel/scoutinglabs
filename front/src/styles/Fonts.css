@@ -59,6 +59,7 @@
     url("../assets/Fonts/Grotzec/Grotzec-Bold2.woff") format("woff");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -67,6 +68,7 @@
     url("../assets/Fonts/Grotzec/Grotzec-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -75,4 +77,5 @@
     url("../assets/Fonts/Thunder/Thunder-BoldItalic.woff") format("woff");
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }

@@ -10,6 +10,7 @@ import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
 import Loader from "../components/home/Loader.jsx";
 import Popup from "../components/home/Popup.js";
+import useHomeData from "../hooks/useHomeData";
 import PreLoadVeoCam from "../assets/veocam-bg.webp";
 import PreLoadSL from "../assets/scoutingplay/splay-bg.webp";
 import PreLoadNosotros from "../assets/nosotros/nosotros-bg.webp";
@@ -17,6 +18,12 @@ import PreLoadSuscripciones from "../assets/suscripciones/susc2.webp";
 //
 
 const HomePage = ({ data }) => {
+  const homeData = useHomeData();
+  const localizedData =
+    homeData?.localizations?.find(
+      (loc) => loc.locale?.toLowerCase() === "es"
+    ) || homeData;
+
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   const [loaderVisible, setLoaderVisible] = useState(true);
@@ -59,23 +66,23 @@ const HomePage = ({ data }) => {
     if (!loaderShown) {
       setFadeOut(false);
       setLoaderVisible(true); // Asegúrate de mostrar el loader al inicio
+      // Reducir tiempo del loader para mejorar LCP (de 3.5s a 1.5s)
+      const timeout = setTimeout(() => {
+        setFadeOut(true); // Activamos el fadeOut
+        localStorage.setItem("loaderShown", "true"); // Guardamos que ya se mostró
+        setVideoPlaying(true); // Iniciamos el video
+
+        setTimeout(() => {
+          setLoaderVisible(false); // Ocultamos el loader después de que el fadeOut se complete
+        }, 500); // Reducido de 1000ms a 500ms
+      }, 1500); // Reducido de 3500ms a 1500ms para mejorar LCP
+
+      return () => clearTimeout(timeout); // Limpiar el timeout al desmontar el componente
     } else {
       setFadeOut(true); // Ya se mostró, activar el fadeOut
       setLoaderVisible(false); // Ocultar el loader inmediatamente
       setVideoPlaying(true); // Iniciamos el video
     }
-
-    const timeout = setTimeout(() => {
-      setFadeOut(true); // Activamos el fadeOut
-      localStorage.setItem("loaderShown", "true"); // Guardamos que ya se mostró
-      setVideoPlaying(true); // Iniciamos el video
-
-      setTimeout(() => {
-        setLoaderVisible(false); // Ocultamos el loader después de que el fadeOut se complete
-      }, 1000); // Este tiempo debe coincidir con la duración del fadeOut (ajustar según el efecto)
-    }, 3500); // Tiempo de 3.5 segundos para el loader
-
-    return () => clearTimeout(timeout); // Limpiar el timeout al desmontar el componente
   }, []);
 
   useEffect(() => {
@@ -97,6 +104,8 @@ const HomePage = ({ data }) => {
         <Seo
           title="Scouting Labs"
           description="Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo."
+          heroVideoUrl={localizedData?.hero_background?.url}
+          partnerImageUrl={localizedData?.partner_img?.url}
         />
         <HomeHero
           onVideoLoad={handleVideoLoad}
