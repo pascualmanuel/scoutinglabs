@@ -2,7 +2,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 
-const Seo = ({ title, description }) => {
+const Seo = ({ title, description, heroVideoUrl, partnerImageUrl }) => {
   return (
     <Helmet>
       <title>{title}</title>
@@ -25,6 +25,13 @@ const Seo = ({ title, description }) => {
         href="../assets/favicon/apple-touch-icon.png"
       />
       <link rel="manifest" href="../assets/favicon/site.webmanifest" />
+      {/* Preload recursos críticos para mejorar LCP */}
+      {heroVideoUrl && (
+        <link rel="preload" as="video" href={heroVideoUrl} />
+      )}
+      {partnerImageUrl && (
+        <link rel="preload" as="image" href={partnerImageUrl} />
+      )}
     </Helmet>
   );
 };

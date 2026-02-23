@@ -5,8 +5,6 @@ import { Link, useLocation } from "@reach/router";
 import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
 import Test from "../assets/home/veo-transparent.webp";
-import Pablo from "../assets/pablo.png";
-import Pablo2 from "../assets/pablo2.jpg";
 import Navbar from "./Navbar";
 
 import PreFooter from "./PreFooter";
