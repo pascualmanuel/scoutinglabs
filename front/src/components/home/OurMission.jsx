@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { graphql } from "gatsby";
 
-import SPlay from "../../assets/ScoutingPlay.mp4";
-import VeoCam from "../../assets/VeoCam3.mp4";
-import SplayImg from "../../assets/play-img.png";
-import VeoImg from "../../assets/veo-img.png";
 import Button from "../Button";
 import { useStaticQuery } from "gatsby";
 

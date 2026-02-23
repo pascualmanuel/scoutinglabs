@@ -21,15 +21,18 @@ const ToggleBar = ({
   const isControlled = externalValue !== undefined;
   const currentValue = isControlled ? externalValue : internalValue;
 
-  // Actualizar posición del thumb
+  // Actualizar posición del thumb (optimizado para evitar forced reflow)
   useEffect(() => {
     const index = options.findIndex((opt) => opt.value === currentValue);
     const button = buttonsRef.current[index];
 
     if (button) {
-      setThumbPosition({
-        width: button.offsetWidth,
-        left: button.offsetLeft,
+      // Usar requestAnimationFrame para evitar forced reflow
+      requestAnimationFrame(() => {
+        setThumbPosition({
+          width: button.offsetWidth,
+          left: button.offsetLeft,
+        });
       });
     }
   }, [currentValue, options]);

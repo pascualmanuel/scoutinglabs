@@ -7,11 +7,9 @@ import "../../styles/Home.css";
 import HeroVideo from "../../assets/videos/hero-video.mp4";
 import ArrowIcon from "../../assets/icons/arrow.svg";
 import ReactSVG from "react-svg";
-// import VeoIcon from "../../assets/icons/veo-icon.png";
 import VeoLogo from "../../assets/icons/veo-logo.svg";
 import Six from "../../assets/icons/six.svg";
 import Button from "../Button.js";
-import Pablo from "../../assets/pablo.png";
 import Popup from "./Popup.js";
 import { useEffect, useState, useRef } from "react";
 import { useStaticQuery } from "gatsby";
@@ -77,6 +75,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
           loop={true}
           muted={true}
           playsInline={true}
+          preload="metadata" // Optimizado: solo cargar metadata inicialmente
           onLoadedData={handleVideoLoad} // O usa onCanPlay si prefieres
           src={localizedData?.hero_background.url}
           onError={onError} // Para manejar errores de carga
@@ -167,6 +166,9 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
               <img
                 src={localizedData?.partner_img?.url}
                 className="sm:w-[440px] md:w-[540px] xl:w-[740px] rounded-md sm:rounded-r-none"
+                loading="eager"
+                fetchpriority="high"
+                alt={localizedData?.partner_title || "Partner"}
               />
             </div>
           </div>

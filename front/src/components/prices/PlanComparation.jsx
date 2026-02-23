@@ -52,15 +52,18 @@ const PlanComparation = () => {
 
   const buttonsRef = useRef([]);
 
-  // Obtener posición del botón activo
+  // Obtener posición del botón activo (optimizado para evitar forced reflow)
   useEffect(() => {
     const index = ["mensual", "semestral", "anual"].indexOf(selectedPlan);
     const button = buttonsRef.current[index];
 
     if (button) {
-      setThumbPosition({
-        width: button.offsetWidth,
-        left: button.offsetLeft,
+      // Usar requestAnimationFrame para evitar forced reflow
+      requestAnimationFrame(() => {
+        setThumbPosition({
+          width: button.offsetWidth,
+          left: button.offsetLeft,
+        });
       });
     }
   }, [selectedPlan]);
