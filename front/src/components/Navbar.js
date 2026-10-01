@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "gatsby"; // Asumir que usas gatsby para la navegación
 import WhiteLogo from "../assets/white-logo.svg";
 import Button from "./Button";
@@ -51,28 +51,22 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  // Usamos useRef para persistir la posición entre renders
-  // El primer render debe coincidir en el servidor y en el navegador.
-  const initialDotPosition = 0;
-
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const dotPositionRef = useRef(initialDotPosition);
-  const [dotPosition, setDotPosition] = useState(dotPositionRef.current);
   const [helpPosition, setHelpPosition] = useState(555); // Valor inicial
 
-  // Se establece el valor inicial desde localStorage o 0
-
-  // Se establece el valor inicial desde localStorage o 0 solo en el cliente
-  useEffect(() => {
-    if (typeof window !== "undefined" && localStorage) {
-      const storedPosition = parseInt(
-        localStorage.getItem("dotPosition") || "0",
-        10
-      );
-      dotPositionRef.current = storedPosition; // Guardamos la posición en el ref
-      setDotPosition(storedPosition); // Establecemos el estado
-    }
-  }, []); // Este useEffect solo se ejecuta una vez cuando el componente se monta
+  // Solo una ruta completa del menú puede tener un indicador activo.
+  // Una URL inexistente no hereda la selección de la página anterior.
+  const activePath = location.pathname
+    .replace(/^\/en(?=\/|$)/, "")
+    .replace(/\/+$/, "");
+  const dotPosition =
+    {
+      "/veo-cam": 0,
+      "/scouting-play": 90,
+      "/nosotros": 180,
+      "/suscripciones": 270,
+      "/ayuda": helpPosition,
+    }[activePath] ?? null;
 
   useEffect(() => {
     // Actualizar helpPosition según el tamaño de la ventana
@@ -91,42 +85,7 @@ const Navbar = () => {
   }, [width]); // Este efecto se ejecuta cada vez que cambia windowSize
 
   useEffect(() => {
-    if (dotPosition === null) return; // Esperamos a que el estado de dotPosition se inicialice
-
-    // Activamos la transición cuando la ruta cambia
-    setIsTransitioning(true);
-
-    let newPosition;
-
-    if (location.pathname.includes("/veo-cam/")) {
-      newPosition = 0;
-    } else if (location.pathname.includes("/scouting-play/")) {
-      newPosition = 90;
-    } else if (location.pathname.includes("/nosotros/")) {
-      newPosition = 180;
-    } else if (location.pathname.includes("/suscripciones/")) {
-      newPosition = 270;
-    } else if (location.pathname.includes("/ayuda/")) {
-      newPosition = helpPosition;
-    } else if (
-      location.pathname === "/" ||
-      location.pathname === "/en/" ||
-      location.pathname === "/contacto/" ||
-      location.pathname === "/en/contacto/"
-    ) {
-      newPosition = null;
-    } else {
-      newPosition = dotPositionRef.current; // Mantener la última posición si no hay cambio de ruta
-    }
-
-    // Guardamos la nueva posición en localStorage para persistir entre visitas
-    if (typeof window !== "undefined" && localStorage) {
-      localStorage.setItem("dotPosition", newPosition);
-    }
-
-    // Actualizamos el ref y el estado de dotPosition
-    dotPositionRef.current = newPosition;
-    setDotPosition(newPosition);
+    setIsTransitioning(dotPosition !== null);
 
     // Terminamos la transición después de 500ms
     const timer = setTimeout(() => {
@@ -135,7 +94,7 @@ const Navbar = () => {
 
     // Limpiamos el timer cuando el efecto termine
     return () => clearTimeout(timer);
-  }, [location.pathname, helpPosition]); // Solo se ejecuta cuando la ruta cambia
+  }, [dotPosition]);
 
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);

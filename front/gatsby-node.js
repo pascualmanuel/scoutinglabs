@@ -1,4 +1,7 @@
 // gatsby-node.js
+const fs = require("fs/promises");
+const path = require("path");
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
@@ -48,6 +51,35 @@ exports.onCreateNode = ({ node, actions }) => {
     });
   });
 };
+exports.onPostBuild = async ({ store, reporter }) => {
+  // React 18 puede insertar NUL al cortar texto UTF-8 durante el SSR.
+  // https://github.com/facebook/react/issues/31134
+  // Quitamos solo ese carácter inválido; los copies no se modifican.
+  let cleanedFiles = 0;
+  const cleanHtml = async (directory) => {
+    const entries = await fs.readdir(directory, { withFileTypes: true });
+    await Promise.all(
+      entries.map(async (entry) => {
+        const file = path.join(directory, entry.name);
+        if (entry.isDirectory()) {
+          await cleanHtml(file);
+        } else if (entry.isFile() && entry.name.endsWith(".html")) {
+          const html = await fs.readFile(file, "utf8");
+          if (html.includes("\0")) {
+            await fs.writeFile(file, html.replace(/\0/g, ""));
+            cleanedFiles += 1;
+          }
+        }
+      })
+    );
+  };
+
+  await cleanHtml(path.join(store.getState().program.directory, "public"));
+  if (cleanedFiles) {
+    reporter.info(`Removed invalid NUL characters from ${cleanedFiles} HTML files.`);
+  }
+};
+
 // exports.onCreateNode = ({ node, actions }) => {
 //   const replaceNulls = (value) => {
 //     if (value === null) return ""; // Ahora sí reemplaza null por ""
