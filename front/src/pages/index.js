@@ -1,45 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { graphql } from "gatsby";
 import Layout from "../components/Layout"; // Si tienes un layout común
-import Seo from "../components/Seo.js"; // Si estás usando SEO dinámico
 import "../styles/Layout.css";
 import "../styles/Home.css";
 import HomeHero from "../components/home/HomeHero.js";
 import HomeVeo from "../components/home/HomeVeo.jsx";
 import OurMission from "../components/home/OurMission.jsx";
-import Loader from "../components/home/Loader.jsx";
 import Popup from "../components/home/Popup.js";
-import useHomeData from "../hooks/useHomeData";
 import PreLoadVeoCam from "../assets/veocam-bg.webp";
 import PreLoadSL from "../assets/scoutingplay/splay-bg.webp";
 import PreLoadNosotros from "../assets/nosotros/nosotros-bg.webp";
 import PreLoadSuscripciones from "../assets/suscripciones/susc2.webp";
 //
 
-const HomePage = ({ data }) => {
-  const homeData = useHomeData();
-  const localizedData =
-    homeData?.localizations?.find(
-      (loc) => loc.locale?.toLowerCase() === "es"
-    ) || homeData;
-
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-  const [loaderVisible, setLoaderVisible] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
-  const [videoError, setVideoError] = useState(false);
-  const [videoPlaying, setVideoPlaying] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false); // Estado para el fade-out
+const HomePage = () => {
   const [showPopup, setShowPopup] = useState(false);
-
-  const handleVideoLoad = () => {
-    setVideoLoaded(true);
-  };
-
-  const handleVideoError = () => {
-    setVideoError(true);
-  };
 
   useEffect(() => {
     // Check if the popup has already been closed before
@@ -60,57 +35,14 @@ const HomePage = ({ data }) => {
     localStorage.setItem("popupClosed", "true"); // Store in localStorage
   };
 
-  useEffect(() => {
-    const loaderShown = localStorage.getItem("loaderShown");
-
-    if (!loaderShown) {
-      setFadeOut(false);
-      setLoaderVisible(true); // Asegúrate de mostrar el loader al inicio
-      // Reducir tiempo del loader para mejorar LCP (de 3.5s a 1.5s)
-      const timeout = setTimeout(() => {
-        setFadeOut(true); // Activamos el fadeOut
-        localStorage.setItem("loaderShown", "true"); // Guardamos que ya se mostró
-        setVideoPlaying(true); // Iniciamos el video
-
-        setTimeout(() => {
-          setLoaderVisible(false); // Ocultamos el loader después de que el fadeOut se complete
-        }, 500); // Reducido de 1000ms a 500ms
-      }, 1500); // Reducido de 3500ms a 1500ms para mejorar LCP
-
-      return () => clearTimeout(timeout); // Limpiar el timeout al desmontar el componente
-    } else {
-      setFadeOut(true); // Ya se mostró, activar el fadeOut
-      setLoaderVisible(false); // Ocultar el loader inmediatamente
-      setVideoPlaying(true); // Iniciamos el video
-    }
-  }, []);
-
-  useEffect(() => {
-    setIsChecked(true);
-  }, [loaderVisible]);
-
-  if (!isChecked) {
-    return null;
-  }
-
   return (
     <>
       <img src={PreLoadVeoCam} className="hidden" />
       <img src={PreLoadSL} className="hidden" />
       <img src={PreLoadNosotros} className="hidden" />
       <img src={PreLoadSuscripciones} className="hidden" />
-      {loaderVisible && <Loader fadeOut={fadeOut} />}
       <Layout>
-        <Seo
-          title="Scouting Labs"
-          description="Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo."
-          heroVideoUrl={localizedData?.hero_background?.url}
-          partnerImageUrl={localizedData?.partner_img?.url}
-        />
-        <HomeHero
-          onVideoLoad={handleVideoLoad}
-          playVideo={videoPlaying} // Pasamos el estado que controla si el video debe reproducirse
-        />
+        <HomeHero playVideo />
         {showPopup && <Popup onClose={handleClosePopup} />}
 
         <OurMission />
@@ -122,14 +54,4 @@ const HomePage = ({ data }) => {
 
 export default HomePage;
 
-// Consulta GraphQL (puedes dejarla en blanco si todavía no tienes datos)
-export const query = graphql`
-  query HomePageQuery {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
-  }
-`;
+export { default as Head } from "../components/Seo";

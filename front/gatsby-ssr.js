@@ -1,10 +1,10 @@
+import React from "react";
+import { LanguageProvider } from "./src/hooks/LanguageContext";
+
 export const onRenderBody = ({ setHtmlAttributes }) => {
   setHtmlAttributes({ lang: "es" });
 };
 
-export const wrapRootElement = ({ element }) => {
-  if (typeof window === "undefined") {
-    return null; // Evita errores en el SSR
-  }
-  return element;
-};
+export const wrapRootElement = ({ element }) => (
+  <LanguageProvider>{element}</LanguageProvider>
+);

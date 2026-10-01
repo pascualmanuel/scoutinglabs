@@ -22,7 +22,7 @@ const OurCarousel = () => {
                 className="w-full h-[305px] rounded-lg object-cover"
               />
               <p className="subH2 text-grey4 mt-10 mb-1">{item.description}</p>
-              <h4 className="subH">{item.title}</h4>
+              <h2 className="subH">{item.title}</h2>
             </div>
           ))}
         </div>

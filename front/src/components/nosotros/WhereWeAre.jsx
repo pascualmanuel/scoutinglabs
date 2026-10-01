@@ -73,9 +73,9 @@ const WhereWeAre = () => {
   return (
     <>
       <div>
-        <h3 className="pb-10 pt-40 h1Title text-center m-auto w-[300px] ssm:w-full ">
+        <h2 className="pb-10 pt-40 h1Title text-center m-auto w-[300px] ssm:w-full ">
           <ParseMarkdown text={localizedData?.paises_title} />
-        </h3>
+        </h2>
       </div>
       <div className="flex flex-row flex-wrap gap-4 max-w-[630px] lm:max-w-[900px] m-auto justify-center px-4">
         {localizedData?.paises.map((item) => (

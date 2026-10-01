@@ -18,8 +18,9 @@ export const ParseMarkdown = ({ text }) => {
       /(\*\*.*?\*\*|_.*?_|<u>.*?<\/u>|\[.*?\]\(.*?\)|<sBlue>.*?<sBlue>|<blue>.*?<blue>|-.*?-)/g
     );
 
+    // Se usa también dentro de párrafos y headings, que no admiten divs.
     return (
-      <div key={lineIndex} className={hasBulletInLine ? "block ml-4" : ""}>
+      <span key={lineIndex} className={hasBulletInLine ? "block ml-4" : "block"}>
         {segments.map((segment, segmentIndex) => {
           if (segment.startsWith("**") && segment.endsWith("**")) {
             return <strong key={segmentIndex}>{segment.slice(2, -2)}</strong>;
@@ -74,7 +75,7 @@ export const ParseMarkdown = ({ text }) => {
           }
           return segment;
         })}
-      </div>
+      </span>
     );
   });
 };

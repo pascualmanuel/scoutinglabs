@@ -52,13 +52,8 @@ const Navbar = () => {
   const location = useLocation();
 
   // Usamos useRef para persistir la posición entre renders
-  const [initialDotPosition, setInitialDotPosition] = useState(() => {
-    // Valor inicial seguro: intenta obtenerlo de localStorage si es cliente
-    if (typeof window !== "undefined" && localStorage) {
-      return parseInt(localStorage.getItem("dotPosition") || "0", 10);
-    }
-    return 0; // Valor por defecto para SSR
-  });
+  // El primer render debe coincidir en el servidor y en el navegador.
+  const initialDotPosition = 0;
 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const dotPositionRef = useRef(initialDotPosition);

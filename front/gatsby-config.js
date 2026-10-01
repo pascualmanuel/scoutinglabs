@@ -3,14 +3,16 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`, // Cargar el archivo .env basado en el entorno
 });
 
+const pageMetadata = require("./src/content/seo.json");
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
   siteMetadata: {
-    title: `scoutingLabs`,
+    title: `Scouting Labs`,
     siteUrl: `https://scoutinglabs.com/`,
-    description: `Scouting Labs: Obtene la Veo Cam, cámaras deportivas inteligentes para análisis y grabación, sin necesidad de un camarógrafo.`,
+    description: pageMetadata["/"].description,
   },
   flags: {
     DEV_SSR: true,
@@ -20,6 +22,17 @@ module.exports = {
     "gatsby-plugin-image", // Necesario para trabajar con imágenes en Gatsby
     "gatsby-plugin-sharp", // Necesario para procesar imágenes
     "gatsby-transformer-sharp", // Para transformar imágenes (por ejemplo, `.webp`)
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        output: "/",
+        resolvePages: ({ allSitePage: { nodes } }) =>
+          nodes.filter(({ path }) =>
+            Object.prototype.hasOwnProperty.call(pageMetadata, path)
+          ),
+        serialize: ({ path }) => ({ url: path }),
+      },
+    },
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {

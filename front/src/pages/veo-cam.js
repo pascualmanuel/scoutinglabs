@@ -47,11 +47,11 @@ const VeoCam = () => {
                   : "Official distributor of Veo Technologies"}
               </span>
             </div>
-            <h2 className="h1Title pt-[50px]">
+            <h1 className="h1Title pt-[50px]">
               <ParseMarkdown text={localizedData?.title} />
 
               {/* <ParseMarkdown text={localizedData?.title} /> */}
-            </h2>
+            </h1>
             <img src={VeoCamImg} className="my-[-102px] relative w-[300px]" />
             <h2 className="h1Title">
               <ParseMarkdown text={localizedData?.subtitle} />
@@ -130,9 +130,9 @@ const VeoCam = () => {
               </span>
             </div>
 
-            <h1 className="h1Title mb-6 lg:mb-8 md:w-[550px] 2xl:w-[auto]">
+            <h2 className="h1Title mb-6 lg:mb-8 md:w-[550px] 2xl:w-[auto]">
               {localizedData?.second_section_title}
-            </h1>
+            </h2>
             <p className="body0 sm:w-[490px]">
               {localizedData?.second_section_subtitle}
             </p>
@@ -159,7 +159,7 @@ const VeoCam = () => {
           <GridSection />
         </div>
         <div className="px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
-          <h3 className="h1Title">{localizedData?.suscription_title}</h3>
+          <h2 className="h1Title">{localizedData?.suscription_title}</h2>
           <p className="mt-8 body1 opacity-50">
             <ParseMarkdown
               text={
@@ -182,3 +182,5 @@ const VeoCam = () => {
 };
 
 export default VeoCam;
+
+export { default as Head } from "../components/Seo";

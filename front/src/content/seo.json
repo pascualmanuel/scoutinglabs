@@ -1,0 +1,37 @@
+{
+  "/": {
+    "title": "Scouting Labs | Tecnología deportiva en LATAM",
+    "description": "Grabá y analizá tus partidos con Veo Cam 3. Scouting Labs acerca tecnología deportiva, soporte y una comunidad para impulsar el deporte amateur en LATAM.",
+    "image": "camera"
+  },
+  "/veo-cam/": {
+    "title": "Veo Cam 3: cámara deportiva con IA | Scouting Labs",
+    "description": "Grabá tus partidos sin camarógrafo con Veo Cam 3. Conocé sus funciones y accesorios, con capacitación y soporte de Scouting Labs en LATAM.",
+    "image": "camera"
+  },
+  "/suscripciones/": {
+    "title": "Planes y precios de Veo Cam 3 | Scouting Labs",
+    "description": "Compará las suscripciones de Veo Cam 3: planes Starter, Team, Club y Enterprise, pagos mensuales, semestrales o anuales y complementos para tu equipo.",
+    "image": "camera"
+  },
+  "/nosotros/": {
+    "title": "Sobre Scouting Labs | Tecnología y deporte amateur",
+    "description": "Conocé al equipo de Scouting Labs y nuestra misión: acercar tecnología deportiva a atletas, entrenadores y clubes para potenciar el deporte amateur.",
+    "image": "team"
+  },
+  "/contacto/": {
+    "title": "Contacto y cotización de Veo Cam 3 | Scouting Labs",
+    "description": "Consultá por tu Veo Cam 3, planes y accesorios. Contactá al equipo comercial de Scouting Labs por formulario o WhatsApp y recibí una cotización.",
+    "image": "camera"
+  },
+  "/scouting-play/": {
+    "title": "Scouting Play: comunidad deportiva | Scouting Labs",
+    "description": "Mirá videos de partidos y seguí a Scouting Play en Instagram, TikTok y YouTube. Conocé la comunidad de deporte amateur de Scouting Labs.",
+    "image": "community"
+  },
+  "/ayuda/": {
+    "title": "Ayuda sobre Veo Cam y suscripciones | Scouting Labs",
+    "description": "Encontrá respuestas sobre Veo Cam 3, la plataforma y suscripciones: cómo funciona la cámara, garantía, capacitación y canales de soporte.",
+    "image": "camera"
+  }
+}

@@ -39,9 +39,9 @@ const Suscripciones = () => {
                 </span>
               </div>
 
-              <h2 className="h1Title w-[300px] mg:w-[400px]">
+              <h1 className="h1Title w-[300px] mg:w-[400px]">
                 <ParseMarkdown text={localizedData?.subscription_title} />
-              </h2>
+              </h1>
 
               <div className="mt-6">
                 <Button
@@ -88,3 +88,5 @@ const Suscripciones = () => {
 };
 
 export default Suscripciones;
+
+export { default as Head } from "../components/Seo";

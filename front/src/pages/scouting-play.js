@@ -21,18 +21,18 @@ const ScoutinPlay = () => {
     <>
       <Layout>
         <div className="sPlay-bg h-[800px] flex flex-col justify-center">
-          <div className="flex flex-col items-center">
+          <h1 className="flex flex-col items-center">
             <img src={SPLogo} className="mb-8" />
-            <h2
+            <span
               className="h1Title text-clearBlue w-[270px] sm:w-[400px]
              mg:w-auto text-center mb-4 sm:mb-0"
             >
               UNA COMUNIDAD
-            </h2>
-            <h2 className="h1Title w-[270px] sm:w-[400px] mg:w-auto text-center">
+            </span>{" "}
+            <span className="h1Title w-[270px] sm:w-[400px] mg:w-auto text-center">
               LA MISMA PASION
-            </h2>
-          </div>
+            </span>
+          </h1>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-10">
             {localizedData?.buttons.map((button, index) => (
               <a href={button?.link} target="_blank">
@@ -93,3 +93,5 @@ const ScoutinPlay = () => {
 };
 
 export default ScoutinPlay;
+
+export { default as Head } from "../components/Seo";

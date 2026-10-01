@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../../components/Layout"; // Si tienes un layout común
-import Seo from "../../components/Seo.js"; // Si estás usando SEO dinámico
 import "../../styles/Layout.css";
 import "../../styles/Home.css";
 import HeroVideo from "../../assets/videos/hero-video.mp4";
@@ -30,7 +29,7 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
   const videoRef = useRef(null); // Creamos una referencia para el video
 
   const handleVideoLoad = () => {
-    onVideoLoad(); // Llamamos a la función pasada como prop
+    onVideoLoad?.();
   };
 
   // Reproducir el video si `playVideo` es `true`
@@ -132,10 +131,10 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
         {/* <div> */}
         <div className=" max-w-[540px] llg:w-[460px] ml-6 mr-6 md:ml-16  xl:ml-28 relative llg:mr-[70px] 2xl:m">
           {/* <img src={Six} className="absolute right-12" /> */}
-          <h1 className="transparent-bold grotzec absolute right-[32px]">
+          <p className="transparent-bold grotzec absolute right-[32px]">
             {" "}
             {localizedData?.partner_number}
-          </h1>
+          </p>
 
           <div className="llg:mb-[50px] z-50 relative">
             <h2
@@ -144,9 +143,9 @@ const HomeHero = ({ onVideoLoad, onError, playVideo }) => {
             >
               {localizedData?.partner_title}
             </h2>
-            <h3 className="h2Title text-clearBlue">
+            <p className="h2Title text-clearBlue">
               {localizedData?.partner_subtitle}
-            </h3>
+            </p>
           </div>
           <div className="my-10 llg:my-0">
             <p className="text-grey2 body0 mb-8 !text-[18px] xxl:!text-[24px]">

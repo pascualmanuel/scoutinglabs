@@ -22,8 +22,11 @@ if (typeof window !== "undefined") {
 const GridSection = () => {
   const { locale } = useLanguage();
   const [ocultarPadre, setOcultarPadre] = useState(false);
+  const [animationReady, setAnimationReady] = useState(false);
 
   useEffect(() => {
+    // La animación se monta después de hidratar el HTML estático.
+    setAnimationReady(true);
     const manejarResize = () => {
       const ancho = window.innerWidth;
       setOcultarPadre(ancho >= 1 && ancho <= 920); // Solo oculta el padre en este rango
@@ -81,7 +84,7 @@ const GridSection = () => {
                     src={VeoCamImg}
                     className="absolute top-4 right-0  w-auto translate-x-1/2 h-[230px]"
                   />
-                  {typeof window !== "undefined" && Lottie && (
+                  {animationReady && Lottie && (
                     <Lottie
                       animationData={dotAnimation} // Correct prop for Lottie
                       loop={true} // Enable looping
@@ -229,7 +232,7 @@ const GridSection = () => {
                   src={VeoCamImg}
                   className="absolute top-4 right-0  w-auto translate-x-1/2 h-[230px]"
                 />
-                {typeof window !== "undefined" && Lottie && (
+                {animationReady && Lottie && (
                   <Lottie
                     animationData={dotAnimation} // Correct prop for Lottie
                     loop={true} // Enable looping

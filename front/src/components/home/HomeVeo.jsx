@@ -96,18 +96,18 @@ const HomeVeo = () => {
         </div>
       </div>
       <div className="mx-6 lm:mx-16 mb-16 lg:mx-28 max-w-screen-2xl 2xl:mx-auto 2xl:px-28">
-        <h3 className="h1Title uppercase text-left sm:w-[490px]">
+        <h2 className="h1Title uppercase text-left sm:w-[490px]">
           {/* Confian en <br /> nosotros */}
           {localizedData?.confian_first_title}
-        </h3>
+        </h2>
         <div className="flex justify-end w-full">
-          <h3 className="text-clearBlue text-right h1Title mt-6 smallLetter ms:w-[685px] mg:w-[900px]">
+          <h2 className="text-clearBlue text-right h1Title mt-6 smallLetter ms:w-[685px] mg:w-[900px]">
             <span className="text-skyBlue">
               {/* clubes, torneos <br /> y academias */}
               {localizedData?.confian_second_title}
             </span>
             {/* &nbsp; de todo el mundo */}
-          </h3>
+          </h2>
         </div>
       </div>
       <TeamsCarousel />

@@ -14,3 +14,5 @@ const Ayuda = () => {
 };
 
 export default Ayuda;
+
+export { default as Head } from "../components/Seo";

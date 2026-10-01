@@ -7,20 +7,11 @@ export const LanguageProvider = ({ children }) => {
   const [locale, setLocale] = useState("ES");
 
   useEffect(() => {
-    // Obtener el idioma guardado o detectar de la URL
-    const savedLocale = localStorage.getItem("locale");
+    // La URL determina el idioma; una preferencia antigua no debe sacar
+    // al visitante de una página española ni cambiar su contenido.
     const path = window.location.pathname;
-
-    // Detectar idioma inicial
-    const detectedLocale = path.startsWith("/en") ? "EN" : savedLocale || "ES";
+    const detectedLocale = /^\/en(?:\/|$)/.test(path) ? "EN" : "ES";
     setLocale(detectedLocale);
-
-    // Redirección si hay discrepancia entre URL y localStorage
-    if (detectedLocale === "EN" && !path.startsWith("/en")) {
-      navigate("/en", { replace: true });
-    } else if (detectedLocale === "ES" && path.startsWith("/en")) {
-      navigate("/", { replace: true });
-    }
   }, []);
 
   const changeLanguage = (newLocale) => {

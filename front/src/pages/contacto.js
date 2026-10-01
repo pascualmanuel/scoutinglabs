@@ -23,9 +23,9 @@ const Contacto = () => {
         <div className="px-4 ssm:px-6 sm:px-16 lg:h-[750px] lg:flex lg:flex-row lg:items-center lg:justify-center lg:mt-[-40px]">
           <div className="mb-10">
             <ContactCircles />
-            <h2 className="h1Title mg:text-[110px] mg:leading-[102px] mg:tracking-[-0.03em] mb-8 lg:max-w-[550px]">
+            <h1 className="h1Title mg:text-[110px] mg:leading-[102px] mg:tracking-[-0.03em] mb-8 lg:max-w-[550px]">
               {localizedData?.title}
-            </h2>
+            </h1>
             <div className="flex flex-row items-center">
               <img src={TickContact} />
               <p className="ml-2 body1 text-grey3">
@@ -43,3 +43,5 @@ const Contacto = () => {
 };
 
 export default Contacto;
+
+export { default as Head } from "../components/Seo";

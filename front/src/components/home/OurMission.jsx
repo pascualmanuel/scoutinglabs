@@ -182,13 +182,13 @@ function Locations() {
                     }`}
                     onClick={() => handleLocationChange(location)}
                   >
-                    <h2
+                    <h3
                       className={`pl-[30px] text-location subH !capitalize ${
                         activeText === location ? "text-active" : ""
                       }`}
                     >
                       {locations[location].title}
-                    </h2>
+                    </h3>
                     <p
                       className={`pl-[30px] body1 ${
                         activeText === location ? "text-active" : "hidden"

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 // import "./FAQ.css"; // Add your styles here
 import ToggleBar from "../Togglebar";
 import { ParseMarkdown } from "../../hooks/ParseMarkdown";
@@ -8,9 +8,6 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const answerRef = useRef(null); // Reference to the answer div
-  useEffect(() => {
-    document.title = "Scouting Labs - Ayuda";
-  }, []);
 
   const getEmbedUrl = (url) => {
     if (!url) return "";
@@ -48,9 +45,9 @@ const FAQItem = ({ number, title, answer, mediaSrc }) => {
         <div className="faq-header xll:!mb-[-20px]  ">
           <div className="faq-left">
             {/* <div className="faq-number subH">{number}</div> */}
-            <div className="faq-title subH w-[260px] sm:w-auto lg:max-w-[400px] mg:max-w-[500px]">
+            <h2 className="faq-title subH w-[260px] sm:w-auto lg:max-w-[400px] mg:max-w-[500px]">
               {title}
-            </div>
+            </h2>
           </div>
           <div className="faq-right">
             <div

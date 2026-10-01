@@ -162,8 +162,8 @@ const PlanComparation = () => {
   const veoCamUrlEn = "/en/veo-cam/";
 
   const isVeoCam =
-    window.location.pathname === veoCamUrl ||
-    window.location.pathname === veoCamUrlEn;
+    location.pathname === veoCamUrl ||
+    location.pathname === veoCamUrlEn;
 
   const planTranslations = {
     ES: { mensual: "Mensual", semestral: "Semestral", anual: "Anual" },

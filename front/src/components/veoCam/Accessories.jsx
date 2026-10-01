@@ -16,9 +16,9 @@ const Accessories = () => {
     <>
       <div className="bg-grey0 py-28">
         <div className="md:max-w-[1536px] ml-6 llg:mx-6 lg:mx-16 xl:mx-28 2xl:mx-auto 2xl:px-28 mt-14 md:mt-[100px] ">
-          <h3 className="h1Title uppercase mb-[70px] text-black">
+          <h2 className="h1Title uppercase mb-[70px] text-black">
             {locale === "ES" ? "Accesorios" : "Accessories"}
-          </h3>
+          </h2>
           <div className="overflow-x-auto llg:overflow-hidden pr-6 llg:pr-0">
             <div className="flex flex-row gap-4 llg:gap-6 justify-between  m-auto w-fit llg:w-[auto]">
               {localizedData?.map((item, index) => (
